@@ -1,0 +1,21 @@
+# Datasets
+data/
+exdata/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv
+venv/
+ENV/
+
+# Results & Logs
+results/raw/
+results/summary/
+results/figures/
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
