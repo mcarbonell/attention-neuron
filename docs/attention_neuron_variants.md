@@ -472,5 +472,7 @@ Este documento sirve como mapa de ese espacio de diseño.
 | **V3 (Sparse - L1)** | ✅ Completado | **85.87%**. Fuerte interpretabilidad confirmada: la red usa pocas conexiones del sustrato. |
 | **V12 (Hybrid CNN - MNIST)** | ✅ Completado | **83.42%** con solo **6,648** parámetros. El paradigma escala a visión espacial 2D. |
 | **V12b (Hybrid CNN - CIFAR10)** | ✅ Completado | **40.06%** en 10 épocas (`rank=16`, 76k param). Escala a color; el `rank` es la perilla de capacidad. |
+| **V13 (Polymorphic SUM/MAX)** | ✅ Completado | **86.51%**. La red aprende su álgebra: la oculta mezcla SUM/MAX, la final elige 100% SUM. Lento (~38s). |
+| **V14 (Polymorphic SUM/L2)** | ✅ Completado | **86.46%**. Reemplazar MAX por L2 vectorizada recupera la velocidad (~13s) manteniendo la auto-organización. |
 
 *Nota: Habiendo estabilizado la idea central con la variante Residual (V1) y validado su aplicabilidad en visión con V12, el siguiente paso es explorar el aumento de capacidad por época o probar las variantes "exóticas" (Phase Everywhere, Evolving Substrate, etc.).*
