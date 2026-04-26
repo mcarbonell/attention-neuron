@@ -55,3 +55,4 @@ Todo experimento debe registrar obligatoriamente las siguientes métricas para a
 - Los resúmenes estadísticos se guardan en `results/summary/`.
 - Las gráficas comparativas se guardan en `results/figures/`.
 - **REGLA DE ORO DEL LOGGING:** Ninguna afirmación de mejora es válida si no viene acompañada de un archivo JSON que demuestre que `internal_overhead_time` no anula el ahorro en `total_evaluations`.
+- **REGLA DE SUPERVIVENCIA (Fast Feedback):** Todo script de entrenamiento (`.py`) DEBE imprimir información de progreso (Loss, etc.) en los **primeros 5 batches** de la Época 1. Esto es obligatorio para confirmar instantáneamente que la red compila, el grafo fluye y el proceso no se ha quedado colgado en un bucle infinito o por falta de recursos.

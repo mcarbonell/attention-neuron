@@ -50,7 +50,7 @@ def main():
 
     BATCH_SIZE = 256
     EPOCHS = 10
-    LR = 0.001 
+    LR = 0.01 
 
     transform = transforms.Compose([
         transforms.ToTensor(),

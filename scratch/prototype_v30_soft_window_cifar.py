@@ -110,7 +110,11 @@ class SoftWindowNet(nn.Module):
         return self.fc2(x)
 
 def main():
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    try:
+        import torch_directml
+        device = torch_directml.device()
+    except ImportError:
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"Training V30 'THE FRAMER' (Soft Window Attention) on: {device}")
     
     BATCH_SIZE = 128

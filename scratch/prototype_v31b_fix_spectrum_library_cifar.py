@@ -221,11 +221,11 @@ def main():
         device = torch_directml.device()
     except ImportError:
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(f"Training V31 'THE SPECTRUM LIBRARY' (White, Perlin, Blue Noises) on: {device}")
+    print(f"Training V31b 'THE SPECTRUM LIBRARY FIX' (SGD DirectML bypass) on: {device}")
     
     BATCH_SIZE = 128
     EPOCHS = 50
-    LR = 0.003
+    LR = 0.1 # Much higher LR for SGD
     
     transform_train = transforms.Compose([
         transforms.RandomCrop(32, padding=4),
@@ -248,7 +248,8 @@ def main():
     params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"Trainable Parameters: {params:,}")
     
-    optimizer = optim.AdamW(model.parameters(), lr=LR/10)
+    # We switch from AdamW to SGD to completely bypass the 'aten::lerp' fallback in DirectML
+    optimizer = optim.SGD(model.parameters(), lr=LR/10, momentum=0.9, weight_decay=5e-4)
     scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=LR, total_steps=len(train_loader)*EPOCHS)
     criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
     

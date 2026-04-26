@@ -6,17 +6,20 @@ from torch.utils.data import DataLoader
 import math
 import time
 
-class DualSpeedAttentionLayer(nn.Module):
+class ResidualAttentionLayer(nn.Module):
     def __init__(self, in_features, out_features, rank=2, mask_prob=0.5):
         super().__init__()
         std = math.sqrt(2.0 / in_features)
         self.register_buffer('w_init', torch.randn(out_features, in_features) * std)
         
-        # Inicialización de la parte multiplicativa (M residual) a casi cero
+        # Inicialización de la parte multiplicativa a casi cero o pequeña
+        # para que W_eff empiece muy cerca de W_init + A
+        rank_scale = 1.0 / math.sqrt(rank)
+        # Ojo: M es residual aquí. w_init * M. Inicializamos M muy pequeño para 
+        # que M comience en 0.
         self.delta_in_m = nn.Parameter(torch.randn(out_features, rank) * 0.01)
         self.delta_out_m = nn.Parameter(torch.randn(rank, in_features) * 0.01)
         
-        # Inicialización de la parte aditiva (A) a cero
         self.delta_in_a = nn.Parameter(torch.zeros(out_features, rank))
         self.delta_out_a = nn.Parameter(torch.zeros(rank, in_features))
         self.theta_bias = nn.Parameter(torch.zeros(out_features))
@@ -28,20 +31,21 @@ class DualSpeedAttentionLayer(nn.Module):
         
         if self.training and self.mask_prob < 1.0:
             mask = torch.bernoulli(torch.full(self.w_init.shape, self.mask_prob, device=self.w_init.device))
-            # W_eff = W_init + W_init * M + A (Formulación V1 Residual)
+            # W_eff = W_init + W_init * M + A
             w_evolved = torch.where(mask > 0, self.w_init + self.w_init * w_m + w_a, self.w_init)
         else:
+            # W_eff (esperado) = W_init + p * W_init * M + p * A
             m_eff = self.mask_prob * w_m
             a_eff = self.mask_prob * w_a
             w_evolved = self.w_init + self.w_init * m_eff + a_eff
             
         return torch.matmul(x, w_evolved.t()) + torch.sin(self.theta_bias)
 
-class DualSpeedAttentionMLP(nn.Module):
+class ResidualAttentionMLP(nn.Module):
     def __init__(self, mask_prob=0.5):
         super().__init__()
-        self.layer1 = DualSpeedAttentionLayer(784, 512, rank=2, mask_prob=mask_prob)
-        self.layer2 = DualSpeedAttentionLayer(512, 10, rank=2, mask_prob=mask_prob)
+        self.layer1 = ResidualAttentionLayer(784, 512, rank=2, mask_prob=mask_prob)
+        self.layer2 = ResidualAttentionLayer(512, 10, rank=2, mask_prob=mask_prob)
 
     def forward(self, x):
         x = x.view(-1, 784)
@@ -52,12 +56,11 @@ class DualSpeedAttentionMLP(nn.Module):
 
 def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(f"Benchmarking V6 (Dual-Speed Attention - Residual Base) with ADAM on: {device}")
+    print(f"Benchmarking V1 (Residual Attention) with ADAM on: {device}")
 
     BATCH_SIZE = 256
     EPOCHS = 10
-    LR_M = 0.01   # Learning rate normal para gating (topología global)
-    LR_A = 0.001  # Learning rate 10x menor para aditivo (ajuste fino)
+    LR = 0.01 
 
     transform = transforms.Compose([
         transforms.ToTensor(),
@@ -70,22 +73,8 @@ def main():
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
     test_loader = DataLoader(test_dataset, batch_size=1024, shuffle=False)
 
-    model = DualSpeedAttentionMLP(mask_prob=0.5).to(device)
-    
-    # Separar parámetros en dos grupos
-    params_m = []
-    params_a = []
-    for name, param in model.named_parameters():
-        if 'delta_in_m' in name or 'delta_out_m' in name:
-            params_m.append(param)
-        else:
-            params_a.append(param)
-            
-    optimizer = optim.Adam([
-        {'params': params_m, 'lr': LR_M},
-        {'params': params_a, 'lr': LR_A}
-    ])
-    
+    model = ResidualAttentionMLP(mask_prob=0.5).to(device)
+    optimizer = optim.Adam(model.parameters(), lr=LR)
     criterion = nn.CrossEntropyLoss()
 
     for epoch in range(1, EPOCHS + 1):

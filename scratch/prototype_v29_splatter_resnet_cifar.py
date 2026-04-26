@@ -188,7 +188,11 @@ class SplatterResNet(nn.Module):
         return self.classifier(x)
 
 def main():
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    try:
+        import torch_directml
+        device = torch_directml.device()
+    except ImportError:
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"Training V29 'THE SPLATTER-RESNET' (Fully Continuous Vision) on: {device}")
     
     BATCH_SIZE = 128

@@ -13,9 +13,9 @@ El modelo fue entrenado en MNIST por 10 épocas usando Adam (`rank=2`, `mask_pro
 
 | Variante | Accuracy (10 Epochs) | Comentarios |
 | :--- | :--- | :--- |
-| **V1 (Residual)** | **87.61%** | Salto de ~7% vs Pure Multiplicative. Curva de aprendizaje muy suave. |
+| **V1 (Residual)** | **91.53%** | Salto de ~5% vs Pure Multiplicative. Curva de aprendizaje muy suave. |
 | **V10e (SOTA actual)**| ~88.80% | Modelo original con inicialización unity. |
-| **V4 (Multiplicative)**| 80.74% | Sin corrección aditiva. |
+| **V4 (Multiplicative)**| 86.64% | Sin corrección aditiva. |
 
 ## 3. Conclusiones
 

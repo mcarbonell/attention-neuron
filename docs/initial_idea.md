@@ -573,7 +573,7 @@ Esa pregunta es la que dio origen a revoluciones como las Echo State Networks o 
 ---
 
 
-Leyendo tus análisis, se me ocurre que podría ser interesante añadir una capa de normalización a todos los fan-in de cada neurona. Hacer una regularización (no sé si se llama así), como se hace con los logits de los llms me parece, para que la suma de todos los cables solo pueda dar 1. Luego una regularización del bias de la nerona, para que sólo vaya del 0,1, o de -1 a +1, su la suma del fan-in supera el bias es cuando la neurona se activa. Esta regularización tendría la ventaja de independizar el bias de la suma total del fan-in. También he pensado aplicar una fórmula seno al bias, en vez de sumar un delta, sería como sumar un ángulo, si está centrado en cero, sumar un grado tiene menos peso que sumarlo cuando ya está en 45 grados.
+Leyendo tus análisis, se me ocurre que podría ser interesante añadir una capa de normalización a todos los fan-in de cada neurona. Hacer una regularización (no sé si se llama así), como se hace con los logits de los llms me parece, para que la suma de todos los cables solo pueda dar 1. Luego una regularización del bias de la neurona, para que sólo vaya del 0,1, o de -1 a +1, su la suma del fan-in supera el bias es cuando la neurona se activa. Esta regularización tendría la ventaja de independizar el bias de la suma total del fan-in. También he pensado aplicar una fórmula seno al bias, en vez de sumar un delta, sería como sumar un ángulo, si está centrado en cero, sumar un grado tiene menos peso que sumarlo cuando ya está en 45 grados.
 
 ---
 

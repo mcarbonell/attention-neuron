@@ -144,7 +144,11 @@ class GaussianSplatterNet(nn.Module):
         return x
 
 def main():
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    try:
+        import torch_directml
+        device = torch_directml.device()
+    except ImportError:
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"Training V28 'THE GAUSSIAN SPLATTER 2D' on: {device}")
     
     BATCH_SIZE = 128
