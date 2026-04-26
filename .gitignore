@@ -14,6 +14,8 @@ ENV/
 results/raw/
 results/summary/
 results/figures/
+*.pt
+results/*.pt
 
 # IDEs
 .vscode/

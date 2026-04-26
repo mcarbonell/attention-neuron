@@ -5,6 +5,16 @@
 
 **Attention Neuron** is a neural architecture that rethinks the dense weight matrix as a dynamically modulated, low-rank system. Instead of learning millions of individual weights, the network learns a small set of neuron-centric modulation vectors that reconfigure a frozen random substrate.
 
+## About
+
+Most neural networks treat learning as an act of sculpture: you start with a block of parameters and slowly carve them into the right shape, one weight at a time. Attention Neuron proposes the opposite. It treats the weight matrix as a fixed, random dictionary — a static library of possible features — and learns only **how to read from it**.
+
+In this framework, every neuron has a "personality": vectors that dictate how loudly it listens to the previous layer, and how loudly it speaks to the next. By crossing the outgoing voice of Neuron A with the incoming ear of Neuron B, each connection in the network receives a unique, asymmetric modulation. The network reconfigures massively using very few variables.
+
+This shift in the unit of learning — from the individual weight to the neuron's modulation profile — has produced some surprising results. On MNIST, a network with **only 7,794 trainable parameters** (a 98% reduction from a standard MLP) reaches **94.53% accuracy**. With more rank, the same architecture climbs to **99.09%**. On CIFAR-10, a convolutional variant with just **118K trainable parameters** over frozen random kernels achieves **76.76%**. Most strikingly, the **Rosetta** experiments showed that a network can mix *multiple* random substrates simultaneously, learning to synthesize a feature base from pure noise.
+
+The project is young — born from a series of rapid experiments over 48 hours — but the signal is strong. The question it poses is simple but deep: **how much of a neural network's intelligence lives in the specific values of its weights, and how much lives in the pattern of which weights it chooses to use?**
+
 ## The Core Idea
 
 Traditional neural networks learn by adjusting every connection weight individually. Attention Neuron asks: **what if the weights are random and frozen, and we only learn how to modulate them?**
