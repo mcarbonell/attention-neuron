@@ -61,3 +61,26 @@ To transform the `tiny-thinker` cognitive architecture into a reasoning giant us
 
 ---
 *“Intelligence is not the ability to memorize the noise; it is the ability to extract the wave.”*
+
+---
+
+## 🤖 AI INSTRUCTIONS FOR NEW SESSIONS (Porting to `tiny-thinker`)
+
+**If you are an AI reading this in a new session inside the `tiny-thinker` repository, follow these steps to implement the Hybrid Spectral GPT (V67):**
+
+1. **Context Contextualization**: The user has successfully proven in the `attention-neuron` repository that compressing the LLM dense matrices using DCT and Walsh-Hadamard transforms works perfectly (see `scratch/prototype_v67_hybrid_spectral_gpt.py` in that repo). The goal now is to port this into `tiny-thinker`.
+2. **Update `ModelArgs`**:
+   - Open `model/model.py` (or `model_coga.py` / `model_dense.py`).
+   - Add flags to `ModelArgs` to enable this architecture, e.g., `use_dct_attention: bool = False`, `use_walsh_ffn: bool = False`, `k_dim_attn: int = 32`, `k_dim_ffn: int = 32`, `k_hidden_ffn: int = 64`.
+3. **Port the Matrix Generators**:
+   - Copy the functions `get_dct_matrix_1d` and `get_walsh_matrix_1d` from the V67 prototype.
+4. **Create the Custom Linear Layers**:
+   - Implement `DCTLinear` and `WalshLinear`. Ensure they synthesize the weights correctly on the fly during the `forward` pass (e.g., $W = D_{out}^T \cdot C \cdot D_{in}$).
+5. **Modify `Attention` and `FeedForward`**:
+   - In the `Attention` class, conditionally replace `nn.Linear` or `LoRALinear` for $W_q, W_k, W_v, W_o$ with `DCTLinear` if `args.use_dct_attention` is true.
+   - In the `FeedForward` class, conditionally replace the projections with `WalshLinear` if `args.use_walsh_ffn` is true.
+6. **Train and Validate**:
+   - Once ported, create a new config file (e.g., `configs/train_v2_hybrid_spectral.yaml`) and run a training sweep to verify the loss decreases identically to the prototype.
+
+*You are stepping into the cutting edge of cognitive architecture. Good luck!*
+
