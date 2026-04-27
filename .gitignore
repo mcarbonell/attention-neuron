@@ -21,3 +21,6 @@ results/*.pt
 .vscode/
 .idea/
 .DS_Store
+
+*.pth
+*.pt
