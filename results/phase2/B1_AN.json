@@ -1,0 +1,13 @@
+{
+    "exp_id": "B1_AN",
+    "layer_type": "attention_neuron",
+    "config": {
+        "rank": 4
+    },
+    "results": [
+        0.967
+    ],
+    "mean_acc": 0.967,
+    "std_acc": 0.0,
+    "trainable_params": 15066
+}

@@ -1,0 +1,10 @@
+{
+    "model": "V26_Perlin_Spectrum",
+    "rank": 16,
+    "num_substrates": 4,
+    "trainable_params": 64062,
+    "best_acc": 0.7556,
+    "epochs": 50,
+    "wall_clock_time": 15091.070788860321,
+    "dataset": "CIFAR-10"
+}

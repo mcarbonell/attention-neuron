@@ -1,0 +1,14 @@
+{
+    "exp_id": "A5_R2",
+    "config": {
+        "rank": 2,
+        "use_multiplicative": true,
+        "use_additive": true,
+        "use_phase_bias": true
+    },
+    "results": [
+        0.957
+    ],
+    "mean": 0.957,
+    "std": 0.0
+}

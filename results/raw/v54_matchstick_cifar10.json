@@ -1,0 +1,18 @@
+{
+    "experiment": "v54_matchstick_cifar10",
+    "best_objective": 0.6093,
+    "wall_clock_time": 336.066246509552,
+    "num_neurons": 512,
+    "history_acc": [
+        0.5193,
+        0.5533,
+        0.5681,
+        0.5813,
+        0.5935,
+        0.5913,
+        0.6008,
+        0.599,
+        0.6093,
+        0.6072
+    ]
+}

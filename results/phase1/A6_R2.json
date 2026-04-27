@@ -1,0 +1,18 @@
+{
+    "exp_id": "A6_R2",
+    "config": {
+        "rank": 2,
+        "use_multiplicative": true,
+        "use_additive": true,
+        "use_phase_bias": true
+    },
+    "results": [
+        0.957,
+        0.9577,
+        0.9593,
+        0.9562,
+        0.9573
+    ],
+    "mean": 0.9574999999999999,
+    "std": 0.001025670512396651
+}

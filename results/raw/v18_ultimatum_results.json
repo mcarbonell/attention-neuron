@@ -1,0 +1,11 @@
+{
+    "model": "V18_Ultimatum",
+    "rank_l1": 128,
+    "trainable_params": 1259806,
+    "best_acc": 0.9909,
+    "epochs": 60,
+    "wall_clock_time": 1928.269530057907,
+    "dataset": "MNIST",
+    "augmentation": "Aggressive",
+    "label_smoothing": 0.1
+}

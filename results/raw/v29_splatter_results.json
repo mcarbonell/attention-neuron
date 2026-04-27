@@ -1,0 +1,9 @@
+{
+    "model": "V29_Splatter_ResNet",
+    "splats_per_channel": 4,
+    "trainable_params": 671146,
+    "best_acc": 0.6275,
+    "epochs": 50,
+    "wall_clock_time": 17132.81787085533,
+    "dataset": "CIFAR-10"
+}

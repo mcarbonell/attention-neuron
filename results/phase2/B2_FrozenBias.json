@@ -1,0 +1,13 @@
+{
+    "exp_id": "B2_FrozenBias",
+    "layer_type": "frozen_bias",
+    "config": {
+        "rank": 4
+    },
+    "results": [
+        0.6858
+    ],
+    "mean_acc": 0.6858,
+    "std_acc": 0.0,
+    "trainable_params": 522
+}

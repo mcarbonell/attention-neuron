@@ -1,0 +1,9 @@
+{
+    "model": "V32_Broadcaster_ResNet",
+    "trainable_params": 210186,
+    "frozen_params": 43948800,
+    "best_acc": 0.7153,
+    "epochs": 50,
+    "wall_clock_time": 12245.452615976334,
+    "dataset": "CIFAR-10"
+}

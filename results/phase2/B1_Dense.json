@@ -1,0 +1,13 @@
+{
+    "exp_id": "B1_Dense",
+    "layer_type": "dense",
+    "config": {
+        "rank": 4
+    },
+    "results": [
+        0.9674
+    ],
+    "mean_acc": 0.9674,
+    "std_acc": 0.0,
+    "trainable_params": 407050
+}

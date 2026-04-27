@@ -1,0 +1,13 @@
+{
+    "exp_id": "B3_LowRankAdd",
+    "layer_type": "low_rank_add",
+    "config": {
+        "rank": 4
+    },
+    "results": [
+        0.9491
+    ],
+    "mean_acc": 0.9491,
+    "std_acc": 0.0,
+    "trainable_params": 7794
+}

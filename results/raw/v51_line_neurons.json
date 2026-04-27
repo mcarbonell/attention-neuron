@@ -1,0 +1,22 @@
+{
+    "experiment": "v51_line_neurons",
+    "final_objective": 0.9817,
+    "total_evaluations": 2350,
+    "wall_clock_time": 127.76211762428284,
+    "function_evaluation_time": 35.174962520599365,
+    "internal_overhead_time": 92.58715510368347,
+    "num_neurons": 256,
+    "params_per_neuron": 6,
+    "history_acc": [
+        0.9594,
+        0.9685,
+        0.9753,
+        0.9736,
+        0.9804,
+        0.9808,
+        0.9827,
+        0.9826,
+        0.983,
+        0.9817
+    ]
+}

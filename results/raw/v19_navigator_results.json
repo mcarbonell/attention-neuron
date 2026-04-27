@@ -1,0 +1,9 @@
+{
+    "model": "V19_Navigator",
+    "rank": 32,
+    "trainable_params": 118238,
+    "best_acc": 0.7676,
+    "epochs": 50,
+    "wall_clock_time": 11031.692467689514,
+    "dataset": "CIFAR-10"
+}

@@ -1,0 +1,10 @@
+{
+    "model": "V17_Colossus",
+    "rank": 64,
+    "trainable_params": 897310,
+    "best_acc": 0.9899,
+    "epochs": 40,
+    "wall_clock_time": 1054.02446103096,
+    "dataset": "MNIST",
+    "augmentation": true
+}

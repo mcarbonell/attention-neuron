@@ -1,0 +1,23 @@
+{
+    "experiment": "v52_double_matchstick",
+    "final_objective": 0.9728,
+    "best_objective": 0.9752,
+    "total_evaluations": 2350,
+    "wall_clock_time": 158.3361566066742,
+    "function_evaluation_time": 54.750802755355835,
+    "internal_overhead_time": 103.58535385131836,
+    "num_neurons": 256,
+    "params_per_neuron": 10,
+    "history_acc": [
+        0.966,
+        0.968,
+        0.9708,
+        0.9705,
+        0.973,
+        0.9752,
+        0.9733,
+        0.9685,
+        0.9737,
+        0.9728
+    ]
+}

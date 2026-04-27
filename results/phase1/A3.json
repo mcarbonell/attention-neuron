@@ -1,0 +1,14 @@
+{
+    "exp_id": "A3",
+    "config": {
+        "rank": 2,
+        "use_multiplicative": false,
+        "use_additive": true,
+        "use_phase_bias": true
+    },
+    "results": [
+        0.9175
+    ],
+    "mean": 0.9175,
+    "std": 0.0
+}

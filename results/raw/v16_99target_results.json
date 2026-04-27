@@ -1,0 +1,9 @@
+{
+    "model": "V16_Attention_Neuron",
+    "rank": 32,
+    "trainable_params": 319134,
+    "best_acc": 0.9845,
+    "epochs": 30,
+    "wall_clock_time": 413.28250908851624,
+    "dataset": "MNIST"
+}

@@ -1,0 +1,18 @@
+{
+    "exp_id": "A6_R4",
+    "config": {
+        "rank": 4,
+        "use_multiplicative": true,
+        "use_additive": true,
+        "use_phase_bias": true
+    },
+    "results": [
+        0.967,
+        0.9659,
+        0.9648,
+        0.965,
+        0.9646
+    ],
+    "mean": 0.96546,
+    "std": 0.0008890444308357046
+}
