@@ -22,3 +22,5 @@ results/*.pt
 
 *.pth
 *.pt
+
+GEMINI.md
