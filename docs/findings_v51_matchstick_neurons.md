@@ -13,7 +13,7 @@ En esta iteración (v51), simplificamos las neuronas de trazo (Stroke Neurons v5
 ## Análisis Comparativo (Actualizado)
 | Versión | Geometría | Params/Neurona | Best Acc (MNIST) | Notas |
 | :--- | :--- | :--- | :--- | :--- |
-| v50b | Bézier Cuadrática | 8 | 97.51% | |
+| v50b | Bézier Cuadrática | 8 | 97.88% | |
 | v51 (v1) | Línea Recta | 6 | 97.78% | LR 0.005 |
 | **v51 (v2)** | **Línea Recta** | **6** | **98.30%** | **LR más bajo - ÓPTIMO** |
 
