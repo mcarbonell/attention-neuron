@@ -76,11 +76,50 @@ This perspective connects to several lines of work:
 
 ---
 
+---
+
+## Getting Started
+
+You can now use `attention_neuron` as a modular library for your projects.
+
+### Installation
+
+Clone the repository and add it to your python path, or simply copy the `attention_neuron/` folder into your project.
+
+```python
+from attention_neuron import AttentionLinear, RosettaLinear
+
+# A standard Attention Neuron layer
+# 784 -> 2048 using rank-128 modulation of frozen weights
+layer = AttentionLinear(784, 2048, rank=128)
+
+# Rosetta layer mixing 4 random substrates
+rosetta = RosettaLinear(784, 2048, num_substrates=4)
+```
+
+### Spectral Layers
+
+For advanced frequency-domain routing (DCT or Walsh-Hadamard):
+
+```python
+from attention_neuron import DCTLinear, WalshLinear
+
+# DCT for smooth semantic attention
+dct_layer = DCTLinear(128, 128, k_in=32, k_out=32)
+
+# Walsh for sharp logical FFNs
+walsh_layer = WalshLinear(512, 512, k_in=64, k_out=64)
+```
+
+---
+
 ## Project Structure
 
-- `scratch/`: Experimental prototypes (v1 through v24).
-- `docs/`: Technical whitepapers, findings per version, and research plans.
-- `results/`: Saved model checkpoints and training logs.
+- `attention_neuron/`: The core library.
+    - `layers/`: Implementation of Dense, Rosetta, and Spectral layers.
+- `examples/`: Functional demos (MNIST Compact, Spectral GPT).
+- `scratch/`: Experimental history (v1 through v67).
+- `docs/`: Technical whitepapers and research findings.
 
 ---
 
