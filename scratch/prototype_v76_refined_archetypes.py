@@ -29,7 +29,7 @@ def train_refined_archetypes():
     next_cluster_id = 10
     cluster_to_label = {d: d for d in range(10)}
     
-    MAX_ITER = 30
+    MAX_ITER = 500
     
     print("\nStarting purification process...")
     for iteration in range(MAX_ITER):
