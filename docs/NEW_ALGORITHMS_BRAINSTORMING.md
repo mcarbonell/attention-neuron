@@ -108,3 +108,25 @@ Si expandimos el concepto de la **Neurona Polimórfica (V14)** más allá de las
 ### Impacto Esperado (Shallow is the New Deep)
 Al dotar a una sola capa oculta de un "pool" diverso de estas neuronas polimórficas (ej. 25% SUM, 25% VAR, 25% MULT, 25% SIN) y dejar que el optimizador (Adam) ajuste sus pesos, la red se comportaría como una **Placa de Circuitos Analógicos Evolutiva**. 
 Problemas que hoy exigen arquitecturas masivas de 100 capas (ResNets) para "doblar" el espacio latente y aproximar lógicas complejas, podrían resolverse con redes ultra-planas (Shallow Networks) de 2 o 3 capas, reduciendo masivamente la latencia y la huella de memoria.
+
+---
+
+## 6. Rompiendo la Flecha del Tiempo (Conexiones Recurrentes y Multi-Pass Inference)
+
+### El Tabú del Feed-Forward
+Casi todas las arquitecturas dominantes en Visión y NLP (Transformers, CNNs, MLPs) son estrictamente *Feed-Forward*. La información fluye de izquierda a derecha, de la entrada a la salida, en un único paso sin retorno. Esta topología unidireccional fuerza a la red a "entenderlo todo a la primera", motivo por el cual los modelos necesitan cientos de capas: cada capa es un intento desesperado de procesar un poco más la señal antes de que se escape por la salida.
+
+**La Biología Real:** El cerebro humano no funciona así. El córtex visual primario (V1) envía señales a áreas superiores (V4), pero V4 envía **conexiones masivas hacia atrás** (Top-Down Feedback) hacia V1. El cerebro "hipotetiza" lo que está viendo y envía esa expectativa hacia atrás para afinar la percepción de los sensores crudos.
+
+### La Solución: Multi-Pass Inference y Bucles de Feedback
+En lugar de crear una red de 100 capas ejecutada 1 sola vez, diseñamos una red plana (ej. 5 capas) que se ejecuta a sí misma **2 o 3 veces en bucle cerrado** antes de emitir un veredicto.
+
+#### Mecánica de "Cables Hacia Atrás"
+1. **Pase 1 (La Impresión Cruda):** El dato fluye de la Capa 1 a la Capa 5. La Capa 5 formula una "hipótesis inicial" (ej. "Parece un perro oscuro, pero hay ruido").
+2. **El Bucle de Feedback (Top-Down):** La Capa 5 tiene cables (pesos entrenables) conectados directamente hacia atrás, inyectando su vector de hipótesis en la Capa 1 o Capa 2.
+3. **Pase 2 (Refinamiento Guiado):** El mismo dato vuelve a entrar en la Capa 1, pero ahora la Capa 1 está *modulada* por la expectativa de la Capa 5. Las neuronas que detectan "pelaje" se amplifican, y las que detectan "escamas" se apagan. El dato vuelve a fluir hasta la salida.
+4. **Pase 3 (Confirmación y Early-Exit):** Si la entropía predictiva (como vimos en el Cerebelo V89) colapsa a casi 0 en el segundo o tercer pase, el bucle se detiene y la red responde.
+
+### Impacto en el Razonamiento Profundo (System 2 Thinking)
+Un LLM estándar lee un problema matemático y tiene que escupir la respuesta token a token sin poder "pensar en retrospectiva". 
+Al permitir bucles recurrentes internos en el espacio latente, la red experimenta **"Reflexión Interna"**. Un Transformer podría iterar su estado oculto 3 veces sobre el mismo problema de programación, refinando su propia lógica *antes* de generar la primera palabra. Esto es el verdadero *Chain of Thought* endógeno, logrando capacidades de razonamiento muy superiores con un número de parámetros fraccionario.
