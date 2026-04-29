@@ -107,5 +107,12 @@ En la implementación estándar de Walsh-Attention (V35/V36), cada neurona modul
 **Vision**: A fully-contained, local reasoning engine (50MB - 100MB) that runs at 50+ tokens/sec on a standard i5 CPU using Walsh-Hadamard SIMD optimizations.
 - **Killer App**: Private, local, offline AI that learns and evolves (Neural-PAC Spawning) without ever sending data to the cloud.
 
+## 6. Temporal Spectral Archetypes (3D DCT Video Learning)
+**Concept**: Extending the DCT/Walsh basis to the time dimension, creating archetypes with shape `(T, K, K)`.
+- **Action Harmonics**: Instead of seeing pixels moving, the network learns the "resonance" of an action (e.g., a person waving, a ball bouncing). These are stored as 3D spectral volumes.
+- **Continuous Stream Learning**: A model connected to a 24/7 video feed (like a TV or a robot's camera) only spawns new neurons when it detects a temporal sequence that doesn't match its existing library of "Action-Primitives."
+- **Extreme Memory Efficiency**: Hours of video experience can be compressed into a few thousand interpretable spectral clips.
+- **Interpretability**: Auditing the network by viewing its "Dream Gallery" of .gif-like spectral reconstructions of the actions it has mastered.
+
 ---
-*“If you want to build a mind, don't just scale the weights; scale the logic of the wave.”*
+*“Intelligence is the ability to predict the next wave in the river of time.”*
