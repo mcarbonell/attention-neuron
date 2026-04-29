@@ -81,5 +81,31 @@ En la implementación estándar de Walsh-Attention (V35/V36), cada neurona modul
 - **Mecánica:** La neurona solo aprende **4 parámetros multiplicativos y 4 aditivos**. Esos 4 valores se "estiran" (broadcast) para multiplicar los bloques correspondientes de 256 frecuencias cada uno en el dominio de Walsh.
 - **Impacto Teórico:** ¡Reducción masiva de parámetros! Pasaríamos de 2048 a **8 parámetros por neurona** para controlar la atención global sobre toda la imagen. Si esto funciona, demostraría que la red neuronal solo necesita sintonizar el "volumen general" de las bandas de frecuencia (graves, medios, agudos) como en un ecualizador de música tradicional, en lugar de micro-gestionar cada onda individual. Sería la compresión absoluta del conocimiento.
 
+# Brainstorming Phase: The Walsh & Neural-PAC Era (v2)
+
+## 1. Global Layer Modulator (The "Conductor" Neuron)
+**Concept**: A single high-level neuron (or small vector) that modulates the sensitivity and spectral bias of an entire layer (10k+ neurons) simultaneously.
+**Spectral EQ**: The modulator can act as a low-pass or high-pass filter for the whole layer, suppressing high-frequency noise in chaotic environments.
+**Context Switching**: One modulator could tune the entire network from "Coding Mode" to "Creative Writing Mode" by shifting the resonance of existing archetypes.
+- **Biological Parallel**: Acts like dopamine or serotonin, altering the global "mood" or "readiness" of the network without changing specific synaptic weights.
+
+## 2. Hyperscale Matrix-Free Layers (10k x 10k)
+**Discovery**: Using FWHT and Spectral Synthesis, we can connect 10,000 neurons to 10,000 others using only 16KB of parameters and $O(N \log N)$ complexity.
+- **Implication**: We can build networks with human-level synaptic density on consumer CPUs.
+- **Next Step**: Test "Inter-Archetype Composition," where high-level archetypes are synthesized as combinations of low-level spectral components.
+
+## 3. The "JPEG-LLM" Infinite Context
+**Concept**: Using DCT across the sequence dimension of the KV Cache.
+- **Semantic Zoom**: Store the "wave" of the conversation. When the model needs a detail from 10,000 tokens ago, it interpolates the high-frequency components of that specific spectral block.
+- **Fixed Memory**: Context window is no longer limited by VRAM, but by the resolution of the spectral summary.
+
+## 4. Selective Positive Training (Neural-PAC)
+**Discovery**: Standard backprop (cross-entropy) blurs archetypes. Selective updates (updating only the true class) create sharp, honest, and interpretable models.
+- **Future Feature**: **Synaptic Pruning**. Automatically delete archetypes that fail to attract a minimum number of samples ("Outlier Catchers").
+
+## 5. Portability: The Reasoning .EXE
+**Vision**: A fully-contained, local reasoning engine (50MB - 100MB) that runs at 50+ tokens/sec on a standard i5 CPU using Walsh-Hadamard SIMD optimizations.
+- **Killer App**: Private, local, offline AI that learns and evolves (Neural-PAC Spawning) without ever sending data to the cloud.
+
 ---
-*Documento vivo. A la espera de los resultados finales de la V35 (CIFAR-10) para consolidar estas líneas de investigación.*
+*“If you want to build a mind, don't just scale the weights; scale the logic of the wave.”*
