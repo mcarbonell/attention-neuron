@@ -1,0 +1,172 @@
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+from torchvision import datasets, transforms
+from torch.utils.data import DataLoader
+import time
+import math
+
+# --- Fast Walsh-Hadamard Transform (Vectorized) ---
+def fwht(x):
+    B, N = x.shape
+    h = 1
+    while h < N:
+        x = x.view(B, N // (2 * h), 2, h)
+        a = x[:, :, 0, :]
+        b = x[:, :, 1, :]
+        x = torch.stack([a + b, a - b], dim=2)
+        h *= 2
+    return x.view(B, N)
+
+class SpectralTuningLayer(nn.Module):
+    def __init__(self, in_features, out_features):
+        super().__init__()
+        self.in_features = in_features
+        self.out_features = out_features
+        self.pow2_size = 2**math.ceil(math.log2(in_features))
+        
+        # Pesos para la proyección base
+        self.weight = nn.Parameter(torch.randn(out_features, in_features) / (in_features**0.5))
+        self.bias = nn.Parameter(torch.zeros(out_features))
+        
+        # SINTONIZADOR ESPECTRAL: Cada neurona tiene su propio filtro de frecuencias
+        # Inicializamos con 1.0 para que al principio sea similar al promedio anterior
+        self.spectral_mask = nn.Parameter(torch.ones(out_features, self.pow2_size))
+        
+        # Gating dinámico (MoE intra-neuronal)
+        self.gate_fc = nn.Linear(in_features, out_features * 5)
+        
+    def forward(self, x):
+        B = x.size(0)
+        
+        # Gates dinámicos (B, out_features, 5)
+        gates = torch.sigmoid(self.gate_fc(x)).view(B, self.out_features, 5)
+        
+        # Activaciones pre-agregación pesadas
+        Z = x.unsqueeze(1) * self.weight.unsqueeze(0)
+        
+        # Agregadores Clásicos
+        a_sum = Z.sum(dim=2)
+        a_var = Z.var(dim=2)
+        a_l2 = torch.norm(Z, p=2, dim=2)
+        a_lse = torch.logsumexp(Z, dim=2)
+        
+        # AGREGADOR ESPECTRAL SINTONIZADO
+        Z_pad = F.pad(Z, (0, self.pow2_size - self.in_features))
+        O = self.out_features
+        N = self.pow2_size
+        
+        # FWHT sobre la dimensión espectral
+        Z_walsh = fwht(Z_pad.view(B * O, N)).view(B, O, N)
+        
+        # Aplicamos la máscara espectral aprendible (Sintonización)
+        # Z_walsh: (B, O, N), self.spectral_mask: (O, N)
+        # Hacemos que cada neurona "escuche" solo sus frecuencias preferidas
+        # Usamos abs() para medir magnitud de presencia de la frecuencia
+        tuned_walsh = (Z_walsh.abs() * self.spectral_mask.unsqueeze(0)).mean(dim=2)
+        
+        # Mezcla MoE
+        experts = torch.stack([a_sum, a_var, a_l2, a_lse, tuned_walsh], dim=2)
+        out = (experts * gates).sum(dim=2)
+        
+        return out + self.bias
+
+class SpectralTuningNetwork(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.analog_plate = SpectralTuningLayer(784, 64)
+        self.bn = nn.BatchNorm1d(64)
+        self.classifier = nn.Linear(64, 10)
+
+    def forward(self, x):
+        x = x.view(x.size(0), -1)
+        x = self.analog_plate(x)
+        x = self.bn(x)
+        x = self.classifier(x)
+        return x
+
+class BaselineNetwork(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(784, 64)
+        self.classifier = nn.Linear(64, 10)
+
+    def forward(self, x):
+        x = x.view(x.size(0), -1)
+        x = F.relu(self.fc1(x))
+        x = self.classifier(x)
+        return x
+
+def train_and_evaluate():
+    print("=== Experimento V90d: Spectral Tuning Plate (Walsh Specialization) ===\n")
+    
+    transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
+    train_dataset = datasets.MNIST('data', train=True, download=True, transform=transform)
+    test_dataset = datasets.MNIST('data', train=False, transform=transform)
+    
+    train_loader = DataLoader(train_dataset, batch_size=256, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=1000, shuffle=False)
+
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(f"Usando dispositivo: {device}")
+
+    model_analog = SpectralTuningNetwork().to(device)
+    model_base = BaselineNetwork().to(device)
+    
+    opt_analog = optim.Adam(model_analog.parameters(), lr=0.005)
+    opt_base = optim.Adam(model_base.parameters(), lr=0.005)
+    
+    epochs = 5
+    print(f"Entrenando por {epochs} épocas...")
+    
+    for epoch in range(epochs):
+        model_analog.train()
+        model_base.train()
+        
+        t0 = time.time()
+        for data, target in train_loader:
+            data, target = data.to(device), target.to(device)
+            
+            opt_analog.zero_grad()
+            out_a = model_analog(data)
+            loss_a = F.cross_entropy(out_a, target)
+            loss_a.backward()
+            opt_analog.step()
+            
+            opt_base.zero_grad()
+            out_b = model_base(data)
+            loss_b = F.cross_entropy(out_b, target)
+            loss_b.backward()
+            opt_base.step()
+            
+        print(f"Epoch {epoch+1}/{epochs} | Loss Tuned: {loss_a.item():.4f} | Loss Base: {loss_b.item():.4f} | Tiempo: {time.time()-t0:.2f}s")
+
+    print("\nEvaluando en Test Set...")
+    model_analog.eval()
+    model_base.eval()
+    
+    correct_a = 0
+    correct_b = 0
+    with torch.no_grad():
+        for data, target in test_loader:
+            data, target = data.to(device), target.to(device)
+            pred_a = model_analog(data).argmax(dim=1, keepdim=True)
+            correct_a += pred_a.eq(target.view_as(pred_a)).sum().item()
+            
+            pred_b = model_base(data).argmax(dim=1, keepdim=True)
+            correct_b += pred_b.eq(target.view_as(pred_b)).sum().item()
+
+    acc_a = 100. * correct_a / len(test_loader.dataset)
+    acc_b = 100. * correct_b / len(test_loader.dataset)
+    
+    print(f"\n--- Resultados Finales V90d ---")
+    print(f"Baseline (64 SUM + ReLU):   {acc_b:.2f}%")
+    print(f"Spectral Tuning (64 neur):   {acc_a:.2f}%")
+    
+    # Análisis rápido de máscaras
+    mask_std = model_analog.analog_plate.spectral_mask.std(dim=1).mean().item()
+    print(f"\nDispersión media de máscaras espectrales: {mask_std:.4f} (Valores altos indican especialización)")
+
+if __name__ == '__main__':
+    train_and_evaluate()
