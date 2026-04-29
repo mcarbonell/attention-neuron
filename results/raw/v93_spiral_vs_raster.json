@@ -1,0 +1,48 @@
+{
+    "raster": {
+        "mode": "raster",
+        "final_acc": 0.2212,
+        "total_evaluations": 180000,
+        "wall_clock_time": 311.10209131240845,
+        "history": [
+            {
+                "epoch": 1,
+                "acc": 0.2263,
+                "loss": 2.0278730392456055
+            },
+            {
+                "epoch": 2,
+                "acc": 0.2234,
+                "loss": 2.033735513687134
+            },
+            {
+                "epoch": 3,
+                "acc": 0.2212,
+                "loss": 2.0553953647613525
+            }
+        ]
+    },
+    "spiral": {
+        "mode": "spiral",
+        "final_acc": 0.2297,
+        "total_evaluations": 180000,
+        "wall_clock_time": 314.7884624004364,
+        "history": [
+            {
+                "epoch": 1,
+                "acc": 0.2179,
+                "loss": 2.1992342472076416
+            },
+            {
+                "epoch": 2,
+                "acc": 0.2189,
+                "loss": 2.014479637145996
+            },
+            {
+                "epoch": 3,
+                "acc": 0.2297,
+                "loss": 2.0949482917785645
+            }
+        ]
+    }
+}
