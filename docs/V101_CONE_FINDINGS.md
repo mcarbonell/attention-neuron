@@ -12,6 +12,12 @@ Nuestro enfoque propone una **"Neurona de Atención Cónica 2D"**, que requiere 
 - **V99 (Cono 2D):** 1,320 parámetros. Precisión: ~89.36%. Al usar la distancia Euclidiana real (X, Y) y restaurar la topología 2D de la imagen, la precisión saltó más de 70 puntos.
 - **V100 (Cono 2D + Capa de Salida Densa):** 3,850 parámetros. Precisión: ~91.75%. Conectar los mapas de características espaciales generados por los conos a una capa densa de 10 clases rompió la barrera del 90%.
 - **V101 (Cono 2D + Inhibición + LR bajo):** 3,850 parámetros. Precisión: **94.30%**. Al permitir amplitudes negativas (inhibición) inicializando entre -1.0 y 1.0, y bajando el LR a 0.001, la convergencia fue extraordinariamente rápida (90.44% en Epoch 1).
+- **V102 (Cono 2D + Salida Triangular 1D):** 1,320 parámetros. Precisión: **89.34%**. Volviendo a la extrema eficiencia, se forzó un cuello de botella geométrico. Con un presupuesto minúsculo (~25 conos por clase), la red logró auto-organizar las 256 características ocultas en un espacio topológico 1D continuo para satisfacer al clasificador triangular.
+
+## Auto-Organización Topológica (El caso V102)
+El experimento V102 reveló un comportamiento profundo: la interpretabilidad forzada.
+Al usar una **Capa Triangular 1D** como clasificador final, obligamos a la red a que las características necesarias para detectar un dígito específico deban estar **físicamente juntas** en el vector oculto de 256 dimensiones. 
+La red, al aprender a optimizar la *Loss* usando solo distancias, actuó como un **Autoencoder Topológico Supervisado**. Creó un espacio latente estructurado y continuo en lugar del típico caos no interpretable de una capa Densa clásica, logrando casi un 90% de precisión bajo una restricción paramétrica severa.
 
 ## Formulación Matemática del Cono 2D
 La generación de los pesos dinámicos para cada uno de los 784 píxeles $(P_x, P_y)$ se realiza en tiempo real a partir de solo 4 parámetros entrenables por neurona:
