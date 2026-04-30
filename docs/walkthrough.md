@@ -19,7 +19,11 @@ Validated the property that spectral neurons do not increase parameter counts wi
 ### 4. Rotation Invariance (v118-v119)
 -   **Spectral Rings (v118)**: Achieved perfect mathematical rotation invariance (0° to 180°) using FFT Magnitude on concentric rings.
 -   **The Invariant King (v119)**: Balanced 92% accuracy with high rotation resistance by fusing invariant, structural, and orientation paths into a single **3.3k parameter** model.
+### 5. Radical Cosine Experiment (v120)
+Explored periodic activations (Sine/Cosine) as alternatives to ReLU. Discovered that **Sine activations learn spatial features faster** in the first epoch, though ReLU maintains a slight edge in final convergence stability for standard MLPs.
 
+### 6. Projection Sinusoids (v121)
+Eliminated all learned spatial weights by using fixed **Row and Column Projections** (56 values). Each projection was modulated by a bank of 8 learnable sinusoidal neurons (freq/phase). Achieved **88.87% accuracy with only 5.3k parameters**. Modulador: 896 Clasificador: 4,490. Total: $896 + 4,490 = 5,386$.
 ## Experiments & Findings
 - [findings_v107_feature_fusion.md](file:///c:/Users/mrcm_/Local/proj/algorithms/attention-neuron/docs/findings_v107_feature_fusion.md)
 - [findings_v109_neuron_comparison.md](file:///c:/Users/mrcm_/Local/proj/algorithms/attention-neuron/docs/findings_v109_neuron_comparison.md)
@@ -31,6 +35,8 @@ Validated the property that spectral neurons do not increase parameter counts wi
 - [findings_v117_infinite_samples.md](file:///c:/Users/mrcm_/Local/proj/algorithms/attention-neuron/docs/findings_v117_infinite_samples.md)
 - [findings_v118_spectral_rings.md](file:///c:/Users/mrcm_/Local/proj/algorithms/attention-neuron/docs/findings_v118_spectral_rings.md)
 - [findings_v119_invariant_hybrid.md](file:///c:/Users/mrcm_/Local/proj/algorithms/attention-neuron/docs/findings_v119_invariant_hybrid.md)
+- [findings_v120_cosine_neurons.md](file:///c:/Users/mrcm_/Local/proj/algorithms/attention-neuron/docs/findings_v120_cosine_neurons.md)
+- [findings_v121_projection_sinusoids.md](file:///c:/Users/mrcm_/Local/proj/algorithms/attention-neuron/docs/findings_v121_projection_sinusoids.md)
 
 ## Conclusion
 This session successfully transitioned the project from "general spectral exploration" to "high-efficiency morphological hybrids," proving that domain-specific neuron types (Triangular/Walsh) can outperform dense MLPs by factors of 10x-20x in parameter efficiency.

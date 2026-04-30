@@ -1,0 +1,8 @@
+{
+    "total_evaluations": 900000,
+    "wall_clock_time": 200.1966631412506,
+    "function_evaluation_time": 10.186547756195068,
+    "final_objective": 0.3550631672143936,
+    "test_acc": 0.8887,
+    "internal_overhead_time": 190.01011538505554
+}

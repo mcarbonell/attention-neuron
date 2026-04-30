@@ -1,0 +1,30 @@
+{
+    "dense": {
+        "wall_clock_time": 143.50598788261414,
+        "eval_time": 14.723523300723173,
+        "final_acc": 0.9788,
+        "params": 132746,
+        "overhead_time": 128.78246458189096
+    },
+    "blocky": {
+        "wall_clock_time": 153.45215320587158,
+        "eval_time": 19.259345794213004,
+        "final_acc": 0.9755,
+        "params": 132746,
+        "overhead_time": 134.19280741165858
+    },
+    "smooth_k8": {
+        "wall_clock_time": 155.06575870513916,
+        "eval_time": 22.09041120123584,
+        "final_acc": 0.9691,
+        "params": 9866,
+        "overhead_time": 132.97534750390332
+    },
+    "smooth_k16": {
+        "wall_clock_time": 151.30523300170898,
+        "eval_time": 22.574407799053006,
+        "final_acc": 0.9813,
+        "params": 34442,
+        "overhead_time": 128.73082520265598
+    }
+}

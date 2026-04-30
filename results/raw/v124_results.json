@@ -1,0 +1,22 @@
+{
+    "Blocky K=2": {
+        "acc": 0.5264,
+        "params": 2186
+    },
+    "Smooth K=2": {
+        "acc": 0.3093,
+        "params": 2186
+    },
+    "Blocky K=4": {
+        "acc": 0.8241,
+        "params": 3722
+    },
+    "Smooth K=4": {
+        "acc": 0.9018,
+        "params": 3722
+    },
+    "Smooth K=8": {
+        "acc": 0.9719,
+        "params": 9866
+    }
+}

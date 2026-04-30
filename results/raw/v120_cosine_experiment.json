@@ -1,0 +1,42 @@
+[
+    {
+        "variant": "Baseline",
+        "activation": "relu",
+        "total_evaluations": 600000,
+        "wall_clock_time": 141.98879027366638,
+        "function_evaluation_time": 6.030764102935791,
+        "internal_overhead_time": 135.9580261707306,
+        "final_objective": 0.08840406686067581,
+        "test_acc": 0.9728
+    },
+    {
+        "variant": "PureCosine",
+        "activation": "cosine",
+        "total_evaluations": 600000,
+        "wall_clock_time": 147.3709797859192,
+        "function_evaluation_time": 6.0609290599823,
+        "internal_overhead_time": 141.3100507259369,
+        "final_objective": 0.11786564774811267,
+        "test_acc": 0.9645
+    },
+    {
+        "variant": "PureSine",
+        "activation": "sine",
+        "total_evaluations": 600000,
+        "wall_clock_time": 148.27512764930725,
+        "function_evaluation_time": 7.010793685913086,
+        "internal_overhead_time": 141.26433396339417,
+        "final_objective": 0.11290790028870105,
+        "test_acc": 0.9659
+    },
+    {
+        "variant": "CosineReLU",
+        "activation": "cosine_relu",
+        "total_evaluations": 600000,
+        "wall_clock_time": 138.55958557128906,
+        "function_evaluation_time": 6.794647216796875,
+        "internal_overhead_time": 131.7649383544922,
+        "final_objective": 0.1361728459596634,
+        "test_acc": 0.9613
+    }
+]
