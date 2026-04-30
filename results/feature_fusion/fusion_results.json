@@ -1,0 +1,82 @@
+[
+    {
+        "config": "Baseline (Pixels)",
+        "final_objective": 97.75,
+        "wall_clock_time": 17.755879878997803,
+        "function_evaluation_time": 13.882481336593628,
+        "total_evaluations": 4690,
+        "train_acc": [
+            90.935,
+            96.14,
+            97.35,
+            98.03833333333333,
+            98.38833333333334
+        ],
+        "test_acc": 97.75,
+        "internal_overhead_time": 3.873398542404175
+    },
+    {
+        "config": "Intensity Only",
+        "final_objective": 90.26,
+        "wall_clock_time": 11.83962607383728,
+        "function_evaluation_time": 8.523058652877808,
+        "total_evaluations": 4690,
+        "train_acc": [
+            76.73833333333333,
+            86.455,
+            88.335,
+            89.355,
+            89.94
+        ],
+        "test_acc": 90.26,
+        "internal_overhead_time": 3.3165674209594727
+    },
+    {
+        "config": "Islands Only",
+        "final_objective": 87.35,
+        "wall_clock_time": 12.752774238586426,
+        "function_evaluation_time": 9.2753005027771,
+        "total_evaluations": 4690,
+        "train_acc": [
+            78.81,
+            84.56,
+            85.88666666666667,
+            86.69833333333334,
+            87.39666666666666
+        ],
+        "test_acc": 87.35,
+        "internal_overhead_time": 3.477473735809326
+    },
+    {
+        "config": "Intensity + Islands",
+        "final_objective": 94.7,
+        "wall_clock_time": 12.297411918640137,
+        "function_evaluation_time": 8.844893217086792,
+        "total_evaluations": 4690,
+        "train_acc": [
+            84.05,
+            92.15833333333333,
+            93.305,
+            93.96166666666667,
+            94.50166666666667
+        ],
+        "test_acc": 94.7,
+        "internal_overhead_time": 3.4525187015533447
+    },
+    {
+        "config": "Full Fusion",
+        "final_objective": 97.51,
+        "wall_clock_time": 15.81572937965393,
+        "function_evaluation_time": 11.765191078186035,
+        "total_evaluations": 4690,
+        "train_acc": [
+            90.295,
+            95.48166666666667,
+            96.72166666666666,
+            97.15,
+            97.465
+        ],
+        "test_acc": 97.51,
+        "internal_overhead_time": 4.0505383014678955
+    }
+]
