@@ -1,0 +1,98 @@
+[
+    {
+        "func": "x^2",
+        "model": "poly_v133",
+        "final_objective": 0.00027821918192785235,
+        "std_objective": 0.0001962740230370748,
+        "mse_test": 14.970015525817871,
+        "total_evaluations": 10000000,
+        "wall_clock_time": 26.018176555633545,
+        "function_evaluation_time": 25.98860239982605,
+        "internal_overhead_time": 0.029574155807495117,
+        "params": 153
+    },
+    {
+        "func": "1/x",
+        "model": "poly_v133",
+        "final_objective": 1.0215361937880516,
+        "std_objective": 1.7268184991090263,
+        "mse_test": 0.6974472999572754,
+        "total_evaluations": 10000000,
+        "wall_clock_time": 25.969805479049683,
+        "function_evaluation_time": 25.941800117492676,
+        "internal_overhead_time": 0.028005361557006836,
+        "params": 153
+    },
+    {
+        "func": "prod",
+        "model": "poly_v133",
+        "final_objective": 4.866743329330347e-05,
+        "std_objective": 3.2206160242228174e-05,
+        "mse_test": 0.23639284074306488,
+        "total_evaluations": 10000000,
+        "wall_clock_time": 30.064531564712524,
+        "function_evaluation_time": 30.031497716903687,
+        "internal_overhead_time": 0.03303384780883789,
+        "params": 225
+    },
+    {
+        "func": "div",
+        "model": "poly_v133",
+        "final_objective": 12.458494567871094,
+        "std_objective": 0.326565902939263,
+        "mse_test": 48.91341018676758,
+        "total_evaluations": 10000000,
+        "wall_clock_time": 28.021732091903687,
+        "function_evaluation_time": 27.992910623550415,
+        "internal_overhead_time": 0.028821468353271484,
+        "params": 225
+    },
+    {
+        "func": "sin",
+        "model": "poly_v133",
+        "final_objective": 0.00034082244947057915,
+        "std_objective": 0.0006174222932688184,
+        "mse_test": 0.02258867584168911,
+        "total_evaluations": 10000000,
+        "wall_clock_time": 24.13095188140869,
+        "function_evaluation_time": 24.104431867599487,
+        "internal_overhead_time": 0.0265200138092041,
+        "params": 153
+    },
+    {
+        "func": "cos",
+        "model": "poly_v133",
+        "final_objective": 0.0008429277688264847,
+        "std_objective": 0.0004471055136450935,
+        "mse_test": 0.4960317313671112,
+        "total_evaluations": 10000000,
+        "wall_clock_time": 22.952892065048218,
+        "function_evaluation_time": 22.927009105682373,
+        "internal_overhead_time": 0.025882959365844727,
+        "params": 153
+    },
+    {
+        "func": "tan",
+        "model": "poly_v133",
+        "final_objective": 12.21310043334961,
+        "std_objective": 2.480529375168554,
+        "mse_test": 1081.947998046875,
+        "total_evaluations": 10000000,
+        "wall_clock_time": 22.89189338684082,
+        "function_evaluation_time": 22.866084337234497,
+        "internal_overhead_time": 0.025809049606323242,
+        "params": 153
+    },
+    {
+        "func": "sinc",
+        "model": "poly_v133",
+        "final_objective": 8.823676989777596e-05,
+        "std_objective": 0.00011472943550332214,
+        "mse_test": 7.174461841583252,
+        "total_evaluations": 10000000,
+        "wall_clock_time": 23.254136085510254,
+        "function_evaluation_time": 23.22664165496826,
+        "internal_overhead_time": 0.027494430541992188,
+        "params": 153
+    }
+]

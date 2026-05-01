@@ -1,0 +1,82 @@
+[
+    {
+        "func": "x^2",
+        "model": "poly_v134",
+        "final_objective": 5.142003587934596e-05,
+        "std_objective": 5.499488765575234e-05,
+        "mse_test": 3.7439746856689453,
+        "params": 289,
+        "wall_clock_time": 27.640835285186768,
+        "eval_time": 26.20082664489746
+    },
+    {
+        "func": "1/x",
+        "model": "poly_v134",
+        "final_objective": 0.1079560473561287,
+        "std_objective": 0.029588793550741562,
+        "mse_test": 1.1288026571273804,
+        "params": 289,
+        "wall_clock_time": 27.119000673294067,
+        "eval_time": 27.077589988708496
+    },
+    {
+        "func": "prod",
+        "model": "poly_v134",
+        "final_objective": 4.813069172087126e-05,
+        "std_objective": 2.5629526652126262e-05,
+        "mse_test": 0.09137506783008575,
+        "params": 361,
+        "wall_clock_time": 32.66977596282959,
+        "eval_time": 32.626821756362915
+    },
+    {
+        "func": "div",
+        "model": "poly_v134",
+        "final_objective": 12.08876953125,
+        "std_objective": 0.4437883592267127,
+        "mse_test": 31.329994201660156,
+        "params": 361,
+        "wall_clock_time": 29.08772349357605,
+        "eval_time": 29.04892325401306
+    },
+    {
+        "func": "sin",
+        "model": "poly_v134",
+        "final_objective": 5.007656363886781e-06,
+        "std_objective": 1.919321464593833e-06,
+        "mse_test": 0.7914151549339294,
+        "params": 289,
+        "wall_clock_time": 27.55499029159546,
+        "eval_time": 27.517248153686523
+    },
+    {
+        "func": "cos",
+        "model": "poly_v134",
+        "final_objective": 7.299736330423911e-06,
+        "std_objective": 5.582073588666437e-06,
+        "mse_test": 2.0990216732025146,
+        "params": 289,
+        "wall_clock_time": 27.339733362197876,
+        "eval_time": 27.304994106292725
+    },
+    {
+        "func": "tan",
+        "model": "poly_v134",
+        "final_objective": 3.6256685733795164,
+        "std_objective": 1.0400503059638677,
+        "mse_test": 2.4173834323883057,
+        "params": 289,
+        "wall_clock_time": 27.759353160858154,
+        "eval_time": 27.722749710083008
+    },
+    {
+        "func": "sinc",
+        "model": "poly_v134",
+        "final_objective": 3.3425174706280815e-06,
+        "std_objective": 2.9594635247732043e-06,
+        "mse_test": 1.4630812406539917,
+        "params": 289,
+        "wall_clock_time": 31.032953023910522,
+        "eval_time": 30.981602907180786
+    }
+]

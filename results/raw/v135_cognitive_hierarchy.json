@@ -1,0 +1,44 @@
+[
+    {
+        "func": "x^2",
+        "model": "cognitive_v135",
+        "mse_test": 1.3958292504151661,
+        "gate_avg": 0.20398839687307677,
+        "params": 382
+    },
+    {
+        "func": "1/x",
+        "model": "cognitive_v135",
+        "mse_test": 1.7919432123502095,
+        "gate_avg": 0.6116626461346945,
+        "params": 382
+    },
+    {
+        "func": "prod",
+        "model": "cognitive_v135",
+        "mse_test": 0.025324184447526932,
+        "gate_avg": 0.0042281674686819315,
+        "params": 442
+    },
+    {
+        "func": "sin",
+        "model": "cognitive_v135",
+        "mse_test": 1.301738440990448,
+        "gate_avg": 0.15626398970683417,
+        "params": 382
+    },
+    {
+        "func": "tan",
+        "model": "cognitive_v135",
+        "mse_test": 19.277227719624836,
+        "gate_avg": 0.7249500155448914,
+        "params": 382
+    },
+    {
+        "func": "sinc",
+        "model": "cognitive_v135",
+        "mse_test": 0.0585983886073033,
+        "gate_avg": 0.007799901844312747,
+        "params": 382
+    }
+]
