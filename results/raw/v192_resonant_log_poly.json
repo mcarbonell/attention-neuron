@@ -1,0 +1,58 @@
+[
+    {
+        "func": "Rastrigin",
+        "model": "MLP-L",
+        "mse_train": 0.6390376091003418,
+        "mse_far": 119806.1875,
+        "ratio": 187479.0869796844
+    },
+    {
+        "func": "Rastrigin",
+        "model": "Poly-ResLog-V192",
+        "mse_train": 0.15277549624443054,
+        "mse_far": 35332.0234375,
+        "ratio": 231267.60708235478
+    },
+    {
+        "func": "Ackley",
+        "model": "MLP-L",
+        "mse_train": 0.009945935569703579,
+        "mse_far": 1228.12548828125,
+        "ratio": 123480.13714253047
+    },
+    {
+        "func": "Ackley",
+        "model": "Poly-ResLog-V192",
+        "mse_train": 0.003793030744418502,
+        "mse_far": 249.58602905273438,
+        "ratio": 65801.21433347266
+    },
+    {
+        "func": "Schwefel",
+        "model": "MLP-L",
+        "mse_train": 0.35433971881866455,
+        "mse_far": 290086.625,
+        "ratio": 818668.1018044011
+    },
+    {
+        "func": "Schwefel",
+        "model": "Poly-ResLog-V192",
+        "mse_train": 14722.1435546875,
+        "mse_far": 370156.03125,
+        "ratio": 25.14280817022349
+    },
+    {
+        "func": "sin_high",
+        "model": "MLP-L",
+        "mse_train": 0.000382402038667351,
+        "mse_far": 252.3461456298828,
+        "ratio": 659897.4886467579
+    },
+    {
+        "func": "sin_high",
+        "model": "Poly-ResLog-V192",
+        "mse_train": 2.4639874027343467e-05,
+        "mse_far": 0.4259962737560272,
+        "ratio": 17288.89749981641
+    }
+]
