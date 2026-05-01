@@ -1,0 +1,74 @@
+[
+    {
+        "gen": 0,
+        "num_archetypes": 10,
+        "train_acc": 0.8136667013168335,
+        "test_acc": 0.8240000009536743
+    },
+    {
+        "gen": 1,
+        "num_archetypes": 30,
+        "train_acc": 0.8355666995048523,
+        "test_acc": 0.8392999768257141
+    },
+    {
+        "gen": 2,
+        "num_archetypes": 50,
+        "train_acc": 0.862666666507721,
+        "test_acc": 0.8661999702453613
+    },
+    {
+        "gen": 3,
+        "num_archetypes": 70,
+        "train_acc": 0.8841000199317932,
+        "test_acc": 0.8869999647140503
+    },
+    {
+        "gen": 4,
+        "num_archetypes": 90,
+        "train_acc": 0.8950999975204468,
+        "test_acc": 0.9004999995231628
+    },
+    {
+        "gen": 5,
+        "num_archetypes": 110,
+        "train_acc": 0.9002666473388672,
+        "test_acc": 0.9024999737739563
+    },
+    {
+        "gen": 6,
+        "num_archetypes": 128,
+        "train_acc": 0.9052166938781738,
+        "test_acc": 0.9098999500274658
+    },
+    {
+        "gen": 7,
+        "num_archetypes": 147,
+        "train_acc": 0.9115166664123535,
+        "test_acc": 0.9149999618530273
+    },
+    {
+        "gen": 8,
+        "num_archetypes": 162,
+        "train_acc": 0.9171500205993652,
+        "test_acc": 0.9205999970436096
+    },
+    {
+        "gen": 9,
+        "num_archetypes": 179,
+        "train_acc": 0.9205333590507507,
+        "test_acc": 0.925599992275238
+    },
+    {
+        "gen": 10,
+        "num_archetypes": 191,
+        "train_acc": 0.9243333339691162,
+        "test_acc": 0.9279999732971191
+    },
+    {
+        "gen": 11,
+        "num_archetypes": 203,
+        "train_acc": 0.9269833564758301,
+        "test_acc": 0.9283999800682068
+    }
+]

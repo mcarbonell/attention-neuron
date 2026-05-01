@@ -1,0 +1,6 @@
+{
+    "accuracy": 0.9242,
+    "inject_time": 9.848821399966255,
+    "test_time": 3.6644648999208584,
+    "model": "HolographicClassifier_V139"
+}

@@ -1,0 +1,74 @@
+[
+    {
+        "dim": 4096,
+        "model": "dense",
+        "params": 16777216,
+        "time_ms": 1988.8848999980837,
+        "mem_mb": 192.0,
+        "status": "ok"
+    },
+    {
+        "dim": 4096,
+        "model": "spectral",
+        "params": 1048576,
+        "time_ms": 655.1824000198394,
+        "mem_mb": 12.0,
+        "status": "ok"
+    },
+    {
+        "dim": 8192,
+        "model": "dense",
+        "params": 67108864,
+        "time_ms": 2120.4125999938697,
+        "mem_mb": 768.0,
+        "status": "ok"
+    },
+    {
+        "dim": 8192,
+        "model": "spectral",
+        "params": 2097152,
+        "time_ms": 2754.8481000121683,
+        "mem_mb": 24.0,
+        "status": "ok"
+    },
+    {
+        "dim": 16384,
+        "model": "dense",
+        "params": 268435456,
+        "time_ms": 10694.731199997477,
+        "mem_mb": 3072.0,
+        "status": "ok"
+    },
+    {
+        "dim": 16384,
+        "model": "spectral",
+        "params": 4194304,
+        "time_ms": 7322.888899943791,
+        "mem_mb": 48.0,
+        "status": "ok"
+    },
+    {
+        "dim": 32768,
+        "model": "dense",
+        "status": "failed",
+        "error": "'utf-8' codec can't decode byte 0xe1 in position 97: invalid continuation byte"
+    },
+    {
+        "dim": 32768,
+        "model": "spectral",
+        "status": "failed",
+        "error": "'utf-8' codec can't decode byte 0xe1 in position 97: invalid continuation byte"
+    },
+    {
+        "dim": 49152,
+        "model": "dense",
+        "status": "failed",
+        "error": "'utf-8' codec can't decode byte 0xe1 in position 97: invalid continuation byte"
+    },
+    {
+        "dim": 49152,
+        "model": "spectral",
+        "status": "failed",
+        "error": "'utf-8' codec can't decode byte 0xe1 in position 97: invalid continuation byte"
+    }
+]
