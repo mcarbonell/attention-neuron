@@ -1,0 +1,74 @@
+[
+    {
+        "func": "Rastrigin",
+        "model": "MLP-L",
+        "params": 17025,
+        "mse_train": 8.323534965515137,
+        "mse_far": 215849.328125,
+        "ratio": 25932.41081094147
+    },
+    {
+        "func": "Rastrigin",
+        "model": "Poly-V192-Flat",
+        "params": 1425,
+        "mse_train": 0.13650457561016083,
+        "mse_far": 34678.36328125,
+        "ratio": 254045.42760553912
+    },
+    {
+        "func": "Rastrigin",
+        "model": "Poly-V193-Deep",
+        "params": 5521,
+        "mse_train": 12.671451568603516,
+        "mse_far": 35194.67578125,
+        "ratio": 2777.4778280690634
+    },
+    {
+        "func": "Ackley",
+        "model": "MLP-L",
+        "params": 17025,
+        "mse_train": 0.021387718617916107,
+        "mse_far": 68.4703140258789,
+        "ratio": 3201.384647230265
+    },
+    {
+        "func": "Ackley",
+        "model": "Poly-V192-Flat",
+        "params": 1425,
+        "mse_train": 0.0018315932247787714,
+        "mse_far": 222.13336181640625,
+        "ratio": 121278.76358679903
+    },
+    {
+        "func": "Ackley",
+        "model": "Poly-V193-Deep",
+        "params": 5521,
+        "mse_train": 0.31877052783966064,
+        "mse_far": 123.01460266113281,
+        "ratio": 385.903312625634
+    },
+    {
+        "func": "Schwefel",
+        "model": "MLP-L",
+        "params": 17025,
+        "mse_train": 0.12894682586193085,
+        "mse_far": 267424.375,
+        "ratio": 2073912.0425055623
+    },
+    {
+        "func": "Schwefel",
+        "model": "Poly-V192-Flat",
+        "params": 1425,
+        "mse_train": 15823.09765625,
+        "mse_far": 33050.64453125,
+        "ratio": 2.0887594356845325
+    },
+    {
+        "func": "Schwefel",
+        "model": "Poly-V193-Deep",
+        "params": 5521,
+        "mse_train": 152672.109375,
+        "mse_far": 152350.625,
+        "ratio": 0.9978942822214478
+    }
+]

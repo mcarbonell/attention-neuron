@@ -16,7 +16,7 @@ try:
 except ImportError:
     pass
 
-# --- GENERADORES DE DATOS (Mismos que V190/V191) ---
+# --- GENERADORES DE DATOS ---
 class FunctionBenchmark:
     def __init__(self, name, dim=1):
         self.name = name
@@ -27,7 +27,6 @@ class FunctionBenchmark:
             return [0.5, 2.0], [0.2, 5.0], [0.1, 10.0]
         if "Rastrigin" in self.name or "Ackley" in self.name:
             return [-2.0, 2.0], [-5.12, 5.12], [-15.0, 15.0]
-        # Default
         return [-2.0, 2.0], [-4.0, 4.0], [-10.0, 10.0]
 
     def evaluate(self, x):
@@ -35,7 +34,6 @@ class FunctionBenchmark:
             A = 10
             n = x.shape[1]
             return (A * n + torch.sum(x**2 - A * torch.cos(2 * math.pi * x), dim=1)).unsqueeze(1)
-        
         if self.name == "Ackley":
             n = x.shape[1]
             sum_sq = torch.sum(x**2, dim=1)
@@ -43,14 +41,10 @@ class FunctionBenchmark:
             term1 = -20 * torch.exp(-0.2 * torch.sqrt(sum_sq / n))
             term2 = -torch.exp(sum_cos / n)
             return (term1 + term2 + 20 + math.e).unsqueeze(1)
-        
         if self.name == "Schwefel":
             n = x.shape[1]
             return (418.9829 * n - torch.sum(x * torch.sin(torch.sqrt(torch.abs(x))), dim=1)).unsqueeze(1)
-            
         if self.name == "prod": return (x[:, 0] * x[:, 1]).unsqueeze(1)
-        if self.name == "sin_high": return torch.sin(5.0 * x)
-        
         return x
 
     def generate_data(self, n_samples=2000):
@@ -64,85 +58,79 @@ class FunctionBenchmark:
             "far": (x_far.to(device), self.evaluate(x_far).to(device))
         }
 
-# --- MODELOS ---
+# --- COMPONENTES POLIMÓRFICOS ---
 
 class ResonanceLayer(nn.Module):
-    """
-    V192: Capa que aprende frecuencias y fases para capturar periodicidad.
-    """
     def __init__(self, in_dim, k_oscillators=8):
         super().__init__()
-        self.in_dim = in_dim
-        self.k = k_oscillators
-        
-        # Inicializamos frecuencias en un rango variado
         self.freq = nn.Parameter(torch.randn(in_dim, k_oscillators) * 5.0)
         self.phase = nn.Parameter(torch.randn(in_dim, k_oscillators) * math.pi)
-        
     def forward(self, x):
-        # x: (B, D) -> (B, D, 1)
         x_un = x.unsqueeze(-1)
-        # (B, D, 1) * (D, K) + (D, K) -> (B, D, K)
         phases = x_un * self.freq + self.phase
-        res = torch.sin(phases)
-        return res.view(x.size(0), -1) # (B, D*K)
+        return torch.sin(phases).view(x.size(0), -1)
 
 class LogInteractionLayer(nn.Module):
-    """
-    V191b: Capa logarítmica con manejo de signos.
-    """
-    def __init__(self, in_dim, out_dim=4):
+    def __init__(self, in_dim, out_dim=8):
         super().__init__()
         self.log_weights = nn.Linear(in_dim, out_dim)
         self.sign_net = nn.Linear(in_dim, out_dim)
-        
     def forward(self, x):
         x_abs = torch.abs(x) + 1e-6
         z_mag = torch.exp(self.log_weights(torch.log(x_abs)))
         z_sign = torch.tanh(self.sign_net(torch.sign(x)))
         return z_mag * z_sign
 
-class ResonantLogPoly(nn.Module):
+class PolymorphicStage(nn.Module):
     """
-    V192: Neurona Polimórfica Resonante-Logarítmica.
+    Una etapa que proyecta la entrada a bases estructurales, logarítmicas y resonantes.
     """
-    def __init__(self, in_dim, hidden_dim=32):
+    def __init__(self, in_dim, out_dim=16):
         super().__init__()
         self.in_dim = in_dim
+        self.out_dim = out_dim
         
-        # Rama Resonancia
-        self.res_branch = ResonanceLayer(in_dim, k_oscillators=8)
-        # Rama Logarítmica
-        self.log_branch = LogInteractionLayer(in_dim, out_dim=8)
+        self.res = ResonanceLayer(in_dim, k_oscillators=8)
+        self.log = LogInteractionLayer(in_dim, out_dim=8)
+        self.n_poly_bases = 8
         
-        # Rama Estructural (Bases fijas)
-        self.n_bases = 8
-        
-        # Entrada total al integrador
-        # D*K (res) + 8 (log) + D*8 (poly)
+        # Entrada total: in_dim * 8 (res) + 8 (log) + in_dim * 8 (structural)
         self.total_in = in_dim * 8 + 8 + in_dim * 8
-        self.weights = nn.Parameter(torch.randn(hidden_dim, self.total_in) / math.sqrt(in_dim))
-        self.bias = nn.Parameter(torch.zeros(hidden_dim))
+        self.integrator = nn.Linear(self.total_in, out_dim)
         
-        self.head = nn.Linear(hidden_dim, 1)
-
     def forward(self, x):
-        # 1. Resonancia
-        res_feats = self.res_branch(x)
-        # 2. Log
-        log_feats = self.log_branch(x)
-        # 3. Poly bases
+        res_f = self.res(x)
+        log_f = self.log(x)
+        
+        # Structural bases
         b1, b2, b3, b4 = x, x**2, x**3, torch.abs(x)
         b5, b6, b7 = torch.sin(x), torch.cos(x), 1.0 / (x + 1e-8)
         x_nz = torch.where(x == 0, torch.ones_like(x)*1e-6, x)
         b8 = torch.sin(x_nz) / x_nz
-        poly_bases = torch.cat([b1, b2, b3, b4, b5, b6, b7, b8], dim=1)
+        poly_f = torch.cat([b1, b2, b3, b4, b5, b6, b7, b8], dim=1)
         
-        combined = torch.cat([res_feats, log_feats, poly_bases], dim=1)
-        
-        feat = F.linear(combined, self.weights, self.bias)
-        feat = torch.tanh(feat)
-        return self.head(feat)
+        combined = torch.cat([res_f, log_f, poly_f], dim=1)
+        z = self.integrator(combined)
+        return torch.tanh(z)
+
+class DeepPolymorphicNet(nn.Module):
+    """
+    V193: Red Polimórfica Profunda.
+    """
+    def __init__(self, in_dim, hidden_dim=16, depth=2):
+        super().__init__()
+        self.stages = nn.ModuleList()
+        current_dim = in_dim
+        for i in range(depth):
+            self.stages.append(PolymorphicStage(current_dim, hidden_dim))
+            current_dim = hidden_dim
+            
+        self.head = nn.Linear(hidden_dim, 1)
+
+    def forward(self, x):
+        for stage in self.stages:
+            x = stage(x)
+        return self.head(x)
 
 class BaselineMLP(nn.Module):
     def __init__(self, in_dim, hidden_dim=128):
@@ -185,7 +173,6 @@ def main():
         FunctionBenchmark("Rastrigin", 2),
         FunctionBenchmark("Ackley", 2),
         FunctionBenchmark("Schwefel", 2),
-        FunctionBenchmark("sin_high", 1),
     ]
     
     results = []
@@ -193,7 +180,8 @@ def main():
         print(f"\n>>> BENCHMARK: {bench.name}")
         models = [
             ("MLP-L", BaselineMLP(bench.dim, 128)),
-            ("Poly-ResLog-V192", ResonantLogPoly(bench.dim, 32))
+            ("Poly-V192-Flat", DeepPolymorphicNet(bench.dim, hidden_dim=32, depth=1)),
+            ("Poly-V193-Deep", DeepPolymorphicNet(bench.dim, hidden_dim=16, depth=2))
         ]
         
         for m_name, model in models:
@@ -202,15 +190,14 @@ def main():
             print(f"  Training {m_name} ({p_count} params)...")
             m_train, m_far = train_and_eval(bench, model)
             results.append({
-                "func": bench.name, "model": m_name, 
-                "params": p_count,
+                "func": bench.name, "model": m_name, "params": p_count,
                 "mse_train": m_train, "mse_far": m_far,
                 "ratio": m_far / (m_train + 1e-12)
             })
             print(f"    Train: {m_train:.2e} | Far: {m_far:.2e} | Ratio: {results[-1]['ratio']:.2e}")
 
     os.makedirs("results/raw", exist_ok=True)
-    with open("results/raw/v192_resonant_log_poly.json", "w") as f:
+    with open("results/raw/v193_deep_poly.json", "w") as f:
         json.dump(results, f, indent=4)
 
 if __name__ == "__main__":

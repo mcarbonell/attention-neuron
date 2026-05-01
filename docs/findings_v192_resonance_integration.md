@@ -6,16 +6,16 @@ Unificar los hallazgos de la "Resonance Era" (V180-V189) con la arquitectura pol
 ## Resultados Resumidos (Ratio de Generalización Far OOD)
 El Ratio representa cuánto crece el error al salir del dominio de entrenamiento (más bajo es mejor).
 
-| Función | Modelo | Train MSE | Far OOD MSE | Ratio (Estabilidad) |
-| :--- | :--- | :--- | :--- | :--- |
-| **Schwefel** | MLP-L | 0.354 | 290,000 | 819,000 |
-| | Poly-ResLog-V192 | 14,700 | **370,000** | **25.1** (32,000x mejor) |
-| **sin(5x)** | MLP-L | 3.82e-04 | 252 | 660,000 |
-| | Poly-ResLog-V192 | 2.46e-05 | **0.426** | **17,300** (38x mejor) |
-| **Rastrigin** | MLP-L | 114 | 73,300 | 643 |
-| | Poly-ResLog-V192 | 134 | **34,500** | **257** (2.5x mejor) |
-| **Ackley** | MLP-L | 0.009 | 1,230 | 123,000 |
-| | Poly-ResLog-V192 | 0.003 | **250** | **65,800** (2x mejor) |
+| Función | Modelo | Parámetros | Train MSE | Far OOD MSE | Ratio (Estabilidad) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Schwefel** | MLP-L | 17,025 | 0.354 | 290,000 | 819,000 |
+| | Poly-ResLog-V192 | **1,425** | 14,700 | **370,000** | **25.1** (32,000x mejor) |
+| **sin(5x)** | MLP-L | 16,897 | 3.82e-04 | 252 | 660,000 |
+| | Poly-ResLog-V192 | **881** | 2.46e-05 | **0.426** | **17,300** (38x mejor) |
+| **Rastrigin** | MLP-L | 17,025 | 114 | 73,300 | 643 |
+| | Poly-ResLog-V192 | **1,425** | 134 | **34,500** | **257** (2.5x mejor) |
+| **Ackley** | MLP-L | 17,025 | 0.009 | 1,230 | 123,000 |
+| | Poly-ResLog-V192 | **1,425** | 0.003 | **250** | **65,800** (2x mejor) |
 
 ## Conclusiones Técnicas
 
