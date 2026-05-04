@@ -1,0 +1,14 @@
+{
+    "baseline_mlp": {
+        "final_objective": 0.014484639368019999,
+        "total_params": 4353,
+        "wall_clock_time": 3.793621301651001,
+        "pei": 0.27082868327073095
+    },
+    "periodic_neuron": {
+        "final_objective": 0.07212975334376097,
+        "total_params": 4,
+        "wall_clock_time": 1.8256914615631104,
+        "pei": 1.3274822108248583
+    }
+}

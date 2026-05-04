@@ -1,0 +1,6 @@
+{
+    "v227_mnist_dct_periodic": {
+        "accuracy": 85.83,
+        "total_params": 1034
+    }
+}

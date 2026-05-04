@@ -1,0 +1,6 @@
+{
+    "v228_mnist_90_percent": {
+        "accuracy": 88.02,
+        "total_params": 1306
+    }
+}

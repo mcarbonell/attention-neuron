@@ -1,0 +1,6 @@
+{
+    "v226_mnist_periodic": {
+        "accuracy": 44.8,
+        "total_params": 522
+    }
+}
