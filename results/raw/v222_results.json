@@ -1,0 +1,9 @@
+{
+    "final_objective": 0.589575275556365,
+    "total_evaluations": 4690,
+    "wall_clock_time": 175.40848660469055,
+    "PEI": 0.040018563307107596,
+    "total_params": 632930,
+    "hardware_info": "CPU/GPU Auto",
+    "commit_hash": "v222_prototype"
+}

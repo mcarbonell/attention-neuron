@@ -1,0 +1,8 @@
+{
+    "final_objective": 0.9087833688457383,
+    "total_evaluations": 4690,
+    "wall_clock_time": 279.756632566452,
+    "PEI": 0.007347737859705185,
+    "total_params": 2267360,
+    "method": "PAC-Purified-Spectral-Diffusion"
+}
