@@ -1,0 +1,5 @@
+{
+    "layers": 2,
+    "latency_ms": 202.11559999734163,
+    "experts_per_layer": 2048
+}
