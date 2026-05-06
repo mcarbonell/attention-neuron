@@ -1,0 +1,9 @@
+{
+    "final_objective": 0.06071280688047409,
+    "far_ood_mse": 1.6905159950256348,
+    "total_evaluations": 3000,
+    "wall_clock_time": 6.013331890106201,
+    "PEI": 4.5078433029619545,
+    "total_params": 4505,
+    "dge_params_ratio": 0.0013318534961154272
+}
