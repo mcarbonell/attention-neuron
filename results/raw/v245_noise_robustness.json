@@ -1,0 +1,102 @@
+[
+    {
+        "model_name": "Spectral-MF",
+        "noise_level": 0.0,
+        "final_objective": 96.13,
+        "total_params": 17098,
+        "wall_clock_time": 103.44528007507324,
+        "function_evaluation_time": 22.218876123428345,
+        "internal_overhead_time": 81.2264039516449,
+        "PEI": 22.709819305012097
+    },
+    {
+        "model_name": "Spectral-MF",
+        "noise_level": 0.1,
+        "final_objective": 95.36,
+        "total_params": 17098,
+        "wall_clock_time": 110.53849387168884,
+        "function_evaluation_time": 23.519808292388916,
+        "internal_overhead_time": 87.01868557929993,
+        "PEI": 22.527913959491872
+    },
+    {
+        "model_name": "Spectral-MF",
+        "noise_level": 0.2,
+        "final_objective": 95.2,
+        "total_params": 17098,
+        "wall_clock_time": 108.7317578792572,
+        "function_evaluation_time": 22.578335762023926,
+        "internal_overhead_time": 86.15342211723328,
+        "PEI": 22.490115446137022
+    },
+    {
+        "model_name": "Spectral-MF",
+        "noise_level": 0.4,
+        "final_objective": 94.04,
+        "total_params": 17098,
+        "wall_clock_time": 110.30590629577637,
+        "function_evaluation_time": 23.657747745513916,
+        "internal_overhead_time": 86.64815855026245,
+        "PEI": 22.216076224314342
+    },
+    {
+        "model_name": "Spectral-MF",
+        "noise_level": 0.6,
+        "final_objective": 92.66,
+        "total_params": 17098,
+        "wall_clock_time": 105.64702558517456,
+        "function_evaluation_time": 22.161763906478882,
+        "internal_overhead_time": 83.48526167869568,
+        "PEI": 21.89006404662874
+    },
+    {
+        "model_name": "MLP-Baseline",
+        "noise_level": 0.0,
+        "final_objective": 97.45,
+        "total_params": 101770,
+        "wall_clock_time": 80.45612239837646,
+        "function_evaluation_time": 1.5907549858093262,
+        "internal_overhead_time": 78.86536741256714,
+        "PEI": 19.460326730692092
+    },
+    {
+        "model_name": "MLP-Baseline",
+        "noise_level": 0.1,
+        "final_objective": 97.16,
+        "total_params": 101770,
+        "wall_clock_time": 78.6172194480896,
+        "function_evaluation_time": 1.3852698802947998,
+        "internal_overhead_time": 77.2319495677948,
+        "PEI": 19.40241503493118
+    },
+    {
+        "model_name": "MLP-Baseline",
+        "noise_level": 0.2,
+        "final_objective": 96.49,
+        "total_params": 101770,
+        "wall_clock_time": 83.55948162078857,
+        "function_evaluation_time": 1.556973934173584,
+        "internal_overhead_time": 82.00250768661499,
+        "PEI": 19.268619048173214
+    },
+    {
+        "model_name": "MLP-Baseline",
+        "noise_level": 0.4,
+        "final_objective": 95.56,
+        "total_params": 101770,
+        "wall_clock_time": 82.95298194885254,
+        "function_evaluation_time": 1.5137910842895508,
+        "internal_overhead_time": 81.43919086456299,
+        "PEI": 19.082902230733055
+    },
+    {
+        "model_name": "MLP-Baseline",
+        "noise_level": 0.6,
+        "final_objective": 94.15,
+        "total_params": 101770,
+        "wall_clock_time": 83.46760725975037,
+        "function_evaluation_time": 1.6376981735229492,
+        "internal_overhead_time": 81.82990908622742,
+        "PEI": 18.801331572033458
+    }
+]
