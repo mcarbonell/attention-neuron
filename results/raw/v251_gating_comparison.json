@@ -1,0 +1,35 @@
+[
+    {
+        "name": "Standard MLP",
+        "final_objective": 97.93,
+        "total_evaluations": 600000,
+        "wall_clock_time": 136.82768154144287,
+        "function_evaluation_time": 9.031744241714478,
+        "internal_overhead_time": 127.7959372997284,
+        "trainable_params": 407050,
+        "total_params": 407050,
+        "PEI": 17.457420782910834
+    },
+    {
+        "name": "Gated MLP (Full)",
+        "final_objective": 97.76,
+        "total_evaluations": 600000,
+        "wall_clock_time": 139.5207371711731,
+        "function_evaluation_time": 9.773969411849976,
+        "internal_overhead_time": 129.74676775932312,
+        "trainable_params": 407572,
+        "total_params": 407572,
+        "PEI": 17.425386937469742
+    },
+    {
+        "name": "Gated MLP (Frozen Weights)",
+        "final_objective": 77.02,
+        "total_evaluations": 600000,
+        "wall_clock_time": 120.71647047996521,
+        "function_evaluation_time": 9.536727666854858,
+        "internal_overhead_time": 111.17974281311035,
+        "trainable_params": 522,
+        "total_params": 407572,
+        "PEI": 28.33178302423352
+    }
+]
