@@ -1,0 +1,53 @@
+{
+    "config": {
+        "batch_size": 128,
+        "epochs": 10,
+        "gate_lr": 0.01,
+        "hidden_dim": 512,
+        "ternary_threshold": 0.05,
+        "device": "cpu",
+        "seed": 42
+    },
+    "baseline": {
+        "final_objective": 53.98,
+        "wall_clock_time": 99.59260702133179,
+        "function_evaluation_time": 9.993096590042114,
+        "internal_overhead_time": 89.59951043128967,
+        "PEI": 9.264479843134577,
+        "gate_sparsity": 0,
+        "total_params": 670740
+    },
+    "ternary": {
+        "final_objective": 32.8,
+        "wall_clock_time": 105.36594772338867,
+        "function_evaluation_time": 11.217740774154663,
+        "internal_overhead_time": 94.14820694923401,
+        "PEI": 5.629398644957654,
+        "gate_sparsity": 71.17988467216492,
+        "total_params": 670740
+    },
+    "history_baseline": [
+        51.82,
+        53.15,
+        53.7,
+        53.78,
+        53.76,
+        53.65,
+        53.76,
+        53.72,
+        53.86,
+        53.98
+    ],
+    "history_ternary": [
+        33.75,
+        33.48,
+        32.8,
+        32.8,
+        32.8,
+        32.8,
+        32.8,
+        32.8,
+        32.8,
+        32.8
+    ]
+}

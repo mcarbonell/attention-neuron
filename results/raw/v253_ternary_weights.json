@@ -1,0 +1,30 @@
+{
+    "config": {
+        "batch_size": 128,
+        "epochs": 10,
+        "gate_lr": 0.001,
+        "hidden_dim": 2048,
+        "device": "cpu",
+        "seed": 42
+    },
+    "metrics": {
+        "final_objective": 93.07,
+        "wall_clock_time": 161.7862937450409,
+        "function_evaluation_time": 50.28258442878723,
+        "internal_overhead_time": 111.50370931625366,
+        "PEI": 25.756015982539505,
+        "total_params": 4106
+    },
+    "history": [
+        88.31,
+        90.12,
+        89.74,
+        91.13,
+        89.47,
+        91.36,
+        91.32,
+        91.49,
+        92.58,
+        93.07
+    ]
+}

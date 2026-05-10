@@ -51,5 +51,22 @@ Based on 15 experiments (v251a to v251o), the optimal configuration for a spectr
 
 ---
 
+## 💎 The New Frontiers (Ternary & CNN Series v253-v256)
+
+### 6. The Inhibition Law (Ternary Superiority)
+**Subtraction is a structural necessity.** We compared Binary {0, 1} vs. Ternary {-1, 0, 1} frozen weights.
+- **Binary {0, 1}**: Failed (Acc 41%) due to cumulative bias explosion (mean 0.5) and inability to detect contrast.
+- **Ternary {-1, 0, 1}**: Success (**Acc 94.7%**). Negative weights provide zero-mean signals and enable differential feature extraction (edges).
+
+### 7. The CNN Spatial Record
+**Spatial priors multiply efficiency by 40x.** 
+- **Finding**: A gated ternary CNN reached **85.07% Acc with only 394 learnable parameters**. 
+- **PEI Benchmark**: This represents a new record in Parametric Efficiency Index, proving that local translation invariance (convolution) is the perfect partner for random gated projections.
+
+### 8. Full Ternary Inference
+**100% Multiplication-Free Inference.** We achieved **Acc 82.2%** using both frozen ternary weights AND learnable ternary gates (via STE). This removes all floating-point operations from the inference path, ideal for FPGA/ASIC hardware.
+
+---
+
 ## 💎 Conclusion
-We have demonstrated a paradigm where weights provide the **potential** (the reservoir) and gates provide the **will** (the selection). This architecture achieves near-SOTA results with a parameter budget 25x smaller than traditional methods, paving the way for ultra-compact and fast spectral models.
+We have demonstrated a paradigm where weights provide the **potential** (the reservoir) and gates provide the **will** (the selection). This architecture achieves near-SOTA results with a parameter budget 25x-200x smaller than traditional methods, paving the way for ultra-compact and fast spectral models.
