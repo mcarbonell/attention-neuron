@@ -1,0 +1,31 @@
+[
+    {
+        "name": "Conservative PID (Kp=1, Ki=10, Kd=20, WD=1e-4)",
+        "final_objective": 68.39,
+        "total_evaluations": 3910,
+        "wall_clock_time": 1312.376746892929,
+        "function_evaluation_time": 978.4959170818329,
+        "internal_overhead_time": 333.8808298110962,
+        "PEI": 10.310677966673813,
+        "config": {
+            "lr": 0.001,
+            "kp": 1.0,
+            "ki": 10.0,
+            "kd": 20.0,
+            "weight_decay": 0.0001
+        }
+    },
+    {
+        "name": "Adam (Standard + WD)",
+        "final_objective": 75.11,
+        "total_evaluations": 3910,
+        "wall_clock_time": 1300.3906965255737,
+        "function_evaluation_time": 1000.8961763381958,
+        "internal_overhead_time": 299.49452018737793,
+        "PEI": 11.323804972611056,
+        "config": {
+            "lr": 0.001,
+            "weight_decay": 0.0001
+        }
+    }
+]

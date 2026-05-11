@@ -1,0 +1,419 @@
+[
+    {
+        "name": "PID(Kp=0.1, Ki=1, Kd=0.1)",
+        "final_objective": 93.56,
+        "total_evaluations": 2345,
+        "wall_clock_time": 79.56960105895996,
+        "function_evaluation_time": 9.80101227760315,
+        "internal_overhead_time": 69.76858878135681,
+        "PEI": 16.327353186065967,
+        "config": {
+            "lr": 0.001,
+            "kp": 0.1,
+            "ki": 1,
+            "kd": 0.1
+        }
+    },
+    {
+        "name": "PID(Kp=0.1, Ki=1, Kd=1)",
+        "final_objective": 93.96,
+        "total_evaluations": 2345,
+        "wall_clock_time": 89.23437523841858,
+        "function_evaluation_time": 11.641491413116455,
+        "internal_overhead_time": 77.59288382530212,
+        "PEI": 16.397158030811863,
+        "config": {
+            "lr": 0.001,
+            "kp": 0.1,
+            "ki": 1,
+            "kd": 1
+        }
+    },
+    {
+        "name": "PID(Kp=0.1, Ki=1, Kd=10)",
+        "final_objective": 93.6,
+        "total_evaluations": 2345,
+        "wall_clock_time": 88.83730840682983,
+        "function_evaluation_time": 11.479753494262695,
+        "internal_overhead_time": 77.35755491256714,
+        "PEI": 16.334333670540552,
+        "config": {
+            "lr": 0.001,
+            "kp": 0.1,
+            "ki": 1,
+            "kd": 10
+        }
+    },
+    {
+        "name": "PID(Kp=0.1, Ki=10, Kd=0.1)",
+        "final_objective": 97.44,
+        "total_evaluations": 2345,
+        "wall_clock_time": 88.94143056869507,
+        "function_evaluation_time": 11.317906618118286,
+        "internal_overhead_time": 77.62352395057678,
+        "PEI": 17.00446018010119,
+        "config": {
+            "lr": 0.001,
+            "kp": 0.1,
+            "ki": 10,
+            "kd": 0.1
+        }
+    },
+    {
+        "name": "PID(Kp=0.1, Ki=10, Kd=1)",
+        "final_objective": 97.42,
+        "total_evaluations": 2345,
+        "wall_clock_time": 95.54516911506653,
+        "function_evaluation_time": 13.774825096130371,
+        "internal_overhead_time": 81.77034401893616,
+        "PEI": 17.000969937863896,
+        "config": {
+            "lr": 0.001,
+            "kp": 0.1,
+            "ki": 10,
+            "kd": 1
+        }
+    },
+    {
+        "name": "PID(Kp=0.1, Ki=10, Kd=10)",
+        "final_objective": 97.49,
+        "total_evaluations": 2345,
+        "wall_clock_time": 83.80960988998413,
+        "function_evaluation_time": 10.298095941543579,
+        "internal_overhead_time": 73.51151394844055,
+        "PEI": 17.01318578569443,
+        "config": {
+            "lr": 0.001,
+            "kp": 0.1,
+            "ki": 10,
+            "kd": 10
+        }
+    },
+    {
+        "name": "PID(Kp=0.1, Ki=100, Kd=0.1)",
+        "final_objective": 98.18,
+        "total_evaluations": 2345,
+        "wall_clock_time": 82.02087092399597,
+        "function_evaluation_time": 10.09703016281128,
+        "internal_overhead_time": 71.92384076118469,
+        "PEI": 17.13359914288111,
+        "config": {
+            "lr": 0.001,
+            "kp": 0.1,
+            "ki": 100,
+            "kd": 0.1
+        }
+    },
+    {
+        "name": "PID(Kp=0.1, Ki=100, Kd=1)",
+        "final_objective": 98.24,
+        "total_evaluations": 2345,
+        "wall_clock_time": 80.8481924533844,
+        "function_evaluation_time": 9.706918478012085,
+        "internal_overhead_time": 71.14127397537231,
+        "PEI": 17.144069869592993,
+        "config": {
+            "lr": 0.001,
+            "kp": 0.1,
+            "ki": 100,
+            "kd": 1
+        }
+    },
+    {
+        "name": "PID(Kp=0.1, Ki=100, Kd=10)",
+        "final_objective": 98.02,
+        "total_evaluations": 2345,
+        "wall_clock_time": 83.1318347454071,
+        "function_evaluation_time": 10.400243043899536,
+        "internal_overhead_time": 72.73159170150757,
+        "PEI": 17.105677204982747,
+        "config": {
+            "lr": 0.001,
+            "kp": 0.1,
+            "ki": 100,
+            "kd": 10
+        }
+    },
+    {
+        "name": "PID(Kp=1, Ki=1, Kd=0.1)",
+        "final_objective": 94.93,
+        "total_evaluations": 2345,
+        "wall_clock_time": 83.21671104431152,
+        "function_evaluation_time": 10.448057651519775,
+        "internal_overhead_time": 72.76865339279175,
+        "PEI": 16.566434779320673,
+        "config": {
+            "lr": 0.001,
+            "kp": 1,
+            "ki": 1,
+            "kd": 0.1
+        }
+    },
+    {
+        "name": "PID(Kp=1, Ki=1, Kd=1)",
+        "final_objective": 95.22,
+        "total_evaluations": 2345,
+        "wall_clock_time": 81.04698514938354,
+        "function_evaluation_time": 9.745118856430054,
+        "internal_overhead_time": 71.30186629295349,
+        "PEI": 16.617043291761448,
+        "config": {
+            "lr": 0.001,
+            "kp": 1,
+            "ki": 1,
+            "kd": 1
+        }
+    },
+    {
+        "name": "PID(Kp=1, Ki=1, Kd=10)",
+        "final_objective": 95.07,
+        "total_evaluations": 2345,
+        "wall_clock_time": 82.92449760437012,
+        "function_evaluation_time": 10.536717653274536,
+        "internal_overhead_time": 72.38777995109558,
+        "PEI": 16.590866474981734,
+        "config": {
+            "lr": 0.001,
+            "kp": 1,
+            "ki": 1,
+            "kd": 10
+        }
+    },
+    {
+        "name": "PID(Kp=1, Ki=10, Kd=0.1)",
+        "final_objective": 97.56,
+        "total_evaluations": 2345,
+        "wall_clock_time": 83.31353902816772,
+        "function_evaluation_time": 10.506156921386719,
+        "internal_overhead_time": 72.807382106781,
+        "PEI": 17.025401633524964,
+        "config": {
+            "lr": 0.001,
+            "kp": 1,
+            "ki": 10,
+            "kd": 0.1
+        }
+    },
+    {
+        "name": "PID(Kp=1, Ki=10, Kd=1)",
+        "final_objective": 97.72,
+        "total_evaluations": 2345,
+        "wall_clock_time": 84.51557564735413,
+        "function_evaluation_time": 11.025700807571411,
+        "internal_overhead_time": 73.48987483978271,
+        "PEI": 17.053323571423324,
+        "config": {
+            "lr": 0.001,
+            "kp": 1,
+            "ki": 10,
+            "kd": 1
+        }
+    },
+    {
+        "name": "PID(Kp=1, Ki=10, Kd=10)",
+        "final_objective": 97.53,
+        "total_evaluations": 2345,
+        "wall_clock_time": 87.60949373245239,
+        "function_evaluation_time": 11.247520446777344,
+        "internal_overhead_time": 76.36197328567505,
+        "PEI": 17.02016627016902,
+        "config": {
+            "lr": 0.001,
+            "kp": 1,
+            "ki": 10,
+            "kd": 10
+        }
+    },
+    {
+        "name": "PID(Kp=1, Ki=100, Kd=0.1)",
+        "final_objective": 98.04,
+        "total_evaluations": 2345,
+        "wall_clock_time": 87.7842652797699,
+        "function_evaluation_time": 11.547107219696045,
+        "internal_overhead_time": 76.23715806007385,
+        "PEI": 17.109167447220045,
+        "config": {
+            "lr": 0.001,
+            "kp": 1,
+            "ki": 100,
+            "kd": 0.1
+        }
+    },
+    {
+        "name": "PID(Kp=1, Ki=100, Kd=1)",
+        "final_objective": 98.24,
+        "total_evaluations": 2345,
+        "wall_clock_time": 82.29650497436523,
+        "function_evaluation_time": 10.195406198501587,
+        "internal_overhead_time": 72.10109877586365,
+        "PEI": 17.144069869592993,
+        "config": {
+            "lr": 0.001,
+            "kp": 1,
+            "ki": 100,
+            "kd": 1
+        }
+    },
+    {
+        "name": "PID(Kp=1, Ki=100, Kd=10)",
+        "final_objective": 98.27,
+        "total_evaluations": 2345,
+        "wall_clock_time": 85.4826672077179,
+        "function_evaluation_time": 11.185132026672363,
+        "internal_overhead_time": 74.29753518104553,
+        "PEI": 17.149305232948933,
+        "config": {
+            "lr": 0.001,
+            "kp": 1,
+            "ki": 100,
+            "kd": 10
+        }
+    },
+    {
+        "name": "PID(Kp=10, Ki=1, Kd=0.1)",
+        "final_objective": 97.78,
+        "total_evaluations": 2345,
+        "wall_clock_time": 88.7934832572937,
+        "function_evaluation_time": 11.516542673110962,
+        "internal_overhead_time": 77.27694058418274,
+        "PEI": 17.063794298135207,
+        "config": {
+            "lr": 0.001,
+            "kp": 10,
+            "ki": 1,
+            "kd": 0.1
+        }
+    },
+    {
+        "name": "PID(Kp=10, Ki=1, Kd=1)",
+        "final_objective": 97.71,
+        "total_evaluations": 2345,
+        "wall_clock_time": 86.54989814758301,
+        "function_evaluation_time": 11.038260221481323,
+        "internal_overhead_time": 75.51163792610168,
+        "PEI": 17.051578450304675,
+        "config": {
+            "lr": 0.001,
+            "kp": 10,
+            "ki": 1,
+            "kd": 1
+        }
+    },
+    {
+        "name": "PID(Kp=10, Ki=1, Kd=10)",
+        "final_objective": 97.51,
+        "total_evaluations": 2345,
+        "wall_clock_time": 89.22648501396179,
+        "function_evaluation_time": 11.835565567016602,
+        "internal_overhead_time": 77.39091944694519,
+        "PEI": 17.016676027931727,
+        "config": {
+            "lr": 0.001,
+            "kp": 10,
+            "ki": 1,
+            "kd": 10
+        }
+    },
+    {
+        "name": "PID(Kp=10, Ki=10, Kd=0.1)",
+        "final_objective": 97.75,
+        "total_evaluations": 2345,
+        "wall_clock_time": 86.97550320625305,
+        "function_evaluation_time": 10.859336853027344,
+        "internal_overhead_time": 76.11616635322571,
+        "PEI": 17.058558934779263,
+        "config": {
+            "lr": 0.001,
+            "kp": 10,
+            "ki": 10,
+            "kd": 0.1
+        }
+    },
+    {
+        "name": "PID(Kp=10, Ki=10, Kd=1)",
+        "final_objective": 97.96,
+        "total_evaluations": 2345,
+        "wall_clock_time": 88.93076992034912,
+        "function_evaluation_time": 11.612366437911987,
+        "internal_overhead_time": 77.31840348243713,
+        "PEI": 17.09520647827086,
+        "config": {
+            "lr": 0.001,
+            "kp": 10,
+            "ki": 10,
+            "kd": 1
+        }
+    },
+    {
+        "name": "PID(Kp=10, Ki=10, Kd=10)",
+        "final_objective": 98.02,
+        "total_evaluations": 2345,
+        "wall_clock_time": 86.18288397789001,
+        "function_evaluation_time": 10.782821893692017,
+        "internal_overhead_time": 75.400062084198,
+        "PEI": 17.105677204982747,
+        "config": {
+            "lr": 0.001,
+            "kp": 10,
+            "ki": 10,
+            "kd": 10
+        }
+    },
+    {
+        "name": "PID(Kp=10, Ki=100, Kd=0.1)",
+        "final_objective": 98.05,
+        "total_evaluations": 2345,
+        "wall_clock_time": 88.61924266815186,
+        "function_evaluation_time": 11.580780982971191,
+        "internal_overhead_time": 77.03846168518066,
+        "PEI": 17.11091256833869,
+        "config": {
+            "lr": 0.001,
+            "kp": 10,
+            "ki": 100,
+            "kd": 0.1
+        }
+    },
+    {
+        "name": "PID(Kp=10, Ki=100, Kd=1)",
+        "final_objective": 98.21,
+        "total_evaluations": 2345,
+        "wall_clock_time": 92.62172055244446,
+        "function_evaluation_time": 11.68866777420044,
+        "internal_overhead_time": 80.93305277824402,
+        "PEI": 17.13883450623705,
+        "config": {
+            "lr": 0.001,
+            "kp": 10,
+            "ki": 100,
+            "kd": 1
+        }
+    },
+    {
+        "name": "PID(Kp=10, Ki=100, Kd=10)",
+        "final_objective": 98.05,
+        "total_evaluations": 2345,
+        "wall_clock_time": 86.9616847038269,
+        "function_evaluation_time": 11.413443565368652,
+        "internal_overhead_time": 75.54824113845825,
+        "PEI": 17.11091256833869,
+        "config": {
+            "lr": 0.001,
+            "kp": 10,
+            "ki": 100,
+            "kd": 10
+        }
+    },
+    {
+        "name": "Adam (Standard)",
+        "final_objective": 97.63,
+        "total_evaluations": 2345,
+        "wall_clock_time": 85.23041582107544,
+        "function_evaluation_time": 10.938512086868286,
+        "internal_overhead_time": 74.29190373420715,
+        "PEI": 17.037617481355493,
+        "config": {
+            "lr": 0.001
+        }
+    }
+]

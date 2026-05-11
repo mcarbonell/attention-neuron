@@ -1,0 +1,29 @@
+[
+    {
+        "name": "Industrial PID (Kp=1, Ki=100, Kd=10)",
+        "final_objective": 72.13,
+        "total_evaluations": 3910,
+        "wall_clock_time": 1331.049025297165,
+        "function_evaluation_time": 1004.030620098114,
+        "internal_overhead_time": 327.0184051990509,
+        "PEI": 10.874531389621028,
+        "config": {
+            "lr": 0.001,
+            "kp": 1.0,
+            "ki": 100.0,
+            "kd": 10.0
+        }
+    },
+    {
+        "name": "Adam (Standard)",
+        "final_objective": 72.72,
+        "total_evaluations": 3910,
+        "wall_clock_time": 1278.3356368541718,
+        "function_evaluation_time": 997.5347881317139,
+        "internal_overhead_time": 280.8008487224579,
+        "PEI": 10.96348152853516,
+        "config": {
+            "lr": 0.001
+        }
+    }
+]

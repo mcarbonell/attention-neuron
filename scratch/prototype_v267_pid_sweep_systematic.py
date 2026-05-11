@@ -1,0 +1,189 @@
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torchvision import datasets, transforms
+from torch.utils.data import DataLoader
+import time
+import json
+import os
+import math
+
+# --- PID Optimizer ---
+class PID(optim.Optimizer):
+    def __init__(self, params, lr=1e-3, momentum=0.9, derivative=0.1, kp=1.0, ki=1.0, kd=1.0, weight_decay=0):
+        defaults = dict(lr=lr, momentum=momentum, derivative=derivative, 
+                        kp=kp, ki=ki, kd=kd, weight_decay=weight_decay)
+        super(PID, self).__init__(params, defaults)
+
+    @torch.no_grad()
+    def step(self, closure=None):
+        loss = None
+        if closure is not None:
+            with torch.enable_grad(): loss = closure()
+        for group in self.param_groups:
+            lr, momentum, derivative = group['lr'], group['momentum'], group['derivative']
+            kp, ki, kd = group['kp'], group['ki'], group['kd']
+            for p in group['params']:
+                if p.grad is None: continue
+                grad = p.grad
+                state = self.state[p]
+                if len(state) == 0:
+                    state['integral'] = torch.zeros_like(p)
+                    state['prev_grad'] = torch.clone(grad).detach()
+                    state['derivative'] = torch.zeros_like(p)
+                integral, prev_grad, deriv_ema = state['integral'], state['prev_grad'], state['derivative']
+                
+                # I (Integral) component: EMA of gradients
+                integral.mul_(momentum).add_(grad, alpha=1 - momentum)
+                
+                # D (Derivative) component: Change in gradient
+                current_deriv = grad - prev_grad
+                deriv_ema.mul_(derivative).add_(current_deriv, alpha=1 - derivative)
+                
+                # PID Update
+                # update = Kp * P + Ki * I + Kd * D
+                update = grad.mul(kp).add(integral, alpha=ki).add(deriv_ema, alpha=kd)
+                
+                p.add_(update, alpha=-lr)
+                state['prev_grad'].copy_(grad)
+        return loss
+
+# --- Standard MLP ---
+class StandardMLP(nn.Module):
+    def __init__(self, input_size=784, hidden_size=512, num_classes=10):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(input_size, hidden_size),
+            nn.ReLU(),
+            nn.BatchNorm1d(hidden_size),
+            nn.Linear(hidden_size, hidden_size // 2),
+            nn.ReLU(),
+            nn.BatchNorm1d(hidden_size // 2),
+            nn.Linear(hidden_size // 2, num_classes)
+        )
+    def forward(self, x):
+        return self.net(x.view(x.size(0), -1))
+
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+def run_experiment(name, optimizer_class, optimizer_kwargs, train_loader, test_loader, epochs=5, device="cpu"):
+    model = StandardMLP().to(device)
+    num_params = count_parameters(model)
+    optimizer = optimizer_class(model.parameters(), **optimizer_kwargs)
+    criterion = nn.CrossEntropyLoss()
+    
+    print(f"\n>>> Running: {name}")
+    
+    wall_clock_start = time.time()
+    func_eval_time = 0
+    total_evaluations = 0
+    
+    for epoch in range(epochs):
+        model.train()
+        for i, (data, target) in enumerate(train_loader):
+            data, target = data.to(device), target.to(device)
+            
+            # Start timer for function evaluation
+            fe_start = time.time()
+            optimizer.zero_grad()
+            output = model(data)
+            loss = criterion(output, target)
+            loss.backward()
+            fe_end = time.time()
+            func_eval_time += (fe_end - fe_start)
+            total_evaluations += 1
+            
+            # THE KEY: Relaxed Clipping (as in v265/v266)
+            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=100.0)
+            
+            optimizer.step()
+            
+            if i % 300 == 0 and epoch == 0:
+                print(f"  Batch {i} | Loss: {loss.item():.4f}")
+        
+        model.eval()
+        correct = 0
+        with torch.no_grad():
+            for data, target in test_loader:
+                output = model(data.to(device))
+                correct += output.argmax(dim=1).eq(target.to(device)).sum().item()
+        
+        acc = 100. * correct / 10000
+        print(f"  Epoch {epoch+1}/{epochs} | Acc: {acc:.2f}%")
+    
+    wall_clock_time = time.time() - wall_clock_start
+    internal_overhead_time = wall_clock_time - func_eval_time
+    pei = acc / math.log10(num_params + 1)
+    
+    results = {
+        "name": name,
+        "final_objective": acc,
+        "total_evaluations": total_evaluations,
+        "wall_clock_time": wall_clock_time,
+        "function_evaluation_time": func_eval_time,
+        "internal_overhead_time": internal_overhead_time,
+        "PEI": pei,
+        "config": optimizer_kwargs
+    }
+    
+    return results
+
+def main():
+    torch.manual_seed(42)
+    device = torch.device("cpu") # Small MLP, CPU is faster/fine
+    
+    transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
+    train_loader = DataLoader(datasets.MNIST('data', train=True, download=True, transform=transform), batch_size=128, shuffle=True)
+    test_loader = DataLoader(datasets.MNIST('data', train=False, transform=transform), batch_size=128, shuffle=False)
+    
+    kp_vals = [0.1, 1, 10]
+    ki_vals = [1, 10, 100]
+    kd_vals = [0.1, 1, 10]
+    
+    sweep_results = []
+    best_acc = 0
+    best_config = None
+    
+    print("="*50)
+    print("PID HYPERPARAMETER SWEEP")
+    print("="*50)
+    
+    for kp in kp_vals:
+        for ki in ki_vals:
+            for kd in kd_vals:
+                name = f"PID(Kp={kp}, Ki={ki}, Kd={kd})"
+                res = run_experiment(name, PID, {"lr": 1e-3, "kp": kp, "ki": ki, "kd": kd}, train_loader, test_loader, epochs=5, device=device)
+                sweep_results.append(res)
+                
+                if res["final_objective"] > best_acc:
+                    best_acc = res["final_objective"]
+                    best_config = name
+
+    # Adam Baseline
+    print("\n" + "="*50)
+    print("ADAM BASELINE")
+    print("="*50)
+    adam_res = run_experiment("Adam (Standard)", optim.Adam, {"lr": 1e-3}, train_loader, test_loader, epochs=5, device=device)
+    sweep_results.append(adam_res)
+    
+    # Final Summary
+    print("\n" + "="*50)
+    print("SWEEP SUMMARY")
+    print("="*50)
+    print(f"Best PID Acc: {best_acc:.2f}% ({best_config})")
+    print(f"Adam Acc:     {adam_res['final_objective']:.2f}%")
+    
+    improvement = best_acc - adam_res['final_objective']
+    print(f"Difference:   {improvement:+.2f}%")
+    
+    # Save results
+    os.makedirs("results/raw", exist_ok=True)
+    timestamp = int(time.time())
+    with open(f"results/raw/sweep_pid_v267_{timestamp}.json", "w") as f:
+        json.dump(sweep_results, f, indent=4)
+    
+    print(f"\nResults saved to results/raw/sweep_pid_v267_{timestamp}.json")
+
+if __name__ == "__main__":
+    main()

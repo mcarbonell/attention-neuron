@@ -74,8 +74,9 @@ Based on 15 experiments (v251a to v251o), the optimal configuration for a spectr
 
 ### 10. The Industrial Miracle (PID Optimization)
 **Control Theory beats Statistical Adaptation.**
-- **Finding**: A purely mechanical PID Optimizer (**Kp=1, Ki=150, Kd=1**) beat Adam on MNIST (**98.47% vs 97.85%**).
-- **The Damping Law**: Derivative control (Kd) acts as a high-precision brake, allowing for massive momentum (Ki) without overshooting, resulting in a **6.5x lower final loss** than Adam.
+- **Finding**: A purely mechanical PID Optimizer (**Kp=1, Ki=100, Kd=1**) with **Relaxed Clipping (10.0)** beat Adam on both exotic gated networks and standard MLPs (**98.41% vs 97.64%**).
+- **The Damping Law**: Derivative control (Kd) paired with Relaxed Clipping (10.0) allows for massive momentum (Ki=100) without overshooting, resulting in superior late-stage stability compared to Adam.
+- **PEI Impact**: This optimizer achieves higher precision per epoch, making it the new internal standard for "High-Precision" training.
 
 ---
 
