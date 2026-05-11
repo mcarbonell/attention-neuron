@@ -14,7 +14,7 @@ CONFIG = {
     "epochs": 10,
     "gate_lr": 1e-3,
     "patch_size": 4,
-    "hidden_dim": 512,
+    "hidden_dim": 1024, # Increased muscle
     "device": "cpu",
     "seed": 42
 }
@@ -25,12 +25,10 @@ def set_seed(seed):
         torch.cuda.manual_seed(seed)
 
 def get_hadamard_matrix(n):
-    """Generates a Walsh-Hadamard matrix of size n (must be power of 2)."""
     if n == 1:
         return torch.tensor([[1.0]])
     h2 = torch.tensor([[1.0, 1.0], [1.0, -1.0]])
     h_prev = get_hadamard_matrix(n // 2)
-    # Kronecker product to build the matrix
     return torch.kron(h2, h_prev) / math.sqrt(2)
 
 # --- Architecture Components ---
@@ -42,32 +40,49 @@ class TernaryLinearGated(nn.Module):
         self.gate = nn.Parameter(torch.full((out_features,), float(init_val)))
         
     def forward(self, x):
-        # x can be (batch, seq, in) or (batch, in)
         res = torch.matmul(x, self.weight.t())
         return res * self.gate
 
-class SpectrumGatedTransformer(nn.Module):
+class ResidualSpectrumBlock(nn.Module):
+    def __init__(self, hidden_dim, hadamard_matrix):
+        super().__init__()
+        self.register_buffer("hadamard", hadamard_matrix)
+        # We use a gated projection within the block
+        self.proj = TernaryLinearGated(hidden_dim, hidden_dim, init_val=0.0) # Start closed
+        self.silu = nn.SiLU()
+        
+    def forward(self, x):
+        # x is (B, 64, D)
+        residual = x
+        
+        # 1. Global Spectral Mixing
+        x = self.hadamard @ x
+        
+        # 2. Gated Projection
+        x = self.proj(x)
+        x = self.silu(x)
+        
+        # 3. Residual connection
+        return residual + x
+
+class RSGTransformer(nn.Module):
     def __init__(self, patch_size, hidden_dim, num_classes=10):
         super().__init__()
         self.patch_size = patch_size
         self.hidden_dim = hidden_dim
         
-        # 0. Precompute Spectral Mixer (Hadamard Matrix for 64 patches)
-        self.register_buffer("hadamard", get_hadamard_matrix(64))
+        # 0. Precompute Hadamard
+        h_mat = get_hadamard_matrix(64)
         
         # 1. Patch Embedding (Frozen Ternary)
-        self.patch_embed = TernaryLinearGated(patch_size * patch_size, hidden_dim, init_val=0.0)
-        self.silu1 = nn.SiLU()
+        self.patch_embed = TernaryLinearGated(patch_size * patch_size, hidden_dim, init_val=1.0)
+        self.silu_embed = nn.SiLU()
         
-        # 2. Mixer Block 1 (Spectral + Gating)
-        self.mixer1 = TernaryLinearGated(hidden_dim, hidden_dim, init_val=1.0)
-        self.silu2 = nn.SiLU()
+        # 2. Residual Blocks
+        self.block1 = ResidualSpectrumBlock(hidden_dim, h_mat)
+        self.block2 = ResidualSpectrumBlock(hidden_dim, h_mat)
         
-        # 3. Mixer Block 2 (Spectral + Gating)
-        self.mixer2 = TernaryLinearGated(hidden_dim, hidden_dim, init_val=1.0)
-        self.silu3 = nn.SiLU()
-        
-        # 4. Final Head
+        # 3. Final Head
         self.classifier = TernaryLinearGated(hidden_dim, num_classes, init_val=1.0)
         
     def forward(self, x):
@@ -78,35 +93,27 @@ class SpectrumGatedTransformer(nn.Module):
         x = x.unfold(2, p, p).unfold(3, p, p)
         x = x.contiguous().view(b, -1, p*p)
         
-        # Patch Embedding
+        # Step 1: Patch Embedding
         x = self.patch_embed(x) 
-        x = self.silu1(x)
+        x = self.silu_embed(x)
         
-        # Block 1: Mixing + Projection
-        # (batch, 64, 512) -> mix along 64
-        x = self.hadamard @ x
-        x = self.mixer1(x)
-        x = self.silu2(x)
+        # Step 2: Residual Mixing Blocks
+        x = self.block1(x)
+        x = self.block2(x)
         
-        # Block 2: Mixing + Projection
-        x = self.hadamard @ x
-        x = self.mixer2(x)
-        x = self.silu3(x)
-        
-        # Global Average Pooling (across patches)
+        # Step 3: Global Average Pooling
         x = x.mean(dim=1)
         
-        # Classifier
+        # Step 4: Classifier
         x = self.classifier(x)
         return x
 
     def print_architecture(self):
-        print("\n--- Network Architecture (Spectrum-Gated Transformer v2) ---")
+        print("\n--- Network Architecture (RESIDUAL Spectrum-Gated Transformer) ---")
         total_frozen = sum(p.numel() for p in self.buffers())
         total_learnable = sum(p.numel() for p in self.parameters() if p.requires_grad)
-        print(f"Patches: 64 (4x4 pixels)")
         print(f"Hidden Dim: {self.hidden_dim}")
-        print(f"Blocks: 2 (Spectral Mixing + Gating)")
+        print(f"Blocks: 2 Residual Blocks")
         print(f"Frozen Params:    {total_frozen:,}")
         print(f"Learnable Gates:  {total_learnable:,}")
         print("---------------------------\n")
@@ -117,7 +124,6 @@ def evaluate(model, loader, device):
     correct = 0
     with torch.no_grad():
         for data, target in loader:
-            # Pad 28x28 to 32x32
             data = torch.nn.functional.pad(data, (2, 2, 2, 2))
             data, target = data.to(device), target.to(device)
             output = model(data)
@@ -130,15 +136,12 @@ def train_model(model, train_loader, test_loader, config):
     optimizer = optim.Adam(model.parameters(), lr=config["gate_lr"])
     criterion = nn.CrossEntropyLoss()
     
-    start_time = time.time()
     for epoch in range(config["epochs"]):
         model.train()
         epoch_start = time.time()
         for i, (data, target) in enumerate(train_loader):
-            # Pad 28x28 to 32x32
             data = torch.nn.functional.pad(data, (2, 2, 2, 2))
             data, target = data.to(config["device"]), target.to(config["device"])
-            
             optimizer.zero_grad()
             output = model(data)
             loss = criterion(output, target)
@@ -151,27 +154,16 @@ def train_model(model, train_loader, test_loader, config):
         acc = evaluate(model, test_loader, config["device"])
         print(f"Epoch {epoch+1}/{config['epochs']} | Acc: {acc:.2f}% | Time: {time.time()-epoch_start:.2f}s")
         
-    return time.time() - start_time
+    return 
 
 def main():
     set_seed(CONFIG["seed"])
-    transform = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Normalize((0.1307,), (0.3081,))
-    ])
-    
+    transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
     train_loader = DataLoader(datasets.MNIST('data', train=True, download=True, transform=transform), batch_size=CONFIG["batch_size"], shuffle=True)
     test_loader = DataLoader(datasets.MNIST('data', train=False, transform=transform), batch_size=CONFIG["batch_size"], shuffle=False)
     
-    model = SpectrumGatedTransformer(CONFIG["patch_size"], CONFIG["hidden_dim"]).to(CONFIG["device"])
-    duration = train_model(model, train_loader, test_loader, CONFIG)
-    
-    # Save
-    os.makedirs("results/raw", exist_ok=True)
-    report = {"config": CONFIG, "duration": duration}
-    with open("results/raw/v258_spectrum_transformer.json", "w") as f:
-        json.dump(report, f, indent=4)
-    print(f"\nResults saved to results/raw/v258_spectrum_transformer.json")
+    model = RSGTransformer(CONFIG["patch_size"], CONFIG["hidden_dim"]).to(CONFIG["device"])
+    train_model(model, train_loader, test_loader, CONFIG)
 
 if __name__ == "__main__":
     main()

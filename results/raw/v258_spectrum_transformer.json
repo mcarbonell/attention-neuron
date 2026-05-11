@@ -1,0 +1,12 @@
+{
+    "config": {
+        "batch_size": 128,
+        "epochs": 10,
+        "gate_lr": 0.001,
+        "patch_size": 4,
+        "hidden_dim": 512,
+        "device": "cpu",
+        "seed": 42
+    },
+    "duration": 1761.0389473438263
+}
