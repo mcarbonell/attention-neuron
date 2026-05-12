@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Complex FFT MLP",
+        "final_objective": 95.43,
+        "total_evaluations": 4690,
+        "wall_clock_time": 184.7931923866272,
+        "function_evaluation_time": 27.345735549926758,
+        "internal_overhead_time": 157.44745683670044,
+        "PEI": 19.05541609709507,
+        "params": 101864
+    },
+    {
+        "name": "Real FFT MLP (Matched)",
+        "final_objective": 97.93,
+        "total_evaluations": 4690,
+        "wall_clock_time": 164.69604659080505,
+        "function_evaluation_time": 19.077434301376343,
+        "internal_overhead_time": 145.6186122894287,
+        "PEI": 18.457651615450047,
+        "params": 202142
+    }
+]

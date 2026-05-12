@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Complex-Valued MLP",
+        "final_objective": 2.637794193516285e-06,
+        "total_evaluations": 3750,
+        "wall_clock_time": 10.749663591384888,
+        "function_evaluation_time": 3.8655412197113037,
+        "internal_overhead_time": 6.884122371673584,
+        "PEI": 1.9717779974717637,
+        "params": 674
+    },
+    {
+        "name": "Real-Valued MLP (Matched)",
+        "final_objective": 1.61252741008866e-05,
+        "total_evaluations": 3750,
+        "wall_clock_time": 9.582577466964722,
+        "function_evaluation_time": 3.262070894241333,
+        "internal_overhead_time": 6.320506572723389,
+        "PEI": 1.5529770293992005,
+        "params": 1218
+    }
+]
