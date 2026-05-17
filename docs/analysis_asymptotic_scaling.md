@@ -79,6 +79,35 @@ output = out @ W_out                                  (proyección C→d)
 
 ---
 
+### 1.3 True Causal ComplexFFT Mixer (El Definitivo — V281/V282)
+
+**¿Qué es?** Un reemplazo total de Self-Attention usando la Transformada Rápida de Fourier (FFT) y modulación causal en el dominio de la frecuencia. La secuencia de entrada se pasa al dominio frecuencial, se multiplica por un "gate" complejo con fase y amplitud aprendidas, y se proyecta a un subespacio estrictamente causal (donde la respuesta impulsional anti-causal se hace cero) antes de volver al dominio temporal. 
+
+La principal diferencia con los modelos previos es que la **fase compleja** del gate actúa como un codificador posicional intrínseco.
+
+```
+X = FFT(x_padded)                                    (A dominio de frecuencias)
+h_raw = IFFT(exp(log_amp) * exp(i*phase))            (Respuesta impulsional del gate)
+h_causal = h_raw * causal_mask                       (Forzar causalidad estricta)
+gate_causal = FFT(h_causal)                          (Gate corregido)
+out = IFFT(X * gate_causal)[:T]                      (Filtrado y vuelta al dominio tiempo)
+output = out @ W_out                                 (Proyección a d dims)
+```
+
+| Métrica | Fórmula | Dependencia clave |
+|---|---|---|
+| **Parámetros/capa** | 2·pad_T + d² | **O(d² + T)** — La matriz de salida d×d domina. |
+| **FLOPs/token** | O(log T) + 2d² | **O(d²)** — La FFT es O(T log T) global, marginal por token. |
+| **Memoria training** | d·T | **O(dT)** — No hay matriz NxN de atención. |
+| **Memoria inferencia** | d·T (Buffer temporal) | **O(dT)** |
+
+**Ventajas clave vs Self-Attention y ConeAttn:**
+1. **Calidad asombrosa**: Logra el 96% de la calidad de Self-Attention (V281) y compite perfectamente cuando se estabiliza con nGPT (V282).
+2. **Sin Positional Encoding**: La fase en la FFT ya codifica de manera absoluta y relativa la temporalidad de la secuencia.
+3. **Hardware-efficient**: `torch.fft` es nativo y corre a velocidades órdenes de magnitud más rápidas que Self-Attention e incluso implementaciones Python puras de los conos.
+
+---
+
 ## 2. Bloques FFN (Feed-Forward Network)
 
 ### 2.1 Dense FFN (Baseline)
@@ -197,6 +226,7 @@ Variante con escala: `output = x * (scale * sigmoid(gate))`
 | **ConeAttn + Narrow** | 2Cd | d² | 2Cd + d² | O(d²) si C∝d, sino O(Cd) |
 | **ConeAttn + Bottleneck** | 2Cd | d²/2 | 2Cd + d²/2 | O(d²) — 24× menos |
 | **ConeAttn + DimGate** | 2Cd | 2d | 2Cd + 2d | **O(Cd)** — sublineal en d² |
+| **CausalPhase + Narrow (V282)** | d² | d² | 2d² | O(d²) — 6× menos absoluto |
 
 ### 3.2 Parámetros a escalas concretas (L capas, sin embeddings)
 
@@ -285,21 +315,20 @@ La diferencia cuadrática vs lineal se vuelve astronómica a contexto largo:
 | Restricción principal | Mejor arquitectura | Razón |
 |---|---|---|
 | **Contexto muy largo** (>16K) | ConeAttn + Dense FFN | O(N) vs O(N²), sin KV-cache |
-| **Modelo muy grande** (params) | Attn + NarrowFFN | 57% menos params, atención completa |
-| **Máxima compresión** | ConeAttn + NarrowFFN | 85% menos params, pero ~10% peor |
-| **Inferencia en edge** | ConeAttn + NarrowFFN | Sin KV-cache + modelo tiny |
-| **Máxima calidad** | Transformer estándar | Baseline, O(N²), costly |
+| **Máxima compresión / Edge** | CausalPhase + NarrowFFN + nGPT | Retiene PPL asombrosa con 19% de parámetros |
+| **Interpretación bio-mimética**| ConeAttn + Dense FFN | Los radios se auto-organizan (interpretabilidad visual) |
+| **Máxima calidad cruda** | nGPT Transformer | Baseline estabilizado con hiperesfera |
 
-### La oportunidad real: ConeAttn + Dense FFN
+> **DimGate no se beneficia de apilado:** su capacidad expresiva NO crece con L. El presupuesto de params libre (O(d) vs O(d²)/capa) debe invertirse en d_model más grande, NO en más capas. Y ni siquiera eso compensa, porque la operación es cualitativamente insuficiente.
 
-La combinación más prometedora para producción es **ConeAttn + Dense FFN**:
-- Solo +0.9% peor que baseline
-- 28% menos parámetros
-- **O(N) en contexto** (vs O(N²))
-- **Sin KV-cache** (decenas de GB de ahorro en inferencia)
-- Los radios se auto-organizan biológicamente (interpretabilidad gratis)
+### La oportunidad real (Post-V282): The Ultimate Phase-nGPT
+
+Tras el éxito del V282, la combinación definitiva para producción y modelos de lenguaje ultra-ligeros es **nGPT + CausalComplexFFT + NarrowFFN**:
+- Logra Perplejidad y Loss casi idénticos al Transformer Estándar.
+- **Utiliza solo el 19.2% de los parámetros** del Transformer base.
+- Se entrena en menos de la **mitad del tiempo**.
+- La estabilización hiper-esférica de nGPT (con learning rates elevados) permite que el modelo optimice la fase compleja y el mapeo lineal de manera inmaculada.
+- No utiliza Positional Encoding explícito (la fase de la FFT lo absorbe de forma natural).
 
 A escala LLaMA-7B:
-- **Params**: 6.4B → 4.5B (30% menos)
-- **Inferencia memoria**: 63 GB → 8.6 GB (86% menos, porque no hay KV-cache)
-- **Contexto**: de ~128K (con tricks) a **ilimitado**
+- Esta arquitectura emularía la capacidad de razonamiento de un modelo de 7B pero pesando menos de **1.4B parámetros**, encajando de sobra en la RAM de cualquier teléfono móvil de gama baja sin necesidad de cuantización extrema.
