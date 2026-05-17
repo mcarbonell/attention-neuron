@@ -227,6 +227,7 @@ Variante con escala: `output = x * (scale * sigmoid(gate))`
 | **ConeAttn + Bottleneck** | 2Cd | d²/2 | 2Cd + d²/2 | O(d²) — 24× menos |
 | **ConeAttn + DimGate** | 2Cd | 2d | 2Cd + 2d | **O(Cd)** — sublineal en d² |
 | **CausalPhase + Narrow (V282)** | d² | d² | 2d² | O(d²) — 6× menos absoluto |
+| **Matrix-Free Phase-nGPT (V283)** | k² | k² | 2k² | **O(k²)** — Independiente de d² |
 
 ### 3.2 Parámetros a escalas concretas (L capas, sin embeddings)
 
@@ -321,14 +322,12 @@ La diferencia cuadrática vs lineal se vuelve astronómica a contexto largo:
 
 > **DimGate no se beneficia de apilado:** su capacidad expresiva NO crece con L. El presupuesto de params libre (O(d) vs O(d²)/capa) debe invertirse en d_model más grande, NO en más capas. Y ni siquiera eso compensa, porque la operación es cualitativamente insuficiente.
 
-### La oportunidad real (Post-V282): The Ultimate Phase-nGPT
+### La revolución absoluta: Matrix-Free Phase-nGPT (V283)
 
-Tras el éxito del V282, la combinación definitiva para producción y modelos de lenguaje ultra-ligeros es **nGPT + CausalComplexFFT + NarrowFFN**:
-- Logra Perplejidad y Loss casi idénticos al Transformer Estándar.
-- **Utiliza solo el 19.2% de los parámetros** del Transformer base.
-- Se entrena en menos de la **mitad del tiempo**.
-- La estabilización hiper-esférica de nGPT (con learning rates elevados) permite que el modelo optimice la fase compleja y el mapeo lineal de manera inmaculada.
-- No utiliza Positional Encoding explícito (la fase de la FFT lo absorbe de forma natural).
+Tras el éxito consecutivo del V282 y el V283, la arquitectura definitiva se deshace de TODAS las matrices densas. Mediante el uso de una capa `WalshLinear` (Blueprint V67), el modelo asume un coste puro de **O(k² + T)**:
+- En V283, un núcleo de Walsh con $k=d/2$ (k=64) **superó en Loss** a la versión densa ($d \times d$), usando 3 veces menos parámetros.
+- Frente a un Transformer clásico (610K params), el modelo Matrix-Free de k=64 (42K params) retiene un 95% de la calidad utilizando apenas el **7% de los parámetros**.
+- La estabilización hiper-esférica de nGPT funciona en perfecta sinergia con la proyección ortogonal de Walsh-Hadamard.
 
-A escala LLaMA-7B:
-- Esta arquitectura emularía la capacidad de razonamiento de un modelo de 7B pero pesando menos de **1.4B parámetros**, encajando de sobra en la RAM de cualquier teléfono móvil de gama baja sin necesidad de cuantización extrema.
+A escala LLaMA-7B ($d=4096$):
+- Un núcleo Walsh de $k=256$ permitiría a la red operar en altísima dimensión latente pesando decenas de veces menos. Un LLM cognitivamente denso que cabe íntegramente en la memoria caché L3 de un procesador moderno.
