@@ -331,3 +331,37 @@ Tras el éxito consecutivo del V282 y el V283, la arquitectura definitiva se des
 
 A escala LLaMA-7B ($d=4096$):
 - Un núcleo Walsh de $k=256$ permitiría a la red operar en altísima dimensión latente pesando decenas de veces menos. Un LLM cognitivamente denso que cabe íntegramente en la memoria caché L3 de un procesador moderno.
+
+
+---
+
+Cuántos parámetros tendría el "cerebro" en un modelo Denso?
+En un Transformer clásico (tipo GPT o LLaMA), cada capa tiene un coste paramétrico dominado por matrices densas $d \times d$:
+
+Self-Attention: 4 proyecciones densas ($W_Q, W_K, W_V, W_O$) = $4d^2$
+Feed-Forward (FFN): Expansión típica de $4x$ (arriba y abajo) = $8d^2$
+Total por Capa Densa: $12d^2$
+Para tu configuración ($d = 256, L = 6$):
+
+Capa Densa: $12 \times 256^2 = 786,432$ parámetros/capa.
+Cerebro Denso (6 capas): $6 \times 786,432 = $ ~4.71 Millones de parámetros.
+Nuestro cerebro Matrix-Free de 6 capas pesa ~64,500 parámetros. ¡Es una compresión del 98.6% (73 veces más ligero)! Todo el "razonamiento" ocurre en una fracción microscópica de memoria.
+
+2. ¿Cómo escalan asintóticamente las variables?
+La fórmula exacta del peso total de nuestro Spectral V9 Matrix-Free es: $$\text{Total} = \underbrace{2 \cdot V \cdot d}{\text{Vocabulario}} + L \cdot \Big( \underbrace{2k^2}{\text{Núcleos lógicos}} + \underbrace{2d}{\text{nGPT Alphas}} + \underbrace{T{freq}}_{\text{Memoria FFT}} \Big)$$
+
+Frente al Transformer Denso: $$\text{Total Denso} = \underbrace{2 \cdot V \cdot d}{\text{Vocabulario}} + L \cdot \Big( \underbrace{12d^2}{\text{Cerebro}} \Big)$$
+
+Fíjate en las implicaciones masivas de aislar las variables:
+
+Aumentar $d$ (Dimensión del Embedding):
+
+En el Denso: Subir a $d=4096$ (tamaño LLaMA-7B) hace que el cerebro explote a $O(d^2)$ (cientos de millones de pesos por capa).
+En Matrix-Free: El término $2d$ (nGPT alphas) crece linealmente. Es asintóticamente gratis. Puedes crear embeddings gigantescos para que los conceptos no interfieran sin engordar el cerebro. El límite aquí pasa a ser únicamente el peso del Vocabulario ($2 \cdot V \cdot d$).
+Aumentar $k$ (Ancho de Banda Lógico):
+
+Si vemos que el modelo razona poco, podemos duplicar $k$ a $128$. El coste cerebral pasará de 64k a 200k, lo cual sigue siendo un "error de redondeo" en comparación a los 4.7 Millones del denso.
+Aumentar $L$ (Profundidad / Capas):
+
+Escala linealmente en ambos, pero al ser el coste por capa tan bajo en Matrix-Free ($2k^2 + T$), podemos construir modelos ultrarprofundos (ej. $L=100$) y el cerebro entero seguiría cabiendo cómodamente en la Caché L3 de tu procesador.
+Básicamente, hemos desconectado la resolución semántica ($d$) del coste computacional del razonamiento ($k^2$). 
