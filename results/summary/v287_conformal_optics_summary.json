@@ -1,0 +1,35 @@
+{
+    "metadata": {
+        "hidden_size": 128,
+        "epochs": 5,
+        "learning_rate": 0.001,
+        "num_coefficients": 6,
+        "seeds": [
+            42,
+            43,
+            44,
+            45,
+            46
+        ]
+    },
+    "summary": {
+        "conformal": {
+            "avg_accuracy": 0.39059999999999995,
+            "std_accuracy": 0.03237573165196425,
+            "avg_loss": 2.166425139083862,
+            "avg_PEI": 0.11195269818810624,
+            "avg_wall_clock_time": 85.86162185668945,
+            "avg_forward_time": 1.0483940601348878,
+            "total_params": 3082
+        },
+        "baseline": {
+            "avg_accuracy": 0.9445399999999999,
+            "std_accuracy": 0.0013965672200076877,
+            "avg_loss": 0.19491602433204652,
+            "avg_PEI": 0.188620390048311,
+            "avg_wall_clock_time": 81.57472596168517,
+            "avg_forward_time": 0.5443858623504638,
+            "total_params": 101770
+        }
+    }
+}
