@@ -1,0 +1,1 @@
+{"experiment_id": "v291", "fecha": "2026-07-18", "familia": "geométrico", "dataset": "Fashion-MNIST / MNIST / CIFAR-10", "n_eval": 10, "metric_name": "acc", "value": 94.27, "SE": null, "params": 4106, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
