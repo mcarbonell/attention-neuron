@@ -30,4 +30,4 @@ Cerramos la vía de las "Firmas Espectrales" individuales. Se confirma que el di
 
 ## Siguientes Pasos
 - Mantener la arquitectura de **Suma Espectral** como estándar.
-- Explorar el refinamiento de los coeficientes mediante optimizadores especializados (SWO) en lugar de cambiar la interfaz de comunicación entre neuronas.
+- Explorar el refinamiento de los coeficientes mediante optimizadores especializados (SMO) en lugar de cambiar la interfaz de comunicación entre neuronas.
