@@ -1,0 +1,55 @@
+{
+  "config": {
+    "exp_id": "v296_causal_norm",
+    "seq_len": 64,
+    "num_kv_pairs": 8,
+    "num_keys": 32,
+    "num_vals": 32,
+    "batch_size": 64,
+    "d_model": 64,
+    "n_layers": 3,
+    "epochs": 20,
+    "steps_per_epoch": 80,
+    "lr": 0.006,
+    "seed": 42,
+    "device": "cpu"
+  },
+  "results": [
+    {
+      "model_name": "CausalVarianceNormalizedHolographic (sqrt(t)) [Candidate 1]",
+      "params": 108995,
+      "final_acc": 18.5,
+      "wall_clock_time": 89.54,
+      "eval_time": 26.4,
+      "internal_overhead_time": 63.14,
+      "epochs_run": 20
+    },
+    {
+      "model_name": "GatedMassNormalizedHolographic (gated mass) [Candidate 2]",
+      "params": 110552,
+      "final_acc": 19.6875,
+      "wall_clock_time": 101.95,
+      "eval_time": 29.8,
+      "internal_overhead_time": 72.16,
+      "epochs_run": 20
+    },
+    {
+      "model_name": "MultiHeadHolographic (v294 Unnorm 8-Head) [Baseline 1]",
+      "params": 108992,
+      "final_acc": 8.9375,
+      "wall_clock_time": 87.18,
+      "eval_time": 25.8,
+      "internal_overhead_time": 61.38,
+      "epochs_run": 20
+    },
+    {
+      "model_name": "CausalAttentionMHA (Baseline 2 - Softmax MHA O(N^2))",
+      "params": 108992,
+      "final_acc": 13.9375,
+      "wall_clock_time": 82.57,
+      "eval_time": 26.11,
+      "internal_overhead_time": 56.45,
+      "epochs_run": 20
+    }
+  ]
+}

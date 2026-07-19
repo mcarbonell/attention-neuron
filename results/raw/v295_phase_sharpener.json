@@ -1,0 +1,55 @@
+{
+  "config": {
+    "exp_id": "v295_phase_sharpener",
+    "seq_len": 64,
+    "num_kv_pairs": 8,
+    "num_keys": 32,
+    "num_vals": 32,
+    "batch_size": 64,
+    "d_model": 64,
+    "n_layers": 3,
+    "epochs": 20,
+    "steps_per_epoch": 80,
+    "lr": 0.004,
+    "seed": 42,
+    "device": "cpu"
+  },
+  "results": [
+    {
+      "model_name": "HarmonicPowerHolographic (4 Harmonics) [Candidate 1]",
+      "params": 108992,
+      "final_acc": 6.25,
+      "wall_clock_time": 127.52,
+      "eval_time": 48.61,
+      "internal_overhead_time": 78.91,
+      "epochs_run": 20
+    },
+    {
+      "model_name": "HarmonicExtremeHolographic (8 Harmonics) [Candidate 2]",
+      "params": 108992,
+      "final_acc": 16.9375,
+      "wall_clock_time": 152.44,
+      "eval_time": 62.4,
+      "internal_overhead_time": 90.04,
+      "epochs_run": 20
+    },
+    {
+      "model_name": "MultiHeadHolographic (v294 Linear 8-Head) [Baseline 1]",
+      "params": 108992,
+      "final_acc": 18.75,
+      "wall_clock_time": 80.12,
+      "eval_time": 22.55,
+      "internal_overhead_time": 57.57,
+      "epochs_run": 20
+    },
+    {
+      "model_name": "CausalAttentionMHA (Baseline 2 - Softmax MHA O(N^2))",
+      "params": 108992,
+      "final_acc": 13.9375,
+      "wall_clock_time": 77.96,
+      "eval_time": 24.16,
+      "internal_overhead_time": 53.81,
+      "epochs_run": 20
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "config": {
+    "exp_id": "v293_holographic",
+    "seq_len": 64,
+    "num_kv_pairs": 8,
+    "num_keys": 32,
+    "num_vals": 32,
+    "batch_size": 64,
+    "d_model": 64,
+    "n_layers": 3,
+    "n_heads": 4,
+    "epochs": 20,
+    "steps_per_epoch": 80,
+    "lr": 0.004,
+    "seed": 42,
+    "device": "cpu"
+  },
+  "results": [
+    {
+      "model_name": "CausalHolographicAccumulator (Candidate 1 - HRR O(N))",
+      "params": 108992,
+      "final_acc": 18.9375,
+      "wall_clock_time": 79.68,
+      "eval_time": 22.41,
+      "internal_overhead_time": 57.27,
+      "epochs_run": 20
+    },
+    {
+      "model_name": "CausalHolographicFFTMixer (Candidate 2 - HRR O(N log N))",
+      "params": 108992,
+      "final_acc": 2.8125,
+      "wall_clock_time": 96.16,
+      "eval_time": 28.14,
+      "internal_overhead_time": 68.02,
+      "epochs_run": 20
+    },
+    {
+      "model_name": "CausalGatedFFTMixer (Baseline 1 - Negative v292)",
+      "params": 96512,
+      "final_acc": 3.25,
+      "wall_clock_time": 69.99,
+      "eval_time": 17.11,
+      "internal_overhead_time": 52.87,
+      "epochs_run": 20
+    },
+    {
+      "model_name": "CausalAttentionMHA (Baseline 2 - Softmax MHA O(N^2))",
+      "params": 108992,
+      "final_acc": 15.312500000000002,
+      "wall_clock_time": 84.47,
+      "eval_time": 26.64,
+      "internal_overhead_time": 57.83,
+      "epochs_run": 20
+    }
+  ]
+}

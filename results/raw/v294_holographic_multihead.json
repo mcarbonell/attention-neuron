@@ -1,0 +1,64 @@
+{
+  "config": {
+    "exp_id": "v294_holographic_multihead",
+    "seq_len": 64,
+    "num_kv_pairs": 8,
+    "num_keys": 32,
+    "num_vals": 32,
+    "batch_size": 64,
+    "d_model": 64,
+    "n_layers": 3,
+    "epochs": 20,
+    "steps_per_epoch": 80,
+    "lr": 0.004,
+    "seed": 42,
+    "device": "cpu"
+  },
+  "results": [
+    {
+      "model_name": "MultiHeadHolographic (H=8) [Candidate 1]",
+      "params": 108992,
+      "final_acc": 18.9375,
+      "wall_clock_time": 90.08,
+      "eval_time": 25.77,
+      "internal_overhead_time": 64.3,
+      "epochs_run": 20
+    },
+    {
+      "model_name": "MultiHeadHolographic (H=16) [Candidate 2]",
+      "params": 108992,
+      "final_acc": 17.8125,
+      "wall_clock_time": 86.46,
+      "eval_time": 24.7,
+      "internal_overhead_time": 61.76,
+      "epochs_run": 20
+    },
+    {
+      "model_name": "DecayedHolographic (H=8 + LRU) [Candidate 3]",
+      "params": 109016,
+      "final_acc": 4.0625,
+      "wall_clock_time": 98.47,
+      "eval_time": 27.55,
+      "internal_overhead_time": 70.92,
+      "epochs_run": 20
+    },
+    {
+      "model_name": "SingleHeadHolographic (v293 Baseline)",
+      "params": 108992,
+      "final_acc": 18.875,
+      "wall_clock_time": 88.14,
+      "eval_time": 25.03,
+      "internal_overhead_time": 63.1,
+      "epochs_run": 20
+    },
+    {
+      "model_name": "CausalAttentionMHA (Baseline 2 - Softmax MHA O(N^2))",
+      "params": 108992,
+      "final_acc": 15.812499999999998,
+      "wall_clock_time": 84.54,
+      "eval_time": 26.57,
+      "internal_overhead_time": 57.97,
+      "epochs_run": 20
+    }
+  ]
+}

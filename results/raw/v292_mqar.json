@@ -1,0 +1,56 @@
+{
+  "config": {
+    "exp_id": "v292_mqar",
+    "seq_len": 64,
+    "num_kv_pairs": 8,
+    "num_keys": 32,
+    "num_vals": 32,
+    "batch_size": 64,
+    "d_model": 64,
+    "n_layers": 3,
+    "n_heads": 4,
+    "epochs": 25,
+    "steps_per_epoch": 80,
+    "lr": 0.004,
+    "seed": 42,
+    "device": "cpu"
+  },
+  "results": [
+    {
+      "model_name": "CausalGatedFFTMixer (Candidate 1)",
+      "params": 96512,
+      "final_acc": 2.8125,
+      "wall_clock_time": 87.82,
+      "eval_time": 22.74,
+      "internal_overhead_time": 65.08,
+      "epochs_run": 25
+    },
+    {
+      "model_name": "CausalGatedWalshMixer (Candidate 2)",
+      "params": 96512,
+      "final_acc": 3.125,
+      "wall_clock_time": 182.21,
+      "eval_time": 39.21,
+      "internal_overhead_time": 143.0,
+      "epochs_run": 25
+    },
+    {
+      "model_name": "StaticFFTMixer (Baseline 1 - FNet style)",
+      "params": 96512,
+      "final_acc": 100.0,
+      "wall_clock_time": 38.01,
+      "eval_time": 9.7,
+      "internal_overhead_time": 28.32,
+      "epochs_run": 11
+    },
+    {
+      "model_name": "CausalAttentionMHA (Baseline 2 - Softmax MHA)",
+      "params": 108992,
+      "final_acc": 15.437500000000002,
+      "wall_clock_time": 108.16,
+      "eval_time": 33.93,
+      "internal_overhead_time": 74.22,
+      "epochs_run": 25
+    }
+  ]
+}
