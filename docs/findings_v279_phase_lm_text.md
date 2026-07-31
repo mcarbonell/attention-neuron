@@ -101,3 +101,85 @@ Para validar los hallazgos sin el artefacto de non-causality, V280 debe:
 - **Script**: `scratch/prototype_v279_phase_lm_text.py`
 - **Datos**: `scratch/data/tiny_shakespeare.txt`
 - **Previo**: `docs/findings_v278_phase_spectral_mixer.md`
+
+
+---
+
+
+## Detectaste la fuga. Eso es lo importante.
+
+Loss 0.044 a nivel carácter con 59K params → *"esto es imposible"* → investigaste → encontraste el leakage → lo pusiste en negrita al principio del documento. Ese reflejo es exactamente el que separa a un experimentalista de alguien que publica ruido. Mucha gente con doctorado habría celebrado el 0.0196.
+
+Pero el salvamento está mal, y por una razón que creo que te va a interesar más que el error en sí.
+
+## El razonamiento que falla
+
+> *"Todos tienen el mismo acceso no-causal, por lo que las diferencias entre ellos son informativas."*
+
+**Acceso igual ≠ capacidad igual de explotarlo.** Un confounder compartido por todos los brazos sigue siendo un confounder si los brazos difieren en su habilidad para aprovecharlo. Y aquí no solo difieren: el atajo es *literalmente* la operación que una de las dos bases diagonaliza y la otra no.
+
+## El mecanismo, y es exacto
+
+Con acceso no causal, "predice el token siguiente" colapsa a **implementar un desplazamiento de una posición**. No hay que modelar lenguaje: hay que copiar $x[t+1]$ a la posición $t$.
+
+Ahora mira qué es un shift en cada base:
+
+| | Operador de desplazamiento |
+|---|---|
+| **Fourier** | $\mathcal{F}\,S\,\mathcal{F}^{-1} = \text{diag}(e^{-2\pi i k/N})$ — **exactamente diagonal** |
+| **Walsh** | $H\,S\,H^{-1}$ — **densa**. Walsh diagonaliza la convolución XOR (shift diádico), no el shift cíclico. |
+
+Tu arquitectura es exactamente `gate_k · X[k]`: un operador diagonal en el dominio espectral.
+
+Entonces:
+
+- **ComplexFFT** puede resolver la tarea **de forma exacta y en una capa**, poniendo $\text{gate}_k = e^{-2\pi i k/N}$. Cero error. Es la solución cerrada.
+- **Walsh con gates reales ±1** no puede representar un shift cíclico con ningún gate diagonal. Tiene que aproximarlo mal.
+
+El factor 10× no mide expresividad para lenguaje. Mide **si la base diagonaliza la operación que la fuga convirtió en la tarea entera**. Es el benchmark más favorable posible para Fourier, y la fuga es lo que lo creó.
+
+Es la misma trampa que en v277 (ciclo de período 4 = raíces cuartas de la unidad) y en Rastrigin con Seismic. Empieza a ser un patrón que conviene que vigiles: **tus tareas sintéticas tienden a tener exactamente la simetría que tu método explota.** Es natural —las diseñas desde la hipótesis— pero significa que necesitas un falsador explícito en cada una.
+
+## Dos diagnósticos de cinco minutos
+
+**1. Mira los gates aprendidos.** Dibuja $\arg(\text{gate}_k)$ contra $k$. Si sale una **rampa lineal de pendiente $-2\pi/N$**, el modelo aprendió el operador de desplazamiento literalmente. No hay ambigüedad posible: es la firma del shift.
+
+**2. Entrena sobre texto barajado a nivel carácter.** Si el loss se queda en ~0.02, no está modelando lenguaje — está copiando. Un LM real se desploma con texto barajado.
+
+Yo apostaría fuerte a los dos. Y si aciertan, la conclusión 1 del documento se cae entera y hay que reetiquetar V279 como **[RUIDO-SOSPECHA]**, no como "hallazgos válidos con caveat".
+
+*(Nota menor: 59.206 vs 59.200. Si los gates complejos cuentan como un parámetro, el brazo ComplexFFT tiene el doble de floats en el mixer. Es el mismo conteo que en v277. Verifícalo.)*
+
+## Y la conclusión 2 ya la refutan tus propios números
+
+> ComplexFFT: 2.2× de mejora con PE. Walsh: 2.5×.
+
+**El PE ayuda prácticamente lo mismo a los dos.** Eso es evidencia *en contra* de "la fase sustituye al PE" — si la fase codificara posición y los signos no, el gap del PE debería ser mucho menor en ComplexFFT. Casi lo dices ("el gap relativo es similar") y luego concluyes lo contrario. Ese número es el resultado limpio del experimento y va en dirección opuesta a tu hipótesis.
+
+## V280: la trampa de causalidad que te vas a comer
+
+Tu opción 3 es la correcta (zero-pad + convolución lineal, es lo que hacen H3/Hyena/S4). Pero tiene un detalle que te va a arruinar el experimento si no lo ves:
+
+> **Parametrizar $\text{gate}_k$ directamente en el dominio de la frecuencia produce un kernel NO causal**, aunque hagas zero-padding.
+
+Un filtro complejo arbitrario en frecuencia corresponde a un kernel temporal con soporte en $t<0$. El padding te da convolución lineal en vez de circular, pero no te da causalidad.
+
+**Lo correcto:** parametriza el kernel en el **dominio del tiempo**, $h[0..N-1]$ con $h[t]=0$ para $t<0$ por construcción, y solo entonces haz FFT para convolucionar rápido. Hyena parametriza $h$ implícitamente con una MLP sobre la posición; S4 lo obtiene de la recurrencia. El FFT es únicamente el acelerador, nunca donde viven los parámetros.
+
+Y un test de causalidad obligatorio antes de creerte nada:
+
+```
+perturba x[t0] y comprueba que ∂y[t]/∂x[t0] == 0 para todo t < t0
+```
+
+Corre eso como assert en cada arquitectura nueva. Es tu perft.
+
+*(Y descarta la opción "cumulative FFT por cada t": $O(N^2\log N)$, no escala.)*
+
+Añade también el brazo que ya has puesto en el plan —transformer denso a params iguales— y compara la loss contra $\ln(65) \approx 4.17$, que es el suelo trivial a nivel carácter. Ese número dibujado como línea horizontal te habría gritado que algo iba mal en V279 antes de terminar de leer la tabla.
+
+## Lo que sí te llevas
+
+Que un mixer espectral con gates diagonales puede implementar traslaciones exactas es un **hecho real y útil**, y explica de paso por qué RoPE funciona: RoPE *es* una rampa de fase. Tu intuición sobre fase y posición es correcta. Lo que V279 no puede sostener es la parte de "lenguaje".
+
+Y la buena noticia: el experimento correcto es más interesante que el que hiciste. Con causalidad honesta, ComplexFFT pierde su solución cerrada y tiene que aprender de verdad. Ahí el resultado —gane quien gane— sí significa algo.

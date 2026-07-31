@@ -1,0 +1,144 @@
+{
+  "config": {
+    "exp_id": "v299_capacity_frontier",
+    "num_pairs_list": [
+      8,
+      16,
+      32,
+      64
+    ],
+    "num_keys": 64,
+    "num_vals": 64,
+    "batch_size": 32,
+    "d_model": 64,
+    "n_layers": 3,
+    "epochs": 15,
+    "steps_per_epoch": 60,
+    "lr_grid": [
+      0.001,
+      0.002,
+      0.004,
+      0.008
+    ],
+    "seed": 42,
+    "device": "cpu"
+  },
+  "results": [
+    {
+      "model_name": "ComplexDeltaPhaseHolographic [Complex Delta, d_k=32]",
+      "load_curve": {
+        "pairs_8": {
+          "num_pairs": 8,
+          "seq_len": 64,
+          "best_acc": 99.8046875,
+          "best_lr": 0.008
+        },
+        "pairs_16": {
+          "num_pairs": 16,
+          "seq_len": 128,
+          "best_acc": 99.74609375,
+          "best_lr": 0.008
+        },
+        "pairs_32": {
+          "num_pairs": 32,
+          "seq_len": 256,
+          "best_acc": 99.7998046875,
+          "best_lr": 0.004
+        },
+        "pairs_64": {
+          "num_pairs": 64,
+          "seq_len": 512,
+          "best_acc": 95.9765625,
+          "best_lr": 0.004
+        }
+      }
+    },
+    {
+      "model_name": "RealDeltaNetVanilla [Real DeltaNet, d_k=45 Iso-Floats]",
+      "load_curve": {
+        "pairs_8": {
+          "num_pairs": 8,
+          "seq_len": 64,
+          "best_acc": 99.66796875,
+          "best_lr": 0.004
+        },
+        "pairs_16": {
+          "num_pairs": 16,
+          "seq_len": 128,
+          "best_acc": 99.541015625,
+          "best_lr": 0.008
+        },
+        "pairs_32": {
+          "num_pairs": 32,
+          "seq_len": 256,
+          "best_acc": 94.833984375,
+          "best_lr": 0.004
+        },
+        "pairs_64": {
+          "num_pairs": 64,
+          "seq_len": 512,
+          "best_acc": 73.1396484375,
+          "best_lr": 0.004
+        }
+      }
+    },
+    {
+      "model_name": "ElementwiseComplexDelta [Complex Vector Memory]",
+      "load_curve": {
+        "pairs_8": {
+          "num_pairs": 8,
+          "seq_len": 64,
+          "best_acc": 89.35546875,
+          "best_lr": 0.008
+        },
+        "pairs_16": {
+          "num_pairs": 16,
+          "seq_len": 128,
+          "best_acc": 57.822265625,
+          "best_lr": 0.008
+        },
+        "pairs_32": {
+          "num_pairs": 32,
+          "seq_len": 256,
+          "best_acc": 7.1826171875,
+          "best_lr": 0.002
+        },
+        "pairs_64": {
+          "num_pairs": 64,
+          "seq_len": 512,
+          "best_acc": 4.482421875,
+          "best_lr": 0.002
+        }
+      }
+    },
+    {
+      "model_name": "CausalAttentionMHA [Softmax MHA + Conv1D Control]",
+      "load_curve": {
+        "pairs_8": {
+          "num_pairs": 8,
+          "seq_len": 64,
+          "best_acc": 99.62890625,
+          "best_lr": 0.008
+        },
+        "pairs_16": {
+          "num_pairs": 16,
+          "seq_len": 128,
+          "best_acc": 99.765625,
+          "best_lr": 0.002
+        },
+        "pairs_32": {
+          "num_pairs": 32,
+          "seq_len": 256,
+          "best_acc": 99.62890625,
+          "best_lr": 0.002
+        },
+        "pairs_64": {
+          "num_pairs": 64,
+          "seq_len": 512,
+          "best_acc": 99.7314453125,
+          "best_lr": 0.004
+        }
+      }
+    }
+  ]
+}

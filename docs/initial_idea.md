@@ -521,11 +521,9 @@ Para tu próximo paso con el 50% de cables aleatorios: ¿Vas a mantener el mismo
 
 Por tu pregunta, no lo sé. Supongo que mismo delta que para todo el lote, además de ser más barato creo que generalizará mejor.
 
----
-
-
-
 La ventaja que le veo a este método es que reduce el coste computacional, en vez de ser O(número de pesos) es O(número de neuronas). Podríamos tener redes con muchas conexiones entre neuronas, y mantener un coste computacional más limitado.
+
+---
 
 Exactamente. Has dado en el clavo de la escalabilidad. En la arquitectura de computadores actual, el "cuello de botella" no es solo el cálculo, sino el movimiento de datos (gradientes) desde la memoria a los núcleos de procesamiento. Al pasar de una complejidad de O(pesos) a O(neuronas), estás eliminando el lastre que impide crear redes con una densidad de conectividad mucho más alta.
 
@@ -694,3 +692,97 @@ El Potencial de esta "Nueva Atención"
 Al aplicar esto no a bloques de texto, sino a píxeles o características individuales en MNIST, estás creando un modelo que "atiende" a la geometría del número de una forma muy pura. Si con el método greedy llegaste al 93%, con estas restricciones de energía y atención, es muy probable que la red aprenda mucho más rápido y con menos ejemplos de los que imaginas.
 
 ¿Te gustaría que profundizáramos en cómo visualizar estos "ángulos" de las neuronas en una gráfica mientras entrenas? Ver cómo se estabilizan los ángulos podría darte la pista definitiva de cuándo la red ha dejado de aprender y ha llegado a su estado óptimo.
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+## Lo primero que salta: dijiste explícitamente lo contrario de lo que construiste
+
+> *"Pesos aleatorios, **pero mi idea es que no sean fijos**."*
+
+Ésa es la cuarta frase del repositorio. Y 297 experimentos después, el programa entero —V4/V5, V22, V26, V31, V251, V87— se llama *"sustratos congelados"*. Corregiste al LLM cuando te propuso pesos fijos, y luego pasaste siete meses ahí.
+
+No es un fallo. Es lo que pasa cuando cambias a backprop: en cuanto los deltas se aprenden por gradiente, la evolución secuencial desaparece y lo que queda es sustrato + modulación. Pero significa que **la rama original nunca se exploró**, y no por haberla descartado con datos.
+
+---
+
+## Tu idea original es rank-1, y eso tiene una consecuencia que no viste
+
+El cable $(i,j)$ pertenece al fan-out de la neurona $i$ y al fan-in de la $j$. Con una puerta multiplicativa por neurona:
+
+$$W[i,j] = W_{init}[i,j]\cdot a_i \cdot b_j \quad\Longleftrightarrow\quad W = \operatorname{diag}(a)\,W_{init}\operatorname{diag}(b)$$
+
+Es exactamente el gating multiplicativo de rango 1 del que hablamos hace unos mensajes. Lo tenías en la primera frase.
+
+Ahora la parte importante. Dijiste *"cada cable podría evolucionar de manera diferente"*. Sólo a medias, y se puede demostrar. Si todos los deltas son multiplicativos y por neurona, tras $T$ rondas greedy:
+
+$$\log\left|\frac{W[i,j]}{W_{init}[i,j]}\right| = \underbrace{\textstyle\sum_t \log a_i^{(t)}}_{\alpha_i} + \underbrace{\textstyle\sum_t \log b_j^{(t)}}_{\beta_j}$$
+
+La matriz de log-ratios es $\alpha\mathbf{1}^\top + \mathbf{1}\beta^\top$: **rango ≤ 2, siempre**. Da igual cuántas rondas hagas. El conjunto alcanzable tiene $2N$ grados de libertad de los $N^2$ posibles, y las iteraciones no lo agrandan.
+
+**El delta aditivo es lo único que te saca de esa variedad.** Por eso V4/V5 importaba tanto — sólo que lo probaste a rango 2 en vez de rango 1, que es tu idea pura. Nunca corriste rank-1 multiplicativo solo, y por el argumento de $\operatorname{rank}(W\circ uv^\top)=\operatorname{rank}(W)$ debería ir casi igual de bien que rank-2.
+
+Predicción falsable directa: **greedy multiplicativo puro debería estancarse en el mismo sitio que optimizar $\operatorname{diag}(a)\,W\operatorname{diag}(b)$ con backprop.** Si el greedy lo bate, la dependencia del camino está haciendo algo y eso sí es interesante.
+
+---
+
+## Tu observación del batch size es una ley, y se deriva
+
+> *"Sube muy rápido al 70-80% pero para llegar al 90 hay que aumentar mucho el lote."*
+
+Perturbas la neurona $k$ en $\varepsilon$. El cambio real de loss es $\approx \varepsilon g_k$. Tu estimación sobre $B$ muestras tiene ruido $\sim\sigma/\sqrt{B}$. La decisión aceptar/rechazar sólo es mejor que una moneda si:
+
+$$B \;>\; \frac{2\sigma^2}{(\varepsilon g_k)^2}$$
+
+Al converger, $g_k \to 0$, luego $B$ **tiene que crecer**. No es una limitación de tu implementación: es la estructura del método. Tu 8192 no era un hiperparámetro afortunado, era el punto donde la SNR cruzaba 1 para el gradiente que te quedaba.
+
+Y hay un truco que multiplica tu eficiencia y que quizá no usaste: **evalúa antes y después con el mismo batch**. Los ruidos se cancelan casi enteros (common random numbers) y el $B$ requerido cae en un orden de magnitud.
+
+Contexto: **McCandlish et al. 2018**, *An Empirical Model of Large-Batch Training* — el "gradient noise scale" es exactamente esta cantidad, y crece durante el entrenamiento. Lo redescubriste desde el otro lado.
+
+---
+
+## El nombre de lo que inventaste
+
+**Node perturbation.** Perturbar neuronas en vez de pesos. Fiete & Seung 2006 (aprendizaje del canto en aves), y antes Widrow.
+
+Y viene con el teorema que explica por qué te funcionó: la varianza del estimador de gradiente de orden cero escala con la **dimensión del espacio perturbado**. Perturbando $N$ neuronas en lugar de $N^2$ pesos, reduces la varianza en un factor $N$. Tu instinto de *"la neurona es la variable, no el peso"* no era estético — era la única versión con relación señal-ruido viable.
+
+Vecinos: **(1+1)-ES** y la regla del 1/5 de Rechenberg (tu greedy accept/reject es literalmente eso); **Salimans et al. 2017**, evolution strategies a escala; **MeZO** (Malladi et al. 2023), ZO moderno para fine-tuning de LLMs, que es tu baseline actual; y para la parte multiplicativa, **exponentiated gradient** (Kivinen & Warmuth 1997) — actualizaciones multiplicativas en log-espacio con cotas de regret distintas a SGD, mejores cuando la solución es dispersa.
+
+*(Y el 93%: un clasificador lineal en MNIST da ~92%. Backprop en el mismo MLP da ~98%. Tu resultado demuestra que el método optimiza, no que compita. Que para un primer prototipo está perfectamente bien — pero es el mismo hueco de baseline que arrastras desde el día uno.)*
+
+---
+
+## Lo que sobrevivió y lo que se perdió
+
+**Sobrevivió:** el gating multiplicativo (toda la línea Attention Neuron), el subconjunto aleatorio del fan → tu `mask_prob=0.5` en V4/V5 y las perturbaciones por bloques del DGE, y la comparación mult vs add → V4/V5.
+
+**Se perdió:** el descenso por coordenadas, la dependencia del camino (deltas sobre el valor actual, no el original), y sobre todo la premisa de que los pesos **no** estén congelados.
+
+Y ahora la parte que me parece bonita de verdad. Tu primera idea era:
+
+$$W \leftarrow W \cdot (\text{delta multiplicativo}) + (\text{delta aditivo})$$
+
+Tu experimento actual, v298, es:
+
+$$M_t \leftarrow M_{t-1}\underbrace{(I - \beta k k^{\mathsf H})}_{\text{multiplicativo}} + \underbrace{\beta v k^{\mathsf H}}_{\text{aditivo}}$$
+
+**Es la misma forma.** Sobre una matriz de memoria en vez de una de pesos — y con la diferencia que lo cambia todo: la regla delta te dice *cuál* multiplicativo y *cuál* aditivo. El multiplicativo proyecta fuera lo que ya estaba almacenado; el aditivo escribe sólo el residuo. Tu intuición de enero era la forma correcta sin el contenido. v298 es el contenido.
+
+Eso no es una casualidad narrativa. Es que llevas siete meses dando vueltas a la misma pregunta, y en v298 encontraste la respuesta principiada. Por eso los últimos 25 experimentos convergen: no cambiaste de tema, llegaste al fondo del original.
+
+Termina ése.

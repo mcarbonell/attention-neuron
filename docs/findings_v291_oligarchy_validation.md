@@ -69,3 +69,138 @@ Tests the architecture on a 3-channel color image classification dataset (3072 i
 1. **Falta de semillas y variabilidad estadística:** Al tratarse de un sondeo exploratorio de una única semilla (Nivel 1), los incrementos de precisión observados (ej. $+0.63\%$ en CIFAR-10) podrían deberse a fluctuaciones aleatorias y no a una superioridad sistemática del método de inicialización en cero. Un estudio Nivel 2 con 5 semillas y cálculo de error estándar es obligatorio antes de confirmar de forma concluyente cualquier afirmación de mejora.
 2. **Saturación en CIFAR-10:** El rendimiento de ~43% en CIFAR-10 es bajo en comparación con redes convolucionales o MLPs completamente entrenados. Esto sugiere que las características aleatorias lineales simples no son suficientes para procesar imágenes complejas sin una estructura espacial local (convolucional) o pre-entrenamiento. El comportamiento observacional del gating sobre representaciones pobres podría diferir del comportamiento sobre representaciones ricas.
 3. **Dependencia de la tasa de aprendizaje:** El scheduler OneCycleLR y la tasa de aprendizaje máxima ($0.05$) no han sido optimizados de forma independiente para cada dimensión $D$ en el sweep de escalado, lo que podría influir artificialmente en la velocidad de convergencia y la dispersión final de los gates para valores extremos de $D$ (como 512 u 8192).
+
+
+---
+
+
+## Lo primero: este documento tiene "Amenazas a la Validez"
+
+Y flagea tú mismo el problema de la semilla, el confound del LR, y la limitación de CIFAR. Después de diez documentos, la trayectoria metodológica es visible y va en la dirección correcta.
+
+Ahora vamos al 48%, porque creo que sé lo que es.
+
+---
+
+## El "atractor" es probablemente una constante de la distribución, no un fenómeno
+
+Si tu $N_{eff}$ es el ratio de participación estándar:
+
+$$N_{eff} = \frac{\left(\sum_i |g_i|\right)^2}{\sum_i g_i^2} \quad\Rightarrow\quad \frac{N_{eff}}{D} = \frac{\mathbb{E}[|g|]^2}{\mathbb{E}[g^2]}$$
+
+**Ese cociente no mide dispersión. Mide la forma de la distribución.** Y tiene valores cerrados:
+
+| Distribución de $g$ | $N_{eff}/D$ |
+|---|---|
+| Uniforme $[0,1]$ | 0.750 |
+| **Gaussiana** | $2/\pi = $ **0.6366** |
+| Exponencial | 0.500 |
+| **Producto de dos gaussianas** $XY$ | $4/\pi^2 = $ **0.4053** |
+
+Ahora tu barrido:
+
+| $D$ | 512 | 1024 | 2048 | 4096 | 8192 |
+|---|---|---|---|---|---|
+| ratio | **0.632** | 0.563 | 0.531 | 0.480 | **0.457** |
+
+$D{=}512$ da **0.632** contra $2/\pi = 0.6366$. **Menos de un 1% de diferencia.** Y la serie decae monótonamente hacia ~0.4, que es $4/\pi^2$.
+
+Y hay una razón mecánica para que aparezca justo el producto de dos gaussianas. Con $y = W_2(g\odot h)$:
+
+$$\frac{\partial L}{\partial g_i} = \underbrace{(\delta^\top W_2)_i}_{\approx\,\mathcal{N}} \cdot \underbrace{h_i}_{\approx\,\mathcal{N}}$$
+
+**El gradiente del gate es un producto de dos cantidades aproximadamente gaussianas e independientes.** Su ratio de participación es exactamente $4/\pi^2$.
+
+Hipótesis: no hay atractor emergente. Los gates heredan la forma de su primer gradiente, y las desviaciones a $D$ pequeño vienen de que con pocas features cada gate recibe más señal y la optimización los "gaussianiza".
+
+**Test, cinco minutos:** mide $N_{eff}/D$ **después de un solo paso desde init=0**. Si ya está en ~0.45, no hay fenómeno que explicar.
+
+Y el segundo, que separa las dos hipótesis de raíz: **entrena con etiquetas aleatorias.** Si el ratio sigue saliendo ~0.48, no tiene nada que ver con la tarea.
+
+---
+
+## Tu propia tabla contradice tu conclusión 1
+
+Escribes que el nivel de dispersión es *"una propiedad intrínseca de la complejidad de la tarea"*.
+
+| Tarea | Accuracy | ratio |
+|---|---|---|
+| MNIST 3 capas | 96.48% | ~0.55 |
+| Fashion-MNIST | 85.32% | 0.513 |
+| CIFAR-10 | 42.99% | 0.491 |
+
+**Tres tareas con 53 puntos de diferencia en dificultad dan el mismo ratio.** Eso es evidencia directa de que el ratio **no** depende de la tarea. Depende de $D$ y del sustrato — que es justo lo que muestra tu barrido de escalado.
+
+La conclusión correcta es más limpia y la tienes medida: *el ratio es insensible a la tarea y sensible a $D$*.
+
+---
+
+## Un resultado gratis que está en tus datos y no has visto
+
+| | Params entrenables | Accuracy |
+|---|---|---|
+| 3 capas, $D{=}4096$ | $4096+4096+10 = $ **8.202** | **96.48%** |
+| 2 capas, $D{=}8192$ | $8192+10 = $ **8.202** | 95.57% |
+
+**Exactamente el mismo presupuesto. +0.91% a favor de la profundidad.**
+
+Tu conclusión 3 ("depth gain") comparaba 96.48% contra 94.27%, que tiene el doble de parámetros y es un confound. Pero la comparación limpia está en la tabla de al lado y sale a tu favor igualmente. Es tu mejor resultado del documento y está sin enunciar.
+
+*(Y el baseline que falta: regresión logística sobre píxeles crudos son 7.850 params y da ~92.5% en MNIST. Le ganas con 8.202. Eso es lo que hace que el número signifique algo.)*
+
+---
+
+## Lo que PR no te dice, y es la pregunta que importa
+
+$N_{eff}$ es un estadístico de forma. **No te dice que puedas prescindir del 52% de los gates.**
+
+El experimento que convierte esto en algo accionable:
+
+> Ordena los gates por $|g|$. Pon a cero los $D - N_{eff}$ menores. Mide accuracy.
+
+- Si aguanta → la oligarquía es real, tienes poda estructurada, y el nombre está justificado.
+- Si se hunde → PR era una descripción de la distribución y nada más.
+
+Y la curva completa (accuracy vs fracción podada, contra poda aleatoria como control) es el resultado que buscas. Barato, y decide si toda la línea tiene consecuencias.
+
+---
+
+## Sobre el escalado sublineal: predicción que discrimina
+
+$\alpha \approx 0.88$. Dos hipótesis incompatibles:
+
+**H-A: el ratio converge a $4/\pi^2$.** Entonces $\alpha \to 1$ y la sublinealidad es un transitorio de $D$ pequeño.
+
+**H-B: $N_{eff}$ satura.** Entonces estás midiendo la **dimensión efectiva del kernel de random features** para esa tarea — que sí es una cantidad con significado, porque el kernel converge a un límite fijo cuando $D\to\infty$ y su espectro deja de crecer.
+
+**$D = 16384, 32768$ las separa.** Si satura, tienes un estimador barato de la dimensión intrínseca de una tarea bajo un mapa de features. Eso es medible, interpretable, y sería un resultado de verdad.
+
+*(Y si satura, debería saturar en **valores distintos** para MNIST y CIFAR. Ahora mismo no lo hacen, lo cual apunta a H-A.)*
+
+---
+
+## Literatura
+
+| | |
+|---|---|
+| 🔴 **Frankle, Schwab & Morcos (2021), *Training BatchNorm and Only BatchNorm*** | Entrenar solo $\gamma,\beta$ por canal en una red congelada. **Es tu experimento con convs.** Y analizan la distribución de $\gamma$ aprendida. Lectura obligatoria. |
+| 🔴 **Ramanujan et al. (2020), *What's Hidden in a Randomly Weighted Neural Network?*** | Máscaras binarias sobre pesos aleatorios (edge-popup). **Encuentran que conservar ~50% es lo óptimo.** Tu número aparece ahí. |
+| Zhou et al. (2019), *Deconstructing Lottery Tickets* | Supermasks. |
+| Malach et al. (2020) | Teorema del lottery ticket fuerte: una red aleatoria suficientemente ancha *contiene* la subred. Es la justificación teórica de tu premisa. |
+| **Extreme Learning Machines** (Huang et al., 2006) | Capa oculta aleatoria, entrenar solo la salida. Literatura enorme, décadas. |
+| Rahimi & Recht (2007) | Random features, dimensión efectiva. |
+| Gaier & Ha (2019), *Weight Agnostic NNs* | La arquitectura importa más que los pesos. |
+
+Que el 50% aparezca en Ramanujan et al. de forma independiente es un dato: o hay algo real, o hay una constante distribucional que se cuela en dos formalizaciones distintas de lo mismo. Mi apuesta es la segunda, pero merece comprobarse.
+
+---
+
+## Qué correr
+
+1. **$N_{eff}$ tras un paso.** Cinco minutos. Puede cerrar la pregunta entera.
+2. **Etiquetas aleatorias.** Separa "tarea" de "sustrato".
+3. **Curva de poda real** vs poda aleatoria. Convierte PR en algo accionable.
+4. **$D = 16384, 32768$.** Discrimina saturación frente a $4/\pi^2$.
+5. Enuncia el resultado de profundidad a 8.202 params igualados, que ya lo tienes.
+
+Y quita "Oligarquía". El nombre presupone la conclusión —que unos pocos gates dominan— que es exactamente lo que PR no demuestra. Llámalo "ratio de participación de gates en sustratos congelados" hasta que la curva de poda diga otra cosa.

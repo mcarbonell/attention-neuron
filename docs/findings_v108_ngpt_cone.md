@@ -133,3 +133,22 @@ Esto cierra el capítulo DimGate definitivamente:
 Re-testear nGPT con lr=1e-2, alpha_init=0.1, epochs=40 para ver si la
 convergencia acelera como promete el paper. Hipótesis: con LR correcto,
 nGPT+Cone+Dense debería llegar a val≈1.55-1.60.
+
+
+
+
+---
+
+
+
+El álgebra de V108 está mal, pero la conclusión es correcta
+
+Dices que norm_sphere(x ⊙ σ(g)) = norm_sphere(x) porque el gate sólo cambia la magnitud. Falso si g ∈ ℝ^d: el producto elemento a elemento con un vector no uniforme sí cambia la dirección. Tus 384 params = 3 capas × 128 confirman que g es un vector.
+
+Lo que sí ocurre, y es más interesante:
+
+Con inicialización g = 0, σ(g) = 0,5 en todas las dimensiones. Uniforme. Entonces x ⊙ 0,5 = 0,5x, la normalización lo cancela, y el update es exactamente la identidad en el arranque. α no recibe gradiente porque el bloque no hace nada; g no recibe gradiente porque α ya se fue a cero. Es una silla conjunta.
+
+No es una imposibilidad algebraica. Es una patología de inicialización, y se arregla con una línea: inicializa g ~ N(0, σ) con σ suficiente para romper la simetría, o mejor, con media distinta de cero.
+
+Vale la pena porque tu conclusión probablemente siga siendo correcta después —DimGate es débil por otras razones— pero ahora mismo estás cerrando un capítulo con una demostración que un revisor tumba en treinta segundos. Y el argumento de colapso en espacio euclídeo (L capas diagonales = 1) sí es correcto, ése consérvalo.

@@ -1,5 +1,10 @@
 # Findings v292: Límite Mecanicista del Gating Multiplicativo en Mezcladores Espectrales (MQAR / Induction Heads)
 
+> [!WARNING]
+> **AUDITORÍA DE ARNÉS Y FE DE ERRATAS (V298):**
+> Los resultados de este experimento fueron medidos bajo un arnés de pruebas sub-especificado (supervisión single-query al final de la secuencia, sin convolución causal local $k=4$ y sin sweep de LR por arquitectura).
+> La auditoría de V298 demostró que el baseline Softmax MHA atascado en ~15% era un artefacto de este arnés incompleto. En el arnés corregido de V298, Softmax MHA alcanza el 99.95%. Las métricas absolutas de este documento quedan marcadas retroactivamente en el Master Ledger como `harness_invalido_pre_v298`.
+
 **Fecha:** 2026-07-18  
 **Experimento ID:** `v292_mqar`  
 **Autor / Entorno:** Antigravity AI — PyTorch CPU / Torch DirectML  

@@ -1,5 +1,10 @@
 # Findings v293: Conjugación de Fase Holográfica (HRR) para Recall Asociativo (MQAR)
 
+> [!WARNING]
+> **AUDITORÍA DE ARNÉS Y FE DE ERRATAS (V298):**
+> Los resultados de este experimento fueron medidos bajo un arnés de pruebas sub-especificado (supervisión single-query, sin Conv1D local y sin sweep de LR).
+> La auditoría de V298 demostró que el rendimiento de este modelo (~18.9%) estaba limitado tanto por el arnés como por el uso de acumulación Hebbiana pura sin borrado. Las métricas de este documento quedan marcadas retroactivamente en el Master Ledger como `harness_invalido_pre_v298`.
+
 **Fecha:** 2026-07-18  
 **Experimento ID:** `v293_holographic`  
 **Autor / Entorno:** Antigravity AI — PyTorch CPU / Torch DirectML  

@@ -1,5 +1,10 @@
 # Findings v295: Afilado Armónico de Fase y Normalización de Memoria en O(N)
 
+> [!WARNING]
+> **AUDITORÍA DE ARNÉS Y FE DE ERRATAS (V298):**
+> Los resultados de este experimento fueron medidos bajo un arnés de pruebas sub-especificado (supervisión single-query, sin Conv1D local y sin sweep de LR).
+> Las métricas absolutas de este documento quedan marcadas retroactivamente en el Master Ledger como `harness_invalido_pre_v298`.
+
 **Fecha:** 2026-07-18  
 **Experimento ID:** `v295_phase_sharpener`  
 **Autor / Entorno:** Antigravity AI — PyTorch CPU / Torch DirectML  

@@ -1,0 +1,65 @@
+{
+  "config": {
+    "exp_id": "v298_delta_phase",
+    "seq_len": 64,
+    "num_kv_pairs": 8,
+    "num_keys": 32,
+    "num_vals": 32,
+    "batch_size": 64,
+    "d_model": 64,
+    "n_layers": 3,
+    "epochs": 15,
+    "steps_per_epoch": 60,
+    "lr_grid": [
+      0.001,
+      0.002,
+      0.004,
+      0.008
+    ],
+    "seed": 42,
+    "device": "cpu"
+  },
+  "chance_level": 3.125,
+  "results": [
+    {
+      "model_name": "DeltaPhaseHolographic [Candidate 1 - Corrected Matrix Delta Rule]",
+      "best_lr": 0.002,
+      "final_acc": 99.9453125,
+      "params": 110342,
+      "wall_clock_time": 265.24,
+      "train_time": 248.15,
+      "internal_overhead_time": 17.09,
+      "epochs_run": 4
+    },
+    {
+      "model_name": "ElementwiseDeltaPhaseHolographic [Candidate 2 - Vector Delta Rule]",
+      "best_lr": 0.008,
+      "final_acc": 98.6328125,
+      "params": 110342,
+      "wall_clock_time": 320.64,
+      "train_time": 284.6,
+      "internal_overhead_time": 36.04,
+      "epochs_run": 15
+    },
+    {
+      "model_name": "PhaseSoftmaxHolographic [Baseline 1 - Selective Scan]",
+      "best_lr": 0.004,
+      "final_acc": 49.59375,
+      "params": 122432,
+      "wall_clock_time": 517.39,
+      "train_time": 475.79,
+      "internal_overhead_time": 41.6,
+      "epochs_run": 15
+    },
+    {
+      "model_name": "CausalAttentionMHA [Baseline 2 - Softmax MHA + Conv1D O(N^2)]",
+      "best_lr": 0.004,
+      "final_acc": 99.953125,
+      "params": 109952,
+      "wall_clock_time": 20.57,
+      "train_time": 14.57,
+      "internal_overhead_time": 6.0,
+      "epochs_run": 3
+    }
+  ]
+}

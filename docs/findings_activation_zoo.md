@@ -48,3 +48,36 @@ No existe una "mejor" función. La elección depende de la naturaleza del proble
 *   Si buscas **estabilidad en clasificación**, usa el Sigmoide o Tanh.
 
 Estas funciones abren una nueva dimensión de **Diseño Topológico de Activaciones** que apenas estamos empezando a explorar.
+
+
+
+
+
+
+-----
+
+## El zoo de activaciones: hay un error matemático con arreglo directo
+
+**Primero, lo bueno:** el diagnóstico de que `round()` tiene gradiente cero y ciega a la red es correcto, y buscar una relajación diferenciable es el instinto acertado.
+
+**El bug numérico.** $\arctan(\tan(x)) = x - \pi\cdot\text{round}(x/\pi)$. Es la diente de sierra, sí — pero la estás calculando con dos transcendentes que se cancelan, atravesando una singularidad. En float32, `tan(x)` cerca de $\pi/2$ pierde precisión catastróficamente. Equivalente exacto, sin singularidad y más rápido:
+
+```python
+sawtooth = torch.remainder(x + math.pi/2, math.pi) - math.pi/2
+```
+
+**El error de fondo, que sí importa.** Dices que $x - \text{Mod}(x)$ es una "escalera diferenciable" que permite empujar valores entre escalones. No:
+
+$$\frac{d}{dx}\big[x - \text{sawtooth}(x)\big] = 1 - 1 = 0$$
+
+**Gradiente exactamente cero en casi todo punto.** Los "subidas" con gradiente son las discontinuidades, que tienen medida nula. Es el mismo `round()` con el que empezaste, con más FLOPs. En autodiff no vas a ver ningún error — simplemente esa rama no aprende nunca, y es invisible en el log.
+
+**El arreglo, y es de una línea:**
+
+$$r_\alpha(x) = x - \alpha\,\frac{\sin(2\pi x)}{2\pi}, \qquad r_\alpha'(x) = 1 - \alpha\cos(2\pi x)$$
+
+Con $\alpha=1$ el gradiente es 0 en los enteros y 2 entre ellos: empuja los valores *hacia* los enteros y deja gradiente en todo lo demás. Recocido de $\alpha: 0 \to 1$ durante el entrenamiento te da soft-to-hard cuantización de verdad. Eso es exactamente lo que querías construir.
+
+Literatura que te sitúa: **Straight-Through Estimator** (Bengio et al. 2013) — el estándar y el rival a batir; **soft-to-hard vector quantization** (Agustsson et al., NeurIPS 2017) — el recocido; **ruido uniforme aditivo** (Ballé et al. 2017) — la alternativa en compresión. Y para tu zoo periódico completo: **Ziyin, Hartwig & Ueda 2020**, *Neural Networks Fail to Learn Periodic Functions and How to Fix It* (activación *snake*), y **SIREN** (Sitzmann et al. 2020), donde la inicialización con activaciones sinusoidales lo es todo.
+
+Y el que más te va a interesar: **Nanda et al. 2023**, *Progress Measures for Grokking*. Encontraron mecanísticamente que un transformer aprendiendo suma modular **construye representaciones trigonométricas por su cuenta**. Tu hipótesis de "aritmética de módulos vía activaciones periódicas" tiene evidencia interpretability a favor.

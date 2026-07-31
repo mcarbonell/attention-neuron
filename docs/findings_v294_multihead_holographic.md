@@ -1,5 +1,10 @@
 # Findings v294: Memoria Holográfica Multicabeza (MH-HPA) y Análisis de Diafonía en O(N)
 
+> [!WARNING]
+> **AUDITORÍA DE ARNÉS Y FE DE ERRATAS (V298):**
+> Los resultados de este experimento fueron medidos bajo un arnés de pruebas sub-especificado (supervisión single-query, sin Conv1D local y sin sweep de LR).
+> Las afirmaciones de "superioridad frente a Softmax MHA" de este documento fueron refutadas en V298 al corregirse el arnés de control (donde Softmax MHA alcanza el 99.95%). Las métricas de este documento quedan marcadas retroactivamente en el Master Ledger como `harness_invalido_pre_v298`.
+
 **Fecha:** 2026-07-18  
 **Experimento ID:** `v294_holographic_multihead`  
 **Autor / Entorno:** Antigravity AI — PyTorch CPU / Torch DirectML  

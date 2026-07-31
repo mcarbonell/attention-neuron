@@ -86,3 +86,29 @@ Si cada neurona del FFN solo necesita 1-2 dimensiones de las 4096:
 El hallazgo de "cada neurona lee ~1 dim" sugiere que el FFN es realmente un **gating sparse sobre dimensiones individuales**. Esto se parece mucho a lo que hacen los Mixture-of-Experts (MoE): activar selectivamente un subconjunto de las dimensiones.
 
 La pregunta natural: **¿Qué pasa si reemplazamos el ConeFFN por un simple gating multiplicativo por dimensión?** Es decir, en vez de conos con centro+radio+amplitud, simplemente un vector de gates g∈R^d que modula `x * sigmoid(g)`. Eso sería aún más simple que los conos y testaría si la "selección" es todo lo que el FFN necesita.
+
+
+
+
+---
+
+
+
+V103/V104 es la réplica de V98/V99 en lenguaje
+
+Esto es lo mejor del documento y creo que no lo has visto porque están separados por 200 experimentos.
+	Conjunto de índices	¿Tiene métrica real?	Resultado
+V98	píxel aplanado	No (i, i+28 son vecinos físicos, distancia 28)	18,5%
+V99	coordenadas 2D	Sí	89,4%
+ConeAttn	posición temporal	Sí	Funciona
+ConeFFN	índice del residual stream	No (permutable, sin orden)	Radio colapsa a 1
+
+Tu conclusión de V104 es "el FFN es un selector sparse". La que sostienen los datos es otra:
+
+    El cono es un prior sobre un conjunto de índices con métrica. El residual stream no la tiene — sus dimensiones son intercambiables. Un cono sobre índices sin orden no tiene ninguna vecindad que explotar, así que degenera a leer una dimensión.
+
+Y lo confirmaste sin querer: forzar radio 4 y 8 empeora monótonamente. Eso no es "el sparse es óptimo", es "cualquier ventana contigua sobre un índice arbitrario es peor que elegir una dimensión concreta".
+
+Es exactamente el mismo diagnóstico que te di para V63 (la DCT no significa nada sobre índices ocultos) y para V35 (Walsh induce convolución diádica, no traslacional). Tres experimentos, tres eras distintas, un solo principio, y V98/V99 más V103/V104 son las dos demostraciones controladas de una variable.
+
+Ese es el criterio a priori que tu meta-tesis necesitaba. Y ahora tiene evidencia en visión y en lenguaje.

@@ -110,3 +110,245 @@ SVD descompone una matriz $W$ de $M \times N$ en dos matrices más pequeñas $U$
 | **Comportamiento 50%** | Pobre (342 PPL) | Regular | Bueno | **Excelente (88 PPL / Suavizado)** |
 | **Aceleración Hardware** | Hardware Especial | Estándar | Estándar | **Estándar (Fácilmente vectorizable)** |
 | **Efecto de Regularización** | No (Memorización) | No | No | **Sí (Filtra ruido de sobreajuste)** |
+
+
+
+---
+
+
+
+## El perft está bien hecho y merece decirse
+
+Δ PPL de $10^{-5}$ al permutar sin comprimir. Verificaste que la permutación en cascada preserva la semántica **antes** de medir nada. Eso es exactamente lo que hay que hacer y casi nadie lo hace.
+
+Ahora el problema, que es más grande de lo que parece.
+
+---
+
+## Dos métodos distintos, la misma mejora minúscula
+
+| | Método | PPL | Δ vs 89.58 |
+|---|---|---|---|
+| v289 | Cuantización jerárquica 8/4 bits | **88.12** | −1.46 |
+| v290 | TSP + lowpass DCT 10% | **88.36** | −1.22 |
+
+Dos mecanismos que no tienen nada que ver —uno cuantiza, otro trunca frecuencias— dan **la misma mejora, del mismo tamaño, sobre el mismo eval**.
+
+Cuando dos intervenciones independientes producen el mismo efecto pequeño, la explicación económica no es que las dos sean buenas. Es que hay una **causa común**, y aquí es evidente: GPT-2 está fuera de distribución sobre Shakespeare (89.58 frente a ~29 en WikiText-2), está sobreconfiado, y **cualquier perturbación suave de los pesos aplana la salida y baja la PPL**.
+
+**El test que resuelve v288, v289 y v290 de golpe, en cinco minutos:**
+
+> Añade ruido gaussiano a los pesos, con $\|\Delta W\|_F$ igualado al que introduce tu compresión. Mide PPL.
+
+Si el ruido también te da ~88, la familia entera de afirmaciones "supera al float32" se cae de una vez, y sabes que estabas midiendo una propiedad del eval y no de tu método.
+
+Si el ruido da 95 y tu método da 88, entonces tienes algo real: **tu perturbación es estructurada de una forma que ayuda**, y eso sí es un hallazgo.
+
+Es el experimento más rentable de tu repositorio ahora mismo, porque tres documentos dependen de la respuesta.
+
+---
+
+## Discrepancia entre tus propios documentos
+
+v290, fila "Paso Bajo DCT (Sin ordenar — **Baseline v288**)": **163.95** a ratio 0.9.
+
+v288, "Paso Bajo DCT (JPG Slice)" al 10% de compresión: **2832.09**.
+
+Ratio 0.9 = 10% de compresión. **Deberían ser el mismo número y difieren en 17×.**
+
+Probable causa: v288 dice "cuadrante superior izquierdo" → DCT **2D**; v290 dice explícitamente DCT-**1D**. Son métodos distintos. Pero entonces etiquetar esa fila como "baseline v288" es incorrecto, y todo el marco "sin ordenar destruye, con TSP funciona" descansa sobre una comparación que mezcla dos experimentos.
+
+Esto es exactamente el mecanismo del 3.5 de nanoGPT: un número que cruza de un documento a otro y cambia de significado por el camino. El linter del ledger lo pillaría.
+
+---
+
+## Lo que la tabla dice de verdad
+
+Por encima de ~200 PPL los números no tienen orden. TSP lowpass va **Explosión (0.5) → Explosión (0.3) → 5735 (0.1)**: mejora al comprimir más. PCA va 4543 → 4039. Son cadáveres, y la variación entre ellos no es información.
+
+Quedándose con lo vivo:
+
+| Método | 10% compr. | 30% compr. | 50% compr. |
+|---|---|---|---|
+| TSP + lowpass | **88.36** | 1302 ☠ | ☠ |
+| Energía, sin ordenar | 90.61 | **98.95** | **155.61** |
+| Energía + Fiedler | 90.76 | 101.56 | **114.71** |
+
+**Tu titular funciona solo a 10% de compresión y muere a 30%. El umbral de energía sin permutar aguanta hasta 50%.**
+
+Es decir: el método robusto es el que no lleva permutación, y el que lleva TSP gana 2 PPL en el régimen menos interesante y colapsa fuera de él.
+
+Y fíjate en el patrón, que es el resultado mecánico del experimento:
+
+> **La permutación transforma el lowpass (de 164 a 88) y no hace prácticamente nada al umbral de energía (90.61 → 90.17 → 90.76).**
+
+Tiene explicación exacta: el umbral de energía se queda con los $k$ coeficientes mayores **estén donde estén**, así que no le importa si la energía está concentrada en bajas frecuencias. El lowpass **exige** que "baja frecuencia" y "alta energía" coincidan. El único trabajo de la permutación es hacerlas coincidir.
+
+Eso convierte tu conclusión en algo más preciso y más defendible: *la permutación no mejora la compresión, alinea la base con la señal para que un corte estructurado sea viable.*
+
+---
+
+## Y ahí está el argumento de ingeniería que no has hecho, que es el bueno
+
+¿Por qué querrías lowpass si el umbral de energía comprime más?
+
+**Porque el lowpass da dispersión estructurada y el umbral no.**
+
+Con DCT-1D por columnas, $W = D^\top \hat W$, así que:
+
+$$Wx = D^\top(\hat W x)$$
+
+Si $\hat W$ es un **bloque contiguo** de bajas frecuencias, $\hat W x$ cuesta $O(kd)$ en vez de $O(d^2)$, y luego una DCT de $O(d\log d)$. **Ahorras cómputo de verdad, con un GEMM denso pequeño, sin kernels dispersos.**
+
+Con umbral de energía la dispersión es irregular: no ahorras nada sin kernels especiales.
+
+Ese es tu punto 1 del análisis competitivo, pero afilado: no es "sigue siendo densa", es que **el lowpass es la única variante que permite ejecutar sin reconstruir $W$**. Y eso justifica por qué merece la pena hacer que funcione aunque el umbral comprima más.
+
+(Con el aviso de V283: mídelo en reloj. A $d$ pequeño la DCT pierde contra el GEMM denso.)
+
+---
+
+## Estás usando un evaluador caro y ruidoso teniendo uno exacto y gratis
+
+Cada punto de tu tabla es una pasada de GPT-2 sobre 10K tokens para obtener una PPL con barras de error que no conoces.
+
+Pero el objetivo de la permutación es **concentrar energía en bajas frecuencias**, y eso se mide directamente:
+
+$$E_\rho(P) = \frac{\sum_{k<\rho d}\|\hat W_k\|^2}{\|\hat W\|^2}$$
+
+Determinista, exacto, sin datos, milisegundos. Por Parseval la energía total no cambia con la permutación, así que $E_\rho$ mide exactamente lo que quieres.
+
+Consecuencias inmediatas:
+
+- **Puedes buscar permutaciones optimizando el objetivo real** en vez de evaluar PPL en un puñado de candidatas.
+- Comparas PCA / TSP / Fiedler / aleatoria en segundos y con una métrica que no tiene ruido.
+- Y puedes comprobar la cadena causal: si $E_\rho$ predice la PPL, tienes mecanismo; si no, la permutación está haciendo otra cosa.
+
+Y de paso explica por qué TSP gana a Fiedler: el objetivo TSP-camino es $\min\sum_i\|w_{\sigma(i+1)}-w_{\sigma(i)}\|$ — **variación total**, que es literalmente suavidad a lo largo del índice. Fiedler minimiza la versión cuadrática relajada de un problema parecido pero distinto. TSP optimiza más directamente lo que necesitas.
+
+---
+
+## Reencuadre: las permutaciones son el subgrupo gratis
+
+Lo que haces es **aprender una base**, restringido a $D\!\cdot\!P$ con $P$ permutación.
+
+¿Por qué esa restricción? Porque una base ortogonal general cuesta $d^2$ floats de almacenamiento y se come todo el ahorro. Una permutación cuesta $d\log d$ bits y se aplica gratis.
+
+> **Las permutaciones son el subgrupo del grupo ortogonal que es gratis de almacenar y de aplicar.**
+
+Eso es tu tesis, con el mecanismo correcto, y sugiere la extensión principiada: **matrices butterfly / Monarch**. Más expresivas que una permutación, $O(d\log d)$ parámetros, y se aplican rápido. Aprende $B$ tal que $D\,B\,W$ sea lowpass-comprimible. Es tu V283 y tu V290 unificados, y es la línea donde la literatura ya tiene kernels.
+
+*(Y el precedente cercano que te falta: **Pool & Yu, "Channel Permutations for N:M Sparsity", NeurIPS 2021** — permutar canales para que un patrón de compresión estructurado funcione mejor. Es tu idea, en dispersión en vez de en frecuencia. Cítalo; te da respaldo y te ahorra defender la novedad del concepto para poder defender la de tu combinación concreta, que sí creo que es nueva.)*
+
+---
+
+## Errores del análisis competitivo
+
+Este documento es tu modo manifiesto otra vez, y esta vez contiene afirmaciones que tu propia tabla contradice.
+
+| Afirmación | Problema |
+|---|---|
+| *"Comportamiento 50%: Excelente (88 PPL)"* | 🔴 Tu tabla dice **Explosión** a ratio 0.5. Estás poniendo el número del 10% en la fila del 50%. |
+| *"Efecto de Regularización: Sí / No"* | No demostrado, y probablemente artefacto OOD. Pendiente del test de ruido. |
+| *"tirar capas enteras de alta frecuencia sin que la red se entere"* | Solo a 10% de compresión. A 30% la red muy definitivamente se entera. |
+| Paridad implícita con GPTQ/AWQ | Ellos hacen 4 bits con ~1-2% de degradación en modelos de 7B evaluados en distribución. Tú tienes 10% de compresión en GPT-2-small sobre 10K tokens OOD. |
+
+**Y el argumento que sí es bueno y hay que reforzar:** frente a SVD, no almacenas la base. Es correcto y es tu mejor carta. La comparación honesta es a **almacenamiento igualado**: SVD rango $r$ cuesta $2rd$ floats, DCT con $k$ coeficientes cuesta $kd$. Igual almacenamiento ⟹ $k = 2r$.
+
+> ¿Conservar el 20% de coeficientes DCT bate a un SVD de rango $0.1d$?
+
+Eckart–Young dice que SVD es óptimo **a rango dado**, no a **almacenamiento dado**. Ese hueco es real y es exactamente donde vive tu método. Es el experimento que puede convertir el análisis competitivo en una medición.
+
+---
+
+## En orden
+
+1. **Ruido gaussiano iso-Frobenius.** Cinco minutos. Decide si v288, v289 y v290 tienen un resultado o un artefacto OOD.
+2. **WikiText-2, 280K tokens.** Tercera vez que lo digo.
+3. **$E_\rho(P)$ como objetivo** en vez de PPL. Convierte tu búsqueda de permutaciones en algo barato y exacto.
+4. **DCT-$2r$ vs SVD-$r$**, almacenamiento igualado. El competidor real.
+5. **Wall clock de $D^\top(\hat W x)$** frente al GEMM denso. Tu mejor argumento de ingeniería, sin medir.
+
+Y arregla la discrepancia 163.95 / 2832.09 antes que nada. Ese número está sosteniendo el marco de todo el documento.
+
+
+
+
+---
+
+
+
+## Veredicto corto: sí, es una vía real — pero el valor está casi todo en el paso 1, y ése es el que no has aislado
+
+De los cuatro pasos, tres son estándar desde 2016 (Deep Compression es literalmente prune→quantize→Huffman). **El único que es tuyo es la permutación TSP.** Y es mejor de lo que crees, por una razón que el encuadre "→ espectral" está ocultando:
+
+**La permutación no está atada a la DCT.** Es un preprocesado exacto, gratuito y agnóstico a la base que aumenta la compresibilidad de cualquier codificador que venga detrás. Eso la convierte en algo que **compone** con GPTQ/AWQ/GGUF en vez de competir con ellos — que es una posición mucho mejor que la que estás ocupando.
+
+Tu propio dato lo dice: 163,95 → 88,36 PPL sólo por reordenar. Ese delta es el resultado. La DCT es el vehículo con el que lo mediste.
+
+---
+
+## El ablation que decide si la DCT sobra
+
+A 90% de retención, la DCT te da 1,11× de compresión. Tu 21× venía de cuantización (4×) y Huffman (5,3×). **El paso espectral casi no está comprimiendo.**
+
+Corre estos tres brazos a igual bits/peso:
+
+| Brazo | Qué mide |
+|---|---|
+| Permutación + cuantiz. + Huffman (**sin DCT**) | ¿Aporta algo el transform? |
+| DCT + cuantiz. + Huffman (sin permutación) | Ya lo tienes: 163,95 |
+| Los tres | 88,36 |
+
+Y añade el que sospecho que gana: **permutación + delta-coding + rANS, sin pérdida ninguna.** Si ordenas canales para que los adyacentes sean parecidos, `w[i,j] − w[i,j−1]` tiene entropía baja. Es exactamente invertible, no hay que discutir calidad, y es la versión sin riesgo de tu idea.
+
+*(La codificación por entropía ya está en el suelo teórico — te lo calculé en V198. No optimices más ahí.)*
+
+---
+
+## Prior art: la analogía correcta no es JPEG, es compresión de grafos
+
+- **WebGraph** (Boldi & Vigna): descubrieron que ordenar los nodos por URL lexicográfica hace las listas de adyacencia mucho más comprimibles, porque URLs similares tienen patrones de enlace similares. Es tu principio exacto, en otro dominio.
+- **Recursive Graph Bisection** (Dhulipala et al., KDD 2016) — el algoritmo de Facebook para ese mismo problema, y **suele batir a un TSP greedy**. Si tu heurística es el cuello, ahí está la mejora.
+- **Cuthill-McKee** — reordenación para minimizar ancho de banda en matrices dispersas. Mismo objetivo, 50 años.
+- **Martinez et al., CVPR 2021**, *Permute, Quantize and Fine-tune* — permutaciones para mejorar cuantización vectorial de redes. Compruébalo, creo que es tu vecino más directo.
+- Para el lossless de floats: **bitshuffle / Blosc / zfp** — separar planos de bytes (signo+exponente vs mantisa) es el baseline que tienes que batir.
+
+---
+
+## La pregunta buena, y creo que nadie la ha respondido
+
+**QuIP# y QuaRot rotan con Hadamard para *dispersar* la energía y matar outliers** — hacen la distribución más incoherente para que un codebook fijo la cubra bien.
+
+**Tú permutas para *concentrar* estructura** — haces la señal más suave para que un transform la comprima.
+
+Son filosofías opuestas sobre el mismo tensor. ¿Se cancelan? ¿Se componen? ¿Cuál domina a 3 bits/peso?
+
+Nadie ha medido eso, y tú tienes las dos implementaciones. Es un experimento acotado, con métrica estándar, y con una respuesta interesante gane quien gane.
+
+---
+
+## Sobre "por lo menos en disco": el hedge es correcto, pero conoce a tus rivales
+
+Tu baseline **no es fp16**. Es:
+
+1. **`zstd -19` sobre un safetensors fp16** con bitshuffle. Es gratis, es lossless, y te va a quitar un 15-25% sin hacer nada. Si tu 21× no bate holgadamente eso *a igual perplejidad*, no hay resultado.
+2. **GGUF Q4_K_M**: ~4,5 bits/peso, calidad casi intacta, y **ejecutable directamente**. Ésa es la comparación dura: tu formato necesita descomprimir a fp16 antes de correr, así que ganas en disco y pierdes en RAM. Para casi todo el mundo, la RAM manda.
+
+**El test que mata o valida la vía entera, y cuesta una tarde: mide GB/s de descompresión.** Si estás por debajo del ancho de banda del almacenamiento, has convertido un problema de I/O en un problema de CPU y el 21× no vale nada. Huffman va a unos cientos de MB/s; zstd descomprime a 3-5 GB/s. Ése es el número que decide si el formato sirve para cold start.
+
+Dónde sí gana, y es real: **distribución de modelos** (ancho de banda de CDN), **arranque en frío serverless**, y sobre todo **checkpoints de entrenamiento** — donde nadie ejecuta desde el archivo, se guardan cientos, y el estado del optimizador pesa 2-3× los pesos. Ahí conecta directamente con tu SMO: si la permutación mejora la compresión de pesos *y* de los momentos de Adam, tienes una contribución de sistemas con usuario concreto.
+
+---
+
+## La figura que necesitas
+
+Una sola: **bits/peso (eje X) vs perplejidad en WikiText-2 (eje Y)**, con GPTQ, AWQ, GGUF Q4/Q3 y QuIP# superpuestos.
+
+Y cuenta **todos** los metadatos dentro de los bits/peso: tabla de Huffman, escalas de cuantización, y los índices de permutación (~log₂(d!) ≈ 4 KB por eje de 3072 — despreciable a escala, pero decláralo).
+
+**Y el experimento que yo haría primero, porque es el más barato y el más vendible:** coge GPTQ tal cual, mete tu permutación como preprocesado, y mide el delta de perplejidad a los mismos bits/peso. Si mejora un 3-5% un método SOTA sin tocarlo, eso es un resultado limpio, corto y compone con todo el ecosistema. Es mucho mejor apuesta que competir con un pipeline entero.
+
+---
+
+Sobre el mapa: no lo hagas uno a uno a mano. Extracción automática al ledger, y tú sólo revisas los dos campos que requieren criterio (`superseded_by` y `verdict`). Lo demás es mecánico.
