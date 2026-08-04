@@ -1,32 +1,12 @@
 """
-prototype_v300_capacity_scaling.py
-======================================
-V300: Capacity Scaling Law Benchmark for Complex Phase Delta in O(N).
+run_v300_colab.py
+=================
+Self-contained script to run V300 Capacity Scaling Benchmark on Google Colab (Free T4 GPU).
 
-Core Scientific Question:
-  How does the associative recall capacity frontier (max KV pairs stored with >95% accuracy)
-  scale empirical capacity as a function of key dimension d_k in {32, 64, 128}?
-  Does Complex Phase Delta (C^{d_k x d_k}) maintain its state density lead over
-  Real-Valued DeltaNet Vanilla (R^{d_k x d_k}) under strict iso-floats state matching?
-
-Dimension & Iso-Floats Setup (H=2 heads):
-  - d_k_complex = 32  -> 2 * 32^2  = 2,048 floats/head  | Iso-Real d_k_real = 45  (45^2 = 2,025 floats)
-  - d_k_complex = 64  -> 2 * 64^2  = 8,192 floats/head  | Iso-Real d_k_real = 90  (90^2 = 8,100 floats)
-  - d_k_complex = 128 -> 2 * 128^2 = 32,768 floats/head | Iso-Real d_k_real = 181 (181^2 = 32,761 floats)
-
-Load Curve Sweeps:
-  - KV Pairs: num_pairs in {32, 64, 128, 256}
-  - Sequence Lengths: seq_len = 8 * num_pairs in {256, 512, 1024, 2048}
-
-Models Compared:
-  1. ComplexDeltaPhaseHolographic [Complex Delta, H=2]
-  2. RealDeltaNetVanilla          [Real DeltaNet, H=2] (Iso-floats per d_k)
-  3. CausalAttentionMHA           [Softmax MHA + Conv1D O(N^2)] (Reference Ceiling)
-
-Methodology:
-  - Multi-Query MQAR Data Generator with expanded vocabulary (num_keys=256, num_vals=256)
-  - LR Grid: [2e-3, 4e-3]
-  - Results logged to results/raw/v300_capacity_scaling.json & results/master_ledger.jsonl
+Instructions for Google Colab:
+1. Open Google Colab (colab.research.google.com).
+2. Set Runtime -> Change runtime type -> GPU (T4).
+3. Copy-paste this script into a cell and execute.
 """
 
 import math
@@ -94,6 +74,15 @@ def generate_mqar_batch(batch_size, num_pairs=32, seq_len=256, num_keys=256, num
             curr_pos += 2
 
     return x, y
+
+def generate_mqar_dataset(num_batches, batch_size, num_pairs, seq_len, device=device):
+    x_list, y_list = [], []
+    for _ in range(num_batches):
+        x, y = generate_mqar_batch(batch_size, num_pairs=num_pairs, seq_len=seq_len,
+                                  num_keys=CFG["num_keys"], num_vals=CFG["num_vals"], device=device)
+        x_list.append(x)
+        y_list.append(y)
+    return torch.stack(x_list), torch.stack(y_list)
 
 # ── 3. Common Components ──────────────────────────────────────────────
 class SinCosPE(nn.Module):
@@ -300,21 +289,11 @@ class SequenceModel(nn.Module):
             h = layer(h)
         return self.head(h)
 
-def generate_mqar_dataset(num_batches, batch_size, num_pairs, seq_len, device=device):
-    x_list, y_list = [], []
-    for _ in range(num_batches):
-        x, y = generate_mqar_batch(batch_size, num_pairs=num_pairs, seq_len=seq_len,
-                                  num_keys=CFG["num_keys"], num_vals=CFG["num_vals"], device=device)
-        x_list.append(x)
-        y_list.append(y)
-    return torch.stack(x_list), torch.stack(y_list)
-
 # ── Training & Evaluation Loop ──────────────────────────────────────────
-def train_and_eval(model, num_pairs, seq_len, lr, epochs=15, steps_per_epoch=50):
+def train_and_eval(model, model_name, num_pairs, seq_len, lr, epochs=15, steps_per_epoch=50):
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=0.0)
     criterion = nn.CrossEntropyLoss(ignore_index=-100)
     
-    # Scale micro-batch size with sequence length to fit in GPU VRAM
     target_batch = CFG["batch_size"]
     if seq_len >= 2048:
         micro_batch = 2
@@ -327,7 +306,6 @@ def train_and_eval(model, num_pairs, seq_len, lr, epochs=15, steps_per_epoch=50)
     
     accum_steps = max(1, target_batch // micro_batch)
     
-    # Pre-generate dataset once per training run for fast execution
     train_x, train_y = generate_mqar_dataset(steps_per_epoch * accum_steps, micro_batch, num_pairs, seq_len, device=device)
     eval_x, eval_y = generate_mqar_dataset(10, micro_batch, num_pairs, seq_len, device=device)
     
@@ -350,18 +328,19 @@ def train_and_eval(model, num_pairs, seq_len, lr, epochs=15, steps_per_epoch=50)
             nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             optimizer.step()
             
-            # FAST FEEDBACK (GEMINI Rule: print progress in first 5 batches of Epoch 1)
+            # FAST FEEDBACK (Print real-time loss on first 5 steps and each epoch)
             if ep == 0 and step < 5:
-                print(f"      [Fast Feedback] Ep 1, Batch {step+1}: Loss = {total_loss:.4f}")
+                print(f"      [{model_name:28s} | lr={lr}] Ep 1, Step {step+1}/50: Loss = {total_loss:.4f}", flush=True)
+
+        print(f"      [{model_name:28s} | lr={lr}] Epoch {ep+1:2d}/15 Complete | Loss = {total_loss:.4f}", flush=True)
 
     eval_time = time.time() - start_time
     
-    # Evaluation
     model.eval()
     correct = 0
     total = 0
     with torch.no_grad():
-        for i in range(10): # 10 eval batches
+        for i in range(10):
             x = eval_x[i]
             y = eval_y[i]
             logits = model(x)
@@ -375,59 +354,13 @@ def train_and_eval(model, num_pairs, seq_len, lr, epochs=15, steps_per_epoch=50)
         torch.cuda.empty_cache()
     return acc, eval_time
 
-# ── Single Combination Function for Parallel GPU Workers ────────────────
-def run_single_combination(d_k, num_pairs):
-    iso_info = CFG["iso_floats_map"][d_k]
-    dk_c = iso_info["dk_complex"]
-    dk_r = iso_info["dk_real"]
-    d_model = 2 * dk_c
-
-    model_specs = [
-        ("ComplexDeltaPhaseHolographic", ComplexDeltaPhaseHolographicBlock, {"d_k": dk_c}),
-        ("RealDeltaNetVanilla", RealDeltaNetVanillaBlock, {"d_k_real": dk_r}),
-        ("CausalAttentionMHA", CausalAttentionBlock, {})
-    ]
-
-    seq_len = 8 * num_pairs
-    print(f"Executing d_k={d_k}, num_pairs={num_pairs} (seq_len={seq_len}) on {device}")
-    
-    comb_results = {}
-    for name, block_cls, block_kwargs in model_specs:
-        best_acc = -1.0
-        best_lr = None
-        total_time = 0.0
-
-        for lr in CFG["lr_grid"]:
-            torch.manual_seed(CFG["seed"])
-            model = SequenceModel(block_cls, VOCAB_SIZE, d_model, CFG["n_layers"], block_kwargs).to(device)
-            acc, eval_t = train_and_eval(model, num_pairs, seq_len, lr,
-                                         epochs=CFG["epochs"],
-                                         steps_per_epoch=CFG["steps_per_epoch"])
-            total_time += eval_t
-            if acc > best_acc:
-                best_acc = acc
-                best_lr = lr
-
-        key_name = f"{name}_dk{d_k}"
-        comb_results[key_name] = {
-            "best_acc": round(best_acc, 2),
-            "best_lr": best_lr,
-            "total_eval_time": round(total_time, 2)
-        }
-        print(f"  [{name:28s} | d_k={d_k}] Pairs={num_pairs:3d} (L={seq_len:4d}) -> Best Acc: {best_acc:6.2f}% (lr={best_lr})")
-
-    return d_k, num_pairs, comb_results
-
-# ── Main Experiment Suite ───────────────────────────────────────────────
+# ── Main Suite ──────────────────────────────────────────────────────────
 def run_experiment_suite():
     print("=" * 80)
     print(f"EXPERIMENT METADATA HEADER")
     print(f"  Exp ID: {CFG['exp_id']}")
-    print(f"  Hardware: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU (Torch DirectML/Native)'}")
+    print(f"  Hardware: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'}")
     print(f"  PyTorch Version: {torch.__version__}")
-    print(f"  Base File: scratch/prototype_v300_capacity_scaling.py")
-    print(f"  d_k Complex Sweeps: {CFG['d_k_list']}")
-    print(f"  KV Pair Sweeps: {CFG['num_pairs_list']}")
     print("=" * 80)
 
     results_matrix = {}
@@ -436,12 +369,10 @@ def run_experiment_suite():
         iso_info = CFG["iso_floats_map"][d_k]
         dk_c = iso_info["dk_complex"]
         dk_r = iso_info["dk_real"]
-        d_model = 2 * dk_c # Scale d_model with head dimension (H=2)
+        d_model = 2 * dk_c
         
         print(f"\n==========================================================================")
         print(f"--- SWEEP: d_k = {dk_c} (d_model = {d_model}) ---")
-        print(f"    Complex Head: {dk_c}x{dk_c} (C) -> {iso_info['floats_c']} floats/head")
-        print(f"    Iso-Real Head: {dk_r}x{dk_r} (R) -> {iso_info['floats_r']} floats/head")
         print(f"==========================================================================")
 
         results_matrix[d_k] = {}
@@ -462,11 +393,10 @@ def run_experiment_suite():
                 total_time = 0.0
 
                 for lr in CFG["lr_grid"]:
-                    # Fresh model init
                     torch.manual_seed(CFG["seed"])
                     model = SequenceModel(block_cls, VOCAB_SIZE, d_model, CFG["n_layers"], block_kwargs).to(device)
                     
-                    acc, eval_t = train_and_eval(model, num_pairs, seq_len, lr,
+                    acc, eval_t = train_and_eval(model, name, num_pairs, seq_len, lr,
                                                  epochs=CFG["epochs"],
                                                  steps_per_epoch=CFG["steps_per_epoch"])
                     total_time += eval_t
@@ -485,33 +415,9 @@ def run_experiment_suite():
                 }
                 print(f"      [{name:28s} | d_k={d_k}] Pairs={num_pairs:3d} (L={seq_len:4d}) -> Best Acc: {best_acc:6.2f}% (lr={best_lr})")
 
-    # ── Save Results JSON & Master Ledger ───────────────────────────────
-    os.makedirs("results/raw", exist_ok=True)
-    raw_path = "results/raw/v300_capacity_scaling.json"
-    with open(raw_path, "w") as f:
+    with open("v300_capacity_scaling_results.json", "w") as f:
         json.dump({"config": CFG, "results": results_matrix}, f, indent=2)
-    print(f"\nsaved: {raw_path}")
-
-    # Append to master ledger
-    master_ledger_line = {
-        "experiment_id": "v300_capacity_scaling",
-        "fecha": "2026-07-25",
-        "familia": "fase_compleja",
-        "dataset": "MQAR_scaling (pairs: 32-256, seq_len: 256-2048)",
-        "n_eval": len(CFG["d_k_list"]) * len(CFG["num_pairs_list"]) * 3 * len(CFG["lr_grid"]),
-        "metric_name": "recall_accuracy",
-        "value": "scaling_matrix_logged",
-        "SE": None,
-        "params": "scaled_with_dk",
-        "nivel_rigor": 2,
-        "etiqueta": "ANCLA"
-    }
-    
-    os.makedirs("results", exist_ok=True)
-    with open("results/master_ledger.jsonl", "a") as f:
-        f.write(json.dumps(master_ledger_line) + "\n")
-    print("Logged execution to results/master_ledger.jsonl")
-    print("=" * 80)
+    print("\nSaved final benchmark results to v300_capacity_scaling_results.json")
 
 if __name__ == "__main__":
     run_experiment_suite()

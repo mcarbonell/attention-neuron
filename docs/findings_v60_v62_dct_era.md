@@ -29,4 +29,4 @@ This series of experiments explored the integration of **Discrete Cosine Transfo
 
 ## Future Directions
 - **Patch-based DCT**: Scaling to larger images (224x224) using 8x8 DCT patches (true JPEG-neural hybrid).
-- **DGE Integration**: Using Dynamic Gradient Estimation to prune non-essential frequency coefficients during training.
+- **DGE Integration**: Using Denoised Gradient Estimation to prune non-essential frequency coefficients during training.
