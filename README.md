@@ -92,6 +92,12 @@ Backprop physically moves curve endpoints → 100% resolution-invariant, adversa
 **Conformal Optics**: Weight matrix = projection of 2D texture deformed by trainable conformal map.  
 📄 [Phase-nGPT](docs/findings_v282_ultimate_phase_ngpt.md) | [Poincaré](docs/findings_v286_poincare_attention.md) | [Conformal](docs/findings_v287_conformal_optics.md)
 
+### 7. Complex Delta Phase Holographic State Memory (v300–v301)
+**Holographic $O(N)$ Recurrence**: Keys and Queries projected to the complex $U(1)$ unit circle $K = e^{i\theta_k}, Q = e^{i\theta_q}$.  
+**Capacity Scaling Law**: Iso-state-memory (iso-floats) benchmarking against Real DeltaNet. Under capacity pressure (64 pairs, $L=512$), Real DeltaNet collapses to **51.69%**, while Complex Delta Phase sustains **99.11% associative recall**.  
+**Decisive Rectangular Hypothesis**: Proves intrinsic $U(1)$ phase interference cancellation across square and rectangular state allocations.  
+📄 [V300 Capacity Scaling](scratch/prototype_v300_capacity_scaling.py) | [V301 Decisive Benchmark](scratch/prototype_v301_decisive_benchmark.py)
+
 ---
 
 ## 📊 Key Benchmarks
@@ -107,13 +113,14 @@ Backprop physically moves curve endpoints → 100% resolution-invariant, adversa
 | **Gated Ternary CNN** | v256 | **394** | 85.07% | **1015×** |
 | **Conformal Optics** | v287 | **3,082** | 39.06% | **32×** |
 
-### CIFAR-10 & Language
+### CIFAR-10, Associative Recall & Language
 | Model / Task | Version | Trainable Params | Metric | Advantage |
 |--------------|---------|------------------|--------|-----------|
 | **NavigatorNet (CIFAR-10)** | v19 | 118,238 | 76.76% Acc | Rank-32 gates over frozen kernels |
 | **Complex FFN** | v275 | ~800 | 2.63e-6 MSE | 6.1× lower loss vs real MLP |
 | **CausalPhase-nGPT (WikiText)** | v282 | 116,870 | 5.35 PPL | **80% fewer params, 2.3× faster** |
 | **Poincaré Attention (Tree Ancestors)** | v286 | 32,797 | **43.49%** Acc | +11.6% vs Euclidean at $d=64$ |
+| **Complex Delta Phase (MQAR 64 pairs)** | v300 | ~14,000 | **99.11%** Acc | **+47.42% vs Real DeltaNet (51.69%)** under iso-floats |
 
 ---
 
