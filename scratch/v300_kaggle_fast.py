@@ -96,11 +96,11 @@ class FFN(nn.Module):
     def forward(self, x): return self.net(x)
 
 # ── OPTIMIZED: Chunk-wise Delta Rule forward ─────────────────────────────
-# Instead of looping t=0..L-1 one step at a time, we process C steps per
-# iteration.  Inside each chunk we still need the sequential M update, but
-# the chunk boundaries batch the matmuls into bigger tensors so CUDA gets
-# more work per kernel launch.  With C=16 on L=2048 we go from 2048 Python
-# iterations down to 128.
+# NOTE: chunking alone does NOT reduce the number of sequential Python steps
+# (the inner loop still runs one step per token, L in total). The real win
+# against the CPU/launch-overhead bottleneck comes from (a) the within-token
+# matmul fusion (M @ [k,q] in one kernel) and (b) torch.compile unrolling the
+# real scan. CHUNK_SIZE only bounds the stack()/cat() block sizes.
 
 CHUNK_SIZE = 16  # Tune: 8-32 is the sweet spot on T4/P100
 
@@ -132,10 +132,17 @@ def _delta_rule_chunked_real(K, Q, V, beta, d_k):
             v_t = v_c[:, i]
             beta_t = b_c[:, i]  # (B, H, 1, 1)
 
-            v_old = torch.matmul(M, k_t.unsqueeze(-1)).squeeze(-1)
+            # Single (dk x 2) matmul instead of two separate (dk,) matmuls:
+            #   sol = [M @ k,  M @ q]
+            # then reuse M @ q = (M_old @ q) via the rank-1 update identity.
+            kq = torch.stack([k_t, q_t], dim=-1)          # (B, H, dk, 2)
+            sol = torch.matmul(M, kq)                     # (B, H, dk, 2)
+            v_old = sol[..., 0]
             err = v_t - v_old
             M = M + beta_t * (err.unsqueeze(-1) * k_t.unsqueeze(-2))
-            ret = torch.matmul(M, q_t.unsqueeze(-1)).squeeze(-1)
+            dot = torch.sum(k_t * q_t, dim=-1)            # (B, H)
+            beta_s = beta_t.squeeze(-1).squeeze(-1).unsqueeze(-1)  # (B, H, 1)
+            ret = sol[..., 1] + beta_s * err * dot.unsqueeze(-1)
             chunk_out.append(ret)
 
         out_chunks.append(torch.stack(chunk_out, dim=1))  # (B, chunk_len, H, dk)
@@ -173,11 +180,18 @@ def _delta_rule_chunked_complex(K, Q, V, beta, d_k):
 
             k_conj = torch.conj(k_t)
             q_conj = torch.conj(q_t)
-            v_old = torch.matmul(M, k_conj.unsqueeze(-1)).squeeze(-1).real * inv_dk
+            # Single (dk x 2) complex matmul: sol = [M @ k_conj,  M @ q_conj],
+            # and recover M_new @ q_conj from M_old @ q_conj via the update.
+            kq_conj = torch.stack([k_conj, q_conj], dim=-1)  # (B, H, dk, 2)
+            sol = torch.matmul(M, kq_conj)                    # (B, H, dk, 2)
+            v_old = sol[..., 0].real * inv_dk
             err = v_t - v_old
-            update = err.to(torch.complex64).unsqueeze(-1) * k_t.unsqueeze(-2)
+            err_c = err.to(torch.complex64)
+            update = err_c.unsqueeze(-1) * k_t.unsqueeze(-2)
             M = M + beta_t * update
-            ret = torch.matmul(M, q_conj.unsqueeze(-1)).squeeze(-1).real * inv_dk
+            dot = torch.sum(k_t * q_conj, dim=-1)             # (B, H) complex
+            beta_s = beta_t.squeeze(-1).squeeze(-1).unsqueeze(-1)  # (B, H, 1)
+            ret = (sol[..., 1] + beta_s * err_c * dot.unsqueeze(-1)).real * inv_dk
             chunk_out.append(ret)
 
         out_chunks.append(torch.stack(chunk_out, dim=1))
@@ -274,22 +288,31 @@ def train_and_eval_pregenerated(model, model_name, train_x, train_y, eval_x, eva
     target_batch = CFG["batch_size"]
     micro_batch = 2 if seq_len >= 2048 else (4 if seq_len >= 1024 else (16 if seq_len >= 512 else target_batch))
     accum_steps = max(1, target_batch // micro_batch)
-    
+
+    # torch.compile: inductor unrolls/fuses the real scan's kernel launches.
+    # Complex ops are not reliably supported by inductor, so only non-complex
+    # models are compiled (real delta-nets and the MHA baseline).
+    if torch.cuda.is_available() and "Complex" not in model_name:
+        try:
+            model = torch.compile(model)
+        except Exception:
+            pass
+
     start_time = time.time()
     for ep in range(epochs):
         model.train()
         for step in range(steps_per_epoch):
             optimizer.zero_grad()
-            total_loss = 0.0
+            total_loss = torch.zeros((), dtype=torch.float32, device=device)
             for acc_i in range(accum_steps):
                 idx = (step * accum_steps + acc_i) % len(train_x)
                 logits = model(train_x[idx])
                 loss = criterion(logits.view(-1, VOCAB_SIZE), train_y[idx].view(-1)) / accum_steps
                 loss.backward()
-                total_loss += loss.item() * accum_steps
+                total_loss = total_loss + loss.detach()
             nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             optimizer.step()
-        print(f"      [{model_name:28s} | lr={lr:.4f}] Epoch {ep+1:2d}/15 Complete | Loss = {total_loss:.4f}", flush=True)
+        print(f"      [{model_name:28s} | lr={lr:.4f}] Epoch {ep+1:2d}/15 Complete | Loss = {total_loss.item():.4f}", flush=True)
     eval_time = time.time() - start_time
     
     model.eval()
@@ -318,7 +341,7 @@ print(f"  * LR Grid:         {CFG['lr_grid']}")
 print(f"  * Sweeps d_k:      {CFG['d_k_list']}")
 print(f"  * KV Pairs Sweep:  {CFG['num_pairs_list']}")
 print(f"  * Chunk Size:      {CHUNK_SIZE}")
-print(f"  * torch.compile:   disabled (complex ops unsupported by inductor)")
+print(f"  * torch.compile:   enabled for Real/Attention models (complex ops unsupported by inductor)")
 print(f"  * ISO-FLOATS MAP:")
 for dk, info in CFG["iso_floats_map"].items():
     if isinstance(dk, int):
@@ -339,7 +362,7 @@ for d_k in CFG["d_k_list"]:
         ("CausalAttentionMHA", CausalAttentionBlock, {})
     ]
     for num_pairs in CFG["num_pairs_list"]:
-        seq_len = 8 * num_pairs
+        seq_len = 4 * num_pairs + 2
         print(f"\n  >>> Pre-generating GPU Datasets for Load: {num_pairs} Pairs (L={seq_len}) <<<", flush=True)
         
         target_batch = CFG["batch_size"]
