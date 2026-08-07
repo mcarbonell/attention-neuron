@@ -1,0 +1,118 @@
+{
+  "config": {
+    "exp_id": "v300_capacity_scaling_all",
+    "d_k_list": [
+      64
+    ],
+    "iso_floats_map": {
+      "32": {
+        "dk_complex": 32,
+        "dk_real": 45,
+        "floats_c": 2048,
+        "floats_r": 2025
+      },
+      "64": {
+        "dk_complex": 64,
+        "dk_real": 90,
+        "floats_c": 8192,
+        "floats_r": 8100
+      },
+      "128": {
+        "dk_complex": 128,
+        "dk_real": 181,
+        "floats_c": 32768,
+        "floats_r": 32761
+      },
+      "32": {
+        "dk_complex": 32,
+        "dk_real": 45,
+        "floats_c": 2048,
+        "floats_r": 2025
+      },
+      "64": {
+        "dk_complex": 64,
+        "dk_real": 90,
+        "floats_c": 8192,
+        "floats_r": 8100
+      },
+      "128": {
+        "dk_complex": 128,
+        "dk_real": 181,
+        "floats_c": 32768,
+        "floats_r": 32761
+      }
+    },
+    "num_pairs_list": [
+      32,
+      64,
+      128
+    ],
+    "num_keys": 256,
+    "num_vals": 256,
+    "batch_size": 32,
+    "n_layers": 3,
+    "epochs": 5,
+    "steps_per_epoch": 20,
+    "lr_grid": [
+      0.002
+    ],
+    "seed": 42,
+    "compile_non_complex": true,
+    "device": "cpu"
+  },
+  "results": {
+    "64": {
+      "ComplexDeltaPhaseHolographic_dk64": {
+        "32": {
+          "best_acc": 0.89,
+          "best_lr": 0.002,
+          "total_eval_time": 116.42
+        },
+        "64": {
+          "best_acc": 0.66,
+          "best_lr": 0.002,
+          "total_eval_time": 396.63
+        },
+        "128": {
+          "best_acc": 0.47,
+          "best_lr": 0.002,
+          "total_eval_time": 1069.79
+        }
+      },
+      "RealDeltaNetVanilla_dk64": {
+        "32": {
+          "best_acc": 0.66,
+          "best_lr": 0.002,
+          "total_eval_time": 85.96
+        },
+        "64": {
+          "best_acc": 0.54,
+          "best_lr": 0.002,
+          "total_eval_time": 243.64
+        },
+        "128": {
+          "best_acc": 0.42,
+          "best_lr": 0.002,
+          "total_eval_time": 660.8
+        }
+      },
+      "CausalAttentionMHA_dk64": {
+        "32": {
+          "best_acc": 2.0,
+          "best_lr": 0.002,
+          "total_eval_time": 9.67
+        },
+        "64": {
+          "best_acc": 0.9,
+          "best_lr": 0.002,
+          "total_eval_time": 22.1
+        },
+        "128": {
+          "best_acc": 0.55,
+          "best_lr": 0.002,
+          "total_eval_time": 52.47
+        }
+      }
+    }
+  }
+}
