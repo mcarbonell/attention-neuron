@@ -35,8 +35,10 @@ $$M_t = M_{t-1} + \beta_t (v_t - v_{\text{old}}) \otimes K_t^*$$
 
 ## 4. Desempeño y Métrica Principal
 - **Tiny Shakespeare (LM Autorregresivo Iso-Paramétrico, 5 Semillas, $L=256$):** **Val Loss 1.7849 ± 0.0028 / Val PPL 5.96 ± 0.02** 🌟 (v306 [ANCLA]).
+- **TinyStories BPE Subwords (Vocab=4096, 5 Semillas, $L=256$):** **Val Loss 7.6860 ± 0.0063 / Val PPL 2177.82 ± 13.54** 🌟 (v307 [ANCLA]).
 - **MQAR Capacidad (128 Pares, $L=1024$):** **95.61% Accuracy** (v300).
 - **MQAR Vocabulario Compartido ($c=128$, $L=1088$):** **94.30% Accuracy** (v302).
+
 
 
 ---

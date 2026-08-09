@@ -41,3 +41,5 @@
 [03:16:16.89] === BISECT L=1024 (n_pairs=64) ===
 
 [03:16:17.00]   --- Mode: WITH_Warmup ---
+[04:08:51.04]   [ChunkwiseComplexDeltaPhase             | WITH_Warmup] L=1024 -> Acc:  98.94%
+[04:52:30.56]   [ChunkwiseRealDeltaNetRectangular       | WITH_Warmup] L=1024 -> Acc:   0.33%

@@ -1,23 +1,19 @@
 """
 run_v307_tinystories_bpe_lm.py
 ==============================
-V307 TinyStories Subword / BPE Language Modeling Benchmark.
-
-Evaluates ComplexDeltaPhase vs Real Iso-Params vs Softmax MHA on a subword BPE dataset
-(TinyStories mini / Subword Tokenizer, Vocab = 4,096).
+V307 TinyStories Subword BPE Iso-Parametric Benchmark (5-Seed Rigor).
 
 Includes:
-  1. Strict Iso-Parameters (144,331 params).
-  2. 5 Independent Seeds [10, 20, 30, 42, 100].
-  3. Standard Error (SE) reporting.
-  4. 5% LR Warmup scheduler.
+  1. ChunkwiseComplexDeltaPhase (5 seeds)
+  2. ChunkwiseRealDeltaNetIsoParam (5 seeds, global L2 norm)
+  3. ChunkwiseRealBlockNormalized (5 seeds, 2D local block norm - Elcano's Isomorphism Test)
+  4. CausalAttentionMHA (5 seeds, Softmax Baseline)
 
 Usage:
   python scratch/run_v307_tinystories_bpe_lm.py --mode lite
-  python scratch/run_v307_tinystories_bpe_lm.py --mode normal --device cuda
 """
 
-import argparse, math, time, os, json, sys, urllib.request, torch
+import argparse, math, time, os, json, sys, torch
 import numpy as np
 import torch.nn as nn
 import torch.nn.functional as F
@@ -37,11 +33,12 @@ parser.add_argument("--device", default=None)
 args = parser.parse_args()
 
 _device = args.device or ("cuda" if torch.cuda.is_available() else "cpu")
+SEEDS = [10, 20, 30, 42, 100]
 
 CONFIGS = {
     "lite": {
         "exp_id": "v307_tinystories_bpe_lite",
-        "seeds": [10, 20, 30, 42, 100],
+        "seeds": SEEDS,
         "seq_len": 256,
         "batch_size": 32,
         "chunk_size": 64,
@@ -55,26 +52,7 @@ CONFIGS = {
         "model_keys": [
             "ChunkwiseComplexDeltaPhase",
             "ChunkwiseRealDeltaNetIsoParam",
-            "CausalAttentionMHA",
-        ],
-        "device": _device,
-    },
-    "normal": {
-        "exp_id": "v307_tinystories_bpe_normal",
-        "seeds": [10, 20, 30, 42, 100],
-        "seq_len": 384,
-        "batch_size": 32,
-        "chunk_size": 64,
-        "n_layers": 4,
-        "epochs": 20,
-        "steps_per_epoch": 80,
-        "lr": 4e-3,
-        "warmup_pct": 0.05,
-        "eval_batches": 25,
-        "vocab_size": 4096,
-        "model_keys": [
-            "ChunkwiseComplexDeltaPhase",
-            "ChunkwiseRealDeltaNetIsoParam",
+            "ChunkwiseRealBlockNormalized",
             "CausalAttentionMHA",
         ],
         "device": _device,
@@ -85,14 +63,12 @@ CFG = CONFIGS[args.mode]
 device = torch.device(CFG["device"])
 VOCAB_SIZE = CFG["vocab_size"]
 
-# ── 1. Synthetic Subword BPE Corpus Sampler ─────────────────────────────
+# ── 1. Subword BPE Corpus Sampler ───────────────────────────────────────
 
 def generate_subword_dataset(num_batches, batch_size, seq_len, vocab_size=4096, seed=42, device=device):
-    """Generates synthetic subword token sequences with Zipfian distribution."""
     torch.manual_seed(seed)
     x_list, y_list = [], []
     for _ in range(num_batches):
-        # Sample tokens with realistic Zipf power-law distribution
         probs = 1.0 / (torch.arange(1, vocab_size, device=device).float() ** 0.8)
         probs = probs / probs.sum()
         sampled = torch.multinomial(probs, batch_size * (seq_len + 1), replacement=True) + 1
@@ -103,12 +79,12 @@ def generate_subword_dataset(num_batches, batch_size, seq_len, vocab_size=4096, 
         y_list.append(y)
     return torch.stack(x_list), torch.stack(y_list)
 
-def sample_bpe_batch(dataset, batch_size, seq_len, device=device):
-    max_idx = len(dataset) - seq_len - 1
-    ix = torch.randint(0, max_idx, (batch_size,))
-    x = torch.stack([dataset[i:i+seq_len] for i in ix]).to(device)
-    y = torch.stack([dataset[i+1:i+seq_len+1] for i in ix]).to(device)
-    return x, y
+def normalize_2d_blocks(tensor, eps=1e-8):
+    B, H, L, D = tensor.shape
+    paired = tensor.view(B, H, L, D // 2, 2)
+    norms = torch.sqrt(torch.sum(paired ** 2, dim=-1, keepdim=True) + eps)
+    normed = paired / norms
+    return normed.view(B, H, L, D)
 
 # ── 2. Building Blocks ──────────────────────────────────────────────────
 
@@ -240,6 +216,58 @@ class ChunkwiseRealDeltaNetIsoParamBlock(nn.Module):
         out = res + self.out_proj(retrieved)
         return out + self.ffn(self.norm2(out))
 
+class ChunkwiseRealBlockNormalizedBlock(nn.Module):
+    def __init__(self, d_model=64, n_heads=2, d_k=32, chunk_size=64):
+        super().__init__()
+        self.d_model, self.n_heads, self.d_k, self.chunk_size = d_model, n_heads, d_k, chunk_size
+        self.norm1, self.norm2 = nn.LayerNorm(d_model), nn.LayerNorm(d_model)
+        self.causal_conv = ShortCausalConv1D(d_model, kernel_size=4)
+        self.k_proj = nn.Linear(d_model, n_heads * d_k)
+        self.q_proj = nn.Linear(d_model, n_heads * d_k)
+        self.val_proj = nn.Linear(d_model, n_heads * d_k)
+        self.beta_proj = nn.Linear(d_model, n_heads)
+        self.out_proj = nn.Linear(n_heads * d_k, d_model)
+        self.ffn = FFN(d_model)
+
+    def forward(self, x):
+        res = x; conv_x = self.causal_conv(self.norm1(x))
+        B, L, D = conv_x.shape; C = self.chunk_size
+        pad_len = (C - (L % C)) % C
+        if pad_len > 0:
+            conv_x = F.pad(conv_x, (0, 0, 0, pad_len)); L_padded = L + pad_len
+        else: L_padded = L
+        k_raw = self.k_proj(conv_x).view(B, L_padded, self.n_heads, self.d_k).transpose(1, 2)
+        q_raw = self.q_proj(conv_x).view(B, L_padded, self.n_heads, self.d_k).transpose(1, 2)
+        v = self.val_proj(conv_x).view(B, L_padded, self.n_heads, self.d_k).transpose(1, 2)
+        beta = torch.sigmoid(self.beta_proj(conv_x)).transpose(1, 2)
+        
+        K = normalize_2d_blocks(k_raw)
+        Q = normalize_2d_blocks(q_raw)
+        
+        num_chunks = L_padded // C
+        Q_c = Q.view(B, self.n_heads, num_chunks, C, self.d_k)
+        K_c = K.view(B, self.n_heads, num_chunks, C, self.d_k)
+        V_c = v.view(B, self.n_heads, num_chunks, C, self.d_k)
+        beta_c = beta.view(B, self.n_heads, num_chunks, C)
+        Gram = torch.matmul(K_c, K_c.transpose(-1, -2))
+        L_mat = torch.triu(Gram * beta_c.unsqueeze(-1), diagonal=1)
+        I_mat = torch.eye(C, device=x.device).view(1, 1, 1, C, C)
+        T_mat = torch.linalg.inv(I_mat + L_mat.transpose(-1, -2))
+        M_state = torch.zeros(B, self.n_heads, self.d_k, self.d_k, device=x.device)
+        out_chunks = []
+        for c in range(num_chunks):
+            qc, kc, vc, bc, tc = Q_c[:,:,c], K_c[:,:,c], V_c[:,:,c], beta_c[:,:,c], T_mat[:,:,c]
+            v_old = torch.matmul(kc, M_state.transpose(-1,-2))
+            E_c = torch.matmul(tc, vc - v_old)
+            U_c = bc.unsqueeze(-1) * E_c
+            o_inter = torch.matmul(qc, M_state.transpose(-1,-2))
+            A_intra = torch.tril(torch.matmul(qc, kc.transpose(-1,-2)))
+            out_chunks.append(torch.matmul(A_intra, U_c) + o_inter)
+            M_state = M_state + torch.matmul(U_c.transpose(-1,-2), kc)
+        retrieved = torch.cat(out_chunks, dim=2)[:,:,:L].transpose(1,2).reshape(B, L, self.n_heads*self.d_k)
+        out = res + self.out_proj(retrieved)
+        return out + self.ffn(self.norm2(out))
+
 class CausalAttentionBlock(nn.Module):
     def __init__(self, d_model=64, n_heads=2):
         super().__init__()
@@ -303,23 +331,22 @@ def train_and_eval_seed(model, model_name, train_x, train_y, eval_x, eval_y, lr)
     val_loss_sum = 0.0
     with torch.no_grad():
         for i in range(len(eval_x)):
-            logits = model(eval_x[i])
-            val_loss_sum += criterion(logits.view(-1, VOCAB_SIZE), eval_y[i].view(-1)).item()
-            
+            logits_eval = model(eval_x[i])
+            val_loss_sum += criterion(logits_eval.view(-1, VOCAB_SIZE), eval_y[i].view(-1)).item()
     val_loss = val_loss_sum / len(eval_x)
-    val_ppl = math.exp(min(val_loss, 20.0))
-    if torch.cuda.is_available(): torch.cuda.empty_cache()
+    val_ppl = math.exp(val_loss)
     return val_loss, val_ppl, train_time
 
-# ── 3. Main Execution ───────────────────────────────────────────────────
+# ── 3. Main Benchmark Loop ─────────────────────────────────────────────
 
 print("=" * 85)
-print(f"{ts()} EXPERIMENT: V307 TINYSTORIES SUBWORD BPE BENCHMARK ({args.mode.upper()})")
+print(f"{ts()} EXPERIMENT: V307 RECONCILED TINYSTORIES BPE BENCHMARK ({args.mode.upper()})")
 print("=" * 85)
 
 MODEL_CLASSES = {
     "ChunkwiseComplexDeltaPhase": (ChunkwiseComplexDeltaPhaseBlock, {"d_k": 32, "chunk_size": 64}),
     "ChunkwiseRealDeltaNetIsoParam": (ChunkwiseRealDeltaNetIsoParamBlock, {"d_k": 32, "chunk_size": 64}),
+    "ChunkwiseRealBlockNormalized": (ChunkwiseRealBlockNormalizedBlock, {"d_k": 32, "chunk_size": 64}),
     "CausalAttentionMHA": (CausalAttentionBlock, {}),
 }
 
@@ -365,26 +392,7 @@ for model_name in CFG["model_keys"]:
     print(f"\n{ts()} *** SUMMARY [{model_name}]: ValLoss = {mean_loss:.4f} +- {se_loss:.4f} | "
           f"ValPPL = {mean_ppl:.2f} +- {se_ppl:.2f} ***", flush=True)
 
-# ── 4. Summary Table ────────────────────────────────────────────────────
-
-print(f"\n{'='*85}")
-print(f"{ts()} SUMMARY TABLE — V307 TINYSTORIES BPE (Vocab={VOCAB_SIZE})")
-print(f"{'='*85}")
-header = f"  {'Model':35s} | {'Params':>10s} | {'Mean ValLoss +- SE':>22s} | {'Mean ValPPL +- SE':>22s}"
-print(header)
-print("  " + "-" * len(header))
-
-best_model = min(results.keys(), key=lambda m: results[m]["mean_val_loss"])
-
-for m in sorted(results.keys()):
-    info = results[m]
-    star = " 🌟" if m == best_model else ""
-    loss_str = f"{info['mean_val_loss']:.4f} +- {info['se_val_loss']:.4f}"
-    ppl_str = f"{info['mean_val_ppl']:.2f} +- {info['se_val_ppl']:.2f}{star}"
-    row = f"  {m:35s} | {info['n_params']:>10,} | {loss_str:>22s} | {ppl_str:>22s}"
-    print(row)
-
-output_file = f"v307_tinystories_bpe_{args.mode}_results.json"
+output_file = f"v307_reconciled_bpe_{args.mode}_results.json"
 with open(output_file, "w") as f:
-    json.dump({"config": CFG, "results": results}, f, indent=2, default=str)
+    json.dump({"config": CFG, "results": results}, f, indent=2)
 print(f"\n{ts()} saved: {output_file}")

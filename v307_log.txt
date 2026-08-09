@@ -1,0 +1,27 @@
+=====================================================================================
+[00:00:00.00] EXPERIMENT: V307 TINYSTORIES SUBWORD BPE BENCHMARK (LITE)
+=====================================================================================
+
+[00:00:00.18] === MODEL: ChunkwiseComplexDeltaPhase (5 Seeds) ===
+  [00:21:44.09] [ChunkwiseComplexDeltaPhase       | Seed  10] -> ValLoss: 7.7009 | ValPPL: 2210.35 | Params: 664,072
+  [00:43:19.09] [ChunkwiseComplexDeltaPhase       | Seed  20] -> ValLoss: 7.6913 | ValPPL: 2189.30 | Params: 664,072
+  [01:04:28.98] [ChunkwiseComplexDeltaPhase       | Seed  30] -> ValLoss: 7.6866 | ValPPL: 2178.90 | Params: 664,072
+  [01:25:39.26] [ChunkwiseComplexDeltaPhase       | Seed  42] -> ValLoss: 7.6595 | ValPPL: 2120.80 | Params: 664,072
+  [01:46:45.33] [ChunkwiseComplexDeltaPhase       | Seed 100] -> ValLoss: 7.6915 | ValPPL: 2189.73 | Params: 664,072
+
+[01:46:45.34] *** SUMMARY [ChunkwiseComplexDeltaPhase]: ValLoss = 7.6860 +- 0.0063 | ValPPL = 2177.82 +- 13.54 ***
+
+[01:46:45.34] === MODEL: ChunkwiseRealDeltaNetIsoParam (5 Seeds) ===
+  [02:03:17.68] [ChunkwiseRealDeltaNetIsoParam    | Seed  10] -> ValLoss: 7.6777 | ValPPL: 2159.75 | Params: 664,072
+  [02:19:12.20] [ChunkwiseRealDeltaNetIsoParam    | Seed  20] -> ValLoss: 7.7490 | ValPPL: 2319.33 | Params: 664,072
+  [02:35:10.71] [ChunkwiseRealDeltaNetIsoParam    | Seed  30] -> ValLoss: 7.7012 | ValPPL: 2211.08 | Params: 664,072
+  [02:51:08.88] [ChunkwiseRealDeltaNetIsoParam    | Seed  42] -> ValLoss: 7.6764 | ValPPL: 2156.91 | Params: 664,072
+  [03:07:21.99] [ChunkwiseRealDeltaNetIsoParam    | Seed 100] -> ValLoss: 7.6936 | ValPPL: 2194.19 | Params: 664,072
+
+[03:07:22.00] *** SUMMARY [ChunkwiseRealDeltaNetIsoParam]: ValLoss = 7.6996 +- 0.0118 | ValPPL = 2208.25 +- 26.48 ***
+
+[03:07:22.00] === MODEL: CausalAttentionMHA (5 Seeds) ===
+  [03:22:34.39] [CausalAttentionMHA               | Seed  10] -> ValLoss: 7.6810 | ValPPL: 2166.87 | Params: 663,552
+  [03:37:08.66] [CausalAttentionMHA               | Seed  20] -> ValLoss: 7.6971 | ValPPL: 2202.01 | Params: 663,552
+  [03:51:57.04] [CausalAttentionMHA               | Seed  30] -> ValLoss: 7.6928 | ValPPL: 2192.59 | Params: 663,552
+  [04:06:55.72] [CausalAttentionMHA               | Seed  42] -> ValLoss: 7.7066 | ValPPL: 2222.99 | Params: 663,552

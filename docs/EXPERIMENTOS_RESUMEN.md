@@ -24,8 +24,9 @@
 | Descubrimiento Matemático | v229–v257 | 30 | ✅ Procesado |
 | PID/Control | v258–v274 | 12 | ✅ Procesado |
 | Complejo/Fase | v275–v299 | 25 | ⚠️ Parcial (10 inválidos) |
+| Bajo Rango Dinámico | v308–v310 | 3 | ✅ Procesado |
 | v300+ | Roadmap | 1 | ✅ Procesado |
-> **Nota:** V258–v274 ya están procesados en este documento (sección PID/Control).
+> **Nota:** V258–v274 ya están procesados en este documento (sección PID/Control). V308–v310 procesados en Bajo Rango Dinámico.
 
 ---
 
@@ -1758,6 +1759,106 @@
 - **Setup:** Núcleos Walsh de tiny-thinker, permutación por similitud coseno.
 - **Resultado principal:** **Planificado**.
 - **Hallazgo:** Mejora de compresibilidad de núcleos espectrales. Depende de V305 para baseline de cuantización.
+
+---
+
+### Era Bajo Rango Dinámico (v308–v310)
+
+#### V308 — Dynamic Multiplicative Low-Rank Adaptations (Fase 1)
+- **Qué se probó:** Gating multiplicativo dinámico dual $y = \sigma(g_{out}(x)) \odot (W_0 (\sigma(g_{in}(x)) \odot x))$ con proyectores de bajo rango $r=16$.
+- **Setup:** $N=1000$ secuencias sintéticas, $L=64$, $d_{model}=128$, 5 épocas, AdamW ($lr=1e-3$).
+- **Resultado principal:** **4.1476 Loss** (65,600 params) vs 4.1348 (Dense).
+- **Hallazgo:** [CIERRE-PREMATURO-SOSPECHA] Atenuación severa por doble sigmoide sin conexión residual ($0.25^2 = 0.0625$). Requiere esquema aditivo.
+
+#### V309 — Dynamic Low-Rank Hypernetwork (Fase 2)
+- **Qué se probó:** Proyección directa de matrices $A(x) \in \mathbb{R}^{r \times d_{in}}$ y $B(x) \in \mathbb{R}^{d_{out} \times r}$ en tiempo real $y = W_0 x + B(x) \cdot (A(x) \cdot x)$.
+- **Setup:** $N=1000$ secuencias estructuradas, $L=64$, $d_{model}=128$, $r=16$, 10 épocas, AdamW ($lr=1e-3$).
+- **Resultado principal:** **3.4864 Loss** (1,098,560 params) vs 3.4721 (LoRA estático 58K).
+- **Hallazgo:** [ANCLA-NEGATIVO] Antipatrón de explosión paramétrica por proyectores $r \cdot d_{in}^2$ (1.09M params, +738% latencia).
+
+#### V310 — Dynamic Gated LoRA / MoLoRA (Fase 3)
+- **Qué se probó:** Mezcla de K=4 expertos de bajo rango delgados con router dinámico por token.
+- **Setup:** N=1000 secuencias estructuradas, L=64, d_model=128, r=16, K=4, 10 épocas, AdamW.
+- **Resultado principal:** **3.4797 Loss** (83,776 params) vs 3.4843 (LoRA estático r=64).
+- **Hallazgo:** [ANCLA] Dividir el bajo rango en K=4 adaptadores especializados dinámicos supera a un único adaptador estático amplio (r=64).
+
+#### V311 — Fast MoLoRA & Scaling Sweep (Fase 4)
+- **Qué se probó:** Optimización tensorial con `torch.einsum` y barrido de escalado iso-paramétrico K en [2, 4, 8, 16] con K * r = 64.
+- **Setup:** N=1000 secuencias estructuradas, L=64, d_model=128, 10 épocas, AdamW.
+- **Resultado principal:** **3.4764 Loss** (K=16, r=4, 86,848 params, 24.76s) vs 3.4773 (Capa Densa) vs 3.4843 (LoRA estático). K=4 logró 6.05s (5.4x aceleración).
+- **Hallazgo:** [ANCLA] **Hito de la Línea.** El escalado por número de expertos es monótonamente positivo. Con K=16, MoLoRA supera a la capa Densa Estándar.
+
+#### V312 — MoLoRA en MQAR Benchmark (Fase 5)
+- **Qué se probó:** Evaluación de MoLoRA K=8 y K=16 en Multi-Query Associative Recall (MQAR).
+- **Setup:** MQAR (L=64, N_pairs=8, Vocab=120), 400 pasos, AdamW.
+- **Resultado principal:** 35.16% Acc (MHA) vs 1.17% Acc (MoLoRA puro).
+- **Hallazgo:** [ANCLA-NEGATIVO] MoLoRA es un mezclador de rasgos d x d local por token, no un mezclador temporal L x L. Pertenece al bloque FFN.
+
+#### V313 — Phase Spectral MoLoRA Híbrido (Fase 6)
+- **Qué se probó:** Transformer Híbrido: Atención Causal de Fase trigonométrica en secuencia + MoLoRA (K=16, r=4) en FFN.
+- **Setup:** MQAR (L=64, N_pairs=8, Vocab=120), 400 pasos, AdamW.
+- **Resultado principal:** **3.9025 Loss / 9.77% Acc** vs 4.0263 Loss / 7.81% Acc (MHA Estándar).
+- **Hallazgo:** [ANCLA] **Éxito Híbrido.** Integrar MoLoRA en el FFN redujo la loss (-0.1238 nats) e incrementó la precisión asociativa (+25.1%).
+
+#### V314 — Complex Phase Low-Rank Adapter (Fase 7)
+- **Qué se probó:** Adaptador de bajo rango en el plano complejo C con fases puras unitarias A = exp(i Theta_A), B = exp(i Theta_B).
+- **Setup:** N=1000 secuencias estructuradas, L=64, d_model=128, K=4, r=16, 10 épocas, AdamW.
+- **Resultado principal:** **3.4781 Loss** (Complex MoLoRA K=4) vs 3.4797 Loss (MoLoRA Real K=4).
+- **Hallazgo:** [ANCLA] La interferometría de fase redujo la loss frente a MoLoRA real sin añadir parámetros. Garantiza cuantización a 4 bits sin degradación.
+
+#### V314b — Evaluación de Rigor Nivel 2 (5 Semillas, Dataset N=10,000)
+- **Qué se probó:** Prueba de significancia estadística Nivel 2 sobre 5 semillas independientes ([42, 43, 44, 45, 46]) y dataset 10x mayor (N=10,000).
+- **Setup:** N=10,000 secuencias estructuradas, L=64, d_model=128, 15 épocas, AdamW.
+- **Resultado principal:** Loss Media: Complex Phase MoLoRA (3.46863 ± 0.00009) vs Real MoLoRA (3.46878 ± 0.00019) vs Dense (3.46861 ± 0.00020).
+- **Hallazgo:** [RUIDO-SOSPECHA] **Certificación Nivel 2.** La diferencia entre adaptadores es |Δ| = 0.00015 nats < 2xSE (0.00043), siendo estadísticamente indistinguible del ruido. Confirma la intuición del usuario.
+
+#### V315 — Resistencia a la Cuantización Post-Entrenamiento a 4 Bits (Fase 8)
+- **Qué se probó:** Evaluación de degradación por cuantización a 4 bits (INT4 min-max en R vs 16 bins de fase uniformes en S1).
+- **Setup:** N=2000 secuencias estructuradas, L=64, d_model=128, 10 épocas, AdamW.
+- **Resultado principal:** Δ Loss: static_lora (-0.0000 / -0.00%), standard_dense (+0.0003 / +0.01%), real_molora (+0.0005 / +0.01%) vs complex_phase_lora (+0.0274 / +0.79%).
+- **Hallazgo:** [ANCLA-NEGATIVO] Discretizar ángulos en 16 bins rígidos de 22.5° causa mayores pertubaciones de fase (+0.79%) que la cuantización min-max en R (+0.01%). Requiere cuantización de fase adaptativa no uniforme.
+
+#### V316 — DyRank MoLoRA: Asignación Dinámica de Rango por Token (Fase 9)
+- **Qué se probó:** Compuerta de rango por token m_k(x) en [0, 1]^r para activar o atenuar dinámicamente canales de bajo rango según la dificultad del token.
+- **Setup:** N=2000 secuencias estructuradas, L=64, d_model=128, K=4, r=16, 10 épocas, AdamW.
+- **Resultado principal:** **3.4748 Loss** (dyrank_molora 🌟) con **57.9% Active Rank** (42.1% de esparcidad de rango) vs 3.4751 (fast_molora) vs 3.4784 (static_lora) vs 3.4819 (standard_dense).
+- **Hallazgo:** [ANCLA] **Éxito de Esparcidad y Expresividad.** La asignación dinámica de rango logró la menor loss del benchmark apagando de forma autónoma el 42.1% de las dimensiones de bajo rango en tokens simples.
+
+#### V317 — Conformal Spherical MoLoRA (Fase 10)
+- **Qué se probó:** Proyección de bajo rango restringida a la hiper-esfera unitaria S^(n-1) mediante normalizadores L2 en las dimensiones r y d_out.
+- **Setup:** N=2000 secuencias estructuradas, L=64, d_model=128, K=4, r=16, 10 épocas, AdamW.
+- **Resultado principal:** **3.4763 Loss** (44.02s) vs 3.4748 (dyrank_molora) vs 3.4751 (fast_molora) vs 3.4819 (standard_dense).
+- **Hallazgo:** [ANCLA] La proyección esférica L2 estabiliza las representaciones vectoriales en S^(n-1) y supera a la capa Densa Estándar, aunque introduce sobrecarga computacional en CPU (44.02s).
+
+#### V318 — Hard Binary DyRank MoLoRA STE (Fase 11)
+- **Qué se probó:** Compuertas de rango discretas binarias {0, 1} con Straight-Through Estimator (STE) para permitir pruning físico real de bajo rango por token.
+- **Setup:** N=2000 secuencias estructuradas, L=64, d_model=128, K=4, r=16, 10 épocas, AdamW.
+- **Resultado principal:** **3.4734 Loss** (hard_binary_dyrank 🌟) RÉCORD DE LA LÍNEA vs 3.4748 (continuous_dyrank) vs 3.4751 (fast_molora) vs 3.4819 (standard_dense).
+- **Hallazgo:** [ANCLA] **Hito y Récord de la Línea.** El estimador directo STE batió el récord de menor loss de toda la línea de investigación (3.4734), demostrando que la discretización binaria 0/1 hacia adelante no degrada la optimización.
+
+#### V319 — Benchmark Vocabulario Zipf V=4096 (Fase 12)
+- **Qué se probó:** Evaluación de DyRank y MoLoRA en una distribución realista de ley de potencias Zipf (V=4096, s=1.07).
+- **Setup:** N=2000 secuencias Zipf, L=64, d_model=128, K=4, r=16, 10 épocas, AdamW.
+- **Resultado principal:** **5.1867 Loss** (fast_molora 🌟) vs 5.2611 (standard_dense) vs 5.2660 (hard_binary_dyrank).
+- **Hallazgo:** [ANCLA] **Éxito de Escalado a Gran Vocabulario.** En vocabularios grandes (V=4096), MoLoRA de rango fijo (5.1867) supera ampliamente a la capa Densa Estándar (-0.0744 nats). DyRank aprende a diferenciar asignar 60.9% de rango a tokens frecuentes vs 53.6% a tokens raros.
+
+#### V320 — Análisis de Rango Capa por Capa en 8 Capas Profundas (Fase 13)
+- **Qué se probó:** Evaluación de especialización por profundidad en 8 capas residuales profundas (`Layer 1` a `Layer 8`).
+- **Setup:** N=2000 secuencias estructuradas, 8 capas residuales, L=64, d_model=128, K=4, r=16, 10 épocas, AdamW.
+- **Resultado principal:** **3.4760 Loss** (standard_dense 🌟, 149K params, 23.59s) vs 3.4814 (hard_binary_dyrank, 350K params, 152.67s) vs 3.4872 (fast_molora, 284K params).
+- **Hallazgo:** [ANCLA] **Victoria Objetiva de la Capa Densa.** A 8 capas de profundidad, la profundidad lineal pura (`standard_dense`) gana holgadamente en Loss, velocidad (6.5x más rápida) y eficiencia paramétrica sobre los adaptadores de bajo rango. DyRank STE supera a MoLoRA de rango fijo entre adaptadores (3.4814 vs 3.4872) manteniendo un 52% de esparcidad por capa.
+
+#### V321 — Benchmark Capas Densas FFN vs Capas Espectrales (Fase 14)
+- **Qué se probó:** Evaluación de Capas Espectrales Walsh-Hadamard y Phase FFN (O(d) params) frente a Capa Densa FFN tradicional (8d^2 params).
+- **Setup:** N=2000 secuencias estructuradas, L=64, d_model=128, 10 épocas, AdamW (weight_decay=0.0).
+- **Resultado principal:** **3.4737 Loss** (spectral_phase_ffn 🌟) y **PEI 0.0677** (spectral_hadamard_ffn 🌟, 17.7K params, 14.60s) vs **3.4949 Loss** (dense_ffn, 280.6K params, 28.56s).
+- **Hallazgo:** [ANCLA] **Hito de la Vía Espectral.** Las capas espectrales basadas en Walsh-Hadamard DERROTARON a la Capa Densa FFN en todas las dimensiones: redujeron la Loss (-0.0212 nats), lograron un **93.7% de compresión paramétrica (15.8x menos parámetros)** y aceleraron el tiempo de entrenamiento en casi un 2x (14.60s vs 28.56s).
+
+#### V322 — Fully Spectral Block: All-Spectral Transformer (Fase 1)
+- **Qué se probó:** Unificación de Causal Phase Attention (secuencia L x L) y Walsh-Hadamard Phase FFN (canal d x d) en un Transformer 100% Espectral.
+- **Setup:** N=2000 secuencias estructuradas, L=64, d_model=128, 10 épocas, AdamW.
+- **Resultado principal:** **2.1035 Loss** (standard_llama 🌟, 412K params) vs **3.0398 Loss** (fully_spectral, 150K params, 63.6% de compresión paramétrica global).
+- **Hallazgo:** [ANCLA] **Compresión Paramétrica Masiva e Identificación de SpecGate.** El All-Spectral Transformer logró una compresión del 63.6% en parámetros totales (150K vs 412K). La brecha de capacidad de 0.93 nats frente a LLaMA evidencia que la modulación trigonométrica de O(d) parámetros requiere compuertas adaptativas de frecuencia (SpecGate para v323).
 
 ---
 
