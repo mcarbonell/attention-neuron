@@ -1,0 +1,43 @@
+=====================================================================================
+[00:00:00.01] EXPERIMENT: V305 MQAR HARNESS CERTIFICATION (LITE)
+=====================================================================================
+
+[00:00:00.01] === BISECT L=128 (n_pairs=29) ===
+
+[00:00:00.20]   --- Mode: WITH_Warmup ---
+[00:05:35.95]   [ChunkwiseComplexDeltaPhase             | WITH_Warmup] L=128 -> Acc:  98.64%
+[00:10:01.04]   [ChunkwiseRealDeltaNetRectangular       | WITH_Warmup] L=128 -> Acc:   0.79%
+[00:12:42.78]   [CausalAttentionMHA                     | WITH_Warmup] L=128 -> Acc:  99.80%
+
+[00:12:42.78]   --- Mode: NO_Warmup ---
+[00:18:11.90]   [ChunkwiseComplexDeltaPhase             | NO_Warmup] L=128 -> Acc:  99.85%
+[00:22:35.90]   [ChunkwiseRealDeltaNetRectangular       | NO_Warmup] L=128 -> Acc:   0.84%
+[00:25:03.99]   [CausalAttentionMHA                     | NO_Warmup] L=128 -> Acc:  99.83%
+
+[00:25:04.00] === BISECT L=256 (n_pairs=61) ===
+
+[00:25:04.10]   --- Mode: WITH_Warmup ---
+[00:36:03.85]   [ChunkwiseComplexDeltaPhase             | WITH_Warmup] L=256 -> Acc:  98.99%
+[00:44:54.59]   [ChunkwiseRealDeltaNetRectangular       | WITH_Warmup] L=256 -> Acc:   0.44%
+[00:50:46.59]   [CausalAttentionMHA                     | WITH_Warmup] L=256 -> Acc:   0.26%
+
+[00:50:46.60]   --- Mode: NO_Warmup ---
+[01:01:50.69]   [ChunkwiseComplexDeltaPhase             | NO_Warmup] L=256 -> Acc:  93.38%
+[01:10:35.45]   [ChunkwiseRealDeltaNetRectangular       | NO_Warmup] L=256 -> Acc:   0.54%
+[01:16:24.36]   [CausalAttentionMHA                     | NO_Warmup] L=256 -> Acc:   0.23%
+
+[01:16:24.36] === BISECT L=512 (n_pairs=64) ===
+
+[01:16:24.46]   --- Mode: WITH_Warmup ---
+[01:40:19.47]   [ChunkwiseComplexDeltaPhase             | WITH_Warmup] L=512 -> Acc:  99.08%
+[01:59:50.78]   [ChunkwiseRealDeltaNetRectangular       | WITH_Warmup] L=512 -> Acc:   0.33%
+[02:15:49.04]   [CausalAttentionMHA                     | WITH_Warmup] L=512 -> Acc:   0.16%
+
+[02:15:49.04]   --- Mode: NO_Warmup ---
+[02:39:54.37]   [ChunkwiseComplexDeltaPhase             | NO_Warmup] L=512 -> Acc:  99.38%
+[02:59:54.56]   [ChunkwiseRealDeltaNetRectangular       | NO_Warmup] L=512 -> Acc:   0.42%
+[03:16:16.88]   [CausalAttentionMHA                     | NO_Warmup] L=512 -> Acc:   0.31%
+
+[03:16:16.89] === BISECT L=1024 (n_pairs=64) ===
+
+[03:16:17.00]   --- Mode: WITH_Warmup ---

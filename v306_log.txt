@@ -1,0 +1,42 @@
+[00:00:00.00] Fetching Tiny Shakespeare corpus...
+=====================================================================================
+[00:00:00.64] EXPERIMENT: V306 TINY LM ISO-PARAMETRIC MULTI-SEED (LITE)
+=====================================================================================
+
+[00:00:00.64] === MODEL: ChunkwiseComplexDeltaPhase (5 Seeds) ===
+  [00:15:34.51] [ChunkwiseComplexDeltaPhase       | Seed  10] -> ValLoss: 1.7901 | ValPPL:   5.99 | Params: 144,331
+  [00:30:35.89] [ChunkwiseComplexDeltaPhase       | Seed  20] -> ValLoss: 1.7789 | ValPPL:   5.92 | Params: 144,331
+  [00:45:36.00] [ChunkwiseComplexDeltaPhase       | Seed  30] -> ValLoss: 1.7770 | ValPPL:   5.91 | Params: 144,331
+  [01:00:38.63] [ChunkwiseComplexDeltaPhase       | Seed  42] -> ValLoss: 1.7935 | ValPPL:   6.01 | Params: 144,331
+  [01:15:48.89] [ChunkwiseComplexDeltaPhase       | Seed 100] -> ValLoss: 1.7852 | ValPPL:   5.96 | Params: 144,331
+
+[01:15:48.89] *** SUMMARY [ChunkwiseComplexDeltaPhase]: ValLoss = 1.7849 +- 0.0028 | ValPPL = 5.96 +- 0.02 ***
+
+[01:15:48.89] === MODEL: ChunkwiseRealDeltaNetIsoParam (5 Seeds) ===
+  [01:25:19.51] [ChunkwiseRealDeltaNetIsoParam    | Seed  10] -> ValLoss: 1.8085 | ValPPL:   6.10 | Params: 144,331
+  [01:34:52.97] [ChunkwiseRealDeltaNetIsoParam    | Seed  20] -> ValLoss: 1.7976 | ValPPL:   6.04 | Params: 144,331
+  [01:44:37.61] [ChunkwiseRealDeltaNetIsoParam    | Seed  30] -> ValLoss: 1.8052 | ValPPL:   6.08 | Params: 144,331
+  [01:54:26.61] [ChunkwiseRealDeltaNetIsoParam    | Seed  42] -> ValLoss: 1.8065 | ValPPL:   6.09 | Params: 144,331
+  [02:04:04.21] [ChunkwiseRealDeltaNetIsoParam    | Seed 100] -> ValLoss: 1.7949 | ValPPL:   6.02 | Params: 144,331
+
+[02:04:04.21] *** SUMMARY [ChunkwiseRealDeltaNetIsoParam]: ValLoss = 1.8026 +- 0.0024 | ValPPL = 6.07 +- 0.01 ***
+
+[02:04:04.21] === MODEL: CausalAttentionMHA (5 Seeds) ===
+  [02:12:30.00] [CausalAttentionMHA               | Seed  10] -> ValLoss: 1.8317 | ValPPL:   6.24 | Params: 143,811
+  [02:21:01.61] [CausalAttentionMHA               | Seed  20] -> ValLoss: 1.8670 | ValPPL:   6.47 | Params: 143,811
+  [02:29:35.67] [CausalAttentionMHA               | Seed  30] -> ValLoss: 1.8419 | ValPPL:   6.31 | Params: 143,811
+  [02:38:04.95] [CausalAttentionMHA               | Seed  42] -> ValLoss: 1.8663 | ValPPL:   6.46 | Params: 143,811
+  [02:46:38.77] [CausalAttentionMHA               | Seed 100] -> ValLoss: 1.8525 | ValPPL:   6.38 | Params: 143,811
+
+[02:46:38.77] *** SUMMARY [CausalAttentionMHA]: ValLoss = 1.8519 +- 0.0061 | ValPPL = 6.37 +- 0.04 ***
+
+=====================================================================================
+[02:46:38.77] SUMMARY TABLE — V306 ISO-PARAMETRIC MULTI-SEED (LEVEL 2 ANCLA)
+=====================================================================================
+  Model                               |     Params |     Mean ValLoss +- SE |      Mean ValPPL +- SE
+  ----------------------------------------------------------------------------------------------------
+  CausalAttentionMHA                  |    143,811 |       1.8519 +- 0.0061 |           6.37 +- 0.04
+  ChunkwiseComplexDeltaPhase          |    144,331 |       1.7849 +- 0.0028 |         5.96 +- 0.02 🌟
+  ChunkwiseRealDeltaNetIsoParam       |    144,331 |       1.8026 +- 0.0024 |           6.07 +- 0.01
+
+[02:46:38.78] saved: v306_tiny_lm_isoparam_lite_results.json

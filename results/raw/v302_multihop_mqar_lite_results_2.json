@@ -1,0 +1,604 @@
+{
+  "config": {
+    "exp_id": "v302_multihop_mqar_lite",
+    "d_k_list": [
+      32
+    ],
+    "n_hops_list": [
+      1,
+      2,
+      3
+    ],
+    "n_chains_list": [
+      16,
+      32
+    ],
+    "num_tokens": 512,
+    "batch_size": 32,
+    "chunk_size": 64,
+    "n_layers": 4,
+    "epochs": 20,
+    "steps_per_epoch": 50,
+    "lr_grid": [
+      0.002,
+      0.004,
+      0.008
+    ],
+    "eval_batches": 10,
+    "model_keys": [
+      "ChunkwiseComplexDeltaPhase",
+      "ChunkwiseRealDeltaNetRectangular",
+      "CausalAttentionMHA"
+    ],
+    "seed": 42,
+    "device": "cuda"
+  },
+  "results": {
+    "32": {
+      "ChunkwiseComplexDeltaPhase_dk32": {
+        "hops1_chains16": {
+          "best_acc": 0.47,
+          "best_lr": 0.008,
+          "n_params": 201994,
+          "n_hops": 1,
+          "n_chains": 16,
+          "total_pairs": 16,
+          "seq_len": 128,
+          "best_train_time_s": 44.65,
+          "best_avg_epoch_s": 2.23,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.25,
+              "train_time_s": 46.58,
+              "avg_epoch_s": 2.33
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.18,
+              "train_time_s": 48.92,
+              "avg_epoch_s": 2.44
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.47,
+              "train_time_s": 44.65,
+              "avg_epoch_s": 2.23
+            }
+          ]
+        },
+        "hops1_chains32": {
+          "best_acc": 0.29,
+          "best_lr": 0.008,
+          "n_params": 201994,
+          "n_hops": 1,
+          "n_chains": 32,
+          "total_pairs": 32,
+          "seq_len": 192,
+          "best_train_time_s": 56.94,
+          "best_avg_epoch_s": 2.85,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.15,
+              "train_time_s": 56.53,
+              "avg_epoch_s": 2.83
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.17,
+              "train_time_s": 55.74,
+              "avg_epoch_s": 2.79
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.29,
+              "train_time_s": 56.94,
+              "avg_epoch_s": 2.85
+            }
+          ]
+        },
+        "hops2_chains16": {
+          "best_acc": 0.35,
+          "best_lr": 0.008,
+          "n_params": 201994,
+          "n_hops": 2,
+          "n_chains": 16,
+          "total_pairs": 32,
+          "seq_len": 128,
+          "best_train_time_s": 45.65,
+          "best_avg_epoch_s": 2.28,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.21,
+              "train_time_s": 45.65,
+              "avg_epoch_s": 2.28
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.27,
+              "train_time_s": 44.84,
+              "avg_epoch_s": 2.24
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.35,
+              "train_time_s": 45.65,
+              "avg_epoch_s": 2.28
+            }
+          ]
+        },
+        "hops2_chains32": {
+          "best_acc": 0.23,
+          "best_lr": 0.008,
+          "n_params": 201994,
+          "n_hops": 2,
+          "n_chains": 32,
+          "total_pairs": 64,
+          "seq_len": 256,
+          "best_train_time_s": 70.83,
+          "best_avg_epoch_s": 3.54,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.15,
+              "train_time_s": 70.88,
+              "avg_epoch_s": 3.54
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.12,
+              "train_time_s": 70.76,
+              "avg_epoch_s": 3.54
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.23,
+              "train_time_s": 70.83,
+              "avg_epoch_s": 3.54
+            }
+          ]
+        },
+        "hops3_chains16": {
+          "best_acc": 0.23,
+          "best_lr": 0.008,
+          "n_params": 201994,
+          "n_hops": 3,
+          "n_chains": 16,
+          "total_pairs": 48,
+          "seq_len": 192,
+          "best_train_time_s": 55.5,
+          "best_avg_epoch_s": 2.77,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.2,
+              "train_time_s": 55.85,
+              "avg_epoch_s": 2.79
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.16,
+              "train_time_s": 56.98,
+              "avg_epoch_s": 2.85
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.23,
+              "train_time_s": 55.5,
+              "avg_epoch_s": 2.77
+            }
+          ]
+        },
+        "hops3_chains32": {
+          "best_acc": 0.23,
+          "best_lr": 0.002,
+          "n_params": 201994,
+          "n_hops": 3,
+          "n_chains": 32,
+          "total_pairs": 96,
+          "seq_len": 320,
+          "best_train_time_s": 80.62,
+          "best_avg_epoch_s": 4.03,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.23,
+              "train_time_s": 80.62,
+              "avg_epoch_s": 4.03
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.2,
+              "train_time_s": 79.85,
+              "avg_epoch_s": 3.99
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.21,
+              "train_time_s": 77.86,
+              "avg_epoch_s": 3.89
+            }
+          ]
+        }
+      },
+      "ChunkwiseRealDeltaNetRectangular_dk32": {
+        "hops1_chains16": {
+          "best_acc": 0.61,
+          "best_lr": 0.008,
+          "n_params": 235274,
+          "n_hops": 1,
+          "n_chains": 16,
+          "total_pairs": 16,
+          "seq_len": 128,
+          "best_train_time_s": 40.03,
+          "best_avg_epoch_s": 2.0,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.41,
+              "train_time_s": 40.82,
+              "avg_epoch_s": 2.04
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.45,
+              "train_time_s": 40.82,
+              "avg_epoch_s": 2.04
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.61,
+              "train_time_s": 40.03,
+              "avg_epoch_s": 2.0
+            }
+          ]
+        },
+        "hops1_chains32": {
+          "best_acc": 0.24,
+          "best_lr": 0.004,
+          "n_params": 235274,
+          "n_hops": 1,
+          "n_chains": 32,
+          "total_pairs": 32,
+          "seq_len": 192,
+          "best_train_time_s": 48.2,
+          "best_avg_epoch_s": 2.41,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.22,
+              "train_time_s": 47.69,
+              "avg_epoch_s": 2.38
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.24,
+              "train_time_s": 48.2,
+              "avg_epoch_s": 2.41
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.23,
+              "train_time_s": 48.48,
+              "avg_epoch_s": 2.42
+            }
+          ]
+        },
+        "hops2_chains16": {
+          "best_acc": 0.31,
+          "best_lr": 0.008,
+          "n_params": 235274,
+          "n_hops": 2,
+          "n_chains": 16,
+          "total_pairs": 32,
+          "seq_len": 128,
+          "best_train_time_s": 40.12,
+          "best_avg_epoch_s": 2.01,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.27,
+              "train_time_s": 40.33,
+              "avg_epoch_s": 2.02
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.1,
+              "train_time_s": 40.52,
+              "avg_epoch_s": 2.03
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.31,
+              "train_time_s": 40.12,
+              "avg_epoch_s": 2.01
+            }
+          ]
+        },
+        "hops2_chains32": {
+          "best_acc": 0.2,
+          "best_lr": 0.002,
+          "n_params": 235274,
+          "n_hops": 2,
+          "n_chains": 32,
+          "total_pairs": 64,
+          "seq_len": 256,
+          "best_train_time_s": 60.07,
+          "best_avg_epoch_s": 3.0,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.2,
+              "train_time_s": 60.07,
+              "avg_epoch_s": 3.0
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.19,
+              "train_time_s": 59.1,
+              "avg_epoch_s": 2.95
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.19,
+              "train_time_s": 57.83,
+              "avg_epoch_s": 2.89
+            }
+          ]
+        },
+        "hops3_chains16": {
+          "best_acc": 0.27,
+          "best_lr": 0.004,
+          "n_params": 235274,
+          "n_hops": 3,
+          "n_chains": 16,
+          "total_pairs": 48,
+          "seq_len": 192,
+          "best_train_time_s": 48.69,
+          "best_avg_epoch_s": 2.43,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.2,
+              "train_time_s": 47.83,
+              "avg_epoch_s": 2.39
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.27,
+              "train_time_s": 48.69,
+              "avg_epoch_s": 2.43
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.18,
+              "train_time_s": 49.16,
+              "avg_epoch_s": 2.46
+            }
+          ]
+        },
+        "hops3_chains32": {
+          "best_acc": 0.24,
+          "best_lr": 0.008,
+          "n_params": 235274,
+          "n_hops": 3,
+          "n_chains": 32,
+          "total_pairs": 96,
+          "seq_len": 320,
+          "best_train_time_s": 65.6,
+          "best_avg_epoch_s": 3.28,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.16,
+              "train_time_s": 65.56,
+              "avg_epoch_s": 3.28
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.21,
+              "train_time_s": 67.46,
+              "avg_epoch_s": 3.37
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.24,
+              "train_time_s": 65.6,
+              "avg_epoch_s": 3.28
+            }
+          ]
+        }
+      },
+      "CausalAttentionMHA_dk32": {
+        "hops1_chains16": {
+          "best_acc": 99.69,
+          "best_lr": 0.004,
+          "n_params": 201474,
+          "n_hops": 1,
+          "n_chains": 16,
+          "total_pairs": 16,
+          "seq_len": 128,
+          "best_train_time_s": 14.76,
+          "best_avg_epoch_s": 0.74,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 13.93,
+              "train_time_s": 14.78,
+              "avg_epoch_s": 0.74
+            },
+            {
+              "lr": 0.004,
+              "acc": 99.69,
+              "train_time_s": 14.76,
+              "avg_epoch_s": 0.74
+            },
+            {
+              "lr": 0.008,
+              "acc": 99.06,
+              "train_time_s": 14.38,
+              "avg_epoch_s": 0.72
+            }
+          ]
+        },
+        "hops1_chains32": {
+          "best_acc": 99.81,
+          "best_lr": 0.008,
+          "n_params": 201474,
+          "n_hops": 1,
+          "n_chains": 32,
+          "total_pairs": 32,
+          "seq_len": 192,
+          "best_train_time_s": 15.59,
+          "best_avg_epoch_s": 0.78,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.29,
+              "train_time_s": 15.97,
+              "avg_epoch_s": 0.8
+            },
+            {
+              "lr": 0.004,
+              "acc": 99.77,
+              "train_time_s": 16.17,
+              "avg_epoch_s": 0.81
+            },
+            {
+              "lr": 0.008,
+              "acc": 99.81,
+              "train_time_s": 15.59,
+              "avg_epoch_s": 0.78
+            }
+          ]
+        },
+        "hops2_chains16": {
+          "best_acc": 0.29,
+          "best_lr": 0.008,
+          "n_params": 201474,
+          "n_hops": 2,
+          "n_chains": 16,
+          "total_pairs": 32,
+          "seq_len": 128,
+          "best_train_time_s": 15.2,
+          "best_avg_epoch_s": 0.76,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.25,
+              "train_time_s": 15.4,
+              "avg_epoch_s": 0.77
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.18,
+              "train_time_s": 15.95,
+              "avg_epoch_s": 0.8
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.29,
+              "train_time_s": 15.2,
+              "avg_epoch_s": 0.76
+            }
+          ]
+        },
+        "hops2_chains32": {
+          "best_acc": 0.24,
+          "best_lr": 0.008,
+          "n_params": 201474,
+          "n_hops": 2,
+          "n_chains": 32,
+          "total_pairs": 64,
+          "seq_len": 256,
+          "best_train_time_s": 20.57,
+          "best_avg_epoch_s": 1.03,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.2,
+              "train_time_s": 20.48,
+              "avg_epoch_s": 1.02
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.2,
+              "train_time_s": 20.42,
+              "avg_epoch_s": 1.02
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.24,
+              "train_time_s": 20.57,
+              "avg_epoch_s": 1.03
+            }
+          ]
+        },
+        "hops3_chains16": {
+          "best_acc": 0.25,
+          "best_lr": 0.002,
+          "n_params": 201474,
+          "n_hops": 3,
+          "n_chains": 16,
+          "total_pairs": 48,
+          "seq_len": 192,
+          "best_train_time_s": 15.69,
+          "best_avg_epoch_s": 0.78,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.25,
+              "train_time_s": 15.69,
+              "avg_epoch_s": 0.78
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.23,
+              "train_time_s": 15.64,
+              "avg_epoch_s": 0.78
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.23,
+              "train_time_s": 15.79,
+              "avg_epoch_s": 0.79
+            }
+          ]
+        },
+        "hops3_chains32": {
+          "best_acc": 0.23,
+          "best_lr": 0.004,
+          "n_params": 201474,
+          "n_hops": 3,
+          "n_chains": 32,
+          "total_pairs": 96,
+          "seq_len": 320,
+          "best_train_time_s": 26.88,
+          "best_avg_epoch_s": 1.34,
+          "all_lr_results": [
+            {
+              "lr": 0.002,
+              "acc": 0.16,
+              "train_time_s": 26.82,
+              "avg_epoch_s": 1.34
+            },
+            {
+              "lr": 0.004,
+              "acc": 0.23,
+              "train_time_s": 26.88,
+              "avg_epoch_s": 1.34
+            },
+            {
+              "lr": 0.008,
+              "acc": 0.2,
+              "train_time_s": 26.8,
+              "avg_epoch_s": 1.34
+            }
+          ]
+        }
+      }
+    }
+  }
+}

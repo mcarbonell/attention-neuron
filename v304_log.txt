@@ -1,0 +1,146 @@
+[00:00:00.00] Fetching Tiny Shakespeare corpus...
+[00:00:00.21] Downloaded 1,115,394 characters.
+=====================================================================================
+[00:00:00.42] EXPERIMENT: V304 TINY LANGUAGE MODELING BENCHMARK (LITE)
+=====================================================================================
+[00:00:00.42]   * Exp ID:           v304_tiny_lm_lite
+[00:00:00.42]   * Hardware Device:  CPU
+[00:00:00.42]   * PyTorch Version:  2.10.0+cpu
+[00:00:00.42]   * CUDA Available:   False
+[00:00:00.42]   * Seed:             42
+[00:00:00.42]   * Layers:           4
+[00:00:00.42]   * Chunk Size:       64
+[00:00:00.42]   * Batch Size:       32
+[00:00:00.42]   * Seq Length:       256
+[00:00:00.42]   * Epochs/Steps:     15ep x 50steps
+[00:00:00.42]   * LR Grid:          [0.004]
+[00:00:00.42]   * Eval Batches:     15
+[00:00:00.42]   * d_k Sweep:        [32]
+[00:00:00.42]   * Models:           ['ChunkwiseComplexDeltaPhase', 'ChunkwiseRealDeltaNetRectangular', 'CausalAttentionMHA']
+[00:00:00.42]   * Vocab Size:       67 (char-level)
+[00:00:00.42]   * Train/Val Tokens: 1,003,854 / 111,540
+[00:00:00.42]   * Total Runs:       3
+=====================================================================================
+
+[00:00:00.43] === SWEEP d_k=32 (d_model=64) ===
+
+[00:00:00.51] --- TOPOLOGY & PARAMETERS: ChunkwiseComplexDeltaPhase ---
+[00:00:00.51]   [Embedding]  nn.Embedding(vocab=67, d_model=64) -> 4,288 params
+[00:00:00.51]   [PosEnc]     SinCosPE(d_model=64) -> 0 params (fixed buffer)
+[00:00:00.51]   [Layers]     4 x ChunkwiseComplexDeltaPhaseBlock -> 33,922 params/layer (Total Layers: 135,688 params)
+[00:00:00.51]      |- norm1          : LayerNorm                 ->      128 params
+[00:00:00.51]      |- norm2          : LayerNorm                 ->      128 params
+[00:00:00.51]      |- causal_conv    : ShortCausalConv1D         ->      320 params
+[00:00:00.51]      |- theta_k_proj   : Linear                    ->    4,160 params
+[00:00:00.51]      |- theta_q_proj   : Linear                    ->    4,160 params
+[00:00:00.51]      |- val_proj       : Linear                    ->    4,160 params
+[00:00:00.51]      |- beta_proj      : Linear                    ->      130 params
+[00:00:00.51]      |- out_proj       : Linear                    ->    4,160 params
+[00:00:00.51]      |- ffn            : FFN                       ->   16,576 params
+[00:00:00.51]   [LM Head]    nn.Linear(d_model=64, vocab=67) -> 4,355 params
+[00:00:00.51]   [TOTAL]      144,331 trainable parameters
+[00:00:00.51] ---------------------------------------------------------
+
+[00:00:00.51]   [1/3] ChunkwiseComplexDeltaPhase | lr=0.004 | Params: 144,331
+  [00:00:35.86] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch  1/15 | TrainLoss = 2.6401 | TrainPPL =  14.01 | EpTime = 29.78s
+  [00:01:05.68] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch  2/15 | TrainLoss = 2.1796 | TrainPPL =   8.84 | EpTime = 29.82s
+  [00:01:35.23] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch  3/15 | TrainLoss = 2.0324 | TrainPPL =   7.63 | EpTime = 29.55s
+  [00:02:04.73] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch  4/15 | TrainLoss = 1.9243 | TrainPPL =   6.85 | EpTime = 29.50s
+  [00:02:34.20] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch  5/15 | TrainLoss = 1.8610 | TrainPPL =   6.43 | EpTime = 29.46s
+  [00:03:03.68] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch  6/15 | TrainLoss = 1.8028 | TrainPPL =   6.07 | EpTime = 29.49s
+  [00:03:32.74] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch  7/15 | TrainLoss = 1.7569 | TrainPPL =   5.79 | EpTime = 29.05s
+  [00:04:02.48] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch  8/15 | TrainLoss = 1.7240 | TrainPPL =   5.61 | EpTime = 29.74s
+  [00:04:34.50] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch  9/15 | TrainLoss = 1.6980 | TrainPPL =   5.46 | EpTime = 32.02s
+  [00:05:04.96] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch 10/15 | TrainLoss = 1.6669 | TrainPPL =   5.30 | EpTime = 30.46s
+  [00:05:34.48] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch 11/15 | TrainLoss = 1.6504 | TrainPPL =   5.21 | EpTime = 29.52s
+  [00:06:03.95] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch 12/15 | TrainLoss = 1.6198 | TrainPPL =   5.05 | EpTime = 29.47s
+  [00:06:33.17] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch 13/15 | TrainLoss = 1.6121 | TrainPPL =   5.01 | EpTime = 29.22s
+  [00:07:02.40] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch 14/15 | TrainLoss = 1.5892 | TrainPPL =   4.90 | EpTime = 29.23s
+  [00:07:31.33] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  144,331p] Epoch 15/15 | TrainLoss = 1.5758 | TrainPPL =   4.83 | EpTime = 28.93s
+[00:07:34.76]   >> ValLoss: 1.7913 | ValPPL: 6.00 | Time: 445.26s | AvgEp: 29.68s
+
+[00:07:34.76] *** RESULT: [ChunkwiseComplexDeltaPhase            ] d_k=32 -> ValLoss: 1.7913 | ValPPL: 6.00 (lr=0.004) ***
+
+[00:07:34.77] --- TOPOLOGY & PARAMETERS: ChunkwiseRealDeltaNetRectangular ---
+[00:07:34.77]   [Embedding]  nn.Embedding(vocab=67, d_model=64) -> 4,288 params
+[00:07:34.77]   [PosEnc]     SinCosPE(d_model=64) -> 0 params (fixed buffer)
+[00:07:34.77]   [Layers]     4 x ChunkwiseRealDeltaNetRectangularBlock -> 42,242 params/layer (Total Layers: 168,968 params)
+[00:07:34.77]      |- norm1          : LayerNorm                 ->      128 params
+[00:07:34.77]      |- norm2          : LayerNorm                 ->      128 params
+[00:07:34.77]      |- causal_conv    : ShortCausalConv1D         ->      320 params
+[00:07:34.77]      |- k_proj         : Linear                    ->    8,320 params
+[00:07:34.77]      |- q_proj         : Linear                    ->    8,320 params
+[00:07:34.77]      |- val_proj       : Linear                    ->    4,160 params
+[00:07:34.77]      |- beta_proj      : Linear                    ->      130 params
+[00:07:34.77]      |- out_proj       : Linear                    ->    4,160 params
+[00:07:34.77]      |- ffn            : FFN                       ->   16,576 params
+[00:07:34.77]   [LM Head]    nn.Linear(d_model=64, vocab=67) -> 4,355 params
+[00:07:34.77]   [TOTAL]      177,611 trainable parameters
+[00:07:34.77] ---------------------------------------------------------
+
+[00:07:34.78]   [2/3] ChunkwiseRealDeltaNetRectangular | lr=0.004 | Params: 177,611
+  [00:07:59.24] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch  1/15 | TrainLoss = 2.6412 | TrainPPL =  14.03 | EpTime = 24.47s
+  [00:08:22.89] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch  2/15 | TrainLoss = 2.2079 | TrainPPL =   9.10 | EpTime = 23.65s
+  [00:08:46.60] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch  3/15 | TrainLoss = 2.0563 | TrainPPL =   7.82 | EpTime = 23.70s
+  [00:09:10.36] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch  4/15 | TrainLoss = 1.9578 | TrainPPL =   7.08 | EpTime = 23.76s
+  [00:09:34.15] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch  5/15 | TrainLoss = 1.8900 | TrainPPL =   6.62 | EpTime = 23.80s
+  [00:09:57.92] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch  6/15 | TrainLoss = 1.8185 | TrainPPL =   6.16 | EpTime = 23.77s
+  [00:10:21.61] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch  7/15 | TrainLoss = 1.7870 | TrainPPL =   5.97 | EpTime = 23.69s
+  [00:10:44.91] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch  8/15 | TrainLoss = 1.7460 | TrainPPL =   5.73 | EpTime = 23.29s
+  [00:11:09.12] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch  9/15 | TrainLoss = 1.7113 | TrainPPL =   5.54 | EpTime = 24.22s
+  [00:11:32.34] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch 10/15 | TrainLoss = 1.6828 | TrainPPL =   5.38 | EpTime = 23.22s
+  [00:11:56.05] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch 11/15 | TrainLoss = 1.6597 | TrainPPL =   5.26 | EpTime = 23.70s
+  [00:12:19.57] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch 12/15 | TrainLoss = 1.6426 | TrainPPL =   5.17 | EpTime = 23.52s
+  [00:12:42.69] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch 13/15 | TrainLoss = 1.6171 | TrainPPL =   5.04 | EpTime = 23.12s
+  [00:13:06.31] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch 14/15 | TrainLoss = 1.6094 | TrainPPL =   5.00 | EpTime = 23.62s
+  [00:13:29.57] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  177,611p] Epoch 15/15 | TrainLoss = 1.5993 | TrainPPL =   4.95 | EpTime = 23.26s
+[00:13:32.15]   >> ValLoss: 1.7811 | ValPPL: 5.94 | Time: 354.80s | AvgEp: 23.65s
+
+[00:13:32.15] *** RESULT: [ChunkwiseRealDeltaNetRectangular      ] d_k=32 -> ValLoss: 1.7811 | ValPPL: 5.94 (lr=0.004) ***
+
+[00:13:32.16] --- TOPOLOGY & PARAMETERS: CausalAttentionMHA ---
+[00:13:32.16]   [Embedding]  nn.Embedding(vocab=67, d_model=64) -> 4,288 params
+[00:13:32.16]   [PosEnc]     SinCosPE(d_model=64) -> 0 params (fixed buffer)
+[00:13:32.16]   [Layers]     4 x CausalAttentionBlock -> 33,792 params/layer (Total Layers: 135,168 params)
+[00:13:32.16]      |- causal_conv    : ShortCausalConv1D         ->      320 params
+[00:13:32.16]      |- mha            : MultiheadAttention        ->   16,640 params
+[00:13:32.16]      |- norm1          : LayerNorm                 ->      128 params
+[00:13:32.16]      |- norm2          : LayerNorm                 ->      128 params
+[00:13:32.16]      |- ffn            : FFN                       ->   16,576 params
+[00:13:32.16]   [LM Head]    nn.Linear(d_model=64, vocab=67) -> 4,355 params
+[00:13:32.16]   [TOTAL]      143,811 trainable parameters
+[00:13:32.16] ---------------------------------------------------------
+
+[00:13:32.16]   [3/3] CausalAttentionMHA | lr=0.004 | Params: 143,811
+  [00:13:48.28] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch  1/15 | TrainLoss = 2.7131 | TrainPPL =  15.08 | EpTime = 16.12s
+  [00:14:05.04] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch  2/15 | TrainLoss = 2.2410 | TrainPPL =   9.40 | EpTime = 16.75s
+  [00:14:22.96] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch  3/15 | TrainLoss = 2.0973 | TrainPPL =   8.14 | EpTime = 17.92s
+  [00:14:40.36] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch  4/15 | TrainLoss = 2.0136 | TrainPPL =   7.49 | EpTime = 17.40s
+  [00:14:56.65] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch  5/15 | TrainLoss = 1.9463 | TrainPPL =   7.00 | EpTime = 16.29s
+  [00:15:12.69] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch  6/15 | TrainLoss = 1.9005 | TrainPPL =   6.69 | EpTime = 16.04s
+  [00:15:28.94] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch  7/15 | TrainLoss = 1.8634 | TrainPPL =   6.45 | EpTime = 16.24s
+  [00:15:44.87] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch  8/15 | TrainLoss = 1.8192 | TrainPPL =   6.17 | EpTime = 15.93s
+  [00:16:01.10] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch  9/15 | TrainLoss = 1.7940 | TrainPPL =   6.01 | EpTime = 16.23s
+  [00:16:17.85] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch 10/15 | TrainLoss = 1.7687 | TrainPPL =   5.86 | EpTime = 16.76s
+  [00:16:34.27] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch 11/15 | TrainLoss = 1.7436 | TrainPPL =   5.72 | EpTime = 16.42s
+  [00:16:50.74] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch 12/15 | TrainLoss = 1.7298 | TrainPPL =   5.64 | EpTime = 16.47s
+  [00:17:06.82] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch 13/15 | TrainLoss = 1.7004 | TrainPPL =   5.48 | EpTime = 16.08s
+  [00:17:23.00] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch 14/15 | TrainLoss = 1.6987 | TrainPPL =   5.47 | EpTime = 16.18s
+  [00:17:38.95] [CausalAttentionMHA                     | lr=0.0040 |  143,811p] Epoch 15/15 | TrainLoss = 1.6746 | TrainPPL =   5.34 | EpTime = 15.95s
+[00:17:40.77]   >> ValLoss: 1.8506 | ValPPL: 6.36 | Time: 246.78s | AvgEp: 16.45s
+
+[00:17:40.78] *** RESULT: [CausalAttentionMHA                    ] d_k=32 -> ValLoss: 1.8506 | ValPPL: 6.36 (lr=0.004) ***
+
+=====================================================================================
+[00:17:40.78] SUMMARY TABLE — TINY LANGUAGE MODELING (PERPLEXITY)
+=====================================================================================
+
+  d_k = 32:
+  Model                                    |     Params | Best ValLoss |  Best ValPPL |  Best LR
+  ------------------------------------------------------------------------------------------------
+  CausalAttentionMHA                       |    143,811 |       1.8506 |         6.36 |    0.004
+  ChunkwiseComplexDeltaPhase               |    144,331 |       1.7913 |         6.00 |    0.004
+  ChunkwiseRealDeltaNetRectangular         |    177,611 |       1.7811 |         5.94 |    0.004
+
+[00:17:40.78] saved: v304_tiny_lm_lite_results.json
+[00:17:40.78] Total elapsed: 1060.78s

@@ -1,0 +1,419 @@
+=====================================================================================
+[00:00:00.01] EXPERIMENT: V303 OVERWRITE MQAR BENCHMARK (LITE)
+=====================================================================================
+[00:00:00.01]   * Exp ID:           v303_overwrite_mqar_lite
+[00:00:00.01]   * Hardware Device:  CPU
+[00:00:00.01]   * PyTorch Version:  2.11.0+cpu
+[00:00:00.01]   * CUDA Available:   False
+[00:00:00.01]   * Seed:             42
+[00:00:00.01]   * Layers:           4
+[00:00:00.01]   * Chunk Size:       64
+[00:00:00.01]   * Batch Size:       32
+[00:00:00.01]   * Epochs/Steps:     20ep x 50steps
+[00:00:00.01]   * LR Grid:          [0.004]
+[00:00:00.01]   * Eval Batches:     10
+[00:00:00.01]   * d_k Sweep:        [32]
+[00:00:00.01]   * n_keys Sweep:     [32]
+[00:00:00.01]   * Overwrite Ratios: [0.0, 0.3, 0.6]
+[00:00:00.01]   * Models:           ['ChunkwiseComplexDeltaPhase', 'ChunkwiseRealDeltaNetRectangular', 'CausalAttentionMHA']
+[00:00:00.01]   * Num Tokens:       512
+[00:00:00.01]   * Total Runs:       9
+=====================================================================================
+
+[00:00:00.01] === SWEEP d_k=32 (d_model=64) ===
+
+[00:00:00.01]   --- OVERWRITE RATIO = 0.0 (0% keys rewritten) ---
+
+[00:00:00.01]   >>> Generating data: 32 unique keys, 0 overwrites = 32 pairs, L=192 <<<
+[00:00:00.10]   Eval: 320 sequences
+
+[00:00:00.11] --- TOPOLOGY & PARAMETERS: ChunkwiseComplexDeltaPhase ---
+[00:00:00.11]   [Embedding]  nn.Embedding(vocab=514, d_model=64) -> 32,896 params
+[00:00:00.11]   [PosEnc]     SinCosPE(d_model=64) -> 0 params (fixed buffer)
+[00:00:00.11]   [Layers]     4 x ChunkwiseComplexDeltaPhaseBlock -> 33,922 params/layer (Total Layers: 135,688 params)
+[00:00:00.11]      |- norm1          : LayerNorm                 ->      128 params
+[00:00:00.11]      |- norm2          : LayerNorm                 ->      128 params
+[00:00:00.11]      |- causal_conv    : ShortCausalConv1D         ->      320 params
+[00:00:00.11]      |- theta_k_proj   : Linear                    ->    4,160 params
+[00:00:00.11]      |- theta_q_proj   : Linear                    ->    4,160 params
+[00:00:00.11]      |- val_proj       : Linear                    ->    4,160 params
+[00:00:00.11]      |- beta_proj      : Linear                    ->      130 params
+[00:00:00.11]      |- out_proj       : Linear                    ->    4,160 params
+[00:00:00.11]      |- ffn            : FFN                       ->   16,576 params
+[00:00:00.11]   [LM Head]    nn.Linear(d_model=64, vocab=514) -> 33,410 params
+[00:00:00.11]   [TOTAL]      201,994 trainable parameters
+[00:00:00.11] ---------------------------------------------------------
+
+[00:00:00.12]   [1/9] ChunkwiseComplexDeltaPhase | lr=0.004 | Params: 201,994
+  [00:00:46.57] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  1/20 | AvgLoss = 6.3204 | EpTime = 46.46s
+  [00:01:28.82] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  2/20 | AvgLoss = 6.1338 | EpTime = 42.25s
+  [00:02:11.43] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  3/20 | AvgLoss = 5.9167 | EpTime = 42.61s
+  [00:02:53.10] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  4/20 | AvgLoss = 5.6824 | EpTime = 41.66s
+  [00:03:35.23] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  5/20 | AvgLoss = 5.4683 | EpTime = 42.13s
+  [00:04:18.29] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  6/20 | AvgLoss = 5.2557 | EpTime = 43.06s
+  [00:05:01.34] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  7/20 | AvgLoss = 4.9890 | EpTime = 43.05s
+  [00:05:43.16] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  8/20 | AvgLoss = 4.1989 | EpTime = 41.82s
+  [00:06:24.83] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  9/20 | AvgLoss = 1.0436 | EpTime = 41.66s
+  [00:07:06.93] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 10/20 | AvgLoss = 0.1160 | EpTime = 42.10s
+  [00:07:49.43] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 11/20 | AvgLoss = 0.0391 | EpTime = 42.50s
+  [00:08:31.42] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 12/20 | AvgLoss = 0.0159 | EpTime = 41.98s
+  [00:09:13.46] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 13/20 | AvgLoss = 0.0082 | EpTime = 42.04s
+  [00:09:56.34] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 14/20 | AvgLoss = 0.0054 | EpTime = 42.89s
+  [00:10:39.41] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 15/20 | AvgLoss = 0.0042 | EpTime = 43.07s
+  [00:11:21.99] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 16/20 | AvgLoss = 0.0032 | EpTime = 42.58s
+  [00:12:04.78] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 17/20 | AvgLoss = 0.0017 | EpTime = 42.79s
+  [00:12:47.98] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 18/20 | AvgLoss = 0.0009 | EpTime = 43.19s
+  [00:13:29.84] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 19/20 | AvgLoss = 0.0003 | EpTime = 41.87s
+  [00:14:11.98] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 20/20 | AvgLoss = 0.0001 | EpTime = 42.14s
+[00:14:14.95]   >> Acc: 99.61% | Time: 851.87s | AvgEp: 42.59s
+
+[00:14:14.95] *** RESULT: [ChunkwiseComplexDeltaPhase            ] d_k=32 ow_ratio=0.0 n_keys=32 -> Acc: 99.61% (lr=0.004) ***
+
+[00:14:14.96] --- TOPOLOGY & PARAMETERS: ChunkwiseRealDeltaNetRectangular ---
+[00:14:14.97]   [Embedding]  nn.Embedding(vocab=514, d_model=64) -> 32,896 params
+[00:14:14.97]   [PosEnc]     SinCosPE(d_model=64) -> 0 params (fixed buffer)
+[00:14:14.97]   [Layers]     4 x ChunkwiseRealDeltaNetRectangularBlock -> 42,242 params/layer (Total Layers: 168,968 params)
+[00:14:14.97]      |- norm1          : LayerNorm                 ->      128 params
+[00:14:14.97]      |- norm2          : LayerNorm                 ->      128 params
+[00:14:14.97]      |- causal_conv    : ShortCausalConv1D         ->      320 params
+[00:14:14.97]      |- k_proj         : Linear                    ->    8,320 params
+[00:14:14.97]      |- q_proj         : Linear                    ->    8,320 params
+[00:14:14.97]      |- val_proj       : Linear                    ->    4,160 params
+[00:14:14.97]      |- beta_proj      : Linear                    ->      130 params
+[00:14:14.97]      |- out_proj       : Linear                    ->    4,160 params
+[00:14:14.97]      |- ffn            : FFN                       ->   16,576 params
+[00:14:14.97]   [LM Head]    nn.Linear(d_model=64, vocab=514) -> 33,410 params
+[00:14:14.97]   [TOTAL]      235,274 trainable parameters
+[00:14:14.97] ---------------------------------------------------------
+
+[00:14:14.97]   [2/9] ChunkwiseRealDeltaNetRectangular | lr=0.004 | Params: 235,274
+  [00:14:49.31] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  1/20 | AvgLoss = 6.3154 | EpTime = 34.34s
+  [00:15:23.65] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  2/20 | AvgLoss = 6.1754 | EpTime = 34.34s
+  [00:15:57.21] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  3/20 | AvgLoss = 6.0047 | EpTime = 33.56s
+  [00:16:32.30] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  4/20 | AvgLoss = 5.7619 | EpTime = 35.09s
+  [00:17:07.32] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  5/20 | AvgLoss = 5.5554 | EpTime = 35.01s
+  [00:17:41.56] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  6/20 | AvgLoss = 5.3889 | EpTime = 34.24s
+  [00:18:16.48] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  7/20 | AvgLoss = 5.2293 | EpTime = 34.92s
+  [00:18:50.98] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  8/20 | AvgLoss = 5.0808 | EpTime = 34.50s
+  [00:19:24.99] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  9/20 | AvgLoss = 4.9573 | EpTime = 34.01s
+  [00:19:59.77] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 10/20 | AvgLoss = 4.8369 | EpTime = 34.78s
+  [00:20:34.52] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 11/20 | AvgLoss = 4.6792 | EpTime = 34.74s
+  [00:21:09.46] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 12/20 | AvgLoss = 4.5466 | EpTime = 34.95s
+  [00:21:44.67] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 13/20 | AvgLoss = 4.4191 | EpTime = 35.21s
+  [00:22:19.78] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 14/20 | AvgLoss = 4.2921 | EpTime = 35.10s
+  [00:22:53.77] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 15/20 | AvgLoss = 4.1722 | EpTime = 33.99s
+  [00:23:28.60] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 16/20 | AvgLoss = 4.0699 | EpTime = 34.83s
+  [00:24:02.98] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 17/20 | AvgLoss = 3.9755 | EpTime = 34.38s
+  [00:24:37.02] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 18/20 | AvgLoss = 3.8956 | EpTime = 34.04s
+  [00:25:12.27] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 19/20 | AvgLoss = 3.8386 | EpTime = 35.25s
+  [00:25:46.88] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 20/20 | AvgLoss = 3.8052 | EpTime = 34.60s
+[00:25:49.54]   >> Acc: 0.90% | Time: 691.91s | AvgEp: 34.59s
+
+[00:25:49.54] *** RESULT: [ChunkwiseRealDeltaNetRectangular      ] d_k=32 ow_ratio=0.0 n_keys=32 -> Acc: 0.90% (lr=0.004) ***
+
+[00:25:49.56] --- TOPOLOGY & PARAMETERS: CausalAttentionMHA ---
+[00:25:49.56]   [Embedding]  nn.Embedding(vocab=514, d_model=64) -> 32,896 params
+[00:25:49.56]   [PosEnc]     SinCosPE(d_model=64) -> 0 params (fixed buffer)
+[00:25:49.56]   [Layers]     4 x CausalAttentionBlock -> 33,792 params/layer (Total Layers: 135,168 params)
+[00:25:49.56]      |- causal_conv    : ShortCausalConv1D         ->      320 params
+[00:25:49.56]      |- mha            : MultiheadAttention        ->   16,640 params
+[00:25:49.56]      |- norm1          : LayerNorm                 ->      128 params
+[00:25:49.56]      |- norm2          : LayerNorm                 ->      128 params
+[00:25:49.56]      |- ffn            : FFN                       ->   16,576 params
+[00:25:49.56]   [LM Head]    nn.Linear(d_model=64, vocab=514) -> 33,410 params
+[00:25:49.56]   [TOTAL]      201,474 trainable parameters
+[00:25:49.56] ---------------------------------------------------------
+
+[00:25:49.56]   [3/9] CausalAttentionMHA | lr=0.004 | Params: 201,474
+  [00:26:11.68] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  1/20 | AvgLoss = 6.3220 | EpTime = 22.12s
+  [00:26:34.59] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  2/20 | AvgLoss = 6.1956 | EpTime = 22.91s
+  [00:26:56.94] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  3/20 | AvgLoss = 6.1209 | EpTime = 22.35s
+  [00:27:19.17] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  4/20 | AvgLoss = 6.0373 | EpTime = 22.22s
+  [00:27:40.36] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  5/20 | AvgLoss = 5.9459 | EpTime = 21.19s
+  [00:28:02.70] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  6/20 | AvgLoss = 5.8389 | EpTime = 22.34s
+  [00:28:24.84] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  7/20 | AvgLoss = 5.7279 | EpTime = 22.14s
+  [00:28:45.97] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  8/20 | AvgLoss = 5.6247 | EpTime = 21.13s
+  [00:29:08.22] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  9/20 | AvgLoss = 5.5310 | EpTime = 22.25s
+  [00:29:30.57] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 10/20 | AvgLoss = 5.4250 | EpTime = 22.34s
+  [00:29:52.42] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 11/20 | AvgLoss = 5.0138 | EpTime = 21.85s
+  [00:30:14.92] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 12/20 | AvgLoss = 0.6261 | EpTime = 22.50s
+  [00:30:38.72] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 13/20 | AvgLoss = 0.0581 | EpTime = 23.80s
+  [00:31:02.56] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 14/20 | AvgLoss = 0.0363 | EpTime = 23.84s
+  [00:31:26.82] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 15/20 | AvgLoss = 0.0161 | EpTime = 24.26s
+  [00:31:51.56] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 16/20 | AvgLoss = 0.0112 | EpTime = 24.74s
+  [00:32:16.39] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 17/20 | AvgLoss = 0.0085 | EpTime = 24.83s
+  [00:32:41.15] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 18/20 | AvgLoss = 0.0072 | EpTime = 24.76s
+  [00:33:06.63] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 19/20 | AvgLoss = 0.0059 | EpTime = 25.47s
+  [00:33:32.02] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 20/20 | AvgLoss = 0.0117 | EpTime = 25.39s
+[00:33:34.27]   >> Acc: 99.75% | Time: 462.46s | AvgEp: 23.12s
+
+[00:33:34.27] *** RESULT: [CausalAttentionMHA                    ] d_k=32 ow_ratio=0.0 n_keys=32 -> Acc: 99.75% (lr=0.004) ***
+
+[00:33:34.27]   --- OVERWRITE RATIO = 0.3 (30% keys rewritten) ---
+
+[00:33:34.27]   >>> Generating data: 32 unique keys, 10 overwrites = 42 pairs, L=192 <<<
+[00:33:34.42]   Eval: 320 sequences
+
+[00:33:34.43] --- TOPOLOGY & PARAMETERS: ChunkwiseComplexDeltaPhase ---
+[00:33:34.43]   [Embedding]  nn.Embedding(vocab=514, d_model=64) -> 32,896 params
+[00:33:34.43]   [PosEnc]     SinCosPE(d_model=64) -> 0 params (fixed buffer)
+[00:33:34.43]   [Layers]     4 x ChunkwiseComplexDeltaPhaseBlock -> 33,922 params/layer (Total Layers: 135,688 params)
+[00:33:34.43]      |- norm1          : LayerNorm                 ->      128 params
+[00:33:34.43]      |- norm2          : LayerNorm                 ->      128 params
+[00:33:34.43]      |- causal_conv    : ShortCausalConv1D         ->      320 params
+[00:33:34.43]      |- theta_k_proj   : Linear                    ->    4,160 params
+[00:33:34.43]      |- theta_q_proj   : Linear                    ->    4,160 params
+[00:33:34.43]      |- val_proj       : Linear                    ->    4,160 params
+[00:33:34.43]      |- beta_proj      : Linear                    ->      130 params
+[00:33:34.43]      |- out_proj       : Linear                    ->    4,160 params
+[00:33:34.43]      |- ffn            : FFN                       ->   16,576 params
+[00:33:34.43]   [LM Head]    nn.Linear(d_model=64, vocab=514) -> 33,410 params
+[00:33:34.43]   [TOTAL]      201,994 trainable parameters
+[00:33:34.43] ---------------------------------------------------------
+
+[00:33:34.44]   [4/9] ChunkwiseComplexDeltaPhase | lr=0.004 | Params: 201,994
+  [00:34:16.63] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  1/20 | AvgLoss = 6.3202 | EpTime = 42.20s
+  [00:34:58.41] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  2/20 | AvgLoss = 6.1393 | EpTime = 41.77s
+  [00:35:40.20] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  3/20 | AvgLoss = 5.9483 | EpTime = 41.79s
+  [00:36:23.20] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  4/20 | AvgLoss = 5.7429 | EpTime = 43.00s
+  [00:37:05.37] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  5/20 | AvgLoss = 5.5626 | EpTime = 42.16s
+  [00:37:47.28] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  6/20 | AvgLoss = 5.4009 | EpTime = 41.92s
+  [00:38:29.10] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  7/20 | AvgLoss = 5.2417 | EpTime = 41.82s
+  [00:39:11.34] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  8/20 | AvgLoss = 5.0784 | EpTime = 42.24s
+  [00:39:53.70] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  9/20 | AvgLoss = 4.8910 | EpTime = 42.36s
+  [00:40:35.45] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 10/20 | AvgLoss = 4.7070 | EpTime = 41.75s
+  [00:41:17.43] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 11/20 | AvgLoss = 4.5344 | EpTime = 41.98s
+  [00:42:00.55] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 12/20 | AvgLoss = 4.3894 | EpTime = 43.12s
+  [00:42:44.05] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 13/20 | AvgLoss = 4.2414 | EpTime = 43.50s
+  [00:43:26.21] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 14/20 | AvgLoss = 4.0896 | EpTime = 42.16s
+  [00:44:08.41] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 15/20 | AvgLoss = 3.9433 | EpTime = 42.20s
+  [00:44:50.57] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 16/20 | AvgLoss = 3.8001 | EpTime = 42.15s
+  [00:45:33.17] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 17/20 | AvgLoss = 3.6294 | EpTime = 42.60s
+  [00:46:15.04] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 18/20 | AvgLoss = 3.4409 | EpTime = 41.86s
+  [00:46:56.54] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 19/20 | AvgLoss = 3.2389 | EpTime = 41.50s
+  [00:47:37.94] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 20/20 | AvgLoss = 3.0048 | EpTime = 41.40s
+[00:47:41.78]   >> Acc: 8.40% | Time: 843.50s | AvgEp: 42.17s
+
+[00:47:41.78] *** RESULT: [ChunkwiseComplexDeltaPhase            ] d_k=32 ow_ratio=0.3 n_keys=32 -> Acc: 8.40% (lr=0.004) ***
+
+[00:47:41.80] --- TOPOLOGY & PARAMETERS: ChunkwiseRealDeltaNetRectangular ---
+[00:47:41.80]   [Embedding]  nn.Embedding(vocab=514, d_model=64) -> 32,896 params
+[00:47:41.80]   [PosEnc]     SinCosPE(d_model=64) -> 0 params (fixed buffer)
+[00:47:41.80]   [Layers]     4 x ChunkwiseRealDeltaNetRectangularBlock -> 42,242 params/layer (Total Layers: 168,968 params)
+[00:47:41.80]      |- norm1          : LayerNorm                 ->      128 params
+[00:47:41.80]      |- norm2          : LayerNorm                 ->      128 params
+[00:47:41.80]      |- causal_conv    : ShortCausalConv1D         ->      320 params
+[00:47:41.80]      |- k_proj         : Linear                    ->    8,320 params
+[00:47:41.80]      |- q_proj         : Linear                    ->    8,320 params
+[00:47:41.80]      |- val_proj       : Linear                    ->    4,160 params
+[00:47:41.80]      |- beta_proj      : Linear                    ->      130 params
+[00:47:41.80]      |- out_proj       : Linear                    ->    4,160 params
+[00:47:41.80]      |- ffn            : FFN                       ->   16,576 params
+[00:47:41.80]   [LM Head]    nn.Linear(d_model=64, vocab=514) -> 33,410 params
+[00:47:41.80]   [TOTAL]      235,274 trainable parameters
+[00:47:41.80] ---------------------------------------------------------
+
+[00:47:41.81]   [5/9] ChunkwiseRealDeltaNetRectangular | lr=0.004 | Params: 235,274
+  [00:48:15.45] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  1/20 | AvgLoss = 6.3146 | EpTime = 33.64s
+  [00:48:50.19] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  2/20 | AvgLoss = 6.1933 | EpTime = 34.73s
+  [00:49:24.64] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  3/20 | AvgLoss = 6.0741 | EpTime = 34.45s
+  [00:49:58.89] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  4/20 | AvgLoss = 5.8976 | EpTime = 34.25s
+  [00:50:33.53] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  5/20 | AvgLoss = 5.7104 | EpTime = 34.64s
+  [00:51:07.48] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  6/20 | AvgLoss = 5.5523 | EpTime = 33.95s
+  [00:51:42.37] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  7/20 | AvgLoss = 5.4149 | EpTime = 34.89s
+  [00:52:17.23] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  8/20 | AvgLoss = 5.2822 | EpTime = 34.86s
+  [00:52:51.46] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  9/20 | AvgLoss = 5.1493 | EpTime = 34.23s
+  [00:53:26.77] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 10/20 | AvgLoss = 5.0429 | EpTime = 35.31s
+  [00:54:01.93] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 11/20 | AvgLoss = 4.9534 | EpTime = 35.16s
+  [00:54:35.92] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 12/20 | AvgLoss = 4.8545 | EpTime = 33.99s
+  [00:55:10.54] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 13/20 | AvgLoss = 4.7506 | EpTime = 34.63s
+  [00:55:45.47] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 14/20 | AvgLoss = 4.6616 | EpTime = 34.93s
+  [00:56:19.56] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 15/20 | AvgLoss = 4.5858 | EpTime = 34.09s
+  [00:56:54.43] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 16/20 | AvgLoss = 4.5007 | EpTime = 34.87s
+  [00:57:29.37] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 17/20 | AvgLoss = 4.4030 | EpTime = 34.93s
+  [00:58:03.04] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 18/20 | AvgLoss = 4.3243 | EpTime = 33.67s
+  [00:58:37.58] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 19/20 | AvgLoss = 4.2532 | EpTime = 34.54s
+  [00:59:12.01] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 20/20 | AvgLoss = 4.1905 | EpTime = 34.43s
+[00:59:14.21]   >> Acc: 0.54% | Time: 690.20s | AvgEp: 34.51s
+
+[00:59:14.21] *** RESULT: [ChunkwiseRealDeltaNetRectangular      ] d_k=32 ow_ratio=0.3 n_keys=32 -> Acc: 0.54% (lr=0.004) ***
+
+[00:59:14.22] --- TOPOLOGY & PARAMETERS: CausalAttentionMHA ---
+[00:59:14.22]   [Embedding]  nn.Embedding(vocab=514, d_model=64) -> 32,896 params
+[00:59:14.22]   [PosEnc]     SinCosPE(d_model=64) -> 0 params (fixed buffer)
+[00:59:14.22]   [Layers]     4 x CausalAttentionBlock -> 33,792 params/layer (Total Layers: 135,168 params)
+[00:59:14.22]      |- causal_conv    : ShortCausalConv1D         ->      320 params
+[00:59:14.22]      |- mha            : MultiheadAttention        ->   16,640 params
+[00:59:14.22]      |- norm1          : LayerNorm                 ->      128 params
+[00:59:14.22]      |- norm2          : LayerNorm                 ->      128 params
+[00:59:14.22]      |- ffn            : FFN                       ->   16,576 params
+[00:59:14.22]   [LM Head]    nn.Linear(d_model=64, vocab=514) -> 33,410 params
+[00:59:14.22]   [TOTAL]      201,474 trainable parameters
+[00:59:14.22] ---------------------------------------------------------
+
+[00:59:14.22]   [6/9] CausalAttentionMHA | lr=0.004 | Params: 201,474
+  [00:59:35.75] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  1/20 | AvgLoss = 6.3230 | EpTime = 21.52s
+  [00:59:57.56] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  2/20 | AvgLoss = 6.1985 | EpTime = 21.81s
+  [01:00:19.59] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  3/20 | AvgLoss = 6.1299 | EpTime = 22.04s
+  [01:00:41.22] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  4/20 | AvgLoss = 6.0523 | EpTime = 21.63s
+  [01:01:02.54] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  5/20 | AvgLoss = 5.9638 | EpTime = 21.32s
+  [01:01:24.75] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  6/20 | AvgLoss = 5.8713 | EpTime = 22.20s
+  [01:01:47.07] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  7/20 | AvgLoss = 5.7763 | EpTime = 22.32s
+  [01:02:08.99] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  8/20 | AvgLoss = 5.6795 | EpTime = 21.91s
+  [01:02:30.75] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  9/20 | AvgLoss = 5.5875 | EpTime = 21.76s
+  [01:02:52.90] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 10/20 | AvgLoss = 5.4974 | EpTime = 22.15s
+  [01:03:15.04] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 11/20 | AvgLoss = 5.4077 | EpTime = 22.14s
+  [01:03:36.29] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 12/20 | AvgLoss = 5.3141 | EpTime = 21.24s
+  [01:03:58.57] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 13/20 | AvgLoss = 5.2386 | EpTime = 22.28s
+  [01:04:20.76] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 14/20 | AvgLoss = 5.1493 | EpTime = 22.19s
+  [01:04:42.89] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 15/20 | AvgLoss = 5.0704 | EpTime = 22.13s
+  [01:05:04.30] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 16/20 | AvgLoss = 5.0140 | EpTime = 21.41s
+  [01:05:26.40] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 17/20 | AvgLoss = 4.9431 | EpTime = 22.10s
+  [01:05:48.30] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 18/20 | AvgLoss = 4.8663 | EpTime = 21.90s
+  [01:06:10.02] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 19/20 | AvgLoss = 4.8129 | EpTime = 21.72s
+  [01:06:31.86] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 20/20 | AvgLoss = 4.7477 | EpTime = 21.83s
+[01:06:33.43]   >> Acc: 0.23% | Time: 437.63s | AvgEp: 21.88s
+
+[01:06:33.43] *** RESULT: [CausalAttentionMHA                    ] d_k=32 ow_ratio=0.3 n_keys=32 -> Acc: 0.23% (lr=0.004) ***
+
+[01:06:33.43]   --- OVERWRITE RATIO = 0.6 (60% keys rewritten) ---
+
+[01:06:33.43]   >>> Generating data: 32 unique keys, 19 overwrites = 51 pairs, L=192 <<<
+[01:06:33.53]   Eval: 320 sequences
+
+[01:06:33.54] --- TOPOLOGY & PARAMETERS: ChunkwiseComplexDeltaPhase ---
+[01:06:33.54]   [Embedding]  nn.Embedding(vocab=514, d_model=64) -> 32,896 params
+[01:06:33.54]   [PosEnc]     SinCosPE(d_model=64) -> 0 params (fixed buffer)
+[01:06:33.54]   [Layers]     4 x ChunkwiseComplexDeltaPhaseBlock -> 33,922 params/layer (Total Layers: 135,688 params)
+[01:06:33.54]      |- norm1          : LayerNorm                 ->      128 params
+[01:06:33.54]      |- norm2          : LayerNorm                 ->      128 params
+[01:06:33.54]      |- causal_conv    : ShortCausalConv1D         ->      320 params
+[01:06:33.54]      |- theta_k_proj   : Linear                    ->    4,160 params
+[01:06:33.54]      |- theta_q_proj   : Linear                    ->    4,160 params
+[01:06:33.54]      |- val_proj       : Linear                    ->    4,160 params
+[01:06:33.54]      |- beta_proj      : Linear                    ->      130 params
+[01:06:33.54]      |- out_proj       : Linear                    ->    4,160 params
+[01:06:33.54]      |- ffn            : FFN                       ->   16,576 params
+[01:06:33.54]   [LM Head]    nn.Linear(d_model=64, vocab=514) -> 33,410 params
+[01:06:33.54]   [TOTAL]      201,994 trainable parameters
+[01:06:33.54] ---------------------------------------------------------
+
+[01:06:33.54]   [7/9] ChunkwiseComplexDeltaPhase | lr=0.004 | Params: 201,994
+  [01:07:16.09] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  1/20 | AvgLoss = 6.3229 | EpTime = 42.55s
+  [01:07:58.08] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  2/20 | AvgLoss = 6.1556 | EpTime = 41.99s
+  [01:08:40.50] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  3/20 | AvgLoss = 5.9829 | EpTime = 42.41s
+  [01:09:23.85] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  4/20 | AvgLoss = 5.7883 | EpTime = 43.35s
+  [01:10:06.38] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  5/20 | AvgLoss = 5.6161 | EpTime = 42.53s
+  [01:10:49.65] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  6/20 | AvgLoss = 5.4724 | EpTime = 43.27s
+  [01:11:32.78] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  7/20 | AvgLoss = 5.3187 | EpTime = 43.13s
+  [01:12:15.53] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  8/20 | AvgLoss = 5.1631 | EpTime = 42.75s
+  [01:12:58.62] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch  9/20 | AvgLoss = 5.0256 | EpTime = 43.09s
+  [01:13:41.13] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 10/20 | AvgLoss = 4.8943 | EpTime = 42.52s
+  [01:14:23.08] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 11/20 | AvgLoss = 4.7729 | EpTime = 41.94s
+  [01:15:05.76] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 12/20 | AvgLoss = 4.6582 | EpTime = 42.68s
+  [01:15:47.89] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 13/20 | AvgLoss = 4.5529 | EpTime = 42.13s
+  [01:16:29.42] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 14/20 | AvgLoss = 4.4760 | EpTime = 41.53s
+  [01:17:11.01] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 15/20 | AvgLoss = 4.4019 | EpTime = 41.58s
+  [01:17:53.77] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 16/20 | AvgLoss = 4.3053 | EpTime = 42.76s
+  [01:18:36.07] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 17/20 | AvgLoss = 4.1991 | EpTime = 42.30s
+  [01:19:19.20] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 18/20 | AvgLoss = 4.0922 | EpTime = 43.13s
+  [01:20:02.34] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 19/20 | AvgLoss = 4.0107 | EpTime = 43.14s
+  [01:20:44.41] [ChunkwiseComplexDeltaPhase             | lr=0.0040 |  201,994p] Epoch 20/20 | AvgLoss = 3.9628 | EpTime = 42.07s
+[01:20:47.46]   >> Acc: 0.61% | Time: 850.87s | AvgEp: 42.54s
+
+[01:20:47.47] *** RESULT: [ChunkwiseComplexDeltaPhase            ] d_k=32 ow_ratio=0.6 n_keys=32 -> Acc: 0.61% (lr=0.004) ***
+
+[01:20:47.49] --- TOPOLOGY & PARAMETERS: ChunkwiseRealDeltaNetRectangular ---
+[01:20:47.49]   [Embedding]  nn.Embedding(vocab=514, d_model=64) -> 32,896 params
+[01:20:47.49]   [PosEnc]     SinCosPE(d_model=64) -> 0 params (fixed buffer)
+[01:20:47.49]   [Layers]     4 x ChunkwiseRealDeltaNetRectangularBlock -> 42,242 params/layer (Total Layers: 168,968 params)
+[01:20:47.49]      |- norm1          : LayerNorm                 ->      128 params
+[01:20:47.49]      |- norm2          : LayerNorm                 ->      128 params
+[01:20:47.49]      |- causal_conv    : ShortCausalConv1D         ->      320 params
+[01:20:47.49]      |- k_proj         : Linear                    ->    8,320 params
+[01:20:47.49]      |- q_proj         : Linear                    ->    8,320 params
+[01:20:47.49]      |- val_proj       : Linear                    ->    4,160 params
+[01:20:47.49]      |- beta_proj      : Linear                    ->      130 params
+[01:20:47.49]      |- out_proj       : Linear                    ->    4,160 params
+[01:20:47.49]      |- ffn            : FFN                       ->   16,576 params
+[01:20:47.49]   [LM Head]    nn.Linear(d_model=64, vocab=514) -> 33,410 params
+[01:20:47.49]   [TOTAL]      235,274 trainable parameters
+[01:20:47.49] ---------------------------------------------------------
+
+[01:20:47.50]   [8/9] ChunkwiseRealDeltaNetRectangular | lr=0.004 | Params: 235,274
+  [01:21:21.60] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  1/20 | AvgLoss = 6.3110 | EpTime = 34.10s
+  [01:21:55.78] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  2/20 | AvgLoss = 6.1989 | EpTime = 34.18s
+  [01:22:29.40] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  3/20 | AvgLoss = 6.1071 | EpTime = 33.63s
+  [01:23:03.58] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  4/20 | AvgLoss = 5.9615 | EpTime = 34.17s
+  [01:23:38.01] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  5/20 | AvgLoss = 5.7902 | EpTime = 34.43s
+  [01:24:12.78] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  6/20 | AvgLoss = 5.6306 | EpTime = 34.77s
+  [01:24:46.96] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  7/20 | AvgLoss = 5.4801 | EpTime = 34.18s
+  [01:25:22.10] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  8/20 | AvgLoss = 5.3403 | EpTime = 35.13s
+  [01:25:57.01] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch  9/20 | AvgLoss = 5.2080 | EpTime = 34.91s
+  [01:26:30.58] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 10/20 | AvgLoss = 5.0828 | EpTime = 33.57s
+  [01:27:04.77] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 11/20 | AvgLoss = 4.9634 | EpTime = 34.18s
+  [01:27:38.74] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 12/20 | AvgLoss = 4.8501 | EpTime = 33.97s
+  [01:28:11.78] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 13/20 | AvgLoss = 4.7521 | EpTime = 33.05s
+  [01:28:46.28] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 14/20 | AvgLoss = 4.6700 | EpTime = 34.49s
+  [01:29:21.40] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 15/20 | AvgLoss = 4.5769 | EpTime = 35.12s
+  [01:29:56.20] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 16/20 | AvgLoss = 4.5050 | EpTime = 34.80s
+  [01:30:29.94] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 17/20 | AvgLoss = 4.4525 | EpTime = 33.74s
+  [01:31:04.27] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 18/20 | AvgLoss = 4.3876 | EpTime = 34.33s
+  [01:31:38.51] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 19/20 | AvgLoss = 4.3159 | EpTime = 34.24s
+  [01:32:11.97] [ChunkwiseRealDeltaNetRectangular       | lr=0.0040 |  235,274p] Epoch 20/20 | AvgLoss = 4.2561 | EpTime = 33.46s
+[01:32:14.62]   >> Acc: 0.36% | Time: 684.48s | AvgEp: 34.22s
+
+[01:32:14.62] *** RESULT: [ChunkwiseRealDeltaNetRectangular      ] d_k=32 ow_ratio=0.6 n_keys=32 -> Acc: 0.36% (lr=0.004) ***
+
+[01:32:14.64] --- TOPOLOGY & PARAMETERS: CausalAttentionMHA ---
+[01:32:14.64]   [Embedding]  nn.Embedding(vocab=514, d_model=64) -> 32,896 params
+[01:32:14.64]   [PosEnc]     SinCosPE(d_model=64) -> 0 params (fixed buffer)
+[01:32:14.64]   [Layers]     4 x CausalAttentionBlock -> 33,792 params/layer (Total Layers: 135,168 params)
+[01:32:14.64]      |- causal_conv    : ShortCausalConv1D         ->      320 params
+[01:32:14.64]      |- mha            : MultiheadAttention        ->   16,640 params
+[01:32:14.64]      |- norm1          : LayerNorm                 ->      128 params
+[01:32:14.64]      |- norm2          : LayerNorm                 ->      128 params
+[01:32:14.64]      |- ffn            : FFN                       ->   16,576 params
+[01:32:14.64]   [LM Head]    nn.Linear(d_model=64, vocab=514) -> 33,410 params
+[01:32:14.64]   [TOTAL]      201,474 trainable parameters
+[01:32:14.64] ---------------------------------------------------------
+
+[01:32:14.64]   [9/9] CausalAttentionMHA | lr=0.004 | Params: 201,474
+  [01:32:36.13] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  1/20 | AvgLoss = 6.3238 | EpTime = 21.49s
+  [01:32:58.00] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  2/20 | AvgLoss = 6.1996 | EpTime = 21.87s
+  [01:33:20.01] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  3/20 | AvgLoss = 6.1307 | EpTime = 22.01s
+  [01:33:41.46] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  4/20 | AvgLoss = 6.0569 | EpTime = 21.44s
+  [01:34:03.76] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  5/20 | AvgLoss = 5.9736 | EpTime = 22.31s
+  [01:34:25.79] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  6/20 | AvgLoss = 5.8887 | EpTime = 22.03s
+  [01:34:47.54] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  7/20 | AvgLoss = 5.7999 | EpTime = 21.75s
+  [01:35:08.90] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  8/20 | AvgLoss = 5.7143 | EpTime = 21.36s
+  [01:35:30.81] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch  9/20 | AvgLoss = 5.6238 | EpTime = 21.91s
+  [01:35:52.76] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 10/20 | AvgLoss = 5.5446 | EpTime = 21.95s
+  [01:36:13.95] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 11/20 | AvgLoss = 5.4779 | EpTime = 21.19s
+  [01:36:35.75] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 12/20 | AvgLoss = 5.3985 | EpTime = 21.79s
+  [01:36:57.74] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 13/20 | AvgLoss = 5.3261 | EpTime = 21.99s
+  [01:37:19.90] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 14/20 | AvgLoss = 5.2455 | EpTime = 22.16s
+  [01:37:41.58] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 15/20 | AvgLoss = 5.1733 | EpTime = 21.68s
+  [01:38:03.88] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 16/20 | AvgLoss = 5.1006 | EpTime = 22.30s
+  [01:38:25.94] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 17/20 | AvgLoss = 5.0343 | EpTime = 22.05s
+  [01:38:47.81] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 18/20 | AvgLoss = 4.9638 | EpTime = 21.87s
+  [01:39:09.70] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 19/20 | AvgLoss = 4.8985 | EpTime = 21.89s
+  [01:39:31.91] [CausalAttentionMHA                     | lr=0.0040 |  201,474p] Epoch 20/20 | AvgLoss = 4.8141 | EpTime = 22.21s
+[01:39:33.52]   >> Acc: 0.20% | Time: 437.28s | AvgEp: 21.86s
+
+[01:39:33.52] *** RESULT: [CausalAttentionMHA                    ] d_k=32 ow_ratio=0.6 n_keys=32 -> Acc: 0.20% (lr=0.004) ***
+
+=====================================================================================
+[01:39:33.52] SUMMARY TABLE — OVERWRITE MQAR
+=====================================================================================
+
+  d_k = 32:
+  Model                                    |      ow0_k32 |     ow30_k32 |     ow60_k32
+  ---------------------------------------------------------------------------------------
+  CausalAttentionMHA_dk32                  |      99.75% |       0.23% |       0.20%
+  ChunkwiseComplexDeltaPhase_dk32          |      99.61% |       8.40% |       0.61%
+  ChunkwiseRealDeltaNetRectangular_dk32    |       0.90% |       0.54% |       0.36%
+
+[01:39:33.52] saved: v303_overwrite_mqar_lite_results.json
+[01:39:33.52] Total elapsed: 5973.52s
+

@@ -1,0 +1,17 @@
+================================================================================
+RESUMEN DEL BENCHMARK V303 OVERWRITE MQAR (v303_log.txt)
+================================================================================
+Sweeps d_k encontrados:    [32]
+Overwrite Ratios evaluados: [0.0, 0.3, 0.6]
+Unique Keys evaluadas:     [32]
+Modelos evaluados:         ['CausalAttentionMHA', 'ChunkwiseComplexDeltaPhase', 'ChunkwiseRealDeltaNetRectangular']
+Total celdas procesadas:    9
+
+================================================================================
+TABLA DE RESULTADOS — BEST ACC FINAL (%) [d_k = 32]
+================================================================================
+Modelo                               | ow00_k32 | ow30_k32 | ow60_k32
+---------------------------------------------------------------------
+CausalAttentionMHA                   |  99.75%(0.004) |   0.23%(0.004) |   0.20%(0.004)
+ChunkwiseComplexDeltaPhase           |  99.61%(0.004) |   8.40%(0.004) |   0.61%(0.004)
+ChunkwiseRealDeltaNetRectangular     |   0.90%(0.004) |   0.54%(0.004) |   0.36%(0.004)

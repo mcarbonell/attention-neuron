@@ -1,0 +1,15 @@
+================================================================================
+RESUMEN DEL BENCHMARK V304 TINY LANGUAGE MODELING (v304_log.txt)
+================================================================================
+Sweeps d_k encontrados: [32]
+Modelos evaluados:      ['CausalAttentionMHA', 'ChunkwiseComplexDeltaPhase', 'ChunkwiseRealDeltaNetRectangular']
+Total celdas procesadas: 3
+
+================================================================================
+RESULTADOS — PERPLEXITY (PPL) Y VAL LOSS [d_k = 32]
+================================================================================
+  Modelo                                   |     Val Loss |      Val PPL |  Best LR
+  -----------------------------------------------------------------------------------
+  CausalAttentionMHA                       |       1.8506 |         6.36 |   0.0040
+  ChunkwiseComplexDeltaPhase               |       1.7913 |         6.00 |   0.0040
+  ChunkwiseRealDeltaNetRectangular         |       1.7811 |         5.94 |   0.0040
