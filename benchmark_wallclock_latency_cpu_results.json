@@ -1,0 +1,80 @@
+{
+  "ChunkwiseComplexDeltaPhase": {
+    "256": {
+      "mean_batch_ms": 64.97,
+      "std_batch_ms": 9.5,
+      "ms_per_token": 0.03172,
+      "tokens_per_sec": 31521.6
+    },
+    "512": {
+      "mean_batch_ms": 109.8,
+      "std_batch_ms": 15.84,
+      "ms_per_token": 0.02681,
+      "tokens_per_sec": 37303.1
+    },
+    "1024": {
+      "mean_batch_ms": 201.03,
+      "std_batch_ms": 28.22,
+      "ms_per_token": 0.02454,
+      "tokens_per_sec": 40749.2
+    },
+    "2048": {
+      "mean_batch_ms": 468.29,
+      "std_batch_ms": 49.4,
+      "ms_per_token": 0.02858,
+      "tokens_per_sec": 34986.6
+    }
+  },
+  "ChunkwiseRealDeltaNetIsoParam": {
+    "256": {
+      "mean_batch_ms": 50.04,
+      "std_batch_ms": 12.51,
+      "ms_per_token": 0.02443,
+      "tokens_per_sec": 40930.9
+    },
+    "512": {
+      "mean_batch_ms": 114.23,
+      "std_batch_ms": 26.28,
+      "ms_per_token": 0.02789,
+      "tokens_per_sec": 35856.4
+    },
+    "1024": {
+      "mean_batch_ms": 280.9,
+      "std_batch_ms": 108.76,
+      "ms_per_token": 0.03429,
+      "tokens_per_sec": 29163.0
+    },
+    "2048": {
+      "mean_batch_ms": 317.58,
+      "std_batch_ms": 82.35,
+      "ms_per_token": 0.01938,
+      "tokens_per_sec": 51590.5
+    }
+  },
+  "CausalAttentionMHA": {
+    "256": {
+      "mean_batch_ms": 23.22,
+      "std_batch_ms": 6.57,
+      "ms_per_token": 0.01134,
+      "tokens_per_sec": 88193.7
+    },
+    "512": {
+      "mean_batch_ms": 52.89,
+      "std_batch_ms": 12.71,
+      "ms_per_token": 0.01291,
+      "tokens_per_sec": 77436.9
+    },
+    "1024": {
+      "mean_batch_ms": 154.42,
+      "std_batch_ms": 20.25,
+      "ms_per_token": 0.01885,
+      "tokens_per_sec": 53051.1
+    },
+    "2048": {
+      "mean_batch_ms": 520.21,
+      "std_batch_ms": 29.49,
+      "ms_per_token": 0.03175,
+      "tokens_per_sec": 31494.7
+    }
+  }
+}

@@ -1,32 +1,33 @@
+PS C:\Users\mrcm_\Local\proj\algorithms\attention-neuron> python .\scratch\benchmark_wallclock_latency.py
 =====================================================================================
-[00:00:00.03] BENCHMARK: WALL-CLOCK LATENCY & THROUGHPUT (CPU)
+[00:00:00.00] BENCHMARK: WALL-CLOCK LATENCY & THROUGHPUT (CPU)
 =====================================================================================
 
-[00:00:00.35] === Model: ChunkwiseComplexDeltaPhase (Params: 264,688) ===
-[00:00:10.89]   L=256  -> BatchTime: 140.40 ms | ms/token: 0.06855 | Throughput:  14587.4 tok/s
-[00:00:24.67]   L=512  -> BatchTime: 227.56 ms | ms/token: 0.05556 | Throughput:  18000.0 tok/s
-[00:00:50.92]   L=1024 -> BatchTime: 425.52 ms | ms/token: 0.05194 | Throughput:  19251.5 tok/s
-[00:01:45.26]   L=2048 -> BatchTime: 894.57 ms | ms/token: 0.05460 | Throughput:  18314.9 tok/s
+[00:00:00.01] === Model: ChunkwiseComplexDeltaPhase (Params: 264,688) ===
+[00:00:04.00]   L=256  -> BatchTime:  64.97 ms | ms/token: 0.03172 | Throughput:  31521.6 tok/s
+[00:00:10.55]   L=512  -> BatchTime: 109.80 ms | ms/token: 0.02681 | Throughput:  37303.1 tok/s
+[00:00:22.49]   L=1024 -> BatchTime: 201.03 ms | ms/token: 0.02454 | Throughput:  40749.2 tok/s
+[00:00:50.11]   L=2048 -> BatchTime: 468.29 ms | ms/token: 0.02858 | Throughput:  34986.6 tok/s
 
-[00:01:45.28] === Model: ChunkwiseRealDeltaNetIsoParam (Params: 264,688) ===
-[00:01:50.20]   L=256  -> BatchTime:  77.94 ms | ms/token: 0.03806 | Throughput:  26276.2 tok/s
-[00:01:58.31]   L=512  -> BatchTime: 133.67 ms | ms/token: 0.03264 | Throughput:  30641.6 tok/s
-[00:02:15.99]   L=1024 -> BatchTime: 285.35 ms | ms/token: 0.03483 | Throughput:  28709.0 tok/s
-[00:02:55.18]   L=2048 -> BatchTime: 656.85 ms | ms/token: 0.04009 | Throughput:  24943.3 tok/s
+[00:00:50.12] === Model: ChunkwiseRealDeltaNetIsoParam (Params: 264,688) ===
+[00:00:53.19]   L=256  -> BatchTime:  50.04 ms | ms/token: 0.02443 | Throughput:  40930.9 tok/s
+[00:00:59.75]   L=512  -> BatchTime: 114.23 ms | ms/token: 0.02789 | Throughput:  35856.4 tok/s
+[00:01:16.15]   L=1024 -> BatchTime: 280.90 ms | ms/token: 0.03429 | Throughput:  29163.0 tok/s
+[00:01:37.14]   L=2048 -> BatchTime: 317.58 ms | ms/token: 0.01938 | Throughput:  51590.5 tok/s
 
-[00:02:55.20] === Model: CausalAttentionMHA (Params: 264,168) ===
-[00:02:58.55]   L=256  -> BatchTime:  55.09 ms | ms/token: 0.02690 | Throughput:  37176.6 tok/s
-[00:03:08.96]   L=512  -> BatchTime: 176.17 ms | ms/token: 0.04301 | Throughput:  23250.4 tok/s
-[00:03:59.97]   L=1024 -> BatchTime: 855.63 ms | ms/token: 0.10445 | Throughput:   9574.2 tok/s
-[00:07:14.14]   L=2048 -> BatchTime: 3240.51 ms | ms/token: 0.19778 | Throughput:   5056.0 tok/s
+[00:01:37.14] === Model: CausalAttentionMHA (Params: 264,168) ===
+[00:01:38.53]   L=256  -> BatchTime:  23.22 ms | ms/token: 0.01134 | Throughput:  88193.7 tok/s
+[00:01:41.70]   L=512  -> BatchTime:  52.89 ms | ms/token: 0.01291 | Throughput:  77436.9 tok/s
+[00:01:50.95]   L=1024 -> BatchTime: 154.42 ms | ms/token: 0.01885 | Throughput:  53051.1 tok/s
+[00:02:22.05]   L=2048 -> BatchTime: 520.21 ms | ms/token: 0.03175 | Throughput:  31494.7 tok/s
 
 =====================================================================================
-[00:07:14.14] SUMMARY TABLE — WALL-CLOCK LATENCY (ms per batch, B=8)
+[00:02:22.06] SUMMARY TABLE — WALL-CLOCK LATENCY (ms per batch, B=8)
 =====================================================================================
   Model                               | L=256  (ms) | L=512  (ms) | L=1024 (ms) | L=2048 (ms)
   ---------------------------------------------------------------------------------------------
-  CausalAttentionMHA                  |     55.09 |    176.17 |    855.63 |   3240.51
-  ChunkwiseComplexDeltaPhase          |    140.40 |    227.56 |    425.52 |    894.57
-  ChunkwiseRealDeltaNetIsoParam       |     77.94 |    133.67 |    285.35 |    656.85
+  CausalAttentionMHA                  |     23.22 |     52.89 |    154.42 |    520.21
+  ChunkwiseComplexDeltaPhase          |     64.97 |    109.80 |    201.03 |    468.29
+  ChunkwiseRealDeltaNetIsoParam       |     50.04 |    114.23 |    280.90 |    317.58
 
-[00:07:14.15] saved: benchmark_wallclock_latency_cpu_results.json
+[00:02:22.07] saved: benchmark_wallclock_latency_cpu_results.json
