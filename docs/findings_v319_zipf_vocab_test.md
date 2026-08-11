@@ -30,3 +30,9 @@
 ## 2. Implicaciones para la Integración en LLMs (`tiny-thinker`)
 
 Este resultado demuestra que para arquitecturas con grandes vocabularios BPE ($V \ge 4096$), la mezcla de expertos **`fast_molora` ($K=4, r=16$)** proporciona el mejor equilibrio entre reducción de Loss (-0.0744 nats sobre Dense) y simplicidad paramétrica, constituyendo la arquitectura candidata ideal para el entrenamiento del LLM en `tiny-thinker`.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+El vocabulario Zipf no es BPE ni lenguaje: se sintetiza i.i.d. y aplica una regla aritmética al token previo. No hay test retenido ni semillas múltiples, por lo que no justifica seleccionar una arquitectura para `tiny-thinker`. Debe conservarse como stress test de distribución de frecuencias; la transferencia requiere corpus/tokenizador reales. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

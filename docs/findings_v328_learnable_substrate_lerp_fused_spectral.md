@@ -28,3 +28,9 @@
 ## 2. Recomendación para el Modelo de Lenguaje (`tiny-thinker`)
 
 Este descubrimiento demuestra que el motor ideal para el LLM en lenguaje natural real debe implementar el **Router Fused Lerp DCT-II / FWHT**, asignando mayor capacidad de cosenos armónicos en las capas profundas de predicción de tokens.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+El router tiene sólo tres logits globales por capa; no selecciona sustrato por token ni por canal. Su menor número de parámetros frente a v327 procede también de una arquitectura distinta (proyección compartida de entrada $2d$ por rama), por lo que no prueba que el aprendizaje de mezcla sea responsable de la compresión o precisión. La métrica es entrenamiento sintético sin split/semillas; no justifica prescripción para LM real. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

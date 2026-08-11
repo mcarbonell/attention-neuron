@@ -58,3 +58,9 @@ La desviación estándar entre semillas en `ComplexDeltaPhase` es extremadamente
 
 1. **Evaluación de Latencia Real (Wall-clock Time):** Medir la latencia en milisegundos de inferencia por token en GPU/CPU.
 2. **Actualización de la Ficha Técnica ONE-001:** Actualizar la entrada [entry_001_chunkwise_complex_deltaphase.md](file:///c:/Users/mrcm_/Local/proj/algorithms/attention-neuron/docs/encyclopedia/entry_001_chunkwise_complex_deltaphase.md) con la etiqueta **[ANCLA]** y los datos iso-paramétricos de $v306$.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+Este es el principal resultado positivo de la serie: texto real, validación separada, iso-parámetros y cinco semillas. La diferencia media sigue siendo favorable a DeltaPhase; con las pérdidas por semilla publicadas, el test pareado da aproximadamente $p=0.005$ (Welch, $p\approx0.003$). Por rigor, debe reportarse como evidencia moderada/positiva con $n=5$, no como $p<0.001$. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

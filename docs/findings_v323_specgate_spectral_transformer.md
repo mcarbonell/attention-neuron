@@ -29,3 +29,9 @@
 ## 2. Implicación de Inferencia
 
 `SpecGate` demuestra que es posible apagar casi la mitad de los armónicos de frecuencia (43.7% de esparcidad) manteniendo una precisión superior a LLaMA (1.0463 vs 2.1035), ofreciendo una vía directa para aceleración física y ahorro energético en hardware de inferencia.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+El porcentaje de frecuencias activas no demuestra ahorro físico porque el benchmark no implementa ejecución dispersa ni mide inferencia independiente. La comparación continúa sin test/multisemilla y con parámetros no igualados. La conclusión válida es limitada: esta máscara sigmoidal empeoró la loss de entrenamiento frente al espectro completo en esta regla; no es evidencia de consumo energético en hardware. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

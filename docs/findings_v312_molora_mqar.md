@@ -34,3 +34,9 @@
    Las redes compuestas únicamente por capas `Linear` o `MoLoRA` sin mecanismo de contexto no pueden resolver la asociación de pares dispersos a $L=64$.
 2. **Definición de Arquitectura Híbrida (Vía para Fase 6 - v313):**
    MoLoRA debe integrarse en los bloques FFN de un Transformer/DeltaNet, donde la atención/fase se encarga de la agregación espacial $L \times L$ y MoLoRA se encarga de la transformación dinámica $d \times d$.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+La separación conceptual entre mezcla temporal y FFN es una hipótesis razonable, pero las cifras son la accuracy/loss del último batch de entrenamiento, con una semilla y 400 pasos, no evaluación independiente. La conclusión debe limitarse a este protocolo corto de MQAR; requiere evaluación *on-the-fly* retenida y multisemilla. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

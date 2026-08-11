@@ -40,3 +40,9 @@
 | **Capa 6** | 50.1% | 49.9% |
 | **Capa 7** | 47.3% | 52.7% |
 | **Capa 8** | 47.0% | 53.0% |
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+La derrota de los adaptadores en profundidad es una señal útil dentro del toy task, pero las losses son de entrenamiento, una semilla y sin presupuesto de cómputo o parámetros estrictamente igualado por arquitectura. No permite concluir una ley de profundidad para LLMs; sí refuerza la necesidad de controles densos y de profundidad igualados en el siguiente ciclo. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

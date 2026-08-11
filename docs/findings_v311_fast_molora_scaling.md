@@ -43,3 +43,9 @@
 
 1. **Escalado en GPUs:** El tiempo de ejecución para $K=16$ en CPU se ve penalizado por operaciones secuenciales en hilos de CPU. En GPU (DirectML/CUDA), el producto por experto se ejecuta en paralelo con latencia $O(1)$.
 2. **Próximo Paso Requerido (Fase 5 - v312):** Validar la configuración ganadora $K=8$ y $K=16$ en el benchmark exigente MQAR.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+El aparente escalado monótono se observó en una única corrida y cerca del suelo $\ln32$ de una tarea que el modelo tokenwise no puede resolver exactamente. Debe tratarse como indicio de optimización, no como ley de escalado de expertos, hasta incluir validación y varias semillas. La latencia GPU tampoco se infiere de la ejecución CPU. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

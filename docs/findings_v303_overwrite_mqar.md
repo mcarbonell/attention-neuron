@@ -47,3 +47,9 @@ El experimento `v303` evalúa el borrado y la sobreescritura en la memoria asoci
 
 1. **Bug Confirmado del Harness Sintético:** Los controles reales colapsan desde 0% overwrite por fallos de enmascaramiento o codificación posicional en el generador MQAR sintético.
 2. **Duración de Entrenamiento Acotada:** 20 épocas (1,000 pasos) son insuficientes para resolver el problema de borrado-reescritura de la Delta Rule.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+El resultado adverso de overwrite es una hipótesis importante, pero esta versión comparte el periodo de arnés MQAR previo a la corrección de v305. Antes de atribuir el colapso a la mecánica de borrado, se requiere repetición *on-the-fly*, varias semillas y controles de generador/posicionamiento. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

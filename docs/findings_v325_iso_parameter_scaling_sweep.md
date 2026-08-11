@@ -38,3 +38,9 @@
 ## 2. Conclusión Final de la Hoja de Ruta Espectral
 
 El All-Spectral Transformer se consagra como una arquitectura fundacional validada. El siguiente paso técnico es **la integración de este motor 100% espectral en el repositorio `tiny-thinker` (`v326`)** para el entrenamiento con lenguaje natural real en el dataset TinyStories.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+La denominación iso-paramétrica es incorrecta: en las cuatro escalas cambian tanto profundidad como parámetros; por ejemplo, 685,184 frente a 576,080 y 1,086,272 frente a 853,088. Se reporta entrenamiento en una regla sintética, sin split ni semillas. Es una exploración de configuración, no una ley de escalado ni validación fundacional; no justifica por sí sola integración en un LM. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

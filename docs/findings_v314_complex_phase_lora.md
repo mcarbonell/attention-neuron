@@ -31,3 +31,9 @@
    La proyección $\text{Re}(B) \cdot (\text{Re}(A) \cdot x) - \text{Im}(B) \cdot (\text{Im}(A) \cdot x)$ actúa como una interferometría de ondas donde $r=16$ genera patrones de interferencia constructiva y destructiva en las representaciones ocultas.
 2. **Eficiencia de Latencia en CPU:**
    La formulación descompuesta con `torch.einsum` logró una ejecución rápida de 10.75s en CPU frente a los 32.60s del prototipo inicial de la Fase 3.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+La propia v314b refuta que la diferencia de una semilla represente una mejora de expresividad en FP32. Además, la tarea tokenwise está cerca de $\ln32$ y se reporta la última loss de entrenamiento. La característica cuantizable debe considerarse una hipótesis separada, y fue posteriormente evaluada de forma adversa en v315. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

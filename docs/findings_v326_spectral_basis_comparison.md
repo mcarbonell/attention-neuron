@@ -30,3 +30,9 @@
 ## 2. Recomendación para la Arquitectura Final de LLM (`tiny-thinker`)
 
 Este benchmark demuestra que el All-Spectral Transformer puede operar opcionalmente con un **FFN Espectral Híbrido DCT-II / FWHT**, combinando la máxima fidelidad de representación de DCT-II con la velocidad de ejecución de Walsh-Hadamard en la CPU.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+La preferencia DCT-II observada a 10 épocas se invierte en v326b a 25 épocas, lo que muestra sensibilidad al presupuesto de optimización. Sin validación, semillas ni una base ortogonal aleatoria congelada, no puede atribuirse el efecto a la geometría particular de DCT/FWHT. Es un screening de bases bajo este schedule, no una recomendación para LM. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

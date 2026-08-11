@@ -28,3 +28,9 @@
 ## 2. Definición del Motor Definitivo para el LLM Real (`v330`)
 
 Habiendo validado que la Atención Causal $QK^T$ es indispensable en secuencia y que el FFN Espectral Lerp Router (FWHT+DCT) es el mejor sustituto de los bloques densos, la arquitectura ganadora está 100% lista para ser desplegada en **`tiny-thinker` (`v330`)** para entrenamiento en lenguaje natural real (TinyStories BPE 4096).
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+El resultado compara un mezclador espectral estático concreto contra atención QK$^T$ en entrenamiento de una regla local; no demuestra que toda arquitectura sin atención sea inviable. Además, el mezclador no tiene “0 parámetros”: incorpora parámetros de fase/amplitud por posición. Sin corpus real, test retenido, semillas y comparaciones iso-presupuesto, no está listo para desplegarse como motor de TinyStories. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

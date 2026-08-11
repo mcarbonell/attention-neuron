@@ -30,3 +30,9 @@
 ## 2. Implicaciones para Inferencia y Pruning
 
 La técnica Straight-Through Estimator (STE) sobre compuertas de bajo rango se consolida como el mecanismo definitivo para lograr **Pruning Físico Real de Canales $\{0, 1\}$** en LLMs sin degradar el rendimiento.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+La afirmación de pruning físico no está respaldada: las multiplicaciones de bajo rango se ejecutan antes de aplicar la máscara, y 100% de sparsity en forward hace especialmente frágil la interpretación causal de la mejora. Sin validación retenida, multisemilla ni kernel que salte canales, este resultado sólo demuestra comportamiento STE en el toy task. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

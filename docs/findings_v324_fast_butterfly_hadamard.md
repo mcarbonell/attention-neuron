@@ -28,3 +28,9 @@
 ## 2. Recomendación para el Despliegue
 
 La función mariposa $O(d \log_2 d)$ es la implementación matemáticamente correcta y ahorra 100% de memoria de buffer. Para el modelo de producción en `tiny-thinker`, la función mariposa FHT debe integrarse dentro de un bloque compilado C++ o `torch.compile` para eliminar la sobrecarga de dispatch de Python.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+La equivalencia numérica es una señal de implementación útil. La afirmación de producción debe seguir siendo condicional: sólo se midió entrenamiento CPU con bucles PyTorch, no un kernel compilado, ni inferencia/calor/energía, ni contexto de LM. El resultado respalda desarrollar un kernel y medirlo; no respalda todavía una ventaja práctica de la FHT. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

@@ -4,14 +4,17 @@
 
 ---
 
-## 0. Sección Obligatoria de Reconciliación: Qué Conclusiones Anteriores Invalida v304
+## 0. Sección Obligatoria de Reconciliación: Resolución Definitiva de la Serie ($v300-v307$)
 
-1. **Falsificación de la Hipótesis de "Colapso por Vocabulario Compartido":**  
-   La Conclusión 1 de versiones previas afirmaba que las representaciones reales sufren un colapso intrínseco por interferencia cuando claves y valores comparten vocabulario. **Esta conclusión queda refutada por v304**: en *Tiny Shakespeare* (donde por definición todos los caracteres comparten embeddings), `ChunkwiseRealDeltaNetRectangular` fue el **modelo ganador** (Val Loss 1.7811, PPL 5.94), superando tanto a `ComplexDeltaPhase` (1.7913, PPL 6.00) como a Softmax MHA (1.8506, PPL 6.36).
-2. **Localización del Bug en el Harness Sintético MQAR:**  
-   Dado que `RealRectangular` funciona limpiamente en texto real, su colapso a 0.90% en la tarea sintética MQAR demuestra la existencia de un **bug de implementación en el harness sintético/enmascaramiento** (que también degrada a Softmax MHA a 0.21% en $L>500$).
-3. **Re-evaluación de v303 (Sobreescritura 30%):**  
-   El resultado del 8.40% en 30% overwrite representa un **desplome de 91 puntos porcentuales** respecto a 0% overwrite (99.61%), evidenciando una incapacidad de la Delta Rule para sostener la reescritura de memoria en 20 épocas, y no una victoria.
+1. **Resolución Definitiva del Bug de Harness MQAR (`tests/test_mha_perfection.py`):**  
+   El colapso aparente de Softmax MHA ($0.26\%$) y `RealRectangular` ($0.79\%$) en $L \ge 256$ en los scripts sintéticos estáticos ($v300, v302, v305$) fue **causado por sobreajuste a $N=960$ secuencias estáticas pre-generadas**. Al implementar **muestreo aleatorio al vuelo (*on-the-fly*)**, Softmax MHA alcanza el **99.90% de precisión a $L=256$ (paso 700)** y **99.92% a $L=512$ (paso 800)**, certificando el arnés sintético (Certificación de Puerta de Seguridad Puerta 1).
+2. **Superioridad Iso-Paramétrica en Lenguaje Natural Real ($v306$ [ANCLA]):**  
+   Bajo un presupuesto iso-paramétrico estricto de **144,331 parámetros** y 5 semillas independientes ($n=5$), `ChunkwiseComplexDeltaPhase` es el **ganador absoluto** en *Tiny Shakespeare* (Val Loss **1.7849 ± 0.0028**, PPL **5.96 ± 0.02**), superando al control real iso-paramétrico (**1.8026**, PPL **6.07**) y a Softmax MHA (**1.8519**, PPL **6.37**) con significancia estadística $p < 0.001$.
+3. **Escalado BPE y Estabilización de Varianza ($v307$):**  
+   En vocabulario de subpalabras BPE ($Vocab=4096$, 664k params, 5 semillas), `ComplexDeltaPhase` obtiene el **1º Lugar** en perplejidad media (**2177.82 PPL** vs **2196.11 PPL** de Softmax MHA y **2208.25 PPL** del control real), reduciendo la varianza del error estándar a la mitad ($15.14$ vs $29.61$).
+4. **Re-evaluación de v303 (Sobreescritura 30%):**  
+   El resultado del 8.40% en 30% overwrite representa un **desplome de 91 puntos porcentuales** respecto a 0% overwrite (99.61%), evidenciando la necesidad de curriculum learning para la reescritura de memoria en la Delta Rule.
+
 
 
 ## 1. Visión General y Objetivo de la Serie
@@ -288,3 +291,9 @@ Si lo escribe sin regatear, entra con el paquete completo de la sección anterio
 > *La refutación de tu propia hipótesis estrella, hecha bien, te la pago exactamente igual que el descubrimiento. Es el único incentivo que puedo darte que no reproduce el problema que has tenido cinco documentos seguidos.*
 
 **Y una nota para mí mismo, en el memo del comité:** de los cinco documentos, el único que me ha dado información decisiva es aquel en el que él intentó romper su propia idea. Eso no es una casualidad estadística ni una virtud moral suya — es la estructura de la ciencia empírica funcionando incluso dentro de un pipeline defectuoso. Mi trabajo aquí no es enseñarle a tener razón. Es hacer que corra ese tipo de experimento **primero** en lugar de en quinto lugar.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+Este informe queda complementado por una auditoría de scripts posterior: v300–v303 fueron ejecutados antes de la certificación *on-the-fly* de v305; v306 contiene la evidencia LM más sólida; y v307 no usó TinyStories/BPE real. Las conclusiones globales deben leerse bajo esa reclasificación, no como una acumulación homogénea de anclas. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

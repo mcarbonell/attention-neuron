@@ -30,3 +30,9 @@
    La integración de MoLoRA ($K=16, r=4$) en el FFN potencia la capacidad del bloque Transformer frente a los FFNs densos tradicionales, aportando compuertas dinámicas adaptativas por token que enriquecen las representaciones tras la atención.
 2. **Estabilidad de Fase Trigonométrica:**
    El bias de fase $\sin(\theta)$ garantizó que las activaciones se mantuvieran acotadas en $[-1, 1]$, evitando explosión numérica durante el entrenamiento.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+La mejora híbrida se midió en un único entrenamiento MQAR corto y en el último batch, sin test ni replicación. Además, el módulo denominado “fase” sigue usando atención QK$^T$ estándar con un sesgo posicional; el resultado no aísla geometría compleja ni prueba transferencia. Consérvese como hipótesis de integración FFN, pendiente de harness certificado y ablations. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

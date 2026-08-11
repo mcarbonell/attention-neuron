@@ -32,3 +32,9 @@
    Las funciones trigonométricas $\sin(\theta)$ y $\cos(\theta)$ son altamente sensibles a perturbaciones angulares discretas de $22.5^\circ$.
 2. **Recomendación para Cuantización de Fase en 4 Bits:**
    En lugar de una rejilla de fase uniforme rígida de 16 bins, se requiere **cuantización no uniforme adaptativa (k-means clustering de ángulos)** o entrenamiento consciente de la cuantización (*Quantization-Aware Training - QAT*) durante el fine-tuning.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+Resultado negativo útil, pero evaluado sobre la misma tarea sintética y sin validación retenida. No permite predecir cuantización en un LM; sí invalida la anterior afirmación de inmunidad automática de la fase a 4 bits. Cualquier recuperación mediante QAT o cuantización no uniforme debe demostrarse contra un baseline real bajo el mismo protocolo. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

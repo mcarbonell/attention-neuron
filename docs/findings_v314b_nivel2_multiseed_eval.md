@@ -32,3 +32,9 @@
 A pesar de la equivalencia funcional en precisión Float32:
 1. **Estabilidad entre Semillas:** `complex_phase_lora` demostró la menor desviación estándar entre semillas ($\sigma = 0.00021$, la mitad que la variante real $\sigma = 0.00043$), confirmando la propiedad reguladora de las fases unitarias.
 2. **Propiedad Safe by Design:** El valor práctico del dominio complejo no radica en superar a Float32, sino en mantener **cuantización a 4 bits sin degradación por outliers**, puesto que sus parámetros son ángulos $\Theta \in [0, 2\pi]$ acotados en $S^1$.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+El multi-seed confirma indistinguibilidad de loss entre variantes en este patrón, no una ventaja de estabilidad aplicable a LLMs. No hay conjunto retenido y los modelos tokenwise están cerca del límite $\ln32$; la inferencia “safe by design” queda invalidada como afirmación empírica por v315, que encuentra peor degradación con fase uniforme de 4 bits. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

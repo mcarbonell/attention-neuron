@@ -33,3 +33,9 @@
    Al normalizar en $\mathbb{S}^{r-1}$ y $\mathbb{S}^{d-1}$, las activaciones intermedias quedan confinadas al rango $[-1, 1]$, garantizando resistencia a la explosión de magnitud.
 2. **Trade-off Computacional:**
    Aunque la geometría esférica estabiliza el mapa angular, el cómputo de `sqrt(sum(x^2))` en CPU introduce una sobrecarga del +48% en latencia frente a `fast_molora`.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+No hay evidencia de que la normalización aporte estabilidad o precisión fuera de una corrida de entrenamiento en la regla tokenwise, cuya loss está cerca de $\ln32$. La latencia sólo es válida para esta implementación CPU sin calentamiento ni medición de inferencia separada. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

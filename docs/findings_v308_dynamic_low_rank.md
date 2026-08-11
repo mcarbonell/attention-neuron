@@ -39,3 +39,9 @@
 1. **Validez Interna (Inicialización):** La función sigmoide inicializada en 0 atenúa la señal en un 75% por capa. En la versión `v308b` debe usarse gating centrado en la identidad ($\text{sigmoid} + 0.5$ o $1.0 + \text{tanh}$).
 2. **Validez Externa (Tarea Sintética):** La secuencia sintética con permutación aleatoria i.i.d. no evalúa capacidad de memoria asociativa real (como MQAR).
 3. **Validez Arquitectónica:** No se incluyeron conexiones residuales ni LayerNorm, favoreciendo a las capas lineales densas simples sobre las compuertas profundas.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+Además de los límites ya indicados, la métrica es la última loss de entrenamiento sobre un dataset fijo, sin evaluación retenida ni multisemilla. El target es un *shift* de tokens i.i.d.; esta prueba sólo sirve para diagnosticar atenuación e implementación, no para concluir sobre memoria o expresividad secuencial. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

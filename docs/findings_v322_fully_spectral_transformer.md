@@ -28,3 +28,9 @@
 ## 2. Análisis Algorítmico y Siguiente Paso (`v323`)
 
 La diferencia de 0.93 nats entre la arquitectura espectral (150K params) y LLaMA (412K params) se debe a que la modulación trigonométrica de $O(d)$ parámetros en `v322` actúa como un filtro pasabanda rígido. En el experimento `v323`, introduciremos **SpecGate (Compuertas Adaptativas de Frecuencia Espectral)** para permitir que la red abra y cierre canales de frecuencia de forma dinámica por token.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+Aquí aparece mezcla causal, por lo que el modelo puede aprender la regla local $x_{t-1}\mapsto y_t$. Sin embargo, la loss es de entrenamiento en las mismas 2,000 secuencias, sin test ni multisemilla. La etiqueta “LLaMA estándar” también es inexacta: ambos lados comparten una atención QK$^T$ con sesgo sinusoidal. El resultado sólo compara estos FFNs bajo este toy task. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

@@ -30,3 +30,9 @@
 ## 2. Lección Definitiva para el LLM Real (`tiny-thinker`)
 
 Este experimento a 25 épocas consolidadas demuestra que la base discreta de **Walsh-Hadamard (FWHT)** es el motor espectral definitivo para el modelo real: no solo es numéricamente perfecta (99.92% Acc), sino que es óptima para ejecución en procesadores digitales y harware comprimido de 4 bits.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+El cambio de ganador respecto de v326 evidencia que el ranking depende de las épocas; todos los resultados siguen siendo métricas de entrenamiento de una regla causal fija. No se evaluó compresión de 4 bits en estas bases ni hay benchmark de inferencia compilada. FWHT queda como candidata para más pruebas, no como motor definitivo para lenguaje real. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

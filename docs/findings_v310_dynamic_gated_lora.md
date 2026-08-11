@@ -37,3 +37,9 @@
 
 1. **Escalado de Expertos ($K$):** El experimento se limitó a $K=4$ expertos. No se ha evaluado la curva de escalado para $K=8$ o $K=16$.
 2. **Regularización del Router:** No se aplicó pérdida de balanceo de carga (*load-balancing loss*), lo que podría permitir dominancia de un solo experto en secuencias más largas.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+La regla depende de $x_{t-1}$ y el modelo no mezcla posiciones; por ello la loss se compara contra un suelo teórico tokenwise de $\ln32\approx3.4657$, no contra capacidad asociativa. Las ganancias de ~0.005 nats son pérdidas de entrenamiento de una sola semilla y requieren test retenido y replicación antes de atribuirlas al ruteo dinámico. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

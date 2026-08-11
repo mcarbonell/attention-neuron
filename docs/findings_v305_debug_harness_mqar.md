@@ -55,3 +55,9 @@ La caída repentina de Softmax MHA entre $L=128$ (99.83%) y $L=256$ (0.23%) indi
 ## 4. Conclusión
 
 El experimento $v305$ cumple su objetivo de diagnóstico: **localiza el acantilado de Softmax MHA en $L=256$** y **confirma el bug del harness sintético para `RealRectangular` desde $L=128$**, respaldando la validez de los experimentos en lenguaje natural real ($v306$).
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+Este es uno de los resultados metodológicos que se conservan: documenta la vulnerabilidad del dataset estático y establece generación *on-the-fly* para MQAR. Aun así, las tablas son de semilla única y la nueva suite debe reportar evaluación separada y multi-semilla; no rehabilita retrospectivamente las comparaciones de v300–v303. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

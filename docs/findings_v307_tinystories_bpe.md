@@ -48,3 +48,9 @@ La varianza del control real entre semillas registra un pico de PPL de hasta $23
 ## 4. Conclusión
 
 El experimento $v307$ promueve el escalado por subpalabras BPE a **Nivel 2 [ANCLA]**, confirmando que la atención de fase compleja sostiene su ventaja cuantitativa y estabilidad de optimización al aumentar la dimensión del vocabulario.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+**Corrección de alcance:** el script no carga TinyStories ni tokeniza BPE. Muestrea tokens Zipf i.i.d. y predice su desplazamiento, por lo que no hay dependencia contextual de lenguaje que aprender. Este experimento debe reclasificarse como *stress test* Zipf i.i.d. de Nivel 1; no confirma transferencia BPE, ni sostiene la promoción indicada arriba. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

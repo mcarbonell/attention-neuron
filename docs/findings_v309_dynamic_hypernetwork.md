@@ -37,3 +37,9 @@
 
 1. **Ausencia de Bottleneck en la Hypernetwork:** Se proyectó de $d_{in} \to (r \cdot d_{in})$ directamente en un solo paso lineal. Sin un cuello de botella interno ($d_{in} \to r_{hyper} \to r \cdot d_{in}$), la Hypernetwork no está regularizada.
 2. **Alternativa Recomendada (Fase 3 - MoLoRA):** Para obtener adaptación dinámica sin la sobreparametrización $r \cdot d_{in}^2$, se debe utilizar una Mezcla de Adaptadores de Bajo Rango con Ruteo Dinámico (**Dynamic Gated LoRA / MoLoRA**), donde los adaptadores son fijos y solo el vector de ruteo $g(x) \in \mathbb{R}^K$ es dinámico por token.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+La regla sintética depende de $x_{t-1}$, pero este modelo es tokenwise. Condicionado a $x_t$ quedan 32 respuestas equiprobables, con suelo $\ln32\approx3.4657$; las losses ~3.47 están cerca de ese límite. Sin validación retenida/multisemilla, las diferencias de milésimas no prueban superioridad de adaptadores. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

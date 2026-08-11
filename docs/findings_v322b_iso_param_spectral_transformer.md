@@ -31,3 +31,9 @@
    A diferencia de las redes densas donde añadir capas profundas aumenta el ruido y la latencia paramétrica ($O(d^2)$ por capa), añadir capas espectrales de Walsh-Hadamard agrega rotaciones armónicas ortogonales puras. Cada capa filtra y recompone las frecuencias clave sin distorsionar el espacio vectorial.
 2. **Bancos Multi-Frecuencia de Fase:**
    El banco de 4 moduladores trigonométricos $\cos(\mathbf{H} x + \Phi) \cdot \mathbf{w}$ actúa como un analizador espectral multi-resolución, capturando patrones asociativos finos que las capas SiLU densas no logran aislar.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+La comparación no es iso-paramétrica ni iso-profundidad: `fully_spectral_iso` tiene 685,184 parámetros y cinco bloques, frente a 412,352 y dos bloques en el control denso. Además reporta última loss de entrenamiento de una semilla. La gran brecha no permite atribuir causalidad a la base Walsh ni a la compresión; debe reclasificarse como ablation de capacidad no igualada. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

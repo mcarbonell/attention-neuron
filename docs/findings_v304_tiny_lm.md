@@ -46,3 +46,9 @@ Ambos modelos recurrentes DeltaNet (`ComplexDeltaPhase` con PPL **6.00** y `Real
 
 1. **Escalado a Subwords / BPE:** Probar `ComplexDeltaPhase` con tokenización BPE (ej. Tiktoken / GPT-2 vocab de 50k tokens) en TinyStories.
 2. **Evaluación de Contexto Largo en Texto ($L=1024$):** Medir la PPL en secuencias largas para evaluar si la ventaja de capacidad observada en $v302$ beneficia a los modelos de lenguaje en contextos extensos.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+v304 sí usa texto real y validación, pero no es iso-paramétrico: el control rectangular tiene 21.7% más parámetros. La comparación que debe anclar esta línea es v306; este documento queda como señal preliminar y no como prueba de ventaja compleja frente al control real. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

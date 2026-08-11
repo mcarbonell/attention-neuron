@@ -30,3 +30,9 @@
 ## 2. Recomendación Técnica
 
 La combinación de transformadas demuestra que diferentes rasgos se benefician de diferentes geometrías espectrales. El paso a seguir en `v328` es implementar **Aprendizaje de Selección de Sustrato mediante Lerp/Softmax Router** para generar un reporte automático del porcentaje de cada sustrato sintonizado por la red.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+La fusión no está iso-capacidad frente a las bases puras: usa tres ramas y una proyección `combine` de entrada $6d$, mientras las puras usan cuatro bancos y $4d$. La mejora puede venir de esa capacidad de combinación y del schedule, no de complementariedad de bases. Faltan validación, semillas y control con base ortogonal aleatoria. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

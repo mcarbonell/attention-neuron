@@ -38,3 +38,9 @@ Batch 5/5 - Loss: 4.1978 | Active Rank: 63.2%
 ```
 
 Durante los dos primeros batches, la red mantiene las compuertas cerradas ($0.0\%$). A partir del tercer batch, el gradiente activa selectivamente las dimensiones de bajo rango que contienen señal útil, estabilizándose en una esparcidad de rango activa media del **57.9%**.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+La activación media se toma durante entrenamiento y no equivale a ahorro de cómputo físico: el código sigue calculando los canales antes de enmascararlos. La loss está cerca del suelo tokenwise $\ln32$ y no hay test/multisemilla, por lo que la lectura válida es telemetría de compuertas en este toy task, no pruning útil para LLMs. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).

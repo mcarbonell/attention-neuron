@@ -62,3 +62,9 @@ Todos los modelos permanecen en el rango de **0.18% - 0.59%** en 2-hop y 3-hop (
 1. **Evaluación Multi-semilla ($n=5$) en $c=128$:** Reejecutar la prueba en la celda $h=1, c=128$ con 5 semillas fijas para promover el hallazgo a **Nivel 2 [ANCLA]**.
 2. **Curriculum Learning para Multi-hop:** Entrenar primero 10 épocas en $h=1$ y luego migrar progresivamente a $h=2$ para facilitar la alineación inter-capa de las *induction heads*.
 3. **Validación en Texto Real (TinyStories):** Evaluar si la retención asociativa compleja se traduce en menor perplejidad en tareas de next-token prediction en lenguaje natural.
+
+---
+
+## Auditoría posterior y amenazas a la validez (2026-08-10)
+
+Este experimento antecede al harness MQAR *on-the-fly* certificado en v305. Sus diferencias entre arquitecturas pueden estar afectadas por la memorización de lotes estáticos y no deben promocionarse ni extrapolarse a texto hasta repetirlas con dicho protocolo, split de evaluación y varias semillas. Véase la [auditoría transversal v300–v329](findings_v300_v329_audit.md).
