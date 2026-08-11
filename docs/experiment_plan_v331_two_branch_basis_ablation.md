@@ -88,3 +88,11 @@ python scratch/prototype_v331_two_branch_basis_ablation.py --mode level2
 1. **Sólo cinco realizaciones aleatorias de base.** Variar R0/R1 con la semilla evita depender de un único control afortunado, pero no estima con precisión toda la distribución de bases. Si hay señal, repetir con nuevas semillas de base separadas de las de entrenamiento.
 2. **Coste de implementación.** Todas las ramas siguen siendo `F.linear` con buffers materializados en CPU. El resultado compara calidad causal, no la eficiencia de kernels FWHT/DCT compilados.
 3. **Alcance estrecho.** La conclusión, incluso favorable, queda limitada a Tiny Shakespeare char, 2 bloques y `d_model=64`. La transferencia a BPE o escalas mayores requiere un experimento nuevo.
+
+## Resultado registrado (Nivel 2, 2026-08-11)
+
+La comparación terminó con cinco semillas, 30 épocas y 1,024 secuencias retenidas por partición. El contraste primario `lerp_fwht_dct − lerp_random_pair` fue `-0.00137 ± 0.00446` (SE emparejado; `2×SE=0.00893`): no distingue la pareja estructurada de dos bases aleatorias independientes. `lerp_random_pair − lerp_random_tied` fue `-0.00562 ± 0.01591`, también no distinguible.
+
+`lerp_dct_random` obtuvo la menor media nominal (1.94472), pero su contraste contra RandomPair fue `-0.01031 ± 0.00905`, inferior al umbral de magnitud `2×SE=0.01811`. Se registra como [RUIDO-SOSPECHA]. Dense permanece como referencia práctica: `lerp_fwht_dct − dense_ffn = +0.00097 ± 0.00871` y Lerp FWHT+DCT cuesta 30.1% más wall-clock.
+
+El informe, reconciliación y auditoría completa están en `docs/findings_v331_two_branch_basis_ablation.md`.

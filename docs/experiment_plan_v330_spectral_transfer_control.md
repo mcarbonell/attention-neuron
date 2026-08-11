@@ -51,3 +51,7 @@ La ejecución Nivel 2 extendida terminó con cinco semillas y 30 épocas. `dense
 La siguiente hipótesis a probar no es más duración: es si la ventaja nominal procede de las bases FWHT/DCT o de tener dos ramas con un router. Se prioriza una ablación `lerp_random_a_random_b` con dos bases aleatorias independientes, presupuesto y router igualados.
 
 El detalle completo, auditoría y artefacto se registran en `docs/findings_v330_spectral_transfer_control.md`.
+
+## Reconciliación posterior v331 (2026-08-11)
+
+La ablación de dos ramas posterior no encontró una diferencia verificable entre `lerp_fwht_dct` y `lerp_random_pair` (`Δ=-0.00137`, `SE=0.00446`, `2×SE=0.00893`). Por tanto, la tendencia v330b frente al control de una sola base aleatoria no debe interpretarse como evidencia de una ventaja espectral. Véase `docs/findings_v331_two_branch_basis_ablation.md` para el análisis y amenazas a la validez completos.

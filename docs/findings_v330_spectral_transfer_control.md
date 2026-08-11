@@ -139,3 +139,11 @@ La extensión elimina la explicación simple de que Lerp sólo estaba cerca de d
 - Script: `scratch/prototype_v330_spectral_transfer_control.py`
 - Plan actualizado: `docs/experiment_plan_v330_spectral_transfer_control.md`
 - JSON v330b: `results/raw/v330b_spectral_transfer_extended_30ep_20260810T120346Z.json`
+
+## 12. Reconciliación posterior: ablación causal v331 (2026-08-11)
+
+v331 elimina la principal ambigüedad que permanecía en v330b: compara `lerp_fwht_dct` con `lerp_random_pair`, que conserva las dos ramas, router, combinador y 59,205 parámetros de Lerp. El contraste emparejado es `-0.00137 ± 0.00446` (`2×SE=0.00893`), por lo que no hay ventaja verificable de FWHT+DCT sobre una pareja de bases ortogonales aleatorias.
+
+También falla la explicación alternativa de diversidad de dos bases en este presupuesto: `RandomPair − RandomTied = -0.00562 ± 0.01591` (`2×SE=0.03182`). En consecuencia, la tendencia favorable de Lerp frente a una rama aleatoria en v330/v330b debe reclasificarse como [RUIDO-SOSPECHA], no como evidencia de geometría espectral ni como incentivo para extender directamente la misma línea.
+
+El detalle reproducible de esta reconciliación está en `docs/findings_v331_two_branch_basis_ablation.md` y `results/raw/v331_two_branch_basis_ablation_20260811T113633Z.json`.

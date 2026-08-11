@@ -1,0 +1,4792 @@
+{
+  "config": {
+    "device": "cpu",
+    "experiment_id": "v332b_ridge_interpolation_audit",
+    "mode": "pilot",
+    "ridges": [
+      1e-05,
+      0.0001,
+      0.001,
+      0.01
+    ],
+    "rigor_level": 1,
+    "sample_sizes": [
+      48,
+      64,
+      80,
+      128
+    ],
+    "seeds": [
+      42
+    ],
+    "test_examples": 2048
+  },
+  "experiment_id": "v332b_ridge_interpolation_audit",
+  "metadata": {
+    "commit_hash": "85e5be376d8e18e2e7011a77084fd85cd5ee906c",
+    "cpu": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+    "device": "cpu",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+    "torch": "2.10.0+cpu",
+    "torch_threads": 8
+  },
+  "question": "¿El pico Dense en n≈64 cambia sistemáticamente con ridge?",
+  "results": [
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 20081790.662946913,
+      "fit_seconds": 0.0004910998977720737,
+      "n_train": 48,
+      "params": 4096,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.03202678446687464,
+      "train_mse": 1.9829684572351665e-14
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 20081790.662946913,
+      "fit_seconds": 0.00023860018700361252,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.002559572525979695,
+      "train_mse": 0.002520215414050322
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 20081790.662946913,
+      "fit_seconds": 0.00011730007827281952,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07722916349656193,
+      "train_mse": 0.07210111479962368
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 2008179.958641939,
+      "fit_seconds": 0.00025809998624026775,
+      "n_train": 48,
+      "params": 4096,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.03202626477391613,
+      "train_mse": 1.982837149652616e-12
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 2008179.958641939,
+      "fit_seconds": 0.00012059998698532581,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.002559571131066207,
+      "train_mse": 0.002520215414490195
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 2008179.958641939,
+      "fit_seconds": 0.0001268000341951847,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07722915991270628,
+      "train_mse": 0.07210111479967865
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 200818.89580102614,
+      "fit_seconds": 0.00021869991905987263,
+      "n_train": 48,
+      "params": 4096,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.03202107323428363,
+      "train_mse": 1.9815250596157864e-10
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 200818.89580102614,
+      "fit_seconds": 0.00010950001887977123,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.00255955722694808,
+      "train_mse": 0.0025202154582479037
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 200818.89580102614,
+      "fit_seconds": 0.00014200014993548393,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07722912408006824,
+      "train_mse": 0.07210111480517549
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 20082.78957950951,
+      "fit_seconds": 0.0002766998950392008,
+      "n_train": 48,
+      "params": 4096,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.03196969467331649,
+      "train_mse": 1.9684999206278245e-08
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 20082.78957950951,
+      "fit_seconds": 0.00010580010712146759,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0025594226851147015,
+      "train_mse": 0.0025202198297646894
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 20082.78957950951,
+      "fit_seconds": 0.00011559994891285896,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07722876634528922,
+      "train_mse": 0.07210111535463896
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 4519.550005104154,
+      "fit_seconds": 0.00022320006974041462,
+      "n_train": 64,
+      "params": 4096,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.08975288320128713,
+      "train_mse": 1.6745205231150257e-12
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 4519.550005104154,
+      "fit_seconds": 0.00011610006913542747,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0025470653490616774,
+      "train_mse": 0.002398858147121745
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 4519.550005104154,
+      "fit_seconds": 0.00047470000572502613,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07740666020928087,
+      "train_mse": 0.08251767698808263
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 4512.138379066327,
+      "fit_seconds": 0.00040009990334510803,
+      "n_train": 64,
+      "params": 4096,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0895751584247638,
+      "train_mse": 1.669744269939865e-10
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 4512.138379066327,
+      "fit_seconds": 0.00022200006060302258,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.002547065486762379,
+      "train_mse": 0.0023988581473253904
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 4512.138379066327,
+      "fit_seconds": 0.00012320000678300858,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07740665224570165,
+      "train_mse": 0.08251767698812106
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 4439.337812390751,
+      "fit_seconds": 0.00024030008353292942,
+      "n_train": 64,
+      "params": 4096,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0878398347438688,
+      "train_mse": 1.6231831024604688e-08
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 4439.337812390751,
+      "fit_seconds": 0.00012509990483522415,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0025470668807722856,
+      "train_mse": 0.0023988581674975833
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 4439.337812390751,
+      "fit_seconds": 0.00013999990187585354,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07740657261490108,
+      "train_mse": 0.0825176769920062
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 3822.608237849461,
+      "fit_seconds": 0.00026560015976428986,
+      "n_train": 64,
+      "params": 4096,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07388344989544393,
+      "train_mse": 1.2543795697890878e-06
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 3822.608237849461,
+      "fit_seconds": 0.00010930001735687256,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0025470825206295143,
+      "train_mse": 0.002398860182245205
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 3822.608237849461,
+      "fit_seconds": 0.0001403999049216509,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07740577680590724,
+      "train_mse": 0.08251767738081275
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 218.4748446691452,
+      "fit_seconds": 0.0002505001612007618,
+      "n_train": 80,
+      "params": 4096,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.014075063734306488,
+      "train_mse": 0.00051139422427547
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 218.4748446691452,
+      "fit_seconds": 0.0004891999997198582,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0025407216500379958,
+      "train_mse": 0.002527089670020799
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 218.4748446691452,
+      "fit_seconds": 0.00026709982194006443,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.077579185740356,
+      "train_mse": 0.08334991832883569
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 218.4594761562137,
+      "fit_seconds": 0.00038279988802969456,
+      "n_train": 80,
+      "params": 4096,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.01407425160432765,
+      "train_mse": 0.0005113942255896587
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 218.4594761562137,
+      "fit_seconds": 0.000377400079742074,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0025407221946428674,
+      "train_mse": 0.0025270896701474503
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 218.4594761562137,
+      "fit_seconds": 0.00023410003632307053,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0775791783883017,
+      "train_mse": 0.08334991832886224
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 218.3059104093676,
+      "fit_seconds": 0.00043540005572140217,
+      "n_train": 80,
+      "params": 4096,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.014066140129658487,
+      "train_mse": 0.0005113943568906344
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 218.3059104093676,
+      "fit_seconds": 0.00017030001617968082,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0025407276506050594,
+      "train_mse": 0.00252708968265409
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 218.3059104093676,
+      "fit_seconds": 0.00016329996287822723,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07757910487111122,
+      "train_mse": 0.08334991833143321
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 216.78209826464402,
+      "fit_seconds": 0.000650700181722641,
+      "n_train": 80,
+      "params": 4096,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.013985997991819885,
+      "train_mse": 0.0005114073702443938
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 216.78209826464402,
+      "fit_seconds": 0.002817300148308277,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0025407832013418894,
+      "train_mse": 0.002527090931471852
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 216.78209826464402,
+      "fit_seconds": 0.00021500000730156898,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07757837003437923,
+      "train_mse": 0.08334991858764654
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 25.753726357657623,
+      "fit_seconds": 0.0003054998815059662,
+      "n_train": 128,
+      "params": 4096,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.005024227061643498,
+      "train_mse": 0.0012272531838509126
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 25.753726357657623,
+      "fit_seconds": 0.0001610000617802143,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.002517112726916489,
+      "train_mse": 0.0024870890126037284
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 25.753726357657623,
+      "fit_seconds": 0.0001446001697331667,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0763453028514898,
+      "train_mse": 0.08051285858010712
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 25.75355229416425,
+      "fit_seconds": 0.0004575001075863838,
+      "n_train": 128,
+      "params": 4096,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.005024214162363566,
+      "train_mse": 0.0012272531839650762
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 25.75355229416425,
+      "fit_seconds": 0.00023310002870857716,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0025171124608255554,
+      "train_mse": 0.0024870890126577165
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 25.75355229416425,
+      "fit_seconds": 0.00018249987624585629,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07634530135138654,
+      "train_mse": 0.08051285858011546
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 25.75181179385917,
+      "fit_seconds": 0.0004588000010699034,
+      "n_train": 128,
+      "params": 4096,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.005024085220203258,
+      "train_mse": 0.001227253195380754
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 25.75181179385917,
+      "fit_seconds": 0.00019489997066557407,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0025171098045049414,
+      "train_mse": 0.002487089017959655
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 25.75181179385917,
+      "fit_seconds": 0.00020270003005862236,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07634528635121249,
+      "train_mse": 0.08051285858093582
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 25.734420243157103,
+      "fit_seconds": 0.0003377001266926527,
+      "n_train": 128,
+      "params": 4096,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0050228008575944035,
+      "train_mse": 0.0012272543362322572
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 25.734420243157103,
+      "fit_seconds": 0.0002625999040901661,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.0025170837000982344,
+      "train_mse": 0.0024870895471112518
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 25.734420243157103,
+      "fit_seconds": 0.0004529000725597143,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": 0.07634513643533883,
+      "train_mse": 0.0805128586628237
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 21080413.319923643,
+      "fit_seconds": 0.00032629980705678463,
+      "n_train": 48,
+      "params": 4096,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.030507629467547717,
+      "train_mse": 1.42942118516925e-14
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 21080413.319923643,
+      "fit_seconds": 0.0004181000404059887,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.08044506087184836,
+      "train_mse": 0.08181138363522067
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 21080413.319923643,
+      "fit_seconds": 0.0003760000690817833,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.002556503933368752,
+      "train_mse": 0.0024767721814680254
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 2108042.2271101777,
+      "fit_seconds": 0.00030499999411404133,
+      "n_train": 48,
+      "params": 4096,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.030507215766853828,
+      "train_mse": 1.4293323495261934e-12
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 2108042.2271101777,
+      "fit_seconds": 0.00035149999894201756,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.08044504932464136,
+      "train_mse": 0.08181138363529085
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 2108042.2271101777,
+      "fit_seconds": 0.00013509998098015785,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.002556504823728218,
+      "train_mse": 0.002476772181831577
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 210805.1226512322,
+      "fit_seconds": 0.00028270017355680466,
+      "n_train": 48,
+      "params": 4096,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.030503082594769006,
+      "train_mse": 1.4284446526500389e-10
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 210805.1226512322,
+      "fit_seconds": 0.00014739995822310448,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.08044493386272253,
+      "train_mse": 0.08181138364225991
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 210805.1226512322,
+      "fit_seconds": 0.00014830008149147034,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.0025565137582004988,
+      "train_mse": 0.0024767722179170723
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 21081.412264140537,
+      "fit_seconds": 0.0006327000446617603,
+      "n_train": 48,
+      "params": 4096,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.03046214117822614,
+      "train_mse": 1.4196327271019809e-08
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 21081.412264140537,
+      "fit_seconds": 0.00011609983630478382,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.08044378025822449,
+      "train_mse": 0.08181138433837126
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 21081.412264140537,
+      "fit_seconds": 0.00027059996500611305,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.0025566061894222707,
+      "train_mse": 0.0024767758224655944
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 28858.239383043598,
+      "fit_seconds": 0.00030800001695752144,
+      "n_train": 64,
+      "params": 4096,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.3717194826193795,
+      "train_mse": 5.0190940014651524e-11
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 28858.239383043598,
+      "fit_seconds": 0.00015350012108683586,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.08043131562304903,
+      "train_mse": 0.0796635759927831
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 28858.239383043598,
+      "fit_seconds": 0.00020650005899369717,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.0025441803405698783,
+      "train_mse": 0.002405378617244768
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 28556.86135914328,
+      "fit_seconds": 0.0002973999362438917,
+      "n_train": 64,
+      "params": 4096,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.3660864865199629,
+      "train_mse": 4.920174312074052e-09
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 28556.86135914328,
+      "fit_seconds": 0.0002337999176234007,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.08043130988719355,
+      "train_mse": 0.07966357599281625
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 28556.86135914328,
+      "fit_seconds": 0.00012989994138479233,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.0025441802952012055,
+      "train_mse": 0.0024053786174560755
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 25856.568375852803,
+      "fit_seconds": 0.0006369000766426325,
+      "n_train": 64,
+      "params": 4096,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.3178951639848301,
+      "train_mse": 4.078740163596228e-07
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 25856.568375852803,
+      "fit_seconds": 0.00014539994299411774,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.08043125253286582,
+      "train_mse": 0.07966357599610174
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 25856.568375852803,
+      "fit_seconds": 0.000273499870672822,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.002544179861076975,
+      "train_mse": 0.0024053786388112887
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 13290.130487906546,
+      "fit_seconds": 0.0002500000409781933,
+      "n_train": 64,
+      "params": 4096,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.14388523184422364,
+      "train_mse": 1.2130635292863831e-05
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 13290.130487906546,
+      "fit_seconds": 0.00019789999350905418,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.08043067941216117,
+      "train_mse": 0.07966357632426588
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 13290.130487906546,
+      "fit_seconds": 0.0001284000463783741,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.0025441774754452733,
+      "train_mse": 0.0024053807759638357
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 157.57107254004043,
+      "fit_seconds": 0.00021210010163486004,
+      "n_train": 80,
+      "params": 4096,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.010892227424815593,
+      "train_mse": 0.0005149990467526995
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 157.57107254004043,
+      "fit_seconds": 0.0004898000042885542,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.07961457601111473,
+      "train_mse": 0.08597225523939736
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 157.57107254004043,
+      "fit_seconds": 0.00011930009350180626,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.0025320091088927047,
+      "train_mse": 0.002495698166147342
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 157.56249294485085,
+      "fit_seconds": 0.00047369999811053276,
+      "n_train": 80,
+      "params": 4096,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.010891918338435246,
+      "train_mse": 0.0005149990475388844
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 157.56249294485085,
+      "fit_seconds": 0.00014050002209842205,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.07961457127469508,
+      "train_mse": 0.08597225523942106
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 157.56249294485085,
+      "fit_seconds": 0.00014520017430186272,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.0025320098753223446,
+      "train_mse": 0.0024956981662671283
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 157.47674867944463,
+      "fit_seconds": 0.0006385999731719494,
+      "n_train": 80,
+      "params": 4096,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.010888830138475825,
+      "train_mse": 0.0005149991261204099
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 157.47674867944463,
+      "fit_seconds": 0.00018400000408291817,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.07961452391331067,
+      "train_mse": 0.0859722552417677
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 157.47674867944463,
+      "fit_seconds": 0.00047830003313720226,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.0025320175495025677,
+      "train_mse": 0.002495698178471158
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 156.6244434223347,
+      "fit_seconds": 0.0002896999940276146,
+      "n_train": 80,
+      "params": 4096,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.010858212744752595,
+      "train_mse": 0.0005150069475177391
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 156.6244434223347,
+      "fit_seconds": 0.00019100005738437176,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.07961405058060282,
+      "train_mse": 0.08597225547611778
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 156.6244434223347,
+      "fit_seconds": 0.00017159990966320038,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.002532095279458353,
+      "train_mse": 0.0024956994008782625
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 31.8417409160226,
+      "fit_seconds": 0.0004304000176489353,
+      "n_train": 128,
+      "params": 4096,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.0048814898488676465,
+      "train_mse": 0.0013176086404934682
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 31.8417409160226,
+      "fit_seconds": 0.0004545999690890312,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.07916861480191595,
+      "train_mse": 0.07571541553200195
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 31.8417409160226,
+      "fit_seconds": 0.00013729999773204327,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.0025222432742173957,
+      "train_mse": 0.0024754665065261543
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 31.8414955122273,
+      "fit_seconds": 0.0003027999773621559,
+      "n_train": 128,
+      "params": 4096,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.004881473828994926,
+      "train_mse": 0.0013176086406237548
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 31.8414955122273,
+      "fit_seconds": 0.00017010001465678215,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.07916861542022616,
+      "train_mse": 0.07571541553200833
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 31.8414955122273,
+      "fit_seconds": 0.00016830000095069408,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.002522243071322777,
+      "train_mse": 0.0024754665065827635
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 31.839041689048315,
+      "fit_seconds": 0.0005608999636024237,
+      "n_train": 128,
+      "params": 4096,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.00488131369507196,
+      "train_mse": 0.0013176086536515674
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 31.839041689048315,
+      "fit_seconds": 0.00020979996770620346,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.07916862160384094,
+      "train_mse": 0.07571541553263524
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 31.839041689048315,
+      "fit_seconds": 0.00018550013191998005,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.0025222410478274253,
+      "train_mse": 0.002475466512290507
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 31.814524915711047,
+      "fit_seconds": 0.0004896000027656555,
+      "n_train": 128,
+      "params": 4096,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": 0.0048797188295039845,
+      "train_mse": 0.0013176099555650524
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 31.814524915711047,
+      "fit_seconds": 0.00020579993724822998,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.07916868349125664,
+      "train_mse": 0.07571541559520865
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 31.814524915711047,
+      "fit_seconds": 0.00011679995805025101,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": 0.0025222213578665986,
+      "train_mse": 0.002475467083446923
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 19772180.81499802,
+      "fit_seconds": 0.0006422000005841255,
+      "n_train": 48,
+      "params": 4096,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.2605864788782802,
+      "train_mse": 9.764653311081337e-14
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 19772180.81499802,
+      "fit_seconds": 0.00018790015019476414,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 1.0121990454152672,
+      "train_mse": 0.9771723623343268
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 19772180.81499802,
+      "fit_seconds": 0.00018989993259310722,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 1.0021356535990398,
+      "train_mse": 0.9865745753359715
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 1977218.9733033236,
+      "fit_seconds": 0.0007650000043213367,
+      "n_train": 48,
+      "params": 4096,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.2605860349842213,
+      "train_mse": 9.764081135913613e-12
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 1977218.9733033236,
+      "fit_seconds": 0.00015920004807412624,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 1.0121989084597218,
+      "train_mse": 0.9771723623345571
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 1977218.9733033236,
+      "fit_seconds": 0.0003708999138325453,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 1.002135568940827,
+      "train_mse": 0.9865745753361415
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 197722.79726398326,
+      "fit_seconds": 0.00024170009419322014,
+      "n_train": 48,
+      "params": 4096,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.2605816124136957,
+      "train_mse": 9.75836489024787e-10
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 197722.79726398326,
+      "fit_seconds": 0.00023659993894398212,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 1.0121975389638003,
+      "train_mse": 0.9771723623574339
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 197722.79726398326,
+      "fit_seconds": 0.00012209988199174404,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 1.0021347223951675,
+      "train_mse": 0.986574575353206
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 19773.179725844275,
+      "fit_seconds": 0.0002671999391168356,
+      "n_train": 48,
+      "params": 4096,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.26053901922609746,
+      "train_mse": 9.701741712013936e-08
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 19773.179725844275,
+      "fit_seconds": 0.00048390007577836514,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 1.0121838499557043,
+      "train_mse": 0.9771723646426888
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 19773.179725844275,
+      "fit_seconds": 0.00017879996448755264,
+      "n_train": 48,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 1.0021262605843675,
+      "train_mse": 0.9865745770596034
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 50336.60413001261,
+      "fit_seconds": 0.00020350003615021706,
+      "n_train": 64,
+      "params": 4096,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.56867710295965,
+      "train_mse": 1.6137584031021506e-10
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 50336.60413001261,
+      "fit_seconds": 9.670015424489975e-05,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.999324175795347,
+      "train_mse": 0.9723851843945737
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 50336.60413001261,
+      "fit_seconds": 0.00012119999155402184,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 1.000217696819603,
+      "train_mse": 0.970249073894603
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 49434.367359183394,
+      "fit_seconds": 0.0002405000850558281,
+      "n_train": 64,
+      "params": 4096,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.5516765442470366,
+      "train_mse": 1.559255223845056e-08
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 49434.367359183394,
+      "fit_seconds": 9.629991836845875e-05,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.999324124159009,
+      "train_mse": 0.9723851843946576
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 49434.367359183394,
+      "fit_seconds": 0.00013729999773204327,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 1.000217645350532,
+      "train_mse": 0.9702490738946818
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 41920.532172223015,
+      "fit_seconds": 0.0003312998451292515,
+      "n_train": 64,
+      "params": 4096,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.4213396334254199,
+      "train_mse": 1.1421182952488562e-06
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 41920.532172223015,
+      "fit_seconds": 0.00013470021076500416,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9993236078131547,
+      "train_mse": 0.9723851844029676
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 41920.532172223015,
+      "fit_seconds": 0.000157299917191267,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 1.0002171306758494,
+      "train_mse": 0.9702490739026629
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 16635.783931997623,
+      "fit_seconds": 0.0002630001399666071,
+      "n_train": 64,
+      "params": 4096,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.1250719648297224,
+      "train_mse": 2.1379819607789518e-05
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 16635.783931997623,
+      "fit_seconds": 0.00015600002370774746,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9993184461066349,
+      "train_mse": 0.9723851852329997
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 16635.783931997623,
+      "fit_seconds": 0.0005136001855134964,
+      "n_train": 64,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 1.000211985531606,
+      "train_mse": 0.9702490747014554
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 246.3215042989432,
+      "fit_seconds": 0.0002794000320136547,
+      "n_train": 80,
+      "params": 4096,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.014502662643650776,
+      "train_mse": 0.0005215353815757953
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 246.3215042989432,
+      "fit_seconds": 0.00013340008445084095,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9948398842088912,
+      "train_mse": 0.97683717990483
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 246.3215042989432,
+      "fit_seconds": 0.0001691998913884163,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9952874149171032,
+      "train_mse": 0.9800110616255665
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 246.30186646326058,
+      "fit_seconds": 0.0002633999101817608,
+      "n_train": 80,
+      "params": 4096,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.014501962421991128,
+      "train_mse": 0.0005215353900158671
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 246.30186646326058,
+      "fit_seconds": 0.00012429989874362946,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9948398509629266,
+      "train_mse": 0.9768371799048798
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 246.30186646326058,
+      "fit_seconds": 0.00016649998724460602,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9952873853907283,
+      "train_mse": 0.9800110616256074
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 246.105660887832,
+      "fit_seconds": 0.0005039998795837164,
+      "n_train": 80,
+      "params": 4096,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.014494987621377572,
+      "train_mse": 0.0005215362334473005
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 246.105660887832,
+      "fit_seconds": 0.0006719999946653843,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9948395185126362,
+      "train_mse": 0.976837179909805
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 246.105660887832,
+      "fit_seconds": 0.00013109995052218437,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.995287090135497,
+      "train_mse": 0.9800110616298692
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 244.16073108142686,
+      "fit_seconds": 0.0003098000306636095,
+      "n_train": 80,
+      "params": 4096,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.014427948211027542,
+      "train_mse": 0.000521620006351741
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 244.16073108142686,
+      "fit_seconds": 0.00014130002819001675,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9948361949451773,
+      "train_mse": 0.9768371804016723
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 244.16073108142686,
+      "fit_seconds": 0.00021949992515146732,
+      "n_train": 80,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9952841384348553,
+      "train_mse": 0.9800110620577644
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 22.450514720758886,
+      "fit_seconds": 0.00031160004436969757,
+      "n_train": 128,
+      "params": 4096,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.004857084572705273,
+      "train_mse": 0.0012399676054169859
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 22.450514720758886,
+      "fit_seconds": 0.0001759000588208437,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9910346737263274,
+      "train_mse": 0.9759546984569765
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 22.450514720758886,
+      "fit_seconds": 0.00016270019114017487,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 1e-05,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9890096599037137,
+      "train_mse": 0.9826277522615908
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 22.450392613692316,
+      "fit_seconds": 0.0008149000350385904,
+      "n_train": 128,
+      "params": 4096,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.00485706820656464,
+      "train_mse": 0.0012399676065872759
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 22.450392613692316,
+      "fit_seconds": 0.00014759995974600315,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.991034658543599,
+      "train_mse": 0.9759546984569931
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 22.450392613692316,
+      "fit_seconds": 0.0005290999542921782,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.0001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.989009651216227,
+      "train_mse": 0.982627752261603
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 22.449171619482996,
+      "fit_seconds": 0.00043020001612603664,
+      "n_train": 128,
+      "params": 4096,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.004856904938274477,
+      "train_mse": 0.0012399677236100543
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 22.449171619482996,
+      "fit_seconds": 0.00020890007726848125,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9910345067190409,
+      "train_mse": 0.9759546984586333
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 22.449171619482996,
+      "fit_seconds": 0.00021910015493631363,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.001,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9890095643431822,
+      "train_mse": 0.9826277522628442
+    },
+    {
+      "basis": {
+        "basis": "none"
+      },
+      "condition_number": 22.436969318166405,
+      "fit_seconds": 0.0002490999177098274,
+      "n_train": 128,
+      "params": 4096,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": 0.004855311534674504,
+      "train_mse": 0.0012399794197289972
+    },
+    {
+      "basis": {
+        "basis": "dct2",
+        "sha256": "d9b8dc21bf82fcae4971ab67f748994e0a9e88b9dff32538fd5028b0a3164488"
+      },
+      "condition_number": 22.436969318166405,
+      "fit_seconds": 0.00041280011646449566,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.9910329887463403,
+      "train_mse": 0.9759546986223568
+    },
+    {
+      "basis": {
+        "basis": "random_q",
+        "seed": 332042,
+        "sha256": "2ddfcee7f36d4125d0a8006a50b83bfe003cbdee145670a422f4b02e2d666068"
+      },
+      "condition_number": 22.436969318166405,
+      "fit_seconds": 0.00021680002100765705,
+      "n_train": 128,
+      "params": 64,
+      "ridge": 0.01,
+      "seed": 42,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": 0.989008695794777,
+      "train_mse": 0.9826277523870729
+    }
+  ],
+  "started_utc": "2026-08-11T14:16:22.611485+00:00",
+  "summary": {
+    "dct_sparse|n=128|ridge=0.0001|dct_diagonal": {
+      "condition_number": {
+        "mean": 25.75355229416425,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.0001,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0025171124608255554,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=128|ridge=0.0001|dense_linear": {
+      "condition_number": {
+        "mean": 25.75355229416425,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.0001,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.005024214162363566,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=128|ridge=0.0001|random_diagonal": {
+      "condition_number": {
+        "mean": 25.75355229416425,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.0001,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07634530135138654,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=128|ridge=0.001|dct_diagonal": {
+      "condition_number": {
+        "mean": 25.75181179385917,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.001,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0025171098045049414,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=128|ridge=0.001|dense_linear": {
+      "condition_number": {
+        "mean": 25.75181179385917,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.001,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.005024085220203258,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=128|ridge=0.001|random_diagonal": {
+      "condition_number": {
+        "mean": 25.75181179385917,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.001,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07634528635121249,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=128|ridge=0.01|dct_diagonal": {
+      "condition_number": {
+        "mean": 25.734420243157103,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.01,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0025170837000982344,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=128|ridge=0.01|dense_linear": {
+      "condition_number": {
+        "mean": 25.734420243157103,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.01,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0050228008575944035,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=128|ridge=0.01|random_diagonal": {
+      "condition_number": {
+        "mean": 25.734420243157103,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.01,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07634513643533883,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=128|ridge=1e-05|dct_diagonal": {
+      "condition_number": {
+        "mean": 25.753726357657623,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 1e-05,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.002517112726916489,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=128|ridge=1e-05|dense_linear": {
+      "condition_number": {
+        "mean": 25.753726357657623,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 1e-05,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.005024227061643498,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=128|ridge=1e-05|random_diagonal": {
+      "condition_number": {
+        "mean": 25.753726357657623,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 1e-05,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0763453028514898,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=48|ridge=0.0001|dct_diagonal": {
+      "condition_number": {
+        "mean": 2008179.958641939,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.0001,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.002559571131066207,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=48|ridge=0.0001|dense_linear": {
+      "condition_number": {
+        "mean": 2008179.958641939,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.0001,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.03202626477391613,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=48|ridge=0.0001|random_diagonal": {
+      "condition_number": {
+        "mean": 2008179.958641939,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.0001,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07722915991270628,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=48|ridge=0.001|dct_diagonal": {
+      "condition_number": {
+        "mean": 200818.89580102614,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.001,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.00255955722694808,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=48|ridge=0.001|dense_linear": {
+      "condition_number": {
+        "mean": 200818.89580102614,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.001,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.03202107323428363,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=48|ridge=0.001|random_diagonal": {
+      "condition_number": {
+        "mean": 200818.89580102614,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.001,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07722912408006824,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=48|ridge=0.01|dct_diagonal": {
+      "condition_number": {
+        "mean": 20082.78957950951,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.01,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0025594226851147015,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=48|ridge=0.01|dense_linear": {
+      "condition_number": {
+        "mean": 20082.78957950951,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.01,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.03196969467331649,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=48|ridge=0.01|random_diagonal": {
+      "condition_number": {
+        "mean": 20082.78957950951,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.01,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07722876634528922,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=48|ridge=1e-05|dct_diagonal": {
+      "condition_number": {
+        "mean": 20081790.662946913,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 1e-05,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.002559572525979695,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=48|ridge=1e-05|dense_linear": {
+      "condition_number": {
+        "mean": 20081790.662946913,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 1e-05,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.03202678446687464,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=48|ridge=1e-05|random_diagonal": {
+      "condition_number": {
+        "mean": 20081790.662946913,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 1e-05,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07722916349656193,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=64|ridge=0.0001|dct_diagonal": {
+      "condition_number": {
+        "mean": 4512.138379066327,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.0001,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.002547065486762379,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=64|ridge=0.0001|dense_linear": {
+      "condition_number": {
+        "mean": 4512.138379066327,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.0001,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0895751584247638,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=64|ridge=0.0001|random_diagonal": {
+      "condition_number": {
+        "mean": 4512.138379066327,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.0001,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07740665224570165,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=64|ridge=0.001|dct_diagonal": {
+      "condition_number": {
+        "mean": 4439.337812390751,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.001,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0025470668807722856,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=64|ridge=0.001|dense_linear": {
+      "condition_number": {
+        "mean": 4439.337812390751,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.001,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0878398347438688,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=64|ridge=0.001|random_diagonal": {
+      "condition_number": {
+        "mean": 4439.337812390751,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.001,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07740657261490108,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=64|ridge=0.01|dct_diagonal": {
+      "condition_number": {
+        "mean": 3822.608237849461,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.01,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0025470825206295143,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=64|ridge=0.01|dense_linear": {
+      "condition_number": {
+        "mean": 3822.608237849461,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.01,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07388344989544393,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=64|ridge=0.01|random_diagonal": {
+      "condition_number": {
+        "mean": 3822.608237849461,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.01,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07740577680590724,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=64|ridge=1e-05|dct_diagonal": {
+      "condition_number": {
+        "mean": 4519.550005104154,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 1e-05,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0025470653490616774,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=64|ridge=1e-05|dense_linear": {
+      "condition_number": {
+        "mean": 4519.550005104154,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 1e-05,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.08975288320128713,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=64|ridge=1e-05|random_diagonal": {
+      "condition_number": {
+        "mean": 4519.550005104154,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 1e-05,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07740666020928087,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=80|ridge=0.0001|dct_diagonal": {
+      "condition_number": {
+        "mean": 218.4594761562137,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.0001,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0025407221946428674,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=80|ridge=0.0001|dense_linear": {
+      "condition_number": {
+        "mean": 218.4594761562137,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.0001,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.01407425160432765,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=80|ridge=0.0001|random_diagonal": {
+      "condition_number": {
+        "mean": 218.4594761562137,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.0001,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0775791783883017,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=80|ridge=0.001|dct_diagonal": {
+      "condition_number": {
+        "mean": 218.3059104093676,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.001,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0025407276506050594,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=80|ridge=0.001|dense_linear": {
+      "condition_number": {
+        "mean": 218.3059104093676,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.001,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.014066140129658487,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=80|ridge=0.001|random_diagonal": {
+      "condition_number": {
+        "mean": 218.3059104093676,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.001,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07757910487111122,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=80|ridge=0.01|dct_diagonal": {
+      "condition_number": {
+        "mean": 216.78209826464402,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.01,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0025407832013418894,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=80|ridge=0.01|dense_linear": {
+      "condition_number": {
+        "mean": 216.78209826464402,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.01,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.013985997991819885,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=80|ridge=0.01|random_diagonal": {
+      "condition_number": {
+        "mean": 216.78209826464402,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.01,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.07757837003437923,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=80|ridge=1e-05|dct_diagonal": {
+      "condition_number": {
+        "mean": 218.4748446691452,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 1e-05,
+      "student": "dct_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.0025407216500379958,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=80|ridge=1e-05|dense_linear": {
+      "condition_number": {
+        "mean": 218.4748446691452,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 1e-05,
+      "student": "dense_linear",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.014075063734306488,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dct_sparse|n=80|ridge=1e-05|random_diagonal": {
+      "condition_number": {
+        "mean": 218.4748446691452,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 1e-05,
+      "student": "random_diagonal",
+      "teacher": "dct_sparse",
+      "test_mse": {
+        "mean": 0.077579185740356,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=128|ridge=0.0001|dct_diagonal": {
+      "condition_number": {
+        "mean": 22.450392613692316,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.0001,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.991034658543599,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=128|ridge=0.0001|dense_linear": {
+      "condition_number": {
+        "mean": 22.450392613692316,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.0001,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.00485706820656464,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=128|ridge=0.0001|random_diagonal": {
+      "condition_number": {
+        "mean": 22.450392613692316,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.0001,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.989009651216227,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=128|ridge=0.001|dct_diagonal": {
+      "condition_number": {
+        "mean": 22.449171619482996,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.001,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9910345067190409,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=128|ridge=0.001|dense_linear": {
+      "condition_number": {
+        "mean": 22.449171619482996,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.001,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.004856904938274477,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=128|ridge=0.001|random_diagonal": {
+      "condition_number": {
+        "mean": 22.449171619482996,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.001,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9890095643431822,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=128|ridge=0.01|dct_diagonal": {
+      "condition_number": {
+        "mean": 22.436969318166405,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.01,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9910329887463403,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=128|ridge=0.01|dense_linear": {
+      "condition_number": {
+        "mean": 22.436969318166405,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.01,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.004855311534674504,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=128|ridge=0.01|random_diagonal": {
+      "condition_number": {
+        "mean": 22.436969318166405,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.01,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.989008695794777,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=128|ridge=1e-05|dct_diagonal": {
+      "condition_number": {
+        "mean": 22.450514720758886,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 1e-05,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9910346737263274,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=128|ridge=1e-05|dense_linear": {
+      "condition_number": {
+        "mean": 22.450514720758886,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 1e-05,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.004857084572705273,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=128|ridge=1e-05|random_diagonal": {
+      "condition_number": {
+        "mean": 22.450514720758886,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 1e-05,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9890096599037137,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=48|ridge=0.0001|dct_diagonal": {
+      "condition_number": {
+        "mean": 1977218.9733033236,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.0001,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 1.0121989084597218,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=48|ridge=0.0001|dense_linear": {
+      "condition_number": {
+        "mean": 1977218.9733033236,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.0001,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.2605860349842213,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=48|ridge=0.0001|random_diagonal": {
+      "condition_number": {
+        "mean": 1977218.9733033236,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.0001,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 1.002135568940827,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=48|ridge=0.001|dct_diagonal": {
+      "condition_number": {
+        "mean": 197722.79726398326,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.001,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 1.0121975389638003,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=48|ridge=0.001|dense_linear": {
+      "condition_number": {
+        "mean": 197722.79726398326,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.001,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.2605816124136957,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=48|ridge=0.001|random_diagonal": {
+      "condition_number": {
+        "mean": 197722.79726398326,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.001,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 1.0021347223951675,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=48|ridge=0.01|dct_diagonal": {
+      "condition_number": {
+        "mean": 19773.179725844275,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.01,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 1.0121838499557043,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=48|ridge=0.01|dense_linear": {
+      "condition_number": {
+        "mean": 19773.179725844275,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.01,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.26053901922609746,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=48|ridge=0.01|random_diagonal": {
+      "condition_number": {
+        "mean": 19773.179725844275,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.01,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 1.0021262605843675,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=48|ridge=1e-05|dct_diagonal": {
+      "condition_number": {
+        "mean": 19772180.81499802,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 1e-05,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 1.0121990454152672,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=48|ridge=1e-05|dense_linear": {
+      "condition_number": {
+        "mean": 19772180.81499802,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 1e-05,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.2605864788782802,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=48|ridge=1e-05|random_diagonal": {
+      "condition_number": {
+        "mean": 19772180.81499802,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 1e-05,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 1.0021356535990398,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=64|ridge=0.0001|dct_diagonal": {
+      "condition_number": {
+        "mean": 49434.367359183394,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.0001,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.999324124159009,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=64|ridge=0.0001|dense_linear": {
+      "condition_number": {
+        "mean": 49434.367359183394,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.0001,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.5516765442470366,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=64|ridge=0.0001|random_diagonal": {
+      "condition_number": {
+        "mean": 49434.367359183394,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.0001,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 1.000217645350532,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=64|ridge=0.001|dct_diagonal": {
+      "condition_number": {
+        "mean": 41920.532172223015,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.001,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9993236078131547,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=64|ridge=0.001|dense_linear": {
+      "condition_number": {
+        "mean": 41920.532172223015,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.001,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.4213396334254199,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=64|ridge=0.001|random_diagonal": {
+      "condition_number": {
+        "mean": 41920.532172223015,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.001,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 1.0002171306758494,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=64|ridge=0.01|dct_diagonal": {
+      "condition_number": {
+        "mean": 16635.783931997623,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.01,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9993184461066349,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=64|ridge=0.01|dense_linear": {
+      "condition_number": {
+        "mean": 16635.783931997623,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.01,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.1250719648297224,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=64|ridge=0.01|random_diagonal": {
+      "condition_number": {
+        "mean": 16635.783931997623,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.01,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 1.000211985531606,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=64|ridge=1e-05|dct_diagonal": {
+      "condition_number": {
+        "mean": 50336.60413001261,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 1e-05,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.999324175795347,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=64|ridge=1e-05|dense_linear": {
+      "condition_number": {
+        "mean": 50336.60413001261,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 1e-05,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.56867710295965,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=64|ridge=1e-05|random_diagonal": {
+      "condition_number": {
+        "mean": 50336.60413001261,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 1e-05,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 1.000217696819603,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=80|ridge=0.0001|dct_diagonal": {
+      "condition_number": {
+        "mean": 246.30186646326058,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.0001,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9948398509629266,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=80|ridge=0.0001|dense_linear": {
+      "condition_number": {
+        "mean": 246.30186646326058,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.0001,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.014501962421991128,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=80|ridge=0.0001|random_diagonal": {
+      "condition_number": {
+        "mean": 246.30186646326058,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.0001,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9952873853907283,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=80|ridge=0.001|dct_diagonal": {
+      "condition_number": {
+        "mean": 246.105660887832,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.001,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9948395185126362,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=80|ridge=0.001|dense_linear": {
+      "condition_number": {
+        "mean": 246.105660887832,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.001,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.014494987621377572,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=80|ridge=0.001|random_diagonal": {
+      "condition_number": {
+        "mean": 246.105660887832,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.001,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.995287090135497,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=80|ridge=0.01|dct_diagonal": {
+      "condition_number": {
+        "mean": 244.16073108142686,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.01,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9948361949451773,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=80|ridge=0.01|dense_linear": {
+      "condition_number": {
+        "mean": 244.16073108142686,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.01,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.014427948211027542,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=80|ridge=0.01|random_diagonal": {
+      "condition_number": {
+        "mean": 244.16073108142686,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.01,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9952841384348553,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=80|ridge=1e-05|dct_diagonal": {
+      "condition_number": {
+        "mean": 246.3215042989432,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 1e-05,
+      "student": "dct_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9948398842088912,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=80|ridge=1e-05|dense_linear": {
+      "condition_number": {
+        "mean": 246.3215042989432,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 1e-05,
+      "student": "dense_linear",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.014502662643650776,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "dense_full|n=80|ridge=1e-05|random_diagonal": {
+      "condition_number": {
+        "mean": 246.3215042989432,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 1e-05,
+      "student": "random_diagonal",
+      "teacher": "dense_full",
+      "test_mse": {
+        "mean": 0.9952874149171032,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=128|ridge=0.0001|dct_diagonal": {
+      "condition_number": {
+        "mean": 31.8414955122273,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.0001,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.07916861542022616,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=128|ridge=0.0001|dense_linear": {
+      "condition_number": {
+        "mean": 31.8414955122273,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.0001,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.004881473828994926,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=128|ridge=0.0001|random_diagonal": {
+      "condition_number": {
+        "mean": 31.8414955122273,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.0001,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.002522243071322777,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=128|ridge=0.001|dct_diagonal": {
+      "condition_number": {
+        "mean": 31.839041689048315,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.001,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.07916862160384094,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=128|ridge=0.001|dense_linear": {
+      "condition_number": {
+        "mean": 31.839041689048315,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.001,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.00488131369507196,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=128|ridge=0.001|random_diagonal": {
+      "condition_number": {
+        "mean": 31.839041689048315,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.001,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.0025222410478274253,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=128|ridge=0.01|dct_diagonal": {
+      "condition_number": {
+        "mean": 31.814524915711047,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.01,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.07916868349125664,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=128|ridge=0.01|dense_linear": {
+      "condition_number": {
+        "mean": 31.814524915711047,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.01,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.0048797188295039845,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=128|ridge=0.01|random_diagonal": {
+      "condition_number": {
+        "mean": 31.814524915711047,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 0.01,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.0025222213578665986,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=128|ridge=1e-05|dct_diagonal": {
+      "condition_number": {
+        "mean": 31.8417409160226,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 1e-05,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.07916861480191595,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=128|ridge=1e-05|dense_linear": {
+      "condition_number": {
+        "mean": 31.8417409160226,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 1e-05,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.0048814898488676465,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=128|ridge=1e-05|random_diagonal": {
+      "condition_number": {
+        "mean": 31.8417409160226,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 128,
+      "ridge": 1e-05,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.0025222432742173957,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=48|ridge=0.0001|dct_diagonal": {
+      "condition_number": {
+        "mean": 2108042.2271101777,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.0001,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.08044504932464136,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=48|ridge=0.0001|dense_linear": {
+      "condition_number": {
+        "mean": 2108042.2271101777,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.0001,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.030507215766853828,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=48|ridge=0.0001|random_diagonal": {
+      "condition_number": {
+        "mean": 2108042.2271101777,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.0001,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.002556504823728218,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=48|ridge=0.001|dct_diagonal": {
+      "condition_number": {
+        "mean": 210805.1226512322,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.001,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.08044493386272253,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=48|ridge=0.001|dense_linear": {
+      "condition_number": {
+        "mean": 210805.1226512322,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.001,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.030503082594769006,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=48|ridge=0.001|random_diagonal": {
+      "condition_number": {
+        "mean": 210805.1226512322,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.001,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.0025565137582004988,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=48|ridge=0.01|dct_diagonal": {
+      "condition_number": {
+        "mean": 21081.412264140537,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.01,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.08044378025822449,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=48|ridge=0.01|dense_linear": {
+      "condition_number": {
+        "mean": 21081.412264140537,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.01,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.03046214117822614,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=48|ridge=0.01|random_diagonal": {
+      "condition_number": {
+        "mean": 21081.412264140537,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 0.01,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.0025566061894222707,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=48|ridge=1e-05|dct_diagonal": {
+      "condition_number": {
+        "mean": 21080413.319923643,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 1e-05,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.08044506087184836,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=48|ridge=1e-05|dense_linear": {
+      "condition_number": {
+        "mean": 21080413.319923643,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 1e-05,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.030507629467547717,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=48|ridge=1e-05|random_diagonal": {
+      "condition_number": {
+        "mean": 21080413.319923643,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 48,
+      "ridge": 1e-05,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.002556503933368752,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=64|ridge=0.0001|dct_diagonal": {
+      "condition_number": {
+        "mean": 28556.86135914328,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.0001,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.08043130988719355,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=64|ridge=0.0001|dense_linear": {
+      "condition_number": {
+        "mean": 28556.86135914328,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.0001,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.3660864865199629,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=64|ridge=0.0001|random_diagonal": {
+      "condition_number": {
+        "mean": 28556.86135914328,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.0001,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.0025441802952012055,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=64|ridge=0.001|dct_diagonal": {
+      "condition_number": {
+        "mean": 25856.568375852803,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.001,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.08043125253286582,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=64|ridge=0.001|dense_linear": {
+      "condition_number": {
+        "mean": 25856.568375852803,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.001,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.3178951639848301,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=64|ridge=0.001|random_diagonal": {
+      "condition_number": {
+        "mean": 25856.568375852803,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.001,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.002544179861076975,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=64|ridge=0.01|dct_diagonal": {
+      "condition_number": {
+        "mean": 13290.130487906546,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.01,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.08043067941216117,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=64|ridge=0.01|dense_linear": {
+      "condition_number": {
+        "mean": 13290.130487906546,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.01,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.14388523184422364,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=64|ridge=0.01|random_diagonal": {
+      "condition_number": {
+        "mean": 13290.130487906546,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 0.01,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.0025441774754452733,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=64|ridge=1e-05|dct_diagonal": {
+      "condition_number": {
+        "mean": 28858.239383043598,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 1e-05,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.08043131562304903,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=64|ridge=1e-05|dense_linear": {
+      "condition_number": {
+        "mean": 28858.239383043598,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 1e-05,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.3717194826193795,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=64|ridge=1e-05|random_diagonal": {
+      "condition_number": {
+        "mean": 28858.239383043598,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 64,
+      "ridge": 1e-05,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.0025441803405698783,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=80|ridge=0.0001|dct_diagonal": {
+      "condition_number": {
+        "mean": 157.56249294485085,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.0001,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.07961457127469508,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=80|ridge=0.0001|dense_linear": {
+      "condition_number": {
+        "mean": 157.56249294485085,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.0001,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.010891918338435246,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=80|ridge=0.0001|random_diagonal": {
+      "condition_number": {
+        "mean": 157.56249294485085,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.0001,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.0025320098753223446,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=80|ridge=0.001|dct_diagonal": {
+      "condition_number": {
+        "mean": 157.47674867944463,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.001,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.07961452391331067,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=80|ridge=0.001|dense_linear": {
+      "condition_number": {
+        "mean": 157.47674867944463,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.001,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.010888830138475825,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=80|ridge=0.001|random_diagonal": {
+      "condition_number": {
+        "mean": 157.47674867944463,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.001,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.0025320175495025677,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=80|ridge=0.01|dct_diagonal": {
+      "condition_number": {
+        "mean": 156.6244434223347,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.01,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.07961405058060282,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=80|ridge=0.01|dense_linear": {
+      "condition_number": {
+        "mean": 156.6244434223347,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.01,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.010858212744752595,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=80|ridge=0.01|random_diagonal": {
+      "condition_number": {
+        "mean": 156.6244434223347,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 0.01,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.002532095279458353,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=80|ridge=1e-05|dct_diagonal": {
+      "condition_number": {
+        "mean": 157.57107254004043,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 1e-05,
+      "student": "dct_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.07961457601111473,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=80|ridge=1e-05|dense_linear": {
+      "condition_number": {
+        "mean": 157.57107254004043,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 1e-05,
+      "student": "dense_linear",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.010892227424815593,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    "random_sparse|n=80|ridge=1e-05|random_diagonal": {
+      "condition_number": {
+        "mean": 157.57107254004043,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "n_seeds": 1,
+      "n_train": 80,
+      "ridge": 1e-05,
+      "student": "random_diagonal",
+      "teacher": "random_sparse",
+      "test_mse": {
+        "mean": 0.0025320091088927047,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    }
+  }
+}
