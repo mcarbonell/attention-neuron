@@ -105,3 +105,5 @@
 {"experiment_id": "v366", "fecha": "2026-08-13", "familia": " geometrico_atencion_foveal ", "dataset": "MQAR Associative Recall 1D (T=128)", "n_eval": 600, "metric_name": "acc", "value": 23.166666666666668, "SE": null, "params": 42871, "nivel_rigor": 1, "etiqueta": "SE\u00d1AL"}
 {"experiment_id": "v367", "fecha": "2026-08-13", "familia": " geometrico_atencion_foveal ", "dataset": "MQAR Associative Recall 1D (T=128)", "n_eval": 600, "metric_name": "acc", "value": 19.666666666666668, "SE": null, "params": 43393, "nivel_rigor": 1, "etiqueta": "SE\u00d1AL"}
 {"experiment_id": "v350", "fecha": "2026-08-14", "familia": "fase_compleja / regladelta / capacidad", "dataset": "MQARDataset (Sweep P8..P64 / L128..L1024)", "n_eval": 60000, "metric_name": "accuracy", "value": 11.333333333333332, "SE": null, "params": 345358, "nivel_rigor": 1, "etiqueta": "SE\u00d1AL"}
+{"experiment_id": "v352_parity_shortcut_sweep", "fecha": "2026-08-14", "familia": "frecuencia_compleja_laplace", "dataset": "sintetico_zk_parity_sweep_l64", "n_eval": 3600, "metric_name": "accuracy", "value": 27.58, "SE": null, "params": 65536, "nivel_rigor": 2, "etiqueta": "ANCLA-NEGATIVO"}
+
