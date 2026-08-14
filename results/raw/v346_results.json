@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "experiment_id": "v346",
+    "date_utc": "2026-08-13T09:01:22.071547Z",
+    "commit_hash": "ff6b632",
+    "device": "cpu",
+    "device_desc": "CPU (AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD)",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "config": {
+      "experiment_id": "v346",
+      "vocab_size": 64,
+      "d_model": 128,
+      "d_state_candidate": 64,
+      "d_state_baseline": 16,
+      "kernel_size": 4,
+      "num_pairs": 8,
+      "L_train": 128,
+      "num_samples_train": 2400,
+      "batch_size": 32,
+      "epochs": 40,
+      "learning_rate": 0.002,
+      "scheduler": "CosineAnnealingLR",
+      "rigor_level": 1,
+      "eval_lengths": [
+        128,
+        256,
+        512
+      ]
+    }
+  },
+  "models": {
+    "Selective-Conv1D IIR (v346 Candidato d_state=64)": {
+      "params": 150854,
+      "final_loss": 2.317957452138265,
+      "wall_clock_time": 2165.403544187546,
+      "eval_time": 2150.3821589946747,
+      "overhead_time": 15.021385192871094,
+      "accuracies": {
+        "L_128": 20.0,
+        "L_256": 20.0,
+        "L_512": 19.75
+      }
+    },
+    "Causal Induction Transformer (Anthropic Circuit)": {
+      "params": 281408,
+      "final_loss": 2.5606814988454185,
+      "wall_clock_time": 600.7616300582886,
+      "eval_time": 595.5308895111084,
+      "overhead_time": 5.230740547180176,
+      "accuracies": {
+        "L_128": 12.75,
+        "L_256": 16.75,
+        "L_512": 17.75
+      }
+    },
+    "Selective-Conv1D IIR (v345 Baseline d_state=16)": {
+      "params": 93062,
+      "final_loss": 3.2643807888031007,
+      "wall_clock_time": 1304.381653547287,
+      "eval_time": 1292.024168729782,
+      "overhead_time": 12.357484817504883,
+      "accuracies": {
+        "L_128": 9.75,
+        "L_256": 13.25,
+        "L_512": 8.5
+      }
+    }
+  }
+}

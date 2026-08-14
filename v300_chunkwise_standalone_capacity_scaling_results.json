@@ -1,0 +1,340 @@
+{
+  "config": {
+    "exp_id": "v300_capacity_scaling_chunkwise_standalone",
+    "d_k_list": [
+      32,
+      64,
+      128
+    ],
+    "iso_floats_map": {
+      "32": {
+        "dk_complex": 32,
+        "dk_real": 45,
+        "floats_c": 2048,
+        "floats_r": 2025
+      },
+      "64": {
+        "dk_complex": 64,
+        "dk_real": 90,
+        "floats_c": 8192,
+        "floats_r": 8100
+      },
+      "128": {
+        "dk_complex": 128,
+        "dk_real": 181,
+        "floats_c": 32768,
+        "floats_r": 32761
+      },
+      "32": {
+        "dk_complex": 32,
+        "dk_real": 45,
+        "floats_c": 2048,
+        "floats_r": 2025
+      },
+      "64": {
+        "dk_complex": 64,
+        "dk_real": 90,
+        "floats_c": 8192,
+        "floats_r": 8100
+      },
+      "128": {
+        "dk_complex": 128,
+        "dk_real": 181,
+        "floats_c": 32768,
+        "floats_r": 32761
+      }
+    },
+    "num_pairs_list": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "num_keys": 256,
+    "num_vals": 256,
+    "batch_size": 32,
+    "chunk_size": 64,
+    "n_layers": 3,
+    "epochs": 20,
+    "steps_per_epoch": 50,
+    "lr_grid": [
+      0.002,
+      0.004,
+      0.008
+    ],
+    "seed": 42,
+    "device": "cpu"
+  },
+  "results": {
+    "32": {
+      "ChunkwiseComplexDeltaPhase_dk32": {
+        "32": {
+          "best_acc": 99.66,
+          "best_lr": 0.004,
+          "total_eval_time": 743.88
+        },
+        "64": {
+          "best_acc": 99.32,
+          "best_lr": 0.008,
+          "total_eval_time": 1890.76
+        },
+        "128": {
+          "best_acc": 95.61,
+          "best_lr": 0.004,
+          "total_eval_time": 6171.1
+        },
+        "256": {
+          "best_acc": 72.29,
+          "best_lr": 0.004,
+          "total_eval_time": 17050.15
+        }
+      },
+      "ChunkwiseRealDeltaNetSquare_dk32": {
+        "32": {
+          "best_acc": 94.82,
+          "best_lr": 0.008,
+          "total_eval_time": 642.15
+        },
+        "64": {
+          "best_acc": 86.63,
+          "best_lr": 0.004,
+          "total_eval_time": 1566.3
+        },
+        "128": {
+          "best_acc": 71.56,
+          "best_lr": 0.008,
+          "total_eval_time": 4646.31
+        },
+        "256": {
+          "best_acc": 0.86,
+          "best_lr": 0.004,
+          "total_eval_time": 13187.61
+        }
+      },
+      "ChunkwiseRealDeltaNetRectangular_dk32": {
+        "32": {
+          "best_acc": 3.93,
+          "best_lr": 0.002,
+          "total_eval_time": 608.9
+        },
+        "64": {
+          "best_acc": 88.93,
+          "best_lr": 0.004,
+          "total_eval_time": 1572.02
+        },
+        "128": {
+          "best_acc": 62.62,
+          "best_lr": 0.004,
+          "total_eval_time": 4816.21
+        },
+        "256": {
+          "best_acc": 3.2,
+          "best_lr": 0.004,
+          "total_eval_time": 11451.42
+        }
+      },
+      "CausalAttentionMHA_dk32": {
+        "32": {
+          "best_acc": 99.97,
+          "best_lr": 0.002,
+          "total_eval_time": 390.96
+        },
+        "64": {
+          "best_acc": 100.0,
+          "best_lr": 0.002,
+          "total_eval_time": 990.85
+        },
+        "128": {
+          "best_acc": 100.0,
+          "best_lr": 0.004,
+          "total_eval_time": 3434.98
+        },
+        "256": {
+          "best_acc": 100.0,
+          "best_lr": 0.002,
+          "total_eval_time": 10427.85
+        }
+      }
+    },
+    "64": {
+      "ChunkwiseComplexDeltaPhase_dk64": {
+        "32": {
+          "best_acc": 99.96,
+          "best_lr": 0.004,
+          "total_eval_time": 1412.52
+        },
+        "64": {
+          "best_acc": 100.0,
+          "best_lr": 0.004,
+          "total_eval_time": 3203.78
+        },
+        "128": {
+          "best_acc": 99.92,
+          "best_lr": 0.004,
+          "total_eval_time": 9808.18
+        },
+        "256": {
+          "best_acc": 99.94,
+          "best_lr": 0.002,
+          "total_eval_time": 24386.16
+        }
+      },
+      "ChunkwiseRealDeltaNetSquare_dk64": {
+        "32": {
+          "best_acc": 92.64,
+          "best_lr": 0.004,
+          "total_eval_time": 1205.13
+        },
+        "64": {
+          "best_acc": 97.32,
+          "best_lr": 0.004,
+          "total_eval_time": 2578.32
+        },
+        "128": {
+          "best_acc": 97.6,
+          "best_lr": 0.004,
+          "total_eval_time": 7378.62
+        },
+        "256": {
+          "best_acc": 83.87,
+          "best_lr": 0.008,
+          "total_eval_time": 19840.64
+        }
+      },
+      "ChunkwiseRealDeltaNetRectangular_dk64": {
+        "32": {
+          "best_acc": 95.06,
+          "best_lr": 0.004,
+          "total_eval_time": 1284.95
+        },
+        "64": {
+          "best_acc": 97.11,
+          "best_lr": 0.004,
+          "total_eval_time": 2803.7
+        },
+        "128": {
+          "best_acc": 97.4,
+          "best_lr": 0.004,
+          "total_eval_time": 7795.79
+        },
+        "256": {
+          "best_acc": 93.2,
+          "best_lr": 0.008,
+          "total_eval_time": 22183.93
+        }
+      },
+      "CausalAttentionMHA_dk64": {
+        "32": {
+          "best_acc": 99.92,
+          "best_lr": 0.002,
+          "total_eval_time": 724.27
+        },
+        "64": {
+          "best_acc": 99.98,
+          "best_lr": 0.008,
+          "total_eval_time": 1783.86
+        },
+        "128": {
+          "best_acc": 100.0,
+          "best_lr": 0.008,
+          "total_eval_time": 5115.33
+        },
+        "256": {
+          "best_acc": 100.0,
+          "best_lr": 0.002,
+          "total_eval_time": 16454.32
+        }
+      }
+    },
+    "128": {
+      "ChunkwiseComplexDeltaPhase_dk128": {
+        "32": {
+          "best_acc": 99.99,
+          "best_lr": 0.004,
+          "total_eval_time": 2911.07
+        },
+        "64": {
+          "best_acc": 99.96,
+          "best_lr": 0.004,
+          "total_eval_time": 6211.03
+        },
+        "128": {
+          "best_acc": 100.0,
+          "best_lr": 0.002,
+          "total_eval_time": 19964.04
+        },
+        "256": {
+          "best_acc": 100.0,
+          "best_lr": 0.002,
+          "total_eval_time": 48324.03
+        }
+      },
+      "ChunkwiseRealDeltaNetSquare_dk128": {
+        "32": {
+          "best_acc": 98.31,
+          "best_lr": 0.002,
+          "total_eval_time": 3006.79
+        },
+        "64": {
+          "best_acc": 96.23,
+          "best_lr": 0.002,
+          "total_eval_time": 5461.77
+        },
+        "128": {
+          "best_acc": 99.2,
+          "best_lr": 0.004,
+          "total_eval_time": 15708.07
+        },
+        "256": {
+          "best_acc": 99.08,
+          "best_lr": 0.004,
+          "total_eval_time": 38027.21
+        }
+      },
+      "ChunkwiseRealDeltaNetRectangular_dk128": {
+        "32": {
+          "best_acc": 98.76,
+          "best_lr": 0.008,
+          "total_eval_time": 2814.42
+        },
+        "64": {
+          "best_acc": 97.1,
+          "best_lr": 0.002,
+          "total_eval_time": 5624.55
+        },
+        "128": {
+          "best_acc": 99.12,
+          "best_lr": 0.004,
+          "total_eval_time": 15742.98
+        },
+        "256": {
+          "best_acc": 98.85,
+          "best_lr": 0.002,
+          "total_eval_time": 40159.97
+        }
+      },
+      "CausalAttentionMHA_dk128": {
+        "32": {
+          "best_acc": 99.79,
+          "best_lr": 0.002,
+          "total_eval_time": 1642.68
+        },
+        "64": {
+          "best_acc": 99.94,
+          "best_lr": 0.002,
+          "total_eval_time": 3280.41
+        },
+        "128": {
+          "best_acc": 100.0,
+          "best_lr": 0.002,
+          "total_eval_time": 9870.94
+        },
+        "256": {
+          "best_acc": 99.98,
+          "best_lr": 0.002,
+          "total_eval_time": 30966.6
+        }
+      }
+    }
+  }
+}

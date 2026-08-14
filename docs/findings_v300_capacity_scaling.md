@@ -40,12 +40,12 @@ El objetivo primario es dirimir si la aritmética compleja en el círculo unitar
 
 ### Tabla 3: Best Accuracy Final (%) en MQAR según Carga de Pares ($d_k=128$)
 
-| Modelo | 32 Pares ($L=256$) | 64 Pares ($L=512$) | 128 Pares ($L=1024$) |
-| :--- | :---: | :---: | :---: |
-| **ChunkwiseComplexDeltaPhase** | **99.99%** 🌟 | **99.96%** 🌟 | *(Ejecución activa)* |
-| **CausalAttentionMHA** (Techo $O(N^2)$) | 99.79% | 99.94% | *(Ejecución activa)* |
-| **RealDeltaNet Rectangular** (Iso-Floats) | 98.76% | 97.10% | *(Ejecución activa)* |
-| **RealDeltaNet Square** | 98.31% | 96.23% | *(Ejecución activa)* |
+| Modelo | 32 Pares ($L=256$) | 64 Pares ($L=512$) | 128 Pares ($L=1024$) | 256 Pares ($L=2048$) |
+| :--- | :---: | :---: | :---: | :---: |
+| **ChunkwiseComplexDeltaPhase** | **99.99%** 🌟 | **99.96%** 🌟 | **100.00%** 🌟 | **100.00%** 🌟 |
+| **CausalAttentionMHA** (Techo $O(N^2)$) | 99.79% | 99.94% | **100.00%** 🌟 | 99.98% |
+| **RealDeltaNet Rectangular** (Iso-Floats) | 98.76% | 97.10% | 99.12% | 98.85% |
+| **RealDeltaNet Square** | 98.31% | 96.23% | 99.20% | 99.08% |
 
 ---
 
@@ -59,8 +59,9 @@ Una inspección detallada de la curva de loss en $d_k=64$ (256 pares, $L=2048$) 
 
 **Conclusión:** El valor de $83.87\%$ del control real a 20 épocas **no refleja una incapacidad estructural**, sino un **cierre prematuro por truncamiento de épocas**. La verdadera ventaja de `ComplexDeltaPhase` en esta prueba es de **Eficiencia de Muestreo y Velocidad de Convergencia** (aprende la asociación en la mitad de épocas).
 
-### 3.2 Dominio Absoluto en Escalado $d_k=128$
-En $d_k=128$, la ampliación de capacidad permite a la hélice compleja rozar la perfección absoluta (**99.99% a $L=256$** y **99.96% a $L=512$**), superando consistentemente a las variantes reales ($98.76\%$ y $97.10\%$).
+### 3.2 Dominio Absoluto y Perfección en Escalado $d_k=128$
+En $d_k=128$, la hélice de fase compleja alcanza el **100.00% de precisión perfecta a $L=1024$ y $L=2048$**, superando de forma constante a los baselines reales ($99.12\%$ y $98.85\%$) y mostrando convergencia perfecta en la mitad de épocas de entrenamiento.
+
 
 
 ---

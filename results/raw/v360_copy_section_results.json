@@ -1,0 +1,149 @@
+{
+  "experiment_id": "v360_copy_section_localizer",
+  "date": "2026-08-13 18:38:21",
+  "rigor_level": 1,
+  "foveal_params": 9944,
+  "baseline_params": 201093,
+  "final_foveal_acc": 77.2,
+  "final_baseline_acc": 42.0,
+  "final_loc_error": 0.48668292236328126,
+  "foveal_history": [
+    {
+      "epoch": 1,
+      "acc": 27.4,
+      "loc_err": 0.48979833984375
+    },
+    {
+      "epoch": 2,
+      "acc": 44.2,
+      "loc_err": 0.4886966552734375
+    },
+    {
+      "epoch": 3,
+      "acc": 47.0,
+      "loc_err": 0.48748089599609373
+    },
+    {
+      "epoch": 4,
+      "acc": 56.6,
+      "loc_err": 0.4866219177246094
+    },
+    {
+      "epoch": 5,
+      "acc": 59.4,
+      "loc_err": 0.48517041015625
+    },
+    {
+      "epoch": 6,
+      "acc": 66.0,
+      "loc_err": 0.482559326171875
+    },
+    {
+      "epoch": 7,
+      "acc": 68.0,
+      "loc_err": 0.48690557861328126
+    },
+    {
+      "epoch": 8,
+      "acc": 71.8,
+      "loc_err": 0.48671273803710935
+    },
+    {
+      "epoch": 9,
+      "acc": 72.4,
+      "loc_err": 0.48689981079101563
+    },
+    {
+      "epoch": 10,
+      "acc": 73.2,
+      "loc_err": 0.4854041748046875
+    },
+    {
+      "epoch": 11,
+      "acc": 73.2,
+      "loc_err": 0.48577606201171875
+    },
+    {
+      "epoch": 12,
+      "acc": 75.8,
+      "loc_err": 0.48488543701171877
+    },
+    {
+      "epoch": 13,
+      "acc": 76.8,
+      "loc_err": 0.485160400390625
+    },
+    {
+      "epoch": 14,
+      "acc": 77.0,
+      "loc_err": 0.4855596008300781
+    },
+    {
+      "epoch": 15,
+      "acc": 77.2,
+      "loc_err": 0.48668292236328126
+    }
+  ],
+  "baseline_history": [
+    {
+      "epoch": 1,
+      "acc": 35.2
+    },
+    {
+      "epoch": 2,
+      "acc": 42.8
+    },
+    {
+      "epoch": 3,
+      "acc": 41.0
+    },
+    {
+      "epoch": 4,
+      "acc": 42.4
+    },
+    {
+      "epoch": 5,
+      "acc": 42.2
+    },
+    {
+      "epoch": 6,
+      "acc": 43.4
+    },
+    {
+      "epoch": 7,
+      "acc": 41.8
+    },
+    {
+      "epoch": 8,
+      "acc": 41.8
+    },
+    {
+      "epoch": 9,
+      "acc": 42.0
+    },
+    {
+      "epoch": 10,
+      "acc": 42.6
+    },
+    {
+      "epoch": 11,
+      "acc": 42.6
+    },
+    {
+      "epoch": 12,
+      "acc": 41.6
+    },
+    {
+      "epoch": 13,
+      "acc": 41.8
+    },
+    {
+      "epoch": 14,
+      "acc": 42.4
+    },
+    {
+      "epoch": 15,
+      "acc": 42.0
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "experiment_id": "v361_copy_section_cluttered_mnist",
+  "date": "2026-08-13 18:46:35",
+  "rigor_level": 1,
+  "foveal_params": 105245,
+  "dense_params": 462218,
+  "cnn_params": 13578,
+  "final_foveal_acc": 29.95,
+  "final_dense_acc": 27.15,
+  "final_cnn_acc": 29.45,
+  "history": {
+    "foveal": [
+      {
+        "epoch": 1,
+        "acc": 15.55,
+        "loc_err": 0.4519888153076172
+      },
+      {
+        "epoch": 2,
+        "acc": 21.3,
+        "loc_err": 0.45243034362792967
+      },
+      {
+        "epoch": 3,
+        "acc": 24.05,
+        "loc_err": 0.45403236389160156
+      },
+      {
+        "epoch": 4,
+        "acc": 25.9,
+        "loc_err": 0.4530702209472656
+      },
+      {
+        "epoch": 5,
+        "acc": 28.25,
+        "loc_err": 0.4508888854980469
+      },
+      {
+        "epoch": 6,
+        "acc": 29.05,
+        "loc_err": 0.4520680389404297
+      },
+      {
+        "epoch": 7,
+        "acc": 29.25,
+        "loc_err": 0.4529719848632813
+      },
+      {
+        "epoch": 8,
+        "acc": 30.85,
+        "loc_err": 0.4528558044433594
+      },
+      {
+        "epoch": 9,
+        "acc": 29.95,
+        "loc_err": 0.45187796020507814
+      },
+      {
+        "epoch": 10,
+        "acc": 30.05,
+        "loc_err": 0.45308038330078126
+      },
+      {
+        "epoch": 11,
+        "acc": 29.5,
+        "loc_err": 0.45321308898925783
+      },
+      {
+        "epoch": 12,
+        "acc": 29.95,
+        "loc_err": 0.4520806579589844
+      }
+    ],
+    "dense": [
+      {
+        "epoch": 1,
+        "acc": 15.3
+      },
+      {
+        "epoch": 2,
+        "acc": 20.95
+      },
+      {
+        "epoch": 3,
+        "acc": 23.55
+      },
+      {
+        "epoch": 4,
+        "acc": 22.6
+      },
+      {
+        "epoch": 5,
+        "acc": 25.05
+      },
+      {
+        "epoch": 6,
+        "acc": 26.4
+      },
+      {
+        "epoch": 7,
+        "acc": 26.55
+      },
+      {
+        "epoch": 8,
+        "acc": 26.4
+      },
+      {
+        "epoch": 9,
+        "acc": 27.05
+      },
+      {
+        "epoch": 10,
+        "acc": 27.85
+      },
+      {
+        "epoch": 11,
+        "acc": 26.45
+      },
+      {
+        "epoch": 12,
+        "acc": 27.15
+      }
+    ],
+    "cnn": [
+      {
+        "epoch": 1,
+        "acc": 19.85
+      },
+      {
+        "epoch": 2,
+        "acc": 18.9
+      },
+      {
+        "epoch": 3,
+        "acc": 17.45
+      },
+      {
+        "epoch": 4,
+        "acc": 20.9
+      },
+      {
+        "epoch": 5,
+        "acc": 21.8
+      },
+      {
+        "epoch": 6,
+        "acc": 22.2
+      },
+      {
+        "epoch": 7,
+        "acc": 21.75
+      },
+      {
+        "epoch": 8,
+        "acc": 22.9
+      },
+      {
+        "epoch": 9,
+        "acc": 27.85
+      },
+      {
+        "epoch": 10,
+        "acc": 28.3
+      },
+      {
+        "epoch": 11,
+        "acc": 28.35
+      },
+      {
+        "epoch": 12,
+        "acc": 29.45
+      }
+    ]
+  }
+}
