@@ -1,0 +1,53 @@
+{
+  "metadata": {
+    "experiment_id": "v361",
+    "date_utc": "2026-08-14T09:33:49.108053+00:00",
+    "commit_hash": "ff6b632",
+    "device": "cpu",
+    "device_desc": "CPU (AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD)",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "config": {
+      "experiment_id": "v361",
+      "vocab_size": 256,
+      "d_model": 256,
+      "n_heads": 4,
+      "d_k": 64,
+      "num_pairs": 32,
+      "L_train": 512,
+      "num_samples_train": 3200,
+      "batch_size": 32,
+      "epochs": 30,
+      "learning_rate": 0.002,
+      "scheduler": "CosineAnnealingLR",
+      "rigor_level": 1,
+      "eval_lengths": [
+        512,
+        1024
+      ]
+    }
+  },
+  "models": {
+    "DeltaPhase Holographic Core (Complex Phase Matrix State C^(64x64) d_k=64)": {
+      "params": 1214734,
+      "final_loss": 4.574040813446045,
+      "wall_clock_time": 15795.865625619888,
+      "eval_time": 15651.245077371597,
+      "overhead_time": 144.62054824829102,
+      "accuracies": {
+        "L_512": 6.0,
+        "L_1024": 5.5
+      }
+    },
+    "Causal Induction Transformer (Anthropic Circuit d_model=256 H=4)": {
+      "params": 1185536,
+      "final_loss": 4.849404830932617,
+      "wall_clock_time": 9220.018395662308,
+      "eval_time": 9174.85411787033,
+      "overhead_time": 45.16427779197693,
+      "accuracies": {
+        "L_512": 1.0,
+        "L_1024": 0.75
+      }
+    }
+  }
+}
