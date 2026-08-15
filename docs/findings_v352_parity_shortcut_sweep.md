@@ -17,9 +17,18 @@ Se evaluó el barrido de módulos $k \in \{3, 5, 7, 8, 9, 12\}$ bajo 4 brazos co
 | **$\mathbb{Z}_9$** | Impar (Compuesto) | 11.11% | **16.31%** 🌟 | 14.84% | 15.09% | 13.98% | **-0.86%** | [ANCLA-NEGATIVO] |
 | **$\mathbb{Z}_{12}$** | Par (Compuesto) | 8.33% | 10.22% | 11.34% | 11.13% | **17.93%** 🌟 | **+6.59%** | [ANCLA] |
 
-## 2. Diagnóstico Causal
-1. **Refutación Teórica:** La idea de que los módulos pares atenúan la ganancia compleja queda desmentida por los datos: $\mathbb{Z}_8$ (+8.36%) y $\mathbb{Z}_{12}$ (+6.59%) presentan las mayores brechas relativas a favor de `Complex Beta`.
-2. **Desempeño de DeltaProduct:** La composición de dos Householders reales por token alcanza la máxima precisión en grupos pequeños ($\mathbb{Z}_3$), demostrando que 2 reflexiones reales pueden generar rotaciones efectivas en planos acotados.
+## 2. Inventario de Arquitectura y Parámetros por Brazo
+* **Dimensiones:** $d_{\text{model}} = 64$, $n_{\text{layers}} = 4$, $n_{\text{heads}} = 4$, $d_k = 16$.
+* **Conteo Comparativo:**
+  - `Real Beta`: **$200,343$ parámetros** ($1.000\times$).
+  - `Fixed Real Beta=2.0`: **$199,303$ parámetros** ($0.995\times$).
+  - `DeltaProduct Real (n_h=2)`: **$218,023$ parámetros** ($1.088\times$, $+8.8\%$ parámetros por doble proyección de clave y compuerta).
+  - `Complex Beta`: **$200,343$ parámetros** ($1.000\times$, exactamente iso-paramétrico con Real Beta).
 
-## 3. Conclusión
+## 3. Diagnóstico Causal
+1. **Refutación Teórica:** La idea de que los módulos pares atenúan la ganancia compleja queda desmentida por los datos: $\mathbb{Z}_8$ (+8.36%) y $\mathbb{Z}_{12}$ (+6.59%) presentan las mayores brechas relativas a favor de `Complex Beta`.
+2. **Desempeño de DeltaProduct:** La composición de dos Householders reales por token alcanza la máxima precisión en grupos pequeños ($\mathbb{Z}_3$), demostrando que 2 reflexiones reales pueden generar rotaciones efectivas en planos acotados, si bien requiere un $+8.8\%$ más de parámetros entrenables.
+
+## 4. Conclusión
 La hipótesis de "par vs. impar" como divisor de expresividad no se sostiene empíricamente. Las ventajas de la parametrización compleja deben evaluarse por su capacidad de rotación continua en $U(d)$ e isometría garantizada, sin asumir patrones simplificados por paridad del módulo.
+

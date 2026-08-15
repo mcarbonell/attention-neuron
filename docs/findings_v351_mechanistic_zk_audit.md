@@ -20,5 +20,13 @@ Se ejecutaron las 3 auditorías mecánicas sobre la arquitectura de 4 capas:
 * **Desvíos Pares ($\Delta = 0, 2, 4, 6, 8, 10$):** 100% de las predicciones se concentran en las clases con la misma paridad.
 * **Conclusión:** El modelo aprende la estructura del subgrupo cociente par $\mathbb{Z}_2 \subset \mathbb{Z}_{12}$ con fidelidad absoluta.
 
-## 2. Conclusión
-Este experimento proporciona la descomposición de evidencia más limpia del proyecto: la ventaja de `DeltaPhase` se divide en dos componentes cuantificados de forma independiente: **Isometría gratis (+24.5pp)** y **Rotación en el Grupo Unitario $U(d)$ (+21.0pp)**.
+## 2. Inventario de Arquitectura y Parámetros
+* **Dimensiones:** $d_{\text{model}} = 64$, $n_{\text{layers}} = 4$, $n_{\text{heads}} = 4$, $d_k = 16$.
+* **Conteo por Brazo:**
+  - `Real Beta DeltaNet`: $200,343$ parámetros.
+  - `Fixed Real Beta=2.0`: $199,303$ parámetros ($1,040$ parámetros menos al prescindir de la proyección $W_\beta$).
+  - `Complex Beta DeltaPhase`: $200,343$ parámetros ($1.000\times$ iso-paramétrico con Real Beta).
+
+## 3. Conclusión
+Este experimento proporciona la descomposición de evidencia: la ventaja observada en este régimen se divide en **Isometría gratis (+24.5pp)** y **Rotación en el Grupo Unitario $U(d)$ (+21.0pp)** bajo rigurosa equivalencia paramétrica ($200,343$ vs $199,303$ params).
+
