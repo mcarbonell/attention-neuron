@@ -1,0 +1,10 @@
+{
+  "id": "v373_nca_morphogenesis",
+  "description": "Neural CA: crece un patron desde semilla y lo auto-repara (regla local aprendida).",
+  "params": 660,
+  "metrics": {
+    "grow_mse": 0.1316,
+    "repair_mse": 0.6343,
+    "hole_recovered_frac": 0.9884
+  }
+}

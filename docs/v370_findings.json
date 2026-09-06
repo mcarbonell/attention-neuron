@@ -1,0 +1,38 @@
+{
+  "id": "v370_cellular_poly_neuron",
+  "k_rules": 6,
+  "rule_names": [
+    "Life",
+    "Seeds",
+    "HighLife",
+    "Replicator",
+    "DayNight",
+    "Stable"
+  ],
+  "params": 496,
+  "mnist": {
+    "alpha_final": {
+      "Life": 0.1582,
+      "Seeds": 0.1866,
+      "HighLife": 0.1579,
+      "Replicator": 0.1532,
+      "DayNight": 0.1542,
+      "Stable": 0.1899
+    },
+    "alpha_dominant": "Stable",
+    "val_acc": 0.134
+  },
+  "rule_recovery_probe": {
+    "target": "Life",
+    "alpha": {
+      "Life": 0.3135,
+      "Seeds": 0.0012,
+      "HighLife": 0.3884,
+      "Replicator": 0.0552,
+      "DayNight": 0.001,
+      "Stable": 0.2407
+    },
+    "dominant": "HighLife",
+    "final_mse": 0.18355
+  }
+}

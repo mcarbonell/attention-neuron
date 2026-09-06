@@ -1,0 +1,31 @@
+{
+  "id": "v372_ca_reservoir",
+  "description": "CA como reservorio: regla CONGELADA itera T pasos; solo se entrena un readout lineal.",
+  "T_steps": 20,
+  "K_readout": 10,
+  "n_train": 3000,
+  "n_test": 1000,
+  "results": {
+    "identity (raw image)": {
+      "linear_readout": 0.186,
+      "conv_readout": 0.613
+    },
+    "random_CA (seed0)": {
+      "linear_readout": 0.145,
+      "conv_readout": 0.126
+    },
+    "random_CA (seed1)": {
+      "linear_readout": 0.11,
+      "conv_readout": 0.126
+    },
+    "Life (smooth)": {
+      "linear_readout": 0.114,
+      "conv_readout": 0.204
+    },
+    "polyblend (Life+Seeds+HighLife)": {
+      "linear_readout": 0.13,
+      "conv_readout": 0.235
+    }
+  },
+  "note": "El readout (lo unico entrenado) es lineal sobre estadisticas de los ultimos K pasos."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "v371_nca_polymorphic",
+  "description": "Regla de CA APRENDIDA (MLP 9->h->1) + alpha polim\u00f3rfico + readout local convolucional",
+  "K": 3,
+  "params": 1904,
+  "mnist_val_acc": 0.544,
+  "alpha_final": [
+    0.3231,
+    0.3122,
+    0.3647
+  ],
+  "rule_recovery_probe": {
+    "target": "Life(discreta)",
+    "K": 3,
+    "alpha": [
+      0.9356,
+      0.0274,
+      0.0371
+    ],
+    "final_mse": 0.1585
+  }
+}
