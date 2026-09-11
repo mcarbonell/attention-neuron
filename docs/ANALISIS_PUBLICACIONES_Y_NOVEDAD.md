@@ -174,7 +174,7 @@ Para maximizar el impacto de toda esta trayectoria, la estrategia óptima consis
 |  DeltaPhase: Complex Matrix States for Linear Attention                                 |
 |  * Target: NeurIPS / ICLR                                                               |
 |  * Núcleo: v298, v299, v300-304, v349, v350, v361                                       |
-|  * Aporte: 100% MQAR en O(N); derrota al Transformer en memoria asociativa.              |
+|  * Aporte: 100% MQAR en O(N); derrota al Transformer en memoria asociativa.             |
 |                                                                                         |
 |  [PAPER 2: TEORÍA DE OPTIMIZACIÓN]                                                      |
 |  Phase-Shift Optimization: Escaping Loss Basin Orbits via Switched Second-Order Dynamics|
@@ -183,7 +183,7 @@ Para maximizar el impacto de toda esta trayectoria, la estrategia óptima consis
 |  * Aporte: Salto de +6 pp en 1 época cambiando de régimen inercial a amortiguado.       |
 |                                                                                         |
 |  [PAPER 3: RAZONAMIENTO NEUROSIMBÓLICO]                                                 |
-|  Phasor Logic Networks: Exact Multi-Hop Deduction in a Single Forward Pass               |
+|  Phasor Logic Networks: Exact Multi-Hop Deduction in a Single Forward Pass              |
 |  * Target: ICLR / AAAI                                                                  |
 |  * Núcleo: v334, v335, v336, v337                                                       |
 |  * Aporte: Interferencia destructiva exacta (-1.0000) y multi-hop sin tokens CoT.       |
@@ -192,7 +192,7 @@ Para maximizar el impacto de toda esta trayectoria, la estrategia óptima consis
 |  White-Box Procedural Neurons and Gated Ternary Reservoirs for Ultra-Low Power Vision   |
 |  * Target: CVPR / Nature Machine Intelligence                                           |
 |  * Núcleo: v50, v51, v251, v253, v254, v256                                             |
-|  * Aporte: Neuronas de 6 parámetros y redes ternarias {-1,0,1} sin multiplicaciones.   |
+|  * Aporte: Neuronas de 6 parámetros y redes ternarias {-1,0,1} sin multiplicaciones.    |
 |                                                                                         |
 +-----------------------------------------------------------------------------------------+
 ```
