@@ -1,0 +1,66 @@
+[
+  {
+    "model_name": "SoftmaxPhase_O(N2)_H1",
+    "params": 659,
+    "val_acc": 57.66666531562805,
+    "val_loss": 1.5577616691589355,
+    "time": 1.2165229320526123,
+    "complexity": "O(N^2)"
+  },
+  {
+    "model_name": "SoftmaxPhase_O(N2)_H4",
+    "params": 1745,
+    "val_acc": 92.66666769981384,
+    "val_loss": 0.20724095404148102,
+    "time": 1.776634931564331,
+    "complexity": "O(N^2)"
+  },
+  {
+    "model_name": "LinearHolographic_O(N)_H1",
+    "params": 658,
+    "val_acc": 58.83333086967468,
+    "val_loss": 1.1859750747680664,
+    "time": 1.3260633945465088,
+    "complexity": "O(N)"
+  },
+  {
+    "model_name": "LinearHolographic_O(N)_H4",
+    "params": 1744,
+    "val_acc": 100.0,
+    "val_loss": 7.319635187741369e-05,
+    "time": 2.006185531616211,
+    "complexity": "O(N)"
+  },
+  {
+    "model_name": "DeltaPhaseLinear_O(N)_H1",
+    "params": 675,
+    "val_acc": 60.333335399627686,
+    "val_loss": 1.1748071908950806,
+    "time": 3.4717061519622803,
+    "complexity": "O(N)"
+  },
+  {
+    "model_name": "DeltaPhaseLinear_O(N)_H4",
+    "params": 1812,
+    "val_acc": 100.0,
+    "val_loss": 0.0014977662358433008,
+    "time": 4.558258533477783,
+    "complexity": "O(N)"
+  },
+  {
+    "model_name": "RealLinear_ELU_O(N)_H1",
+    "params": 896,
+    "val_acc": 100.0,
+    "val_loss": 0.0007214137585833669,
+    "time": 1.5719795227050781,
+    "complexity": "O(N)"
+  },
+  {
+    "model_name": "RealLinear_ELU_O(N)_H4",
+    "params": 2696,
+    "val_acc": 100.0,
+    "val_loss": 0.00012178689212305471,
+    "time": 2.98565411567688,
+    "complexity": "O(N)"
+  }
+]
