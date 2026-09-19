@@ -111,5 +111,6 @@
 {"experiment_id": "v353_zk_grokking_gpu_curves", "fecha": "2026-08-14", "familia": "frecuencia_compleja_laplace", "dataset": "sintetico_zk_grokking_3000steps_gpu_t4", "n_eval": 3000, "metric_name": "accuracy", "value": 98.93, "SE": null, "params": 65536, "nivel_rigor": 2, "etiqueta": "ANCLA"}
 {"experiment_id": "v354_mechanistic_post_transition_probe", "fecha": "2026-08-14", "familia": "frecuencia_compleja_laplace", "dataset": "sintetico_zk_post_transition_probe_step3000", "n_eval": 3000, "metric_name": "accuracy", "value": 86.77, "SE": null, "params": 65536, "nivel_rigor": 2, "etiqueta": "ANCLA"}
 {"experiment_id": "v375_scalar_complex_attention", "fecha": "2026-09-19", "familia": "fase_compleja / atencion_escalar", "dataset": "Direct Content Addressing Synthetic (6 slots, 8 keys, 8 vals)", "n_eval": 600, "metric_name": "val_acc", "value": 100.0, "SE": null, "params": 659, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
+{"experiment_id": "v376_angular_capacity_stress", "fecha": "2026-09-19", "familia": "fase_compleja / frontera_capacidad", "dataset": "Capacity Stress Sweep (K=8..64 keys, slots=8)", "n_eval": 600, "metric_name": "val_acc_k64_h4", "value": 91.83, "SE": null, "params": 5385, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 
 

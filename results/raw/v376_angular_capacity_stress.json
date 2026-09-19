@@ -1,0 +1,290 @@
+{
+  "K_8": [
+    {
+      "model_name": "PhaseOnly_U1_H1",
+      "params": 659,
+      "val_acc": 55.83333373069763,
+      "val_loss": 1.2611620426177979,
+      "time": 0.8238871097564697
+    },
+    {
+      "model_name": "PhaseOnly_U1_H2",
+      "params": 1021,
+      "val_acc": 88.49999904632568,
+      "val_loss": 0.6450124979019165,
+      "time": 1.0081675052642822
+    },
+    {
+      "model_name": "PhaseOnly_U1_H4",
+      "params": 1745,
+      "val_acc": 100.0,
+      "val_loss": 0.00017481051327195019,
+      "time": 1.1534607410430908
+    },
+    {
+      "model_name": "ComplexScalar_C1_H1",
+      "params": 693,
+      "val_acc": 100.0,
+      "val_loss": 0.0002915677323471755,
+      "time": 0.9542362689971924
+    },
+    {
+      "model_name": "ComplexScalar_C1_H2",
+      "params": 1089,
+      "val_acc": 100.0,
+      "val_loss": 0.00014924604329280555,
+      "time": 1.310506820678711
+    },
+    {
+      "model_name": "ComplexScalar_C1_H4",
+      "params": 1881,
+      "val_acc": 100.0,
+      "val_loss": 0.00014253734843805432,
+      "time": 1.511648178100586
+    },
+    {
+      "model_name": "RealScalar_R1_H1",
+      "params": 659,
+      "val_acc": 53.66666913032532,
+      "val_loss": 1.0958924293518066,
+      "time": 0.778651237487793
+    },
+    {
+      "model_name": "RealScalar_R1_H4",
+      "params": 1745,
+      "val_acc": 89.99999761581421,
+      "val_loss": 0.29772403836250305,
+      "time": 1.2058491706848145
+    },
+    {
+      "model_name": "StandardVector_dk8_H1",
+      "params": 896,
+      "val_acc": 100.0,
+      "val_loss": 0.0002064138388959691,
+      "time": 0.7925677299499512
+    },
+    {
+      "model_name": "StandardVector_dk8_H4",
+      "params": 2696,
+      "val_acc": 100.0,
+      "val_loss": 8.278986206278205e-05,
+      "time": 1.083064079284668
+    }
+  ],
+  "K_16": [
+    {
+      "model_name": "PhaseOnly_U1_H1",
+      "params": 987,
+      "val_acc": 100.0,
+      "val_loss": 0.016229216009378433,
+      "time": 0.9167940616607666
+    },
+    {
+      "model_name": "PhaseOnly_U1_H2",
+      "params": 1413,
+      "val_acc": 83.49999785423279,
+      "val_loss": 0.6448631882667542,
+      "time": 0.9381990432739258
+    },
+    {
+      "model_name": "PhaseOnly_U1_H4",
+      "params": 2265,
+      "val_acc": 89.33333158493042,
+      "val_loss": 0.43673354387283325,
+      "time": 1.1594135761260986
+    },
+    {
+      "model_name": "ComplexScalar_C1_H1",
+      "params": 1021,
+      "val_acc": 100.0,
+      "val_loss": 0.001308727776631713,
+      "time": 1.0326991081237793
+    },
+    {
+      "model_name": "ComplexScalar_C1_H2",
+      "params": 1481,
+      "val_acc": 100.0,
+      "val_loss": 0.003633116837590933,
+      "time": 2.3031835556030273
+    },
+    {
+      "model_name": "ComplexScalar_C1_H4",
+      "params": 2401,
+      "val_acc": 100.0,
+      "val_loss": 0.0009791164193302393,
+      "time": 2.6237425804138184
+    },
+    {
+      "model_name": "RealScalar_R1_H1",
+      "params": 987,
+      "val_acc": 36.33333444595337,
+      "val_loss": 1.8115683794021606,
+      "time": 1.4353857040405273
+    },
+    {
+      "model_name": "RealScalar_R1_H4",
+      "params": 2265,
+      "val_acc": 73.33333492279053,
+      "val_loss": 0.7567110657691956,
+      "time": 1.940809965133667
+    },
+    {
+      "model_name": "StandardVector_dk8_H1",
+      "params": 1224,
+      "val_acc": 100.0,
+      "val_loss": 0.00047910824650898576,
+      "time": 1.3921833038330078
+    },
+    {
+      "model_name": "StandardVector_dk8_H4",
+      "params": 3216,
+      "val_acc": 100.0,
+      "val_loss": 0.0001823637867346406,
+      "time": 1.8266830444335938
+    }
+  ],
+  "K_32": [
+    {
+      "model_name": "PhaseOnly_U1_H1",
+      "params": 1643,
+      "val_acc": 85.83333492279053,
+      "val_loss": 0.44769537448883057,
+      "time": 1.5269784927368164
+    },
+    {
+      "model_name": "PhaseOnly_U1_H2",
+      "params": 2197,
+      "val_acc": 89.66666460037231,
+      "val_loss": 0.32231247425079346,
+      "time": 1.864145278930664
+    },
+    {
+      "model_name": "PhaseOnly_U1_H4",
+      "params": 3305,
+      "val_acc": 99.6666669845581,
+      "val_loss": 0.020593587309122086,
+      "time": 2.125046730041504
+    },
+    {
+      "model_name": "ComplexScalar_C1_H1",
+      "params": 1677,
+      "val_acc": 80.66666722297668,
+      "val_loss": 0.7297201156616211,
+      "time": 1.7710142135620117
+    },
+    {
+      "model_name": "ComplexScalar_C1_H2",
+      "params": 2265,
+      "val_acc": 93.99999976158142,
+      "val_loss": 0.18535496294498444,
+      "time": 2.1999402046203613
+    },
+    {
+      "model_name": "ComplexScalar_C1_H4",
+      "params": 3441,
+      "val_acc": 93.16666722297668,
+      "val_loss": 0.23946258425712585,
+      "time": 2.6194844245910645
+    },
+    {
+      "model_name": "RealScalar_R1_H1",
+      "params": 1643,
+      "val_acc": 32.16666579246521,
+      "val_loss": 2.3968303203582764,
+      "time": 1.4122347831726074
+    },
+    {
+      "model_name": "RealScalar_R1_H4",
+      "params": 3305,
+      "val_acc": 56.333333253860474,
+      "val_loss": 1.662765383720398,
+      "time": 1.968554973602295
+    },
+    {
+      "model_name": "StandardVector_dk8_H1",
+      "params": 1880,
+      "val_acc": 100.0,
+      "val_loss": 0.0008128369809128344,
+      "time": 1.3958475589752197
+    },
+    {
+      "model_name": "StandardVector_dk8_H4",
+      "params": 4256,
+      "val_acc": 100.0,
+      "val_loss": 0.00036039965925738215,
+      "time": 1.8686683177947998
+    }
+  ],
+  "K_64": [
+    {
+      "model_name": "PhaseOnly_U1_H1",
+      "params": 2955,
+      "val_acc": 44.999998807907104,
+      "val_loss": 2.212829828262329,
+      "time": 1.4709510803222656
+    },
+    {
+      "model_name": "PhaseOnly_U1_H2",
+      "params": 3765,
+      "val_acc": 90.3333306312561,
+      "val_loss": 0.31559622287750244,
+      "time": 1.7728486061096191
+    },
+    {
+      "model_name": "PhaseOnly_U1_H4",
+      "params": 5385,
+      "val_acc": 91.8333351612091,
+      "val_loss": 0.26680895686149597,
+      "time": 2.0652356147766113
+    },
+    {
+      "model_name": "ComplexScalar_C1_H1",
+      "params": 2989,
+      "val_acc": 64.66666460037231,
+      "val_loss": 1.529900074005127,
+      "time": 1.7329299449920654
+    },
+    {
+      "model_name": "ComplexScalar_C1_H2",
+      "params": 3833,
+      "val_acc": 81.49999976158142,
+      "val_loss": 0.755840539932251,
+      "time": 2.3066470623016357
+    },
+    {
+      "model_name": "ComplexScalar_C1_H4",
+      "params": 5521,
+      "val_acc": 89.99999761581421,
+      "val_loss": 0.3984873592853546,
+      "time": 2.633514165878296
+    },
+    {
+      "model_name": "RealScalar_R1_H1",
+      "params": 2955,
+      "val_acc": 24.33333396911621,
+      "val_loss": 3.075712203979492,
+      "time": 1.4411625862121582
+    },
+    {
+      "model_name": "RealScalar_R1_H4",
+      "params": 5385,
+      "val_acc": 42.33333468437195,
+      "val_loss": 2.7861011028289795,
+      "time": 1.9697439670562744
+    },
+    {
+      "model_name": "StandardVector_dk8_H1",
+      "params": 3192,
+      "val_acc": 100.0,
+      "val_loss": 0.0017070070607587695,
+      "time": 1.3954658508300781
+    },
+    {
+      "model_name": "StandardVector_dk8_H4",
+      "params": 6336,
+      "val_acc": 100.0,
+      "val_loss": 0.0008342785877175629,
+      "time": 1.8529069423675537
+    }
+  ]
+}
