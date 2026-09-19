@@ -148,10 +148,10 @@ En cámaras inteligentes de bajo consumo (OpenMV, ESP32-CAM, Sony Spresense) don
     └─────────┬─────────┘
               │
     ┌─────────▼───────────────────────────────────────────────┐
-    │  Afinaidad Multiplier-Free (Onda Triangular o LUT-16):   │
-    │     S_ij = 1 - (2/π) |wrap(θ_q,i - θ_k,j)| · scale       │
+    │  Afinaidad Multiplier-Free (Onda Triangular o LUT-16):  │
+    │     S_ij = 1 - (2/π) |wrap(θ_q,i - θ_k,j)| · scale      │
     │  O Acumulación Causal Holográfica O(N):                 │
-    │     S_t = S_(t-1) + [cos θ_k, sin θ_k] v_t^T             │
+    │     S_t = S_(t-1) + [cos θ_k, sin θ_k] v_t^T            │
     └─────────┬───────────────────────────────────────────────┘
               │
     ┌─────────▼─────────┐
