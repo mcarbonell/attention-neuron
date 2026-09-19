@@ -1,0 +1,82 @@
+[
+  {
+    "model_name": "Triangular_Phase_H1",
+    "params": 659,
+    "val_acc": 55.33333420753479,
+    "val_loss": 1.2097532749176025,
+    "time": 1.4229154586791992,
+    "kernel_desc": "0 mults / Sub+Abs"
+  },
+  {
+    "model_name": "Triangular_Phase_H4",
+    "params": 1745,
+    "val_acc": 100.0,
+    "val_loss": 0.0007805825443938375,
+    "time": 2.095777988433838,
+    "kernel_desc": "0 mults / Sub+Abs"
+  },
+  {
+    "model_name": "LUT16_Phase_H1",
+    "params": 659,
+    "val_acc": 70.99999785423279,
+    "val_loss": 0.7356288433074951,
+    "time": 1.4959793090820312,
+    "kernel_desc": "0 mults / 16-word ROM"
+  },
+  {
+    "model_name": "LUT16_Phase_H4",
+    "params": 1745,
+    "val_acc": 100.0,
+    "val_loss": 0.00014387448027264327,
+    "time": 1.97715425491333,
+    "kernel_desc": "0 mults / 16-word ROM"
+  },
+  {
+    "model_name": "SquareWave_Phase_H1",
+    "params": 659,
+    "val_acc": 42.16666519641876,
+    "val_loss": 1.3106427192687988,
+    "time": 1.5503478050231934,
+    "kernel_desc": "0 mults / 1-bit Sign"
+  },
+  {
+    "model_name": "SquareWave_Phase_H4",
+    "params": 1745,
+    "val_acc": 71.16666436195374,
+    "val_loss": 0.696476399898529,
+    "time": 1.7679553031921387,
+    "kernel_desc": "0 mults / 1-bit Sign"
+  },
+  {
+    "model_name": "ExactCosine_Phase_H1",
+    "params": 659,
+    "val_acc": 68.99999976158142,
+    "val_loss": 0.7554557919502258,
+    "time": 1.254758596420288,
+    "kernel_desc": "Trig Cosine"
+  },
+  {
+    "model_name": "ExactCosine_Phase_H4",
+    "params": 1745,
+    "val_acc": 99.83333349227905,
+    "val_loss": 0.00444142846390605,
+    "time": 2.6219983100891113,
+    "kernel_desc": "Trig Cosine"
+  },
+  {
+    "model_name": "StandardVector_dk8_H1",
+    "params": 896,
+    "val_acc": 100.0,
+    "val_loss": 0.00015353818889707327,
+    "time": 1.9755244255065918,
+    "kernel_desc": "Vector Dot Product"
+  },
+  {
+    "model_name": "StandardVector_dk8_H4",
+    "params": 2696,
+    "val_acc": 100.0,
+    "val_loss": 5.794480603071861e-05,
+    "time": 2.6613504886627197,
+    "kernel_desc": "Vector Dot Product"
+  }
+]
