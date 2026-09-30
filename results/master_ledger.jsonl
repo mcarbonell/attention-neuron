@@ -114,5 +114,8 @@
 {"experiment_id": "v376_angular_capacity_stress", "fecha": "2026-09-19", "familia": "fase_compleja / frontera_capacidad", "dataset": "Capacity Stress Sweep (K=8..64 keys, slots=8)", "n_eval": 600, "metric_name": "val_acc_k64_h4", "value": 91.83, "SE": null, "params": 5385, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v377_linear_holographic_phase_attention", "fecha": "2026-09-19", "familia": "fase_compleja / atencion_lineal_holografica", "dataset": "Causal Associative Recall (8 slots, 8 keys, 8 vals)", "n_eval": 600, "metric_name": "val_acc_h4_linear", "value": 100.0, "SE": null, "params": 1744, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v378_multiplier_free_phase_attention", "fecha": "2026-09-19", "familia": "fase_compleja / hardware_sin_multiplicadores", "dataset": "Direct Associative Recall (8 slots, 8 keys, 8 vals)", "n_eval": 600, "metric_name": "val_acc_h4_triangular", "value": 100.0, "SE": null, "params": 1745, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
+{"experiment_id": "v379", "fecha": "2026-09-30", "familia": "celular / regularizacion_topografica", "dataset": "MNIST (60k train / 10k test)", "n_eval": 10000, "metric_name": "val_acc", "value": 98.01, "SE": 0.07, "params": 235146, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
+{"experiment_id": "v380", "fecha": "2026-09-30", "familia": "celular / regularizacion_topografica_macro", "dataset": "MNIST (60k train / 10k test)", "n_eval": 10000, "metric_name": "val_acc", "value": 97.72, "SE": 0.13, "params": 235146, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
+
 
 

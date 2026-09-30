@@ -1,0 +1,968 @@
+{
+  "experiment_id": "v379",
+  "date_utc": "2026-09-30 19:28:40",
+  "commit_hash": "c8dfef7",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.14.2",
+  "pytorch_version": "2.10.0+cpu",
+  "device": "cpu",
+  "hyperparameters": {
+    "batch_size": 256,
+    "epochs": 10,
+    "seeds": [
+      42,
+      100,
+      2026
+    ],
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "dataset": "MNIST (60k train / 10k test)",
+    "model": "MLP (784 -> 256 -> 128 -> 10)"
+  },
+  "conditions_summary": [
+    {
+      "cond_name": "Turing_ReactionDiffusion_1e-3",
+      "mode": "turing",
+      "epsilon": 0.001,
+      "mean_val_acc": 97.84,
+      "std_val_acc": 0.09,
+      "mean_val_loss": 0.0786,
+      "mean_eff_rank_w1": 199.36,
+      "mean_adj_cosine_w1": 0.011,
+      "cross_seed_rho_raw_w1": 0.0054,
+      "cross_seed_rho_raw_w2": 0.0026,
+      "mean_wall_time_s": 110.81,
+      "mean_overhead_s": 5.5373,
+      "mean_svd_w1": {
+        "effective_rank": 199.6,
+        "energy_retained_pct": {
+          "rank_4": 18.19,
+          "rank_8": 31.13,
+          "rank_16": 49.36,
+          "rank_32": 67.03,
+          "rank_64": 80.49
+        },
+        "top1_ratio_pct": 1.81,
+        "singular_values_top10": [
+          4.4786,
+          4.398,
+          4.2596,
+          3.9578,
+          3.7659,
+          3.6409,
+          3.5708,
+          3.4486,
+          3.3216,
+          3.2484
+        ]
+      }
+    },
+    {
+      "cond_name": "Turing_ReactionDiffusion_1e-4",
+      "mode": "turing",
+      "epsilon": 0.0001,
+      "mean_val_acc": 97.97,
+      "std_val_acc": 0.13,
+      "mean_val_loss": 0.0741,
+      "mean_eff_rank_w1": 199.27,
+      "mean_adj_cosine_w1": 0.0121,
+      "cross_seed_rho_raw_w1": 0.0063,
+      "cross_seed_rho_raw_w2": 0.004,
+      "mean_wall_time_s": 114.14,
+      "mean_overhead_s": 5.4841,
+      "mean_svd_w1": {
+        "effective_rank": 199.48,
+        "energy_retained_pct": {
+          "rank_4": 18.28,
+          "rank_8": 31.54,
+          "rank_16": 49.57,
+          "rank_32": 67.14,
+          "rank_64": 80.5
+        },
+        "top1_ratio_pct": 1.82,
+        "singular_values_top10": [
+          4.5185,
+          4.456,
+          4.2359,
+          3.9357,
+          3.7924,
+          3.715,
+          3.5897,
+          3.5238,
+          3.3521,
+          3.2906
+        ]
+      }
+    },
+    {
+      "cond_name": "Dirichlet_Laplacian2D_1e-3",
+      "mode": "dirichlet",
+      "epsilon": 0.001,
+      "mean_val_acc": 98.0,
+      "std_val_acc": 0.06,
+      "mean_val_loss": 0.0712,
+      "mean_eff_rank_w1": 199.28,
+      "mean_adj_cosine_w1": 0.0112,
+      "cross_seed_rho_raw_w1": 0.006,
+      "cross_seed_rho_raw_w2": 0.0014,
+      "mean_wall_time_s": 91.82,
+      "mean_overhead_s": 1.2157,
+      "mean_svd_w1": {
+        "effective_rank": 199.44,
+        "energy_retained_pct": {
+          "rank_4": 18.31,
+          "rank_8": 31.19,
+          "rank_16": 49.37,
+          "rank_32": 67.08,
+          "rank_64": 80.57
+        },
+        "top1_ratio_pct": 1.81,
+        "singular_values_top10": [
+          4.4982,
+          4.4232,
+          4.2818,
+          3.9752,
+          3.77,
+          3.6713,
+          3.5722,
+          3.398,
+          3.3546,
+          3.3026
+        ]
+      }
+    },
+    {
+      "cond_name": "Dirichlet_Laplacian2D_1e-4",
+      "mode": "dirichlet",
+      "epsilon": 0.0001,
+      "mean_val_acc": 97.84,
+      "std_val_acc": 0.26,
+      "mean_val_loss": 0.0783,
+      "mean_eff_rank_w1": 199.35,
+      "mean_adj_cosine_w1": 0.0092,
+      "cross_seed_rho_raw_w1": 0.0049,
+      "cross_seed_rho_raw_w2": 0.0022,
+      "mean_wall_time_s": 91.19,
+      "mean_overhead_s": 1.2111,
+      "mean_svd_w1": {
+        "effective_rank": 199.64,
+        "energy_retained_pct": {
+          "rank_4": 18.35,
+          "rank_8": 31.2,
+          "rank_16": 49.45,
+          "rank_32": 66.99,
+          "rank_64": 80.49
+        },
+        "top1_ratio_pct": 1.79,
+        "singular_values_top10": [
+          4.4565,
+          4.4544,
+          4.2841,
+          4.0101,
+          3.7292,
+          3.6752,
+          3.5766,
+          3.4285,
+          3.3492,
+          3.3067
+        ]
+      }
+    },
+    {
+      "cond_name": "Cortical_1D_Neuron_1e-3",
+      "mode": "cortical_1d",
+      "epsilon": 0.001,
+      "mean_val_acc": 98.01,
+      "std_val_acc": 0.07,
+      "mean_val_loss": 0.0701,
+      "mean_eff_rank_w1": 199.26,
+      "mean_adj_cosine_w1": 0.009,
+      "cross_seed_rho_raw_w1": 0.0032,
+      "cross_seed_rho_raw_w2": 0.0026,
+      "mean_wall_time_s": 90.44,
+      "mean_overhead_s": 0.8238,
+      "mean_svd_w1": {
+        "effective_rank": 199.41,
+        "energy_retained_pct": {
+          "rank_4": 18.39,
+          "rank_8": 31.51,
+          "rank_16": 49.69,
+          "rank_32": 67.18,
+          "rank_64": 80.57
+        },
+        "top1_ratio_pct": 1.83,
+        "singular_values_top10": [
+          4.5399,
+          4.4424,
+          4.2338,
+          4.0023,
+          3.7547,
+          3.6932,
+          3.6258,
+          3.4741,
+          3.3221,
+          3.2823
+        ]
+      }
+    },
+    {
+      "cond_name": "Baseline_Standard_AdamW",
+      "mode": "none",
+      "epsilon": 0.0,
+      "mean_val_acc": 97.87,
+      "std_val_acc": 0.32,
+      "mean_val_loss": 0.0759,
+      "mean_eff_rank_w1": 199.22,
+      "mean_adj_cosine_w1": 0.0114,
+      "cross_seed_rho_raw_w1": 0.0076,
+      "cross_seed_rho_raw_w2": 0.0015,
+      "mean_wall_time_s": 91.77,
+      "mean_overhead_s": 0.1,
+      "mean_svd_w1": {
+        "effective_rank": 199.31,
+        "energy_retained_pct": {
+          "rank_4": 18.4,
+          "rank_8": 31.53,
+          "rank_16": 49.8,
+          "rank_32": 67.22,
+          "rank_64": 80.64
+        },
+        "top1_ratio_pct": 1.81,
+        "singular_values_top10": [
+          4.4955,
+          4.4527,
+          4.2729,
+          4.0316,
+          3.8219,
+          3.7072,
+          3.5835,
+          3.47,
+          3.3363,
+          3.3191
+        ]
+      }
+    }
+  ],
+  "individual_runs": [
+    {
+      "cond_name": "Turing_ReactionDiffusion_1e-3",
+      "mode": "turing",
+      "epsilon": 0.001,
+      "seed": 42,
+      "params": 235146,
+      "final_tr_loss": 0.015,
+      "final_tr_acc": 99.52,
+      "val_loss": 0.0762,
+      "val_acc": 97.86,
+      "wall_clock_time": 108.34,
+      "reg_overhead_time": 5.4907,
+      "svd_w1": {
+        "effective_rank": 199.6,
+        "energy_retained_pct": {
+          "rank_4": 18.19,
+          "rank_8": 31.13,
+          "rank_16": 49.36,
+          "rank_32": 67.03,
+          "rank_64": 80.49
+        },
+        "top1_ratio_pct": 1.81,
+        "singular_values_top10": [
+          4.4786,
+          4.398,
+          4.2596,
+          3.9578,
+          3.7659,
+          3.6409,
+          3.5708,
+          3.4486,
+          3.3216,
+          3.2484
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0099,
+        "std_adj_cosine": 0.118
+      }
+    },
+    {
+      "cond_name": "Turing_ReactionDiffusion_1e-3",
+      "mode": "turing",
+      "epsilon": 0.001,
+      "seed": 100,
+      "params": 235146,
+      "final_tr_loss": 0.0168,
+      "final_tr_acc": 99.46,
+      "val_loss": 0.077,
+      "val_acc": 97.92,
+      "wall_clock_time": 110.98,
+      "reg_overhead_time": 5.5675,
+      "svd_w1": {
+        "effective_rank": 199.04,
+        "energy_retained_pct": {
+          "rank_4": 18.51,
+          "rank_8": 31.61,
+          "rank_16": 49.8,
+          "rank_32": 67.42,
+          "rank_64": 80.75
+        },
+        "top1_ratio_pct": 1.84,
+        "singular_values_top10": [
+          4.5971,
+          4.5484,
+          4.3368,
+          3.9029,
+          3.8207,
+          3.7224,
+          3.6292,
+          3.4676,
+          3.4082,
+          3.2545
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.015,
+        "std_adj_cosine": 0.1215
+      }
+    },
+    {
+      "cond_name": "Turing_ReactionDiffusion_1e-3",
+      "mode": "turing",
+      "epsilon": 0.001,
+      "seed": 2026,
+      "params": 235146,
+      "final_tr_loss": 0.0156,
+      "final_tr_acc": 99.51,
+      "val_loss": 0.0826,
+      "val_acc": 97.74,
+      "wall_clock_time": 113.1,
+      "reg_overhead_time": 5.5538,
+      "svd_w1": {
+        "effective_rank": 199.44,
+        "energy_retained_pct": {
+          "rank_4": 18.65,
+          "rank_8": 31.57,
+          "rank_16": 49.47,
+          "rank_32": 67.08,
+          "rank_64": 80.54
+        },
+        "top1_ratio_pct": 1.85,
+        "singular_values_top10": [
+          4.617,
+          4.4586,
+          4.3689,
+          4.0065,
+          3.8632,
+          3.6564,
+          3.5594,
+          3.4504,
+          3.3957,
+          3.2632
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.008,
+        "std_adj_cosine": 0.1167
+      }
+    },
+    {
+      "cond_name": "Turing_ReactionDiffusion_1e-4",
+      "mode": "turing",
+      "epsilon": 0.0001,
+      "seed": 42,
+      "params": 235146,
+      "final_tr_loss": 0.0155,
+      "final_tr_acc": 99.49,
+      "val_loss": 0.0716,
+      "val_acc": 97.91,
+      "wall_clock_time": 112.15,
+      "reg_overhead_time": 5.6513,
+      "svd_w1": {
+        "effective_rank": 199.48,
+        "energy_retained_pct": {
+          "rank_4": 18.28,
+          "rank_8": 31.54,
+          "rank_16": 49.57,
+          "rank_32": 67.14,
+          "rank_64": 80.5
+        },
+        "top1_ratio_pct": 1.82,
+        "singular_values_top10": [
+          4.5185,
+          4.456,
+          4.2359,
+          3.9357,
+          3.7924,
+          3.715,
+          3.5897,
+          3.5238,
+          3.3521,
+          3.2906
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0085,
+        "std_adj_cosine": 0.1189
+      }
+    },
+    {
+      "cond_name": "Turing_ReactionDiffusion_1e-4",
+      "mode": "turing",
+      "epsilon": 0.0001,
+      "seed": 100,
+      "params": 235146,
+      "final_tr_loss": 0.0161,
+      "final_tr_acc": 99.45,
+      "val_loss": 0.0707,
+      "val_acc": 98.12,
+      "wall_clock_time": 114.79,
+      "reg_overhead_time": 5.3904,
+      "svd_w1": {
+        "effective_rank": 199.17,
+        "energy_retained_pct": {
+          "rank_4": 18.44,
+          "rank_8": 31.59,
+          "rank_16": 49.7,
+          "rank_32": 67.32,
+          "rank_64": 80.73
+        },
+        "top1_ratio_pct": 1.83,
+        "singular_values_top10": [
+          4.5535,
+          4.509,
+          4.3525,
+          3.9178,
+          3.7687,
+          3.7376,
+          3.6584,
+          3.4869,
+          3.4097,
+          3.2353
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0164,
+        "std_adj_cosine": 0.1254
+      }
+    },
+    {
+      "cond_name": "Turing_ReactionDiffusion_1e-4",
+      "mode": "turing",
+      "epsilon": 0.0001,
+      "seed": 2026,
+      "params": 235146,
+      "final_tr_loss": 0.0162,
+      "final_tr_acc": 99.48,
+      "val_loss": 0.0799,
+      "val_acc": 97.88,
+      "wall_clock_time": 115.48,
+      "reg_overhead_time": 5.4107,
+      "svd_w1": {
+        "effective_rank": 199.15,
+        "energy_retained_pct": {
+          "rank_4": 18.69,
+          "rank_8": 31.73,
+          "rank_16": 49.59,
+          "rank_32": 67.29,
+          "rank_64": 80.68
+        },
+        "top1_ratio_pct": 1.85,
+        "singular_values_top10": [
+          4.6129,
+          4.5019,
+          4.3581,
+          4.0469,
+          3.8146,
+          3.6948,
+          3.597,
+          3.5341,
+          3.4127,
+          3.2599
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0115,
+        "std_adj_cosine": 0.1188
+      }
+    },
+    {
+      "cond_name": "Dirichlet_Laplacian2D_1e-3",
+      "mode": "dirichlet",
+      "epsilon": 0.001,
+      "seed": 42,
+      "params": 235146,
+      "final_tr_loss": 0.0156,
+      "final_tr_acc": 99.48,
+      "val_loss": 0.0704,
+      "val_acc": 97.97,
+      "wall_clock_time": 91.91,
+      "reg_overhead_time": 1.2312,
+      "svd_w1": {
+        "effective_rank": 199.44,
+        "energy_retained_pct": {
+          "rank_4": 18.31,
+          "rank_8": 31.19,
+          "rank_16": 49.37,
+          "rank_32": 67.08,
+          "rank_64": 80.57
+        },
+        "top1_ratio_pct": 1.81,
+        "singular_values_top10": [
+          4.4982,
+          4.4232,
+          4.2818,
+          3.9752,
+          3.77,
+          3.6713,
+          3.5722,
+          3.398,
+          3.3546,
+          3.3026
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0092,
+        "std_adj_cosine": 0.1212
+      }
+    },
+    {
+      "cond_name": "Dirichlet_Laplacian2D_1e-3",
+      "mode": "dirichlet",
+      "epsilon": 0.001,
+      "seed": 100,
+      "params": 235146,
+      "final_tr_loss": 0.0154,
+      "final_tr_acc": 99.52,
+      "val_loss": 0.0697,
+      "val_acc": 98.07,
+      "wall_clock_time": 91.42,
+      "reg_overhead_time": 1.2026,
+      "svd_w1": {
+        "effective_rank": 198.96,
+        "energy_retained_pct": {
+          "rank_4": 18.3,
+          "rank_8": 31.49,
+          "rank_16": 49.7,
+          "rank_32": 67.53,
+          "rank_64": 80.79
+        },
+        "top1_ratio_pct": 1.83,
+        "singular_values_top10": [
+          4.5624,
+          4.4883,
+          4.2895,
+          3.9329,
+          3.8049,
+          3.6958,
+          3.6591,
+          3.5209,
+          3.4067,
+          3.2634
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0153,
+        "std_adj_cosine": 0.1246
+      }
+    },
+    {
+      "cond_name": "Dirichlet_Laplacian2D_1e-3",
+      "mode": "dirichlet",
+      "epsilon": 0.001,
+      "seed": 2026,
+      "params": 235146,
+      "final_tr_loss": 0.0149,
+      "final_tr_acc": 99.52,
+      "val_loss": 0.0734,
+      "val_acc": 97.96,
+      "wall_clock_time": 92.12,
+      "reg_overhead_time": 1.2132,
+      "svd_w1": {
+        "effective_rank": 199.44,
+        "energy_retained_pct": {
+          "rank_4": 18.5,
+          "rank_8": 31.48,
+          "rank_16": 49.4,
+          "rank_32": 67.07,
+          "rank_64": 80.54
+        },
+        "top1_ratio_pct": 1.83,
+        "singular_values_top10": [
+          4.5608,
+          4.4301,
+          4.3678,
+          3.9911,
+          3.8225,
+          3.6739,
+          3.547,
+          3.4999,
+          3.3945,
+          3.2661
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0091,
+        "std_adj_cosine": 0.1184
+      }
+    },
+    {
+      "cond_name": "Dirichlet_Laplacian2D_1e-4",
+      "mode": "dirichlet",
+      "epsilon": 0.0001,
+      "seed": 42,
+      "params": 235146,
+      "final_tr_loss": 0.0173,
+      "final_tr_acc": 99.44,
+      "val_loss": 0.0732,
+      "val_acc": 97.93,
+      "wall_clock_time": 91.3,
+      "reg_overhead_time": 1.2214,
+      "svd_w1": {
+        "effective_rank": 199.64,
+        "energy_retained_pct": {
+          "rank_4": 18.35,
+          "rank_8": 31.2,
+          "rank_16": 49.45,
+          "rank_32": 66.99,
+          "rank_64": 80.49
+        },
+        "top1_ratio_pct": 1.79,
+        "singular_values_top10": [
+          4.4565,
+          4.4544,
+          4.2841,
+          4.0101,
+          3.7292,
+          3.6752,
+          3.5766,
+          3.4285,
+          3.3492,
+          3.3067
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0089,
+        "std_adj_cosine": 0.1166
+      }
+    },
+    {
+      "cond_name": "Dirichlet_Laplacian2D_1e-4",
+      "mode": "dirichlet",
+      "epsilon": 0.0001,
+      "seed": 100,
+      "params": 235146,
+      "final_tr_loss": 0.0149,
+      "final_tr_acc": 99.48,
+      "val_loss": 0.0737,
+      "val_acc": 98.05,
+      "wall_clock_time": 91.07,
+      "reg_overhead_time": 1.1841,
+      "svd_w1": {
+        "effective_rank": 199.09,
+        "energy_retained_pct": {
+          "rank_4": 18.76,
+          "rank_8": 31.88,
+          "rank_16": 49.97,
+          "rank_32": 67.47,
+          "rank_64": 80.75
+        },
+        "top1_ratio_pct": 1.85,
+        "singular_values_top10": [
+          4.6021,
+          4.5675,
+          4.3317,
+          3.9577,
+          3.7898,
+          3.7181,
+          3.6565,
+          3.4527,
+          3.3648,
+          3.2341
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0106,
+        "std_adj_cosine": 0.1225
+      }
+    },
+    {
+      "cond_name": "Dirichlet_Laplacian2D_1e-4",
+      "mode": "dirichlet",
+      "epsilon": 0.0001,
+      "seed": 2026,
+      "params": 235146,
+      "final_tr_loss": 0.0176,
+      "final_tr_acc": 99.42,
+      "val_loss": 0.088,
+      "val_acc": 97.55,
+      "wall_clock_time": 91.2,
+      "reg_overhead_time": 1.2278,
+      "svd_w1": {
+        "effective_rank": 199.33,
+        "energy_retained_pct": {
+          "rank_4": 18.71,
+          "rank_8": 31.55,
+          "rank_16": 49.41,
+          "rank_32": 67.05,
+          "rank_64": 80.62
+        },
+        "top1_ratio_pct": 1.86,
+        "singular_values_top10": [
+          4.6495,
+          4.492,
+          4.3707,
+          4.0275,
+          3.8384,
+          3.6756,
+          3.5496,
+          3.4722,
+          3.4005,
+          3.2647
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0081,
+        "std_adj_cosine": 0.1194
+      }
+    },
+    {
+      "cond_name": "Cortical_1D_Neuron_1e-3",
+      "mode": "cortical_1d",
+      "epsilon": 0.001,
+      "seed": 42,
+      "params": 235146,
+      "final_tr_loss": 0.0158,
+      "final_tr_acc": 99.49,
+      "val_loss": 0.0692,
+      "val_acc": 97.95,
+      "wall_clock_time": 90.24,
+      "reg_overhead_time": 0.823,
+      "svd_w1": {
+        "effective_rank": 199.41,
+        "energy_retained_pct": {
+          "rank_4": 18.39,
+          "rank_8": 31.51,
+          "rank_16": 49.69,
+          "rank_32": 67.18,
+          "rank_64": 80.57
+        },
+        "top1_ratio_pct": 1.83,
+        "singular_values_top10": [
+          4.5399,
+          4.4424,
+          4.2338,
+          4.0023,
+          3.7547,
+          3.6932,
+          3.6258,
+          3.4741,
+          3.3221,
+          3.2823
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0069,
+        "std_adj_cosine": 0.1182
+      }
+    },
+    {
+      "cond_name": "Cortical_1D_Neuron_1e-3",
+      "mode": "cortical_1d",
+      "epsilon": 0.001,
+      "seed": 100,
+      "params": 235146,
+      "final_tr_loss": 0.0154,
+      "final_tr_acc": 99.51,
+      "val_loss": 0.0694,
+      "val_acc": 98.09,
+      "wall_clock_time": 90.19,
+      "reg_overhead_time": 0.8279,
+      "svd_w1": {
+        "effective_rank": 199.05,
+        "energy_retained_pct": {
+          "rank_4": 18.38,
+          "rank_8": 31.53,
+          "rank_16": 49.74,
+          "rank_32": 67.39,
+          "rank_64": 80.74
+        },
+        "top1_ratio_pct": 1.82,
+        "singular_values_top10": [
+          4.5473,
+          4.5088,
+          4.3113,
+          3.9564,
+          3.8071,
+          3.69,
+          3.6539,
+          3.5176,
+          3.4152,
+          3.2727
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0114,
+        "std_adj_cosine": 0.1252
+      }
+    },
+    {
+      "cond_name": "Cortical_1D_Neuron_1e-3",
+      "mode": "cortical_1d",
+      "epsilon": 0.001,
+      "seed": 2026,
+      "params": 235146,
+      "final_tr_loss": 0.0164,
+      "final_tr_acc": 99.47,
+      "val_loss": 0.0716,
+      "val_acc": 98.0,
+      "wall_clock_time": 90.9,
+      "reg_overhead_time": 0.8206,
+      "svd_w1": {
+        "effective_rank": 199.31,
+        "energy_retained_pct": {
+          "rank_4": 18.53,
+          "rank_8": 31.63,
+          "rank_16": 49.46,
+          "rank_32": 67.03,
+          "rank_64": 80.57
+        },
+        "top1_ratio_pct": 1.83,
+        "singular_values_top10": [
+          4.5678,
+          4.4261,
+          4.3886,
+          4.0198,
+          3.8741,
+          3.6995,
+          3.5561,
+          3.5065,
+          3.4307,
+          3.2238
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0088,
+        "std_adj_cosine": 0.1165
+      }
+    },
+    {
+      "cond_name": "Baseline_Standard_AdamW",
+      "mode": "none",
+      "epsilon": 0.0,
+      "seed": 42,
+      "params": 235146,
+      "final_tr_loss": 0.0164,
+      "final_tr_acc": 99.46,
+      "val_loss": 0.0761,
+      "val_acc": 97.81,
+      "wall_clock_time": 89.69,
+      "reg_overhead_time": 0.1036,
+      "svd_w1": {
+        "effective_rank": 199.31,
+        "energy_retained_pct": {
+          "rank_4": 18.4,
+          "rank_8": 31.53,
+          "rank_16": 49.8,
+          "rank_32": 67.22,
+          "rank_64": 80.64
+        },
+        "top1_ratio_pct": 1.81,
+        "singular_values_top10": [
+          4.4955,
+          4.4527,
+          4.2729,
+          4.0316,
+          3.8219,
+          3.7072,
+          3.5835,
+          3.47,
+          3.3363,
+          3.3191
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0101,
+        "std_adj_cosine": 0.1197
+      }
+    },
+    {
+      "cond_name": "Baseline_Standard_AdamW",
+      "mode": "none",
+      "epsilon": 0.0,
+      "seed": 100,
+      "params": 235146,
+      "final_tr_loss": 0.0138,
+      "final_tr_acc": 99.6,
+      "val_loss": 0.0658,
+      "val_acc": 98.21,
+      "wall_clock_time": 93.13,
+      "reg_overhead_time": 0.099,
+      "svd_w1": {
+        "effective_rank": 199.25,
+        "energy_retained_pct": {
+          "rank_4": 18.45,
+          "rank_8": 31.71,
+          "rank_16": 49.68,
+          "rank_32": 67.33,
+          "rank_64": 80.68
+        },
+        "top1_ratio_pct": 1.83,
+        "singular_values_top10": [
+          4.5527,
+          4.5126,
+          4.2795,
+          3.9485,
+          3.8339,
+          3.6837,
+          3.6679,
+          3.4939,
+          3.3889,
+          3.2435
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0136,
+        "std_adj_cosine": 0.1241
+      }
+    },
+    {
+      "cond_name": "Baseline_Standard_AdamW",
+      "mode": "none",
+      "epsilon": 0.0,
+      "seed": 2026,
+      "params": 235146,
+      "final_tr_loss": 0.0185,
+      "final_tr_acc": 99.35,
+      "val_loss": 0.0859,
+      "val_acc": 97.58,
+      "wall_clock_time": 92.48,
+      "reg_overhead_time": 0.0973,
+      "svd_w1": {
+        "effective_rank": 199.1,
+        "energy_retained_pct": {
+          "rank_4": 18.76,
+          "rank_8": 31.84,
+          "rank_16": 49.56,
+          "rank_32": 67.2,
+          "rank_64": 80.67
+        },
+        "top1_ratio_pct": 1.86,
+        "singular_values_top10": [
+          4.6667,
+          4.5316,
+          4.4044,
+          4.0229,
+          3.916,
+          3.7203,
+          3.5829,
+          3.5033,
+          3.4119,
+          3.2658
+        ]
+      },
+      "cortical_w1": {
+        "mean_adj_cosine": 0.0106,
+        "std_adj_cosine": 0.1221
+      }
+    }
+  ]
+}
