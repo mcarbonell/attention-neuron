@@ -117,6 +117,8 @@
 {"experiment_id": "v379", "fecha": "2026-09-30", "familia": "celular / regularizacion_topografica", "dataset": "MNIST (60k train / 10k test)", "n_eval": 10000, "metric_name": "val_acc", "value": 98.01, "SE": 0.07, "params": 235146, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v380", "fecha": "2026-09-30", "familia": "celular / regularizacion_topografica_macro", "dataset": "MNIST (60k train / 10k test)", "n_eval": 10000, "metric_name": "val_acc", "value": 97.72, "SE": 0.13, "params": 235146, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v381", "fecha": "2026-09-30", "familia": "celular / regularizacion_topografica_anchoring", "dataset": "MNIST (60k train / 10k test)", "n_eval": 10000, "metric_name": "val_acc", "value": 97.61, "SE": 0.14, "params": 235146, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
+{"experiment_id": "v382", "fecha": "2026-09-30", "familia": "celular / regularizacion_topografica_harmonic_pinning", "dataset": "MNIST (60k train / 10k test)", "n_eval": 10000, "metric_name": "val_acc", "value": 92.61, "SE": 0.68, "params": 235146, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
+
 
 
 
