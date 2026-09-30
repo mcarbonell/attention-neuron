@@ -119,6 +119,7 @@
 {"experiment_id": "v381", "fecha": "2026-09-30", "familia": "celular / regularizacion_topografica_anchoring", "dataset": "MNIST (60k train / 10k test)", "n_eval": 10000, "metric_name": "val_acc", "value": 97.61, "SE": 0.14, "params": 235146, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v382", "fecha": "2026-09-30", "familia": "celular / regularizacion_topografica_harmonic_pinning", "dataset": "MNIST (60k train / 10k test)", "n_eval": 10000, "metric_name": "val_acc", "value": 92.61, "SE": 0.68, "params": 235146, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v383", "fecha": "2026-10-01", "familia": "celular / compresion_espectral_dct", "dataset": "MNIST (60k train / 10k test)", "n_eval": 10000, "metric_name": "acc_50x_comp", "value": 96.28, "SE": 0.14, "params": 4703, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
+{"experiment_id": "v384", "fecha": "2026-10-01", "familia": "celular / finetuning_espectral_lora", "dataset": "FashionMNIST->MNIST transfer (10k test)", "n_eval": 10000, "metric_name": "transfer_acc_k16", "value": 90.29, "SE": 0.12, "params": 512, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 
 
 

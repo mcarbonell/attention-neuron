@@ -1,0 +1,1150 @@
+{
+  "experiment_id": "v384",
+  "date_utc": "2026-09-30 22:51:36",
+  "commit_hash": "ebe3e65",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.14.2",
+  "pytorch_version": "2.10.0+cpu",
+  "device": "cpu",
+  "hyperparameters": {
+    "pretrain_epochs": 5,
+    "finetune_epochs": 5,
+    "batch_size": 256,
+    "lr_pretrain": 0.001,
+    "lr_finetune": 0.002,
+    "dirichlet_eps": 0.01,
+    "seeds": [
+      42,
+      100,
+      2026
+    ]
+  },
+  "summary": [
+    {
+      "cond_name": "Spectral_k16_DirichletBase",
+      "adapter_params": 512,
+      "mean_acc": 87.71,
+      "std_acc": 0.5080026246651345,
+      "mean_loss": 0.4110080600023269,
+      "mean_time": 24.523533980051678,
+      "all_accs": [
+        88.2,
+        87.92,
+        87.01
+      ]
+    },
+    {
+      "cond_name": "Spectral_k8_DirichletBase",
+      "adapter_params": 128,
+      "mean_acc": 82.34666666666668,
+      "std_acc": 0.6833414633662653,
+      "mean_loss": 0.5680715074380239,
+      "mean_time": 24.48453728357951,
+      "all_accs": [
+        82.54,
+        83.07,
+        81.43
+      ]
+    },
+    {
+      "cond_name": "Spectral_k24_DirichletBase",
+      "adapter_params": 1152,
+      "mean_acc": 89.91333333333334,
+      "std_acc": 0.11145502331533637,
+      "mean_loss": 0.3365091721614202,
+      "mean_time": 24.585383256276447,
+      "all_accs": [
+        90.07,
+        89.85,
+        89.82
+      ]
+    },
+    {
+      "cond_name": "Spectral_k16_StandardBase",
+      "adapter_params": 512,
+      "mean_acc": 90.29333333333334,
+      "std_acc": 0.20072092289765933,
+      "mean_loss": 0.32404867881536487,
+      "mean_time": 24.345948855082195,
+      "all_accs": [
+        90.27,
+        90.55,
+        90.06
+      ]
+    },
+    {
+      "cond_name": "LoRA_r4_DirichletBase",
+      "adapter_params": 5696,
+      "mean_acc": 91.36,
+      "std_acc": 1.1248999955551628,
+      "mean_loss": 0.2842729327042897,
+      "mean_time": 24.79505451520284,
+      "all_accs": [
+        92.2,
+        92.11,
+        89.77
+      ]
+    },
+    {
+      "cond_name": "LoRA_r4_StandardBase",
+      "adapter_params": 5696,
+      "mean_acc": 92.38,
+      "std_acc": 0.3379349049743179,
+      "mean_loss": 0.24331460667451224,
+      "mean_time": 24.762226978937786,
+      "all_accs": [
+        92.69,
+        91.91,
+        92.54
+      ]
+    },
+    {
+      "cond_name": "LinearProbe_DirichletBase",
+      "adapter_params": 0,
+      "mean_acc": 69.94666666666667,
+      "std_acc": 1.696355570693307,
+      "mean_loss": 0.9554417289098103,
+      "mean_time": 23.053790251413982,
+      "all_accs": [
+        71.74,
+        67.67,
+        70.43
+      ]
+    },
+    {
+      "cond_name": "LinearProbe_StandardBase",
+      "adapter_params": 0,
+      "mean_acc": 79.24333333333333,
+      "std_acc": 0.9455274835890353,
+      "mean_loss": 0.6819222071488698,
+      "mean_time": 23.36199688911438,
+      "all_accs": [
+        79.34,
+        78.04,
+        80.35
+      ]
+    }
+  ],
+  "detailed_results": [
+    {
+      "cond_name": "Spectral_k16_DirichletBase",
+      "cond_cfg": {
+        "name": "Spectral_k16_DirichletBase",
+        "base_type": "dirichlet",
+        "adapter_type": "spectral",
+        "kwargs": {
+          "k": 16
+        },
+        "desc": "Spectral-LoRA (k=16, 512 params) on Dirichlet-regularized base"
+      },
+      "runs": [
+        {
+          "final_test_acc": 88.2,
+          "final_test_loss": 0.40793929009437563,
+          "adapter_params": 512,
+          "total_trainable_params": 1802,
+          "wall_time": 24.282314777374268,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.6629858778953552,
+              "test_acc": 79.98
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.540970183134079,
+              "test_acc": 84.3
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.4809285401344299,
+              "test_acc": 86.05
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.4466311291217804,
+              "test_acc": 86.73
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.40793929009437563,
+              "test_acc": 88.2
+            }
+          ],
+          "seed": 42,
+          "cond_name": "Spectral_k16_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "spectral"
+        },
+        {
+          "final_test_acc": 87.92,
+          "final_test_loss": 0.39394442679882047,
+          "adapter_params": 512,
+          "total_trainable_params": 1802,
+          "wall_time": 24.42783522605896,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.709833314704895,
+              "test_acc": 78.16
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.5459311648845673,
+              "test_acc": 83.67
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.4712497905731201,
+              "test_acc": 86.09
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.42952408738136294,
+              "test_acc": 87.23
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.39394442679882047,
+              "test_acc": 87.92
+            }
+          ],
+          "seed": 100,
+          "cond_name": "Spectral_k16_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "spectral"
+        },
+        {
+          "final_test_acc": 87.01,
+          "final_test_loss": 0.4311404631137848,
+          "adapter_params": 512,
+          "total_trainable_params": 1802,
+          "wall_time": 24.8604519367218,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.7042561148643494,
+              "test_acc": 78.4
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.5756680618286133,
+              "test_acc": 82.83
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.5094902360439301,
+              "test_acc": 84.27
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.46099546475410463,
+              "test_acc": 86.13
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.4311404631137848,
+              "test_acc": 87.01
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "Spectral_k16_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "spectral"
+        }
+      ]
+    },
+    {
+      "cond_name": "Spectral_k8_DirichletBase",
+      "cond_cfg": {
+        "name": "Spectral_k8_DirichletBase",
+        "base_type": "dirichlet",
+        "adapter_type": "spectral",
+        "kwargs": {
+          "k": 8
+        },
+        "desc": "Spectral-LoRA (k=8, 128 params) on Dirichlet-regularized base"
+      },
+      "runs": [
+        {
+          "final_test_acc": 82.54,
+          "final_test_loss": 0.5492505144119263,
+          "adapter_params": 128,
+          "total_trainable_params": 1418,
+          "wall_time": 24.361910581588745,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.8755982604980469,
+              "test_acc": 72.43
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.6906703400611878,
+              "test_acc": 78.36
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.6257157619476318,
+              "test_acc": 80.11
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.5881698205947876,
+              "test_acc": 81.2
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.5492505144119263,
+              "test_acc": 82.54
+            }
+          ],
+          "seed": 42,
+          "cond_name": "Spectral_k8_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "spectral"
+        },
+        {
+          "final_test_acc": 83.07,
+          "final_test_loss": 0.5548463418483734,
+          "adapter_params": 128,
+          "total_trainable_params": 1418,
+          "wall_time": 24.449761390686035,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.8231488963127136,
+              "test_acc": 74.44
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.6882093182563782,
+              "test_acc": 79.23
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.6254709299087524,
+              "test_acc": 81.22
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.5863785140037536,
+              "test_acc": 82.12
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.5548463418483734,
+              "test_acc": 83.07
+            }
+          ],
+          "seed": 100,
+          "cond_name": "Spectral_k8_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "spectral"
+        },
+        {
+          "final_test_acc": 81.43,
+          "final_test_loss": 0.6001176660537719,
+          "adapter_params": 128,
+          "total_trainable_params": 1418,
+          "wall_time": 24.641939878463745,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.8549582976341248,
+              "test_acc": 72.85
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.7194516200065613,
+              "test_acc": 77.33
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.6610803757667542,
+              "test_acc": 79.03
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.6200191777706147,
+              "test_acc": 80.8
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.6001176660537719,
+              "test_acc": 81.43
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "Spectral_k8_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "spectral"
+        }
+      ]
+    },
+    {
+      "cond_name": "Spectral_k24_DirichletBase",
+      "cond_cfg": {
+        "name": "Spectral_k24_DirichletBase",
+        "base_type": "dirichlet",
+        "adapter_type": "spectral",
+        "kwargs": {
+          "k": 24
+        },
+        "desc": "Spectral-LoRA (k=24, 1152 params) on Dirichlet-regularized base"
+      },
+      "runs": [
+        {
+          "final_test_acc": 90.07,
+          "final_test_loss": 0.33379759714603424,
+          "adapter_params": 1152,
+          "total_trainable_params": 2442,
+          "wall_time": 25.026214599609375,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.5779053834915161,
+              "test_acc": 82.76
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.48173761885166166,
+              "test_acc": 86.17
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.4164588934659958,
+              "test_acc": 87.98
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.3775432335853577,
+              "test_acc": 88.77
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.33379759714603424,
+              "test_acc": 90.07
+            }
+          ],
+          "seed": 42,
+          "cond_name": "Spectral_k24_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "spectral"
+        },
+        {
+          "final_test_acc": 89.85,
+          "final_test_loss": 0.3427382226705551,
+          "adapter_params": 1152,
+          "total_trainable_params": 2442,
+          "wall_time": 24.58784532546997,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.6262139837265015,
+              "test_acc": 81.0
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.4708651869773865,
+              "test_acc": 85.75
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.4029379655838013,
+              "test_acc": 87.98
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.36760982871055603,
+              "test_acc": 89.2
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.3427382226705551,
+              "test_acc": 89.85
+            }
+          ],
+          "seed": 100,
+          "cond_name": "Spectral_k24_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "spectral"
+        },
+        {
+          "final_test_acc": 89.82,
+          "final_test_loss": 0.3329916966676712,
+          "adapter_params": 1152,
+          "total_trainable_params": 2442,
+          "wall_time": 24.14208984375,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.6220273465156555,
+              "test_acc": 81.6
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.4810495966434479,
+              "test_acc": 86.08
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.4179763520479202,
+              "test_acc": 87.13
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.3664127426624298,
+              "test_acc": 88.9
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.3329916966676712,
+              "test_acc": 89.82
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "Spectral_k24_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "spectral"
+        }
+      ]
+    },
+    {
+      "cond_name": "Spectral_k16_StandardBase",
+      "cond_cfg": {
+        "name": "Spectral_k16_StandardBase",
+        "base_type": "standard",
+        "adapter_type": "spectral",
+        "kwargs": {
+          "k": 16
+        },
+        "desc": "Spectral-LoRA (k=16, 512 params) on Standard AdamW base"
+      },
+      "runs": [
+        {
+          "final_test_acc": 90.27,
+          "final_test_loss": 0.3233383044719696,
+          "adapter_params": 512,
+          "total_trainable_params": 1802,
+          "wall_time": 24.160109281539917,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.6568142241477967,
+              "test_acc": 80.07
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.46014909801483156,
+              "test_acc": 86.57
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.3826288826942444,
+              "test_acc": 88.41
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.3499792642593384,
+              "test_acc": 89.27
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.3233383044719696,
+              "test_acc": 90.27
+            }
+          ],
+          "seed": 42,
+          "cond_name": "Spectral_k16_StandardBase",
+          "base_type": "standard",
+          "adapter_type": "spectral"
+        },
+        {
+          "final_test_acc": 90.55,
+          "final_test_loss": 0.31593492110967636,
+          "adapter_params": 512,
+          "total_trainable_params": 1802,
+          "wall_time": 24.478039979934692,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.6662629763603211,
+              "test_acc": 79.81
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.43554579608440397,
+              "test_acc": 87.0
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.36828878581523894,
+              "test_acc": 89.09
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.34255298521518707,
+              "test_acc": 89.83
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.31593492110967636,
+              "test_acc": 90.55
+            }
+          ],
+          "seed": 100,
+          "cond_name": "Spectral_k16_StandardBase",
+          "base_type": "standard",
+          "adapter_type": "spectral"
+        },
+        {
+          "final_test_acc": 90.06,
+          "final_test_loss": 0.33287281086444853,
+          "adapter_params": 512,
+          "total_trainable_params": 1802,
+          "wall_time": 24.399697303771973,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.673601217842102,
+              "test_acc": 79.9
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.4789333267688751,
+              "test_acc": 85.55
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.40652363901138305,
+              "test_acc": 87.35
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.35718974385261537,
+              "test_acc": 89.33
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.33287281086444853,
+              "test_acc": 90.06
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "Spectral_k16_StandardBase",
+          "base_type": "standard",
+          "adapter_type": "spectral"
+        }
+      ]
+    },
+    {
+      "cond_name": "LoRA_r4_DirichletBase",
+      "cond_cfg": {
+        "name": "LoRA_r4_DirichletBase",
+        "base_type": "dirichlet",
+        "adapter_type": "lora",
+        "kwargs": {
+          "rank": 4
+        },
+        "desc": "LoRA (r=4, 5696 params) on Dirichlet-regularized base"
+      },
+      "runs": [
+        {
+          "final_test_acc": 92.2,
+          "final_test_loss": 0.2606701963663101,
+          "adapter_params": 5696,
+          "total_trainable_params": 6986,
+          "wall_time": 24.19055700302124,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.48702691712379453,
+              "test_acc": 85.86
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.3685596786022186,
+              "test_acc": 89.37
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.3192307209968567,
+              "test_acc": 90.54
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.28553650728464125,
+              "test_acc": 91.33
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.2606701963663101,
+              "test_acc": 92.2
+            }
+          ],
+          "seed": 42,
+          "cond_name": "LoRA_r4_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "lora"
+        },
+        {
+          "final_test_acc": 92.11,
+          "final_test_loss": 0.26800728757381437,
+          "adapter_params": 5696,
+          "total_trainable_params": 6986,
+          "wall_time": 24.84229040145874,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.5184836075782776,
+              "test_acc": 84.44
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.4049013187885284,
+              "test_acc": 87.81
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.34295315189361575,
+              "test_acc": 89.85
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.29822458112239836,
+              "test_acc": 91.17
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.26800728757381437,
+              "test_acc": 92.11
+            }
+          ],
+          "seed": 100,
+          "cond_name": "LoRA_r4_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "lora"
+        },
+        {
+          "final_test_acc": 89.77,
+          "final_test_loss": 0.3241413141727448,
+          "adapter_params": 5696,
+          "total_trainable_params": 6986,
+          "wall_time": 25.35231614112854,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.5647023586273193,
+              "test_acc": 82.41
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.4381314952850342,
+              "test_acc": 86.3
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.37717605385780334,
+              "test_acc": 88.16
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.34211363430023195,
+              "test_acc": 89.38
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.3241413141727448,
+              "test_acc": 89.77
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "LoRA_r4_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "lora"
+        }
+      ]
+    },
+    {
+      "cond_name": "LoRA_r4_StandardBase",
+      "cond_cfg": {
+        "name": "LoRA_r4_StandardBase",
+        "base_type": "standard",
+        "adapter_type": "lora",
+        "kwargs": {
+          "rank": 4
+        },
+        "desc": "LoRA (r=4, 5696 params) on Standard AdamW base"
+      },
+      "runs": [
+        {
+          "final_test_acc": 92.69,
+          "final_test_loss": 0.2281227633535862,
+          "adapter_params": 5696,
+          "total_trainable_params": 6986,
+          "wall_time": 24.797545433044434,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.44357112531661985,
+              "test_acc": 87.16
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.33787379219532016,
+              "test_acc": 90.05
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.2812708954691887,
+              "test_acc": 91.35
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.24747714304924012,
+              "test_acc": 92.12
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.2281227633535862,
+              "test_acc": 92.69
+            }
+          ],
+          "seed": 42,
+          "cond_name": "LoRA_r4_StandardBase",
+          "base_type": "standard",
+          "adapter_type": "lora"
+        },
+        {
+          "final_test_acc": 91.91,
+          "final_test_loss": 0.2644290043950081,
+          "adapter_params": 5696,
+          "total_trainable_params": 6986,
+          "wall_time": 24.744364261627197,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.46402388405799866,
+              "test_acc": 85.92
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.3739408805847168,
+              "test_acc": 88.84
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.3141747148513794,
+              "test_acc": 90.53
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.28550579652786257,
+              "test_acc": 91.38
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.2644290043950081,
+              "test_acc": 91.91
+            }
+          ],
+          "seed": 100,
+          "cond_name": "LoRA_r4_StandardBase",
+          "base_type": "standard",
+          "adapter_type": "lora"
+        },
+        {
+          "final_test_acc": 92.54,
+          "final_test_loss": 0.2373920522749424,
+          "adapter_params": 5696,
+          "total_trainable_params": 6986,
+          "wall_time": 24.744771242141724,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.4620109603404999,
+              "test_acc": 86.18
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.3368408239364624,
+              "test_acc": 89.5
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.2900118700504303,
+              "test_acc": 90.92
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.26112975431084634,
+              "test_acc": 91.93
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.2373920522749424,
+              "test_acc": 92.54
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "LoRA_r4_StandardBase",
+          "base_type": "standard",
+          "adapter_type": "lora"
+        }
+      ]
+    },
+    {
+      "cond_name": "LinearProbe_DirichletBase",
+      "cond_cfg": {
+        "name": "LinearProbe_DirichletBase",
+        "base_type": "dirichlet",
+        "adapter_type": "none",
+        "kwargs": {},
+        "desc": "Linear Probe (0 adapter params, frozen backbone) on Dirichlet base"
+      },
+      "runs": [
+        {
+          "final_test_acc": 71.74,
+          "final_test_loss": 0.9243434617042542,
+          "adapter_params": 0,
+          "total_trainable_params": 1290,
+          "wall_time": 23.040467977523804,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 1.222760774421692,
+              "test_acc": 62.2
+            },
+            {
+              "epoch": 2,
+              "test_loss": 1.077590206336975,
+              "test_acc": 67.19
+            },
+            {
+              "epoch": 3,
+              "test_loss": 1.0030354724884034,
+              "test_acc": 69.6
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.9576481130599975,
+              "test_acc": 70.33
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.9243434617042542,
+              "test_acc": 71.74
+            }
+          ],
+          "seed": 42,
+          "cond_name": "LinearProbe_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "none"
+        },
+        {
+          "final_test_acc": 67.67,
+          "final_test_loss": 1.0121182508468627,
+          "adapter_params": 0,
+          "total_trainable_params": 1290,
+          "wall_time": 22.869492769241333,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 1.2594739261627197,
+              "test_acc": 60.92
+            },
+            {
+              "epoch": 2,
+              "test_loss": 1.1373264375686645,
+              "test_acc": 63.84
+            },
+            {
+              "epoch": 3,
+              "test_loss": 1.0841093877792358,
+              "test_acc": 66.15
+            },
+            {
+              "epoch": 4,
+              "test_loss": 1.0448509809494018,
+              "test_acc": 66.55
+            },
+            {
+              "epoch": 5,
+              "test_loss": 1.0121182508468627,
+              "test_acc": 67.67
+            }
+          ],
+          "seed": 100,
+          "cond_name": "LinearProbe_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "none"
+        },
+        {
+          "final_test_acc": 70.43,
+          "final_test_loss": 0.9298634741783142,
+          "adapter_params": 0,
+          "total_trainable_params": 1290,
+          "wall_time": 23.251410007476807,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 1.2104008741378784,
+              "test_acc": 62.65
+            },
+            {
+              "epoch": 2,
+              "test_loss": 1.0770150068283082,
+              "test_acc": 66.21
+            },
+            {
+              "epoch": 3,
+              "test_loss": 1.0026561744689941,
+              "test_acc": 68.77
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.960867186832428,
+              "test_acc": 69.81
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.9298634741783142,
+              "test_acc": 70.43
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "LinearProbe_DirichletBase",
+          "base_type": "dirichlet",
+          "adapter_type": "none"
+        }
+      ]
+    },
+    {
+      "cond_name": "LinearProbe_StandardBase",
+      "cond_cfg": {
+        "name": "LinearProbe_StandardBase",
+        "base_type": "standard",
+        "adapter_type": "none",
+        "kwargs": {},
+        "desc": "Linear Probe (0 adapter params, frozen backbone) on Standard base"
+      },
+      "runs": [
+        {
+          "final_test_acc": 79.34,
+          "final_test_loss": 0.6808507653236389,
+          "adapter_params": 0,
+          "total_trainable_params": 1290,
+          "wall_time": 23.380003452301025,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 1.0252780305862428,
+              "test_acc": 69.05
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.8596413038253784,
+              "test_acc": 74.11
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.7753982394218445,
+              "test_acc": 76.76
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.7213506192207336,
+              "test_acc": 78.15
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.6808507653236389,
+              "test_acc": 79.34
+            }
+          ],
+          "seed": 42,
+          "cond_name": "LinearProbe_StandardBase",
+          "base_type": "standard",
+          "adapter_type": "none"
+        },
+        {
+          "final_test_acc": 78.04,
+          "final_test_loss": 0.7134855977058411,
+          "adapter_params": 0,
+          "total_trainable_params": 1290,
+          "wall_time": 23.784847736358643,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 1.0381667339324951,
+              "test_acc": 68.43
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.8800917214393615,
+              "test_acc": 73.06
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.8008242796897889,
+              "test_acc": 75.52
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.7503836577415466,
+              "test_acc": 76.77
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.7134855977058411,
+              "test_acc": 78.04
+            }
+          ],
+          "seed": 100,
+          "cond_name": "LinearProbe_StandardBase",
+          "base_type": "standard",
+          "adapter_type": "none"
+        },
+        {
+          "final_test_acc": 80.35,
+          "final_test_loss": 0.6514302584171295,
+          "adapter_params": 0,
+          "total_trainable_params": 1290,
+          "wall_time": 22.92113947868347,
+          "epoch_history": [
+            {
+              "epoch": 1,
+              "test_loss": 0.9825969449043274,
+              "test_acc": 70.81
+            },
+            {
+              "epoch": 2,
+              "test_loss": 0.820170509147644,
+              "test_acc": 75.32
+            },
+            {
+              "epoch": 3,
+              "test_loss": 0.7392821237564087,
+              "test_acc": 77.74
+            },
+            {
+              "epoch": 4,
+              "test_loss": 0.686679483127594,
+              "test_acc": 79.21
+            },
+            {
+              "epoch": 5,
+              "test_loss": 0.6514302584171295,
+              "test_acc": 80.35
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "LinearProbe_StandardBase",
+          "base_type": "standard",
+          "adapter_type": "none"
+        }
+      ]
+    }
+  ]
+}
