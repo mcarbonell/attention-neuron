@@ -1,0 +1,38 @@
+{
+  "L6": {
+    "depth": 6,
+    "linear_params": 786432,
+    "total_params": 814464,
+    "pt_bytes": 3280455,
+    "specq_bytes": 263237,
+    "comp_ratio": 12.461982927931864,
+    "decode_ms": 55.17148971557617,
+    "us_per_matrix": 1532.541380988227,
+    "throughput_mbs": 54.37591073697311,
+    "fp32_ppl": 10.809112415177546,
+    "decoded_ppl": 11.281964315099925,
+    "delta_ppl": 0.47285189992237875,
+    "tok_s_fp32": 265.230673768851,
+    "tok_s_spec": 242.46590299393193,
+    "ms_tok_spec": 4.124291241168976,
+    "sample_output": "ROMEO:\nIf I profane with my unworthiest hand\nThis holy shrinep\nMOf so hapaknd, bat st.\nFupurt olld hin:\nFom e blas ind hen pi"
+  },
+  "L12": {
+    "depth": 12,
+    "linear_params": 1572864,
+    "total_params": 1603968,
+    "pt_bytes": 6459157,
+    "specq_bytes": 473599,
+    "comp_ratio": 13.63845151700067,
+    "decode_ms": 115.78059196472168,
+    "us_per_matrix": 1608.063777287801,
+    "throughput_mbs": 51.82215687606951,
+    "fp32_ppl": 10.932642516443298,
+    "decoded_ppl": 11.096323462182555,
+    "delta_ppl": 0.16368094573925696,
+    "tok_s_fp32": 143.0731703417153,
+    "tok_s_spec": 134.0391208714388,
+    "ms_tok_spec": 7.460508495569229,
+    "sample_output": "ROMEO:\nIf I profane with my unworthiest hand\nThis holy shrine it, beared les,\nYod witot thik, ather goucoue, in mean hend ay "
+  }
+}
