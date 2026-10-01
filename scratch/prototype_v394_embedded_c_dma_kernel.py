@@ -578,7 +578,7 @@ def main():
 
         # AUTOREGRESSIVE GENERATION THROUGHPUT (64 tokens)
         log("\n  --- AUTOREGRESSIVE GENERATION THROUGHPUT (64 tokens, temp=0.8) ---")
-        prompt = dataset.encode("ROMEO:\nIf I profane with my unworthiest hand\nThis holy shrine").unsqueeze(0)
+        prompt = dataset.encode("ROMEO:\nIf I profane with my unworthiest hand\nThis holy shrine")
         
         # TTFT
         with torch.no_grad():
