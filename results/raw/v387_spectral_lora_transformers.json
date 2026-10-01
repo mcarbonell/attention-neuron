@@ -1,0 +1,609 @@
+{
+  "experiment_id": "v387",
+  "date_utc": "2026-10-01 09:08:42",
+  "commit_hash": "1f62f91",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.14.2",
+  "pytorch_version": "2.10.0+cpu",
+  "device": "cpu",
+  "hyperparameters": {
+    "pretrain_steps": 400,
+    "adapt_steps": 300,
+    "batch_size": 32,
+    "lr_adapt": 0.002,
+    "d_model": 128,
+    "ffn_dim": 256,
+    "n_heads": 4,
+    "n_layers": 2,
+    "seq_len": 128,
+    "seeds": [
+      42,
+      100,
+      2026
+    ]
+  },
+  "summary": [
+    {
+      "cond_name": "Spectral_k16_FullLM",
+      "adapter_params": 3072,
+      "mean_ppl": 10.115922726425474,
+      "std_ppl": 0.1424127967028142,
+      "mean_loss": 2.3140115367248657,
+      "std_loss": 0.014084165535980521,
+      "mean_se": 0.0050419811023436215,
+      "delta_ppl": 0.8815595875848512,
+      "pei": 0.25277240833782944
+    },
+    {
+      "cond_name": "Spectral_k8_FullLM",
+      "adapter_params": 768,
+      "mean_ppl": 10.395209155249848,
+      "std_ppl": 0.13155412016587986,
+      "mean_loss": 2.341264923537771,
+      "std_loss": 0.012660060075556551,
+      "mean_se": 0.004748930590869754,
+      "delta_ppl": 0.602273158760477,
+      "pei": 0.20869318473385465
+    },
+    {
+      "cond_name": "Spectral_k24_FullLM",
+      "adapter_params": 6912,
+      "mean_ppl": 9.930429909275754,
+      "std_ppl": 0.1676530243538273,
+      "mean_loss": 2.29546182838579,
+      "std_loss": 0.016831943199108166,
+      "mean_se": 0.005349079774221174,
+      "delta_ppl": 1.0670524047345715,
+      "pei": 0.27790236181366507
+    },
+    {
+      "cond_name": "LoRA_r4_FullLM",
+      "adapter_params": 14336,
+      "mean_ppl": 9.990618830000054,
+      "std_ppl": 0.19384385803428564,
+      "mean_loss": 2.301457075650493,
+      "std_loss": 0.019497442141952852,
+      "mean_se": 0.005497590773804534,
+      "delta_ppl": 1.006863484010271,
+      "pei": 0.24224072874390043
+    },
+    {
+      "cond_name": "LoRA_r2_FullLM",
+      "adapter_params": 7168,
+      "mean_ppl": 10.117908791761428,
+      "std_ppl": 0.16131836716072429,
+      "mean_loss": 2.3141789410263303,
+      "std_loss": 0.016033656414778413,
+      "mean_se": 0.005232061860498343,
+      "delta_ppl": 0.8795735222488972,
+      "pei": 0.22813719922282966
+    },
+    {
+      "cond_name": "ZeroShot_FrozenBase",
+      "adapter_params": 0,
+      "mean_ppl": 10.997482314010325,
+      "std_ppl": 0.24946631478082582,
+      "mean_loss": 2.397411424749427,
+      "std_loss": 0.022528698877451438,
+      "mean_se": 0.005448100751684812,
+      "delta_ppl": 0.0,
+      "pei": 0.0
+    }
+  ],
+  "detailed_results": [
+    {
+      "cond_name": "Spectral_k16_FullLM",
+      "cond_cfg": {
+        "name": "Spectral_k16_FullLM",
+        "adapter_type": "spectral",
+        "kwargs": {
+          "k": 16
+        },
+        "desc": "Spectral-LoRA (k=16, 3,072 adapter params across Attn+FFN)"
+      },
+      "runs": [
+        {
+          "final_val_loss": 2.3145382633432745,
+          "final_val_se": 0.005298927644670044,
+          "final_val_ppl": 10.120248949839631,
+          "adapter_params": 3072,
+          "wall_time": 17.119141101837158,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.3223138019442557,
+              "val_ppl": 10.199246060736424
+            },
+            {
+              "step": 200,
+              "val_loss": 2.313661850988865,
+              "val_ppl": 10.111383324169697
+            },
+            {
+              "step": 300,
+              "val_loss": 2.313144728541374,
+              "val_ppl": 10.10615585261552
+            }
+          ],
+          "seed": 42,
+          "cond_name": "Spectral_k16_FullLM"
+        },
+        {
+          "final_val_loss": 2.296504696458578,
+          "final_val_se": 0.005129621241410654,
+          "final_val_ppl": 9.939380516658153,
+          "adapter_params": 3072,
+          "wall_time": 17.572648525238037,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.3031579400102298,
+              "val_ppl": 10.00573011124371
+            },
+            {
+              "step": 200,
+              "val_loss": 2.2888697807987533,
+              "val_ppl": 9.863783141719539
+            },
+            {
+              "step": 300,
+              "val_loss": 2.2851551110545794,
+              "val_ppl": 9.827210414775902
+            }
+          ],
+          "seed": 100,
+          "cond_name": "Spectral_k16_FullLM"
+        },
+        {
+          "final_val_loss": 2.3309916503727437,
+          "final_val_se": 0.004697394420950168,
+          "final_val_ppl": 10.288138712778638,
+          "adapter_params": 3072,
+          "wall_time": 17.04432225227356,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.3354785069823265,
+              "val_ppl": 10.334403830820747
+            },
+            {
+              "step": 200,
+              "val_loss": 2.3319700876871745,
+              "val_ppl": 10.298209937818985
+            },
+            {
+              "step": 300,
+              "val_loss": 2.331870541969935,
+              "val_ppl": 10.297184846147031
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "Spectral_k16_FullLM"
+        }
+      ]
+    },
+    {
+      "cond_name": "Spectral_k8_FullLM",
+      "cond_cfg": {
+        "name": "Spectral_k8_FullLM",
+        "adapter_type": "spectral",
+        "kwargs": {
+          "k": 8
+        },
+        "desc": "Spectral-LoRA (k=8, 768 adapter params across Attn+FFN)"
+      },
+      "runs": [
+        {
+          "final_val_loss": 2.3417303185909986,
+          "final_val_se": 0.004991773763848124,
+          "final_val_ppl": 10.399214959044969,
+          "adapter_params": 768,
+          "wall_time": 18.06866693496704,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.345208407441775,
+              "val_ppl": 10.435447325820764
+            },
+            {
+              "step": 200,
+              "val_loss": 2.3333506852388384,
+              "val_ppl": 10.312437440213284
+            },
+            {
+              "step": 300,
+              "val_loss": 2.337372596065203,
+              "val_ppl": 10.353996661720739
+            }
+          ],
+          "seed": 42,
+          "cond_name": "Spectral_k8_FullLM"
+        },
+        {
+          "final_val_loss": 2.3255321215838194,
+          "final_val_se": 0.004867501752651125,
+          "final_val_ppl": 10.232123371111827,
+          "adapter_params": 768,
+          "wall_time": 18.36722207069397,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.3232666552066803,
+              "val_ppl": 10.20896907718799
+            },
+            {
+              "step": 200,
+              "val_loss": 2.31341204966108,
+              "val_ppl": 10.108857802642028
+            },
+            {
+              "step": 300,
+              "val_loss": 2.315694037079811,
+              "val_ppl": 10.131952429767624
+            }
+          ],
+          "seed": 100,
+          "cond_name": "Spectral_k8_FullLM"
+        },
+        {
+          "final_val_loss": 2.356532330438495,
+          "final_val_se": 0.0043875162561100136,
+          "final_val_ppl": 10.55428913559275,
+          "adapter_params": 768,
+          "wall_time": 17.6108660697937,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.3597510481874147,
+              "val_ppl": 10.588315144043186
+            },
+            {
+              "step": 200,
+              "val_loss": 2.356112899382909,
+              "val_ppl": 10.54986326719786
+            },
+            {
+              "step": 300,
+              "val_loss": 2.3574362471699715,
+              "val_ppl": 10.56383364720325
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "Spectral_k8_FullLM"
+        }
+      ]
+    },
+    {
+      "cond_name": "Spectral_k24_FullLM",
+      "cond_cfg": {
+        "name": "Spectral_k24_FullLM",
+        "adapter_type": "spectral",
+        "kwargs": {
+          "k": 24
+        },
+        "desc": "Spectral-LoRA (k=24, 6,912 adapter params across Attn+FFN)"
+      },
+      "runs": [
+        {
+          "final_val_loss": 2.2911732027307155,
+          "final_val_se": 0.005576821105697234,
+          "final_val_ppl": 9.886529783639896,
+          "adapter_params": 6912,
+          "wall_time": 18.926177740097046,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.312006994585196,
+              "val_ppl": 10.094664274354566
+            },
+            {
+              "step": 200,
+              "val_loss": 2.296922030299902,
+              "val_ppl": 9.943529422188675
+            },
+            {
+              "step": 300,
+              "val_loss": 2.2904263441761334,
+              "val_ppl": 9.879148700951324
+            }
+          ],
+          "seed": 42,
+          "cond_name": "Spectral_k24_FullLM"
+        },
+        {
+          "final_val_loss": 2.2773286355659366,
+          "final_val_se": 0.005438888611040485,
+          "final_val_ppl": 9.750598186272105,
+          "adapter_params": 6912,
+          "wall_time": 19.506864070892334,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.291846079627673,
+              "val_ppl": 9.893184439753485
+            },
+            {
+              "step": 200,
+              "val_loss": 2.2748908517261346,
+              "val_ppl": 9.726857284935283
+            },
+            {
+              "step": 300,
+              "val_loss": 2.264971727132797,
+              "val_ppl": 9.63085230545273
+            }
+          ],
+          "seed": 100,
+          "cond_name": "Spectral_k24_FullLM"
+        },
+        {
+          "final_val_loss": 2.317883646860719,
+          "final_val_se": 0.005031529605925803,
+          "final_val_ppl": 10.154161757915258,
+          "adapter_params": 6912,
+          "wall_time": 20.2047700881958,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.3286188272138437,
+              "val_ppl": 10.26375571868579
+            },
+            {
+              "step": 200,
+              "val_loss": 2.3206327833235263,
+              "val_ppl": 10.182115340754596
+            },
+            {
+              "step": 300,
+              "val_loss": 2.319544190665086,
+              "val_ppl": 10.171037195634979
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "Spectral_k24_FullLM"
+        }
+      ]
+    },
+    {
+      "cond_name": "LoRA_r4_FullLM",
+      "cond_cfg": {
+        "name": "LoRA_r4_FullLM",
+        "adapter_type": "lora",
+        "kwargs": {
+          "rank": 4
+        },
+        "desc": "Standard LoRA (r=4, 14,336 adapter params across Attn+FFN)"
+      },
+      "runs": [
+        {
+          "final_val_loss": 2.308429428935051,
+          "final_val_se": 0.005753425861410934,
+          "final_val_ppl": 10.058614473910803,
+          "adapter_params": 14336,
+          "wall_time": 21.017359495162964,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.316292291134596,
+              "val_ppl": 10.138015724906229
+            },
+            {
+              "step": 200,
+              "val_loss": 2.3112690103550753,
+              "val_ppl": 10.087217319517324
+            },
+            {
+              "step": 300,
+              "val_loss": 2.2990647820134957,
+              "val_ppl": 9.964858780495831
+            }
+          ],
+          "seed": 42,
+          "cond_name": "LoRA_r4_FullLM"
+        },
+        {
+          "final_val_loss": 2.274867542274296,
+          "final_val_se": 0.005590225203266838,
+          "final_val_ppl": 9.72663055986629,
+          "adapter_params": 14336,
+          "wall_time": 20.6457097530365,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.29978936885794,
+              "val_ppl": 9.9720818026123
+            },
+            {
+              "step": 200,
+              "val_loss": 2.28684638440609,
+              "val_ppl": 9.843844976700614
+            },
+            {
+              "step": 300,
+              "val_loss": 2.2727115323146183,
+              "val_ppl": 9.705682437799585
+            }
+          ],
+          "seed": 100,
+          "cond_name": "LoRA_r4_FullLM"
+        },
+        {
+          "final_val_loss": 2.3210742557421327,
+          "final_val_se": 0.005149121256735825,
+          "final_val_ppl": 10.18661145622307,
+          "adapter_params": 14336,
+          "wall_time": 20.51582670211792,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.3287454555432,
+              "val_ppl": 10.265055483217138
+            },
+            {
+              "step": 200,
+              "val_loss": 2.3204244626065096,
+              "val_ppl": 10.179994416110004
+            },
+            {
+              "step": 300,
+              "val_loss": 2.313850700855255,
+              "val_ppl": 10.1132930378784
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "LoRA_r4_FullLM"
+        }
+      ]
+    },
+    {
+      "cond_name": "LoRA_r2_FullLM",
+      "cond_cfg": {
+        "name": "LoRA_r2_FullLM",
+        "adapter_type": "lora",
+        "kwargs": {
+          "rank": 2
+        },
+        "desc": "Standard LoRA (r=2, 7,168 adapter params across Attn+FFN)"
+      },
+      "runs": [
+        {
+          "final_val_loss": 2.324084385111928,
+          "final_val_se": 0.0053044730628305885,
+          "final_val_ppl": 10.217320670712668,
+          "adapter_params": 7168,
+          "wall_time": 19.600276231765747,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.325044604142507,
+              "val_ppl": 10.227136248260209
+            },
+            {
+              "step": 200,
+              "val_loss": 2.3249682977795603,
+              "val_ppl": 10.226355882463562
+            },
+            {
+              "step": 300,
+              "val_loss": 2.321462220698595,
+              "val_ppl": 10.190564271220449
+            }
+          ],
+          "seed": 42,
+          "cond_name": "LoRA_r2_FullLM"
+        },
+        {
+          "final_val_loss": 2.2915618808940055,
+          "final_val_se": 0.005045838701983735,
+          "final_val_ppl": 9.890373208756836,
+          "adapter_params": 7168,
+          "wall_time": 19.415460109710693,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.303171220670144,
+              "val_ppl": 10.005862994824897
+            },
+            {
+              "step": 200,
+              "val_loss": 2.2978042334318163,
+              "val_ppl": 9.95230550556214
+            },
+            {
+              "step": 300,
+              "val_loss": 2.2917013997832933,
+              "val_ppl": 9.891753198906672
+            }
+          ],
+          "seed": 100,
+          "cond_name": "LoRA_r2_FullLM"
+        },
+        {
+          "final_val_loss": 2.3268905570730567,
+          "final_val_se": 0.0053458738166807076,
+          "final_val_ppl": 10.24603249581478,
+          "adapter_params": 7168,
+          "wall_time": 19.30656862258911,
+          "step_history": [
+            {
+              "step": 100,
+              "val_loss": 2.3331025128563243,
+              "val_ppl": 10.309878495587045
+            },
+            {
+              "step": 200,
+              "val_loss": 2.337945233285427,
+              "val_ppl": 10.359927443518448
+            },
+            {
+              "step": 300,
+              "val_loss": 2.3274949645002683,
+              "val_ppl": 10.252227145812356
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "LoRA_r2_FullLM"
+        }
+      ]
+    },
+    {
+      "cond_name": "ZeroShot_FrozenBase",
+      "cond_cfg": {
+        "name": "ZeroShot_FrozenBase",
+        "adapter_type": "none",
+        "kwargs": {},
+        "desc": "Zero-shot Frozen Base Model (0 adapter params)"
+      },
+      "runs": [
+        {
+          "final_val_loss": 2.386218719681104,
+          "final_val_se": 0.005509369072221697,
+          "final_val_ppl": 10.872304885947258,
+          "adapter_params": 0,
+          "wall_time": 0.5,
+          "step_history": [
+            {
+              "step": 0,
+              "val_loss": 2.386218719681104,
+              "val_ppl": 10.872304885947258
+            }
+          ],
+          "seed": 42,
+          "cond_name": "ZeroShot_FrozenBase"
+        },
+        {
+          "final_val_loss": 2.3771745443344114,
+          "final_val_se": 0.005219671091806213,
+          "final_val_ppl": 10.774417178176105,
+          "adapter_params": 0,
+          "wall_time": 0.5,
+          "step_history": [
+            {
+              "step": 0,
+              "val_loss": 2.3771745443344114,
+              "val_ppl": 10.774417178176105
+            }
+          ],
+          "seed": 100,
+          "cond_name": "ZeroShot_FrozenBase"
+        },
+        {
+          "final_val_loss": 2.4288410102327664,
+          "final_val_se": 0.005615262091026524,
+          "final_val_ppl": 11.34572487790761,
+          "adapter_params": 0,
+          "wall_time": 0.5,
+          "step_history": [
+            {
+              "step": 0,
+              "val_loss": 2.4288410102327664,
+              "val_ppl": 11.34572487790761
+            }
+          ],
+          "seed": 2026,
+          "cond_name": "ZeroShot_FrozenBase"
+        }
+      ]
+    }
+  ]
+}

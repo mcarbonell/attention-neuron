@@ -122,6 +122,7 @@
 {"experiment_id": "v384", "fecha": "2026-10-01", "familia": "celular / finetuning_espectral_lora", "dataset": "FashionMNIST->MNIST transfer (10k test)", "n_eval": 10000, "metric_name": "transfer_acc_k16", "value": 90.29, "SE": 0.12, "params": 512, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v385", "fecha": "2026-10-01", "familia": "celular / atencion_topografica_transformer", "dataset": "Tiny Shakespeare (640 seqs, 81k tokens)", "n_eval": 640, "metric_name": "ppl_10x_comp", "value": 9.14, "SE": 0.006, "params": 288896, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v386", "fecha": "2026-10-01", "familia": "celular / transformer_topografico_completo", "dataset": "Tiny Shakespeare (640 seqs, 81k tokens)", "n_eval": 640, "metric_name": "global_ppl_10x_comp", "value": 10.06, "SE": 0.006, "params": 288128, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
+{"experiment_id": "v387", "fecha": "2026-10-01", "familia": "celular / spectral_lora_transformer", "dataset": "Tiny Shakespeare Domain Shift (640 seqs)", "n_eval": 640, "metric_name": "target_val_ppl_k24", "value": 9.93, "SE": 0.005, "params": 6912, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 
 
 
