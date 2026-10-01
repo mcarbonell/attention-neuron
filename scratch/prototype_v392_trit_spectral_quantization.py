@@ -20,6 +20,8 @@ Rigour Level: Level 1 (Systems & Algorithmic Sub-1.0 bpp Trit Quantization Bench
 
 import sys
 import os
+sys.path.insert(0, os.getcwd())
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import time
 import math
 import struct
@@ -398,11 +400,20 @@ class StreamingTritLM(nn.Module):
         q1 = (torch.from_numpy(raw1[:n1].astype(np.int16)) - 7).float()
         v1 = q1 * (s1 / 7.0)
 
-        # 3. Band 2: Base-3 Ternary Trits via O(1) LUT
+        # 3. Band 2: Base-3 Ternary Trits via O(1) LUT (or 2-bit if SPECQ)
         b2_arr = np.frombuffer(rec["b2"], dtype=np.uint8)
-        raw_trits = TRIT_LUT[b2_arr].ravel()[:n2]
-        q2 = torch.from_numpy(raw_trits).float()
-        v2 = q2 * scale_trit
+        if self.payload.get("format") == "TRITQ_V1":
+            raw_trits = TRIT_LUT[b2_arr].ravel()[:n2]
+            q2 = torch.from_numpy(raw_trits).float()
+            v2 = q2 * scale_trit
+        else:
+            raw2 = np.empty(len(b2_arr) * 4, dtype=np.uint8)
+            raw2[0::4] = (b2_arr >> 6) & 0x03
+            raw2[1::4] = (b2_arr >> 4) & 0x03
+            raw2[2::4] = (b2_arr >> 2) & 0x03
+            raw2[3::4] = b2_arr & 0x03
+            q2 = (torch.from_numpy(raw2[:n2].astype(np.int16)) - 1).float()
+            v2 = q2 * scale_trit
 
         num_el = M * N
         W_dct = self.dct_buf.view(-1)[:num_el].view(M, N)
@@ -670,7 +681,6 @@ def main():
 
         # Condition 2: Reference -> Topographic JPEG Spectral 1.68 bpp (.specq)
         log(f"  [Condition 2 (REFERENCE)]: Evaluating Topographic JPEG Spectral 1.68 bpp (.specq)...")
-        from scratch.prototype_v391_streaming_jit_decode_kernel import StreamingTopographicLM
         masks_v391 = {}
         for shape in [(128, 128), (256, 128), (128, 256)]:
             M, N = shape
@@ -679,7 +689,7 @@ def main():
             rho = torch.sqrt(u**2 + v**2) / math.sqrt(2.0)
             masks_v391[shape] = (rho <= 0.15, (rho > 0.15) & (rho <= 0.35), (rho > 0.35) & (rho <= 0.60))
         specq_payload = torch.load(topo_specq_path, map_location="cpu", weights_only=False)
-        stream_topo_jpeg = StreamingTopographicLM(specq_payload, D_128, D_256, masks_v391)
+        stream_topo_jpeg = StreamingTritLM(specq_payload, D_128, D_256, masks_v391)
         loss_ref, se_ref, ppl_ref, _ = evaluate_model_ppl(stream_topo_jpeg, dataset, num_batches=20, batch_size=32)
         log(f"    -> Topo JPEG 1.68 bpp PPL: {ppl_ref:.2f} +/- {se_ref:.4f} (Val Loss: {loss_ref:.4f})")
 
