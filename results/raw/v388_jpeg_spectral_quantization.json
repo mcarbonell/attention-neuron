@@ -1,0 +1,572 @@
+{
+  "Topographic_Full_eps2e-3": {
+    "config": {
+      "name": "Topographic_Full_eps2e-3",
+      "desc": "Full Topographic Transformer (Candidate)",
+      "eps_attn": 0.002,
+      "eps_ffn": 0.002
+    },
+    "runs": {
+      "42": {
+        "train_stats": {
+          "wall_time": 30.753769397735596,
+          "final_adj_attn": 0.8968487940728664,
+          "final_adj_ffn": 0.8565676510334015
+        },
+        "quant_results": {
+          "fp32": {
+            "mode_name": "FP32 (Unquantized)",
+            "bpp": 32.0,
+            "compression_ratio": 1.0,
+            "val_loss": 2.2409166019409894,
+            "val_se": 0.00619103558887205,
+            "val_ppl": 9.401945180285571,
+            "n_seq": 640,
+            "mean_rel_err": 0.0
+          },
+          "jpeg_adaptive_1.7bpp": {
+            "mode_name": "JPEG Adaptive (8b/4b/2b/0b)",
+            "bpp": 1.681640625,
+            "compression_ratio": 19.02903600464576,
+            "val_loss": 2.3610389955341815,
+            "val_se": 0.005895751692306822,
+            "val_ppl": 10.601961122204033,
+            "n_seq": 640,
+            "mean_rel_err": 0.22235216107219458
+          },
+          "jpeg_aggressive_0.9bpp": {
+            "mode_name": "JPEG Aggressive (8b/4b/2b/0b)",
+            "bpp": 0.913360595703125,
+            "compression_ratio": 35.03545056634034,
+            "val_loss": 2.5784744367003443,
+            "val_se": 0.006074587230083653,
+            "val_ppl": 13.17702043935112,
+            "n_seq": 640,
+            "mean_rel_err": 0.30591494714220363
+          },
+          "spatial_int4": {
+            "mode_name": "Spatial Uniform INT4",
+            "bpp": 4.0,
+            "compression_ratio": 8.0,
+            "val_loss": 2.2702945986762644,
+            "val_se": 0.005611305274376489,
+            "val_ppl": 9.682252772810706,
+            "n_seq": 640,
+            "mean_rel_err": 0.26729803408185643
+          },
+          "spatial_int2": {
+            "mode_name": "Spatial Uniform INT2",
+            "bpp": 2.0,
+            "compression_ratio": 16.0,
+            "val_loss": 5.670118661224842,
+            "val_se": 0.008121202092814533,
+            "val_ppl": 290.06895228682663,
+            "n_seq": 640,
+            "mean_rel_err": 0.9315634419520696
+          },
+          "spectral_uniform_int4": {
+            "mode_name": "Spectral Uniform INT4",
+            "bpp": 4.0,
+            "compression_ratio": 8.0,
+            "val_loss": 2.5984992887824774,
+            "val_se": 0.005813021038288136,
+            "val_ppl": 13.443548005793655,
+            "n_seq": 640,
+            "mean_rel_err": 0.3706029678384463
+          }
+        }
+      },
+      "100": {
+        "train_stats": {
+          "wall_time": 31.234408378601074,
+          "final_adj_attn": 0.8961933888494968,
+          "final_adj_ffn": 0.8269076272845268
+        },
+        "quant_results": {
+          "fp32": {
+            "mode_name": "FP32 (Unquantized)",
+            "bpp": 32.0,
+            "compression_ratio": 1.0,
+            "val_loss": 2.222431239485741,
+            "val_se": 0.005130701726811533,
+            "val_ppl": 9.229743326231086,
+            "n_seq": 640,
+            "mean_rel_err": 0.0
+          },
+          "jpeg_adaptive_1.7bpp": {
+            "mode_name": "JPEG Adaptive (8b/4b/2b/0b)",
+            "bpp": 1.681640625,
+            "compression_ratio": 19.02903600464576,
+            "val_loss": 2.3228942949324844,
+            "val_se": 0.005256816569535552,
+            "val_ppl": 10.205168370323191,
+            "n_seq": 640,
+            "mean_rel_err": 0.23791504185646772
+          },
+          "jpeg_aggressive_0.9bpp": {
+            "mode_name": "JPEG Aggressive (8b/4b/2b/0b)",
+            "bpp": 0.913360595703125,
+            "compression_ratio": 35.03545056634034,
+            "val_loss": 2.562424450367689,
+            "val_se": 0.004934821071282259,
+            "val_ppl": 12.967217611438763,
+            "n_seq": 640,
+            "mean_rel_err": 0.33258700743317604
+          },
+          "spatial_int4": {
+            "mode_name": "Spatial Uniform INT4",
+            "bpp": 4.0,
+            "compression_ratio": 8.0,
+            "val_loss": 2.220344645343721,
+            "val_se": 0.005477361903104597,
+            "val_ppl": 9.210504676481383,
+            "n_seq": 640,
+            "mean_rel_err": 0.2837771823008855
+          },
+          "spatial_int2": {
+            "mode_name": "Spatial Uniform INT2",
+            "bpp": 2.0,
+            "compression_ratio": 16.0,
+            "val_loss": 6.353686021268368,
+            "val_se": 0.00769805929663266,
+            "val_ppl": 574.6068232564506,
+            "n_seq": 640,
+            "mean_rel_err": 0.9384508530298868
+          },
+          "spectral_uniform_int4": {
+            "mode_name": "Spectral Uniform INT4",
+            "bpp": 4.0,
+            "compression_ratio": 8.0,
+            "val_loss": 2.315425284020603,
+            "val_se": 0.0051130776550258085,
+            "val_ppl": 10.129229802429975,
+            "n_seq": 640,
+            "mean_rel_err": 0.3380191425482432
+          }
+        }
+      },
+      "2026": {
+        "train_stats": {
+          "wall_time": 31.70295214653015,
+          "final_adj_attn": 0.895196259021759,
+          "final_adj_ffn": 0.8386704176664352
+        },
+        "quant_results": {
+          "fp32": {
+            "mode_name": "FP32 (Unquantized)",
+            "bpp": 32.0,
+            "compression_ratio": 1.0,
+            "val_loss": 2.2220295308157803,
+            "val_se": 0.0054967789767536935,
+            "val_ppl": 9.226036402916895,
+            "n_seq": 640,
+            "mean_rel_err": 0.0
+          },
+          "jpeg_adaptive_1.7bpp": {
+            "mode_name": "JPEG Adaptive (8b/4b/2b/0b)",
+            "bpp": 1.681640625,
+            "compression_ratio": 19.02903600464576,
+            "val_loss": 2.2943150237202645,
+            "val_se": 0.00549088995884013,
+            "val_ppl": 9.917640336731168,
+            "n_seq": 640,
+            "mean_rel_err": 0.23063413860897222
+          },
+          "jpeg_aggressive_0.9bpp": {
+            "mode_name": "JPEG Aggressive (8b/4b/2b/0b)",
+            "bpp": 0.913360595703125,
+            "compression_ratio": 35.03545056634034,
+            "val_loss": 2.4855952389538287,
+            "val_se": 0.005716487303758254,
+            "val_ppl": 12.008265915573284,
+            "n_seq": 640,
+            "mean_rel_err": 0.32849081543584663
+          },
+          "spatial_int4": {
+            "mode_name": "Spatial Uniform INT4",
+            "bpp": 4.0,
+            "compression_ratio": 8.0,
+            "val_loss": 2.250933378562331,
+            "val_se": 0.00556276962933547,
+            "val_ppl": 9.496595619715952,
+            "n_seq": 640,
+            "mean_rel_err": 0.2973175682127476
+          },
+          "spatial_int2": {
+            "mode_name": "Spatial Uniform INT2",
+            "bpp": 2.0,
+            "compression_ratio": 16.0,
+            "val_loss": 6.484236831218004,
+            "val_se": 0.006372992885961463,
+            "val_ppl": 654.7390970825909,
+            "n_seq": 640,
+            "mean_rel_err": 0.9360524266958237
+          },
+          "spectral_uniform_int4": {
+            "mode_name": "Spectral Uniform INT4",
+            "bpp": 4.0,
+            "compression_ratio": 8.0,
+            "val_loss": 2.340987184271216,
+            "val_se": 0.005098417495066404,
+            "val_ppl": 10.391489816274984,
+            "n_seq": 640,
+            "mean_rel_err": 0.3483458310365677
+          }
+        }
+      }
+    },
+    "quant_summary": {
+      "fp32": {
+        "mode_name": "FP32 (Unquantized)",
+        "bpp": 32.0,
+        "compression_ratio": 1.0,
+        "mean_ppl": 9.285908303144517,
+        "std_ppl": 0.0820644176347675,
+        "mean_loss": 2.2284591240808367,
+        "std_loss": 0.008810293541875663,
+        "mean_se": 0.005606172097479093,
+        "mean_rel_err": 0.0
+      },
+      "jpeg_adaptive_1.7bpp": {
+        "mode_name": "JPEG Adaptive (8b/4b/2b/0b)",
+        "bpp": 1.681640625,
+        "compression_ratio": 19.02903600464576,
+        "mean_ppl": 10.241589943086131,
+        "std_ppl": 0.28055734123282094,
+        "mean_loss": 2.3260827713956433,
+        "std_loss": 0.02733309215673907,
+        "mean_se": 0.0055478194068941675,
+        "mean_rel_err": 0.2303004471792115
+      },
+      "jpeg_aggressive_0.9bpp": {
+        "mode_name": "JPEG Aggressive (8b/4b/2b/0b)",
+        "bpp": 0.913360595703125,
+        "compression_ratio": 35.03545056634034,
+        "mean_ppl": 12.717501322121054,
+        "std_ppl": 0.5087667789703137,
+        "mean_loss": 2.5421647086739543,
+        "std_loss": 0.04053376529620486,
+        "mean_se": 0.005575298535041388,
+        "mean_rel_err": 0.3223309233370754
+      },
+      "spatial_int4": {
+        "mode_name": "Spatial Uniform INT4",
+        "bpp": 4.0,
+        "compression_ratio": 8.0,
+        "mean_ppl": 9.463117689669348,
+        "std_ppl": 0.1940397647352025,
+        "mean_loss": 2.2471908741941053,
+        "std_loss": 0.020562979902249187,
+        "mean_se": 0.005550478935605519,
+        "mean_rel_err": 0.28279759486516315
+      },
+      "spatial_int2": {
+        "mode_name": "Spatial Uniform INT2",
+        "bpp": 2.0,
+        "compression_ratio": 16.0,
+        "mean_ppl": 506.4716242086227,
+        "std_ppl": 156.47765045591711,
+        "mean_loss": 6.169347171237071,
+        "std_loss": 0.35700859690993364,
+        "mean_se": 0.007397418091802885,
+        "mean_rel_err": 0.9353555738925934
+      },
+      "spectral_uniform_int4": {
+        "mode_name": "Spectral Uniform INT4",
+        "bpp": 4.0,
+        "compression_ratio": 8.0,
+        "mean_ppl": 11.321422541499539,
+        "std_ppl": 1.5043841360879513,
+        "mean_loss": 2.4183039190247655,
+        "std_loss": 0.12784399646364433,
+        "mean_se": 0.005341505396126783,
+        "mean_rel_err": 0.3523226471410858
+      }
+    }
+  },
+  "Standard_AdamW_Baseline": {
+    "config": {
+      "name": "Standard_AdamW_Baseline",
+      "desc": "Standard Transformer Baseline (AdamW, eps=0)",
+      "eps_attn": 0.0,
+      "eps_ffn": 0.0
+    },
+    "runs": {
+      "42": {
+        "train_stats": {
+          "wall_time": 30.696542501449585,
+          "final_adj_attn": -0.001649088511840091,
+          "final_adj_ffn": 0.01715977891581133
+        },
+        "quant_results": {
+          "fp32": {
+            "mode_name": "FP32 (Unquantized)",
+            "bpp": 32.0,
+            "compression_ratio": 1.0,
+            "val_loss": 1.9544252999126912,
+            "val_se": 0.007450520127768113,
+            "val_ppl": 7.059860555134369,
+            "n_seq": 640,
+            "mean_rel_err": 0.0
+          },
+          "jpeg_adaptive_1.7bpp": {
+            "mode_name": "JPEG Adaptive (8b/4b/2b/0b)",
+            "bpp": 1.681640625,
+            "compression_ratio": 19.02903600464576,
+            "val_loss": 3.8978017210960387,
+            "val_se": 0.005610611653634882,
+            "val_ppl": 49.29396802338025,
+            "n_seq": 640,
+            "mean_rel_err": 0.8758758306503296
+          },
+          "jpeg_aggressive_0.9bpp": {
+            "mode_name": "JPEG Aggressive (8b/4b/2b/0b)",
+            "bpp": 0.913360595703125,
+            "compression_ratio": 35.03545056634034,
+            "val_loss": 4.372699444741011,
+            "val_se": 0.005169268575453384,
+            "val_ppl": 79.2572938703315,
+            "n_seq": 640,
+            "mean_rel_err": 0.9345313608646393
+          },
+          "spatial_int4": {
+            "mode_name": "Spatial Uniform INT4",
+            "bpp": 4.0,
+            "compression_ratio": 8.0,
+            "val_loss": 1.9743289006873965,
+            "val_se": 0.006870039421820381,
+            "val_ppl": 7.201784918799722,
+            "n_seq": 640,
+            "mean_rel_err": 0.20588651051123938
+          },
+          "spatial_int2": {
+            "mode_name": "Spatial Uniform INT2",
+            "bpp": 2.0,
+            "compression_ratio": 16.0,
+            "val_loss": 4.5056581415235994,
+            "val_se": 0.005509116127979156,
+            "val_ppl": 90.52790462015165,
+            "n_seq": 640,
+            "mean_rel_err": 0.9554353108008703
+          },
+          "spectral_uniform_int4": {
+            "mode_name": "Spectral Uniform INT4",
+            "bpp": 4.0,
+            "compression_ratio": 8.0,
+            "val_loss": 2.037409150227904,
+            "val_se": 0.006732797560225637,
+            "val_ppl": 7.670709775128791,
+            "n_seq": 640,
+            "mean_rel_err": 0.23094184075792631
+          }
+        }
+      },
+      "100": {
+        "train_stats": {
+          "wall_time": 32.555952072143555,
+          "final_adj_attn": -0.0076015631057089195,
+          "final_adj_ffn": 0.018530985864344984
+        },
+        "quant_results": {
+          "fp32": {
+            "mode_name": "FP32 (Unquantized)",
+            "bpp": 32.0,
+            "compression_ratio": 1.0,
+            "val_loss": 1.945338854752481,
+            "val_se": 0.006258780228237881,
+            "val_ppl": 6.996002081982803,
+            "n_seq": 640,
+            "mean_rel_err": 0.0
+          },
+          "jpeg_adaptive_1.7bpp": {
+            "mode_name": "JPEG Adaptive (8b/4b/2b/0b)",
+            "bpp": 1.681640625,
+            "compression_ratio": 19.02903600464576,
+            "val_loss": 4.284038144350052,
+            "val_se": 0.005309562288171184,
+            "val_ppl": 72.53274712394051,
+            "n_seq": 640,
+            "mean_rel_err": 0.878843421737353
+          },
+          "jpeg_aggressive_0.9bpp": {
+            "mode_name": "JPEG Aggressive (8b/4b/2b/0b)",
+            "bpp": 0.913360595703125,
+            "compression_ratio": 35.03545056634034,
+            "val_loss": 4.582186593860388,
+            "val_se": 0.004582069527272001,
+            "val_ppl": 97.72785187028599,
+            "n_seq": 640,
+            "mean_rel_err": 0.9367604355017344
+          },
+          "spatial_int4": {
+            "mode_name": "Spatial Uniform INT4",
+            "bpp": 4.0,
+            "compression_ratio": 8.0,
+            "val_loss": 1.9782926926389337,
+            "val_se": 0.006890086499498686,
+            "val_ppl": 7.230387946673353,
+            "n_seq": 640,
+            "mean_rel_err": 0.21944219494859377
+          },
+          "spatial_int2": {
+            "mode_name": "Spatial Uniform INT2",
+            "bpp": 2.0,
+            "compression_ratio": 16.0,
+            "val_loss": 4.844083721935749,
+            "val_se": 0.005198129598141732,
+            "val_ppl": 126.9868733840239,
+            "n_seq": 640,
+            "mean_rel_err": 0.9648828307787577
+          },
+          "spectral_uniform_int4": {
+            "mode_name": "Spectral Uniform INT4",
+            "bpp": 4.0,
+            "compression_ratio": 8.0,
+            "val_loss": 2.0382446089759467,
+            "val_se": 0.006770317780120769,
+            "val_ppl": 7.6771210145042135,
+            "n_seq": 640,
+            "mean_rel_err": 0.2403619959950447
+          }
+        }
+      },
+      "2026": {
+        "train_stats": {
+          "wall_time": 31.61526393890381,
+          "final_adj_attn": -0.005296913179336116,
+          "final_adj_ffn": 0.026914314308669418
+        },
+        "quant_results": {
+          "fp32": {
+            "mode_name": "FP32 (Unquantized)",
+            "bpp": 32.0,
+            "compression_ratio": 1.0,
+            "val_loss": 1.9367315961048006,
+            "val_se": 0.006849936715659142,
+            "val_ppl": 6.93604408970195,
+            "n_seq": 640,
+            "mean_rel_err": 0.0
+          },
+          "jpeg_adaptive_1.7bpp": {
+            "mode_name": "JPEG Adaptive (8b/4b/2b/0b)",
+            "bpp": 1.681640625,
+            "compression_ratio": 19.02903600464576,
+            "val_loss": 3.971119423210621,
+            "val_se": 0.005768343479623616,
+            "val_ppl": 53.04387616337118,
+            "n_seq": 640,
+            "mean_rel_err": 0.8753267178932825
+          },
+          "jpeg_aggressive_0.9bpp": {
+            "mode_name": "JPEG Aggressive (8b/4b/2b/0b)",
+            "bpp": 0.913360595703125,
+            "compression_ratio": 35.03545056634034,
+            "val_loss": 4.772874856740236,
+            "val_se": 0.0059095480184230996,
+            "val_ppl": 118.25873064507392,
+            "n_seq": 640,
+            "mean_rel_err": 0.9341156383355459
+          },
+          "spatial_int4": {
+            "mode_name": "Spatial Uniform INT4",
+            "bpp": 4.0,
+            "compression_ratio": 8.0,
+            "val_loss": 1.989087430946529,
+            "val_se": 0.007330871093729146,
+            "val_ppl": 7.308860877785506,
+            "n_seq": 640,
+            "mean_rel_err": 0.21819583574930826
+          },
+          "spatial_int2": {
+            "mode_name": "Spatial Uniform INT2",
+            "bpp": 2.0,
+            "compression_ratio": 16.0,
+            "val_loss": 4.985998074710369,
+            "val_se": 0.005645164389902178,
+            "val_ppl": 146.3495699617634,
+            "n_seq": 640,
+            "mean_rel_err": 0.960733120640119
+          },
+          "spectral_uniform_int4": {
+            "mode_name": "Spectral Uniform INT4",
+            "bpp": 4.0,
+            "compression_ratio": 8.0,
+            "val_loss": 2.0119007715955375,
+            "val_se": 0.007004176447416729,
+            "val_ppl": 7.477516899719228,
+            "n_seq": 640,
+            "mean_rel_err": 0.24190763756632805
+          }
+        }
+      }
+    },
+    "quant_summary": {
+      "fp32": {
+        "mode_name": "FP32 (Unquantized)",
+        "bpp": 32.0,
+        "compression_ratio": 1.0,
+        "mean_ppl": 6.997302242273041,
+        "std_ppl": 0.050556220129209364,
+        "mean_loss": 1.9454985835899912,
+        "std_loss": 0.007224307283354334,
+        "mean_se": 0.006853079023888379,
+        "mean_rel_err": 0.0
+      },
+      "jpeg_adaptive_1.7bpp": {
+        "mode_name": "JPEG Adaptive (8b/4b/2b/0b)",
+        "bpp": 1.681640625,
+        "compression_ratio": 19.02903600464576,
+        "mean_ppl": 58.290197103563976,
+        "std_ppl": 10.186694788686799,
+        "mean_loss": 4.050986429552236,
+        "std_loss": 0.16748870148658201,
+        "mean_se": 0.005562839140476561,
+        "mean_rel_err": 0.876681990093655
+      },
+      "jpeg_aggressive_0.9bpp": {
+        "mode_name": "JPEG Aggressive (8b/4b/2b/0b)",
+        "bpp": 0.913360595703125,
+        "compression_ratio": 35.03545056634034,
+        "mean_ppl": 98.41462546189713,
+        "std_ppl": 15.9296738007648,
+        "mean_loss": 4.575920298447211,
+        "std_loss": 0.16343100467953084,
+        "mean_se": 0.005220295373716162,
+        "mean_rel_err": 0.9351358115673065
+      },
+      "spatial_int4": {
+        "mode_name": "Spatial Uniform INT4",
+        "bpp": 4.0,
+        "compression_ratio": 8.0,
+        "mean_ppl": 7.24701124775286,
+        "std_ppl": 0.04526636611780159,
+        "mean_loss": 1.9805696747576196,
+        "std_loss": 0.006236560992996263,
+        "mean_se": 0.007030332338349404,
+        "mean_rel_err": 0.21450818040304712
+      },
+      "spatial_int2": {
+        "mode_name": "Spatial Uniform INT2",
+        "bpp": 2.0,
+        "compression_ratio": 16.0,
+        "mean_ppl": 121.28811598864631,
+        "std_ppl": 23.14262239917583,
+        "mean_loss": 4.778579979389906,
+        "std_loss": 0.201493867680221,
+        "mean_se": 0.005450803372007688,
+        "mean_rel_err": 0.9603504207399157
+      },
+      "spectral_uniform_int4": {
+        "mode_name": "Spectral Uniform INT4",
+        "bpp": 4.0,
+        "compression_ratio": 8.0,
+        "mean_ppl": 7.608449229784077,
+        "std_ppl": 0.0926201284449563,
+        "mean_loss": 2.029184843599796,
+        "std_loss": 0.01222644283554346,
+        "mean_se": 0.006835763929254379,
+        "mean_rel_err": 0.23773715810643303
+      }
+    }
+  }
+}

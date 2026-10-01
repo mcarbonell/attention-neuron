@@ -123,6 +123,7 @@
 {"experiment_id": "v385", "fecha": "2026-10-01", "familia": "celular / atencion_topografica_transformer", "dataset": "Tiny Shakespeare (640 seqs, 81k tokens)", "n_eval": 640, "metric_name": "ppl_10x_comp", "value": 9.14, "SE": 0.006, "params": 288896, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v386", "fecha": "2026-10-01", "familia": "celular / transformer_topografico_completo", "dataset": "Tiny Shakespeare (640 seqs, 81k tokens)", "n_eval": 640, "metric_name": "global_ppl_10x_comp", "value": 10.06, "SE": 0.006, "params": 288128, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v387", "fecha": "2026-10-01", "familia": "celular / spectral_lora_transformer", "dataset": "Tiny Shakespeare Domain Shift (640 seqs)", "n_eval": 640, "metric_name": "target_val_ppl_k24", "value": 9.93, "SE": 0.005, "params": 6912, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
+{"experiment_id": "v388", "fecha": "2026-10-01", "familia": "celular / cuantizacion_espectral_jpeg", "dataset": "Tiny Shakespeare (640 seqs, 81k tokens)", "n_eval": 640, "metric_name": "jpeg_adaptive_1.68bpp_ppl", "value": 10.24, "SE": 0.006, "params": 262144, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 
 
 
