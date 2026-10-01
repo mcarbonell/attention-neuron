@@ -449,8 +449,11 @@ class SynchronousStreamingTritLM(nn.Module):
         )
 
     def decode_into_scratchpad(self, rec, D_out, D_in):
-        decode_matrix_into(rec, D_out, D_in, self.dct_buf, self.scratchpad[:rec["shape"][0], :rec["shape"][1]], self.masks)
-        return self.scratchpad[:rec["shape"][0], :rec["shape"][1]]
+        M, N = rec["shape"]
+        num_el = M * N
+        target_view = self.scratchpad.view(-1)[:num_el].view(M, N)
+        decode_matrix_into(rec, D_out, D_in, self.dct_buf, target_view, self.masks)
+        return target_view
 
     def forward(self, idx):
         B, T = idx.shape
