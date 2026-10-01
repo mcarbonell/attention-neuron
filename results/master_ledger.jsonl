@@ -126,6 +126,7 @@
 {"experiment_id": "v388", "fecha": "2026-10-01", "familia": "celular / cuantizacion_espectral_jpeg", "dataset": "Tiny Shakespeare (640 seqs, 81k tokens)", "n_eval": 640, "metric_name": "jpeg_adaptive_1.68bpp_ppl", "value": 10.24, "SE": 0.006, "params": 262144, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v389", "fecha": "2026-10-01", "familia": "celular / escalado_profundidad_transformer", "dataset": "Tiny Shakespeare (640 seqs, 81k tokens)", "n_eval": 640, "metric_name": "val_ppl_L6_fp32", "value": 10.06, "SE": 0.005, "params": 814464, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v390", "fecha": "2026-10-01", "familia": "celular / kernel_descompresion_inferencia", "dataset": "Tiny Shakespeare (640 seqs, 81k tokens)", "n_eval": 640, "metric_name": "decode_throughput_mbs", "value": 51.82, "SE": null, "params": 1603968, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
+{"experiment_id": "v391", "fecha": "2026-10-01", "familia": "celular / streaming_jit_decode_scratchpad", "dataset": "Tiny Shakespeare (640 seqs, 81k tokens)", "n_eval": 640, "metric_name": "weight_ram_reduction_L12", "value": 9.76, "SE": null, "params": 1603968, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 
 
 
