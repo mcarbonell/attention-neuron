@@ -258,9 +258,114 @@ class AdaptedNanoLM(nn.Module):
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
 
 # ---------------------------------------------------------
-# Base Model Architecture (Trained in Phase 1)
+# Base Model Architecture (Self-Contained)
 # ---------------------------------------------------------
-from scratch.prototype_v386_full_topographic_transformer import FullTopographicLM
+class CausalSelfAttention(nn.Module):
+    def __init__(self, d_model=128, n_heads=4, max_len=128):
+        super().__init__()
+        assert d_model % n_heads == 0
+        self.d_model = d_model
+        self.n_heads = n_heads
+        self.head_dim = d_model // n_heads
+
+        self.q = nn.Linear(d_model, d_model, bias=False)
+        self.k = nn.Linear(d_model, d_model, bias=False)
+        self.v = nn.Linear(d_model, d_model, bias=False)
+        self.o = nn.Linear(d_model, d_model, bias=False)
+
+        self.register_buffer(
+            "causal_mask",
+            torch.triu(torch.ones(max_len, max_len, dtype=torch.bool), diagonal=1),
+            persistent=False
+        )
+
+    def forward(self, x):
+        B, T, C = x.shape
+        q = self.q(x).view(B, T, self.n_heads, self.head_dim).transpose(1, 2)
+        k = self.k(x).view(B, T, self.n_heads, self.head_dim).transpose(1, 2)
+        v = self.v(x).view(B, T, self.n_heads, self.head_dim).transpose(1, 2)
+
+        att = (q @ k.transpose(-2, -1)) * (1.0 / math.sqrt(self.head_dim))
+        att = att.masked_fill(self.causal_mask[:T, :T], float("-inf"))
+        att = F.softmax(att, dim=-1)
+
+        y = att @ v
+        y = y.transpose(1, 2).contiguous().view(B, T, C)
+        return self.o(y)
+
+    def get_dirichlet_energy(self):
+        return (dirichlet_energy_2d(self.q.weight) +
+                dirichlet_energy_2d(self.k.weight) +
+                dirichlet_energy_2d(self.v.weight) +
+                dirichlet_energy_2d(self.o.weight))
+
+
+class TopographicFFN(nn.Module):
+    def __init__(self, d_model=128, ffn_dim=256):
+        super().__init__()
+        self.w_in = nn.Linear(d_model, ffn_dim, bias=False)
+        self.w_out = nn.Linear(ffn_dim, d_model, bias=False)
+
+    def forward(self, x):
+        return self.w_out(F.gelu(self.w_in(x)))
+
+    def get_dirichlet_energy(self):
+        return dirichlet_energy_2d(self.w_in.weight) + dirichlet_energy_2d(self.w_out.weight)
+
+
+class FullTransformerBlock(nn.Module):
+    def __init__(self, d_model=128, n_heads=4, max_len=128, ffn_dim=256):
+        super().__init__()
+        self.ln1 = nn.LayerNorm(d_model)
+        self.attn = CausalSelfAttention(d_model, n_heads, max_len)
+        self.ln2 = nn.LayerNorm(d_model)
+        self.ffn = TopographicFFN(d_model, ffn_dim)
+
+    def forward(self, x):
+        x = x + self.attn(self.ln1(x))
+        x = x + self.ffn(self.ln2(x))
+        return x
+
+
+class FullTopographicLM(nn.Module):
+    def __init__(self, vocab_size=65, d_model=128, n_heads=4, n_layers=2, max_len=128, ffn_dim=256):
+        super().__init__()
+        self.vocab_size = vocab_size
+        self.d_model = d_model
+        self.max_len = max_len
+        self.tok_emb = nn.Embedding(vocab_size, d_model)
+        self.pos_emb = nn.Parameter(torch.zeros(1, max_len, d_model))
+
+        self.blocks = nn.ModuleList([
+            FullTransformerBlock(d_model, n_heads, max_len, ffn_dim)
+            for _ in range(n_layers)
+        ])
+        self.ln_f = nn.LayerNorm(d_model)
+        self.lm_head = nn.Linear(d_model, vocab_size, bias=False)
+
+        self.lm_head.weight = self.tok_emb.weight
+        self.init_weights()
+
+    def init_weights(self):
+        for p in self.parameters():
+            if p.dim() > 1:
+                nn.init.normal_(p, mean=0.0, std=0.02)
+
+    def forward(self, idx):
+        B, T = idx.shape
+        x = self.tok_emb(idx) + self.pos_emb[:, :T, :]
+        for block in self.blocks:
+            x = block(x)
+        x = self.ln_f(x)
+        logits = self.lm_head(x)
+        return logits
+
+    def get_attn_dirichlet_energy(self):
+        return sum(block.attn.get_dirichlet_energy() for block in self.blocks)
+
+    def get_ffn_dirichlet_energy(self):
+        return sum(block.ffn.get_dirichlet_energy() for block in self.blocks)
+
 
 # ---------------------------------------------------------
 # Dataset Splitter: Domain Shift within Tiny Shakespeare
