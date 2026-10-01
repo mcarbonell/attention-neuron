@@ -22,6 +22,8 @@ results/*.pt
 
 *.pth
 *.pt
+*.tritq
+results/raw/*.tritq
 *.dll
 *.so
 *.o

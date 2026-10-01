@@ -130,6 +130,7 @@
 {"experiment_id": "v392", "fecha": "2026-10-01", "familia": "celular / cuantizacion_trit_espectral_sub1b", "dataset": "Tiny Shakespeare (640 seqs, 81k tokens)", "n_eval": 640, "metric_name": "val_ppl_L12_trit_0.945b", "value": 11.54, "SE": 0.005, "params": 1603968, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v393", "fecha": "2026-10-01", "familia": "celular / pipelining_dma_asincrono_doble_buffer", "dataset": "Tiny Shakespeare (640 seqs, 81k tokens)", "n_eval": 640, "metric_name": "val_ppl_L12_pipelined_0.945b", "value": 11.41, "SE": 0.005, "params": 1603968, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 {"experiment_id": "v394", "fecha": "2026-10-01", "familia": "celular / microkernel_c_zero_copy_dma", "dataset": "Tiny Shakespeare (640 seqs, 81k tokens)", "n_eval": 640, "metric_name": "val_ppl_L12_c_dma_0.945b", "value": 11.44, "SE": 0.005, "params": 1603968, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
+{"experiment_id": "v395", "fecha": "2026-10-01", "familia": "celular / escalado_tinystories_bpe_dma", "dataset": "TinyStories BPE (640 seqs, 81k tokens)", "n_eval": 640, "metric_name": "linear_compression_20M", "value": 34.37, "SE": null, "params": 18957312, "nivel_rigor": 1, "etiqueta": "SEÑAL"}
 
 
 
