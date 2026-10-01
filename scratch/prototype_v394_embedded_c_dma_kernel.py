@@ -17,6 +17,7 @@
 
 import os
 import sys
+sys.path.insert(0, os.path.abspath("."))
 import time
 import math
 import ctypes
@@ -340,7 +341,7 @@ class EmbeddedCDMAPipelinedLM(nn.Module):
 # ---------------------------------------------------------
 from scratch.prototype_v393_async_pipelined_streaming_gemm import (
     AsyncDMAPipelinedLM,
-    SynchronousStreamingLM,
+    SynchronousStreamingTritLM,
     ScalableTransformerLM,
     TinyShakespeareDataset,
     decode_matrix_into
@@ -529,7 +530,7 @@ def main():
         # Instantiate Models
         c_cand_model = EmbeddedCDMAPipelinedLM(payload, D_128, D_256, masks)
         py_cand_model = AsyncDMAPipelinedLM(payload, D_128, D_256, masks)
-        sync_model = SynchronousStreamingLM(payload, D_128, D_256, masks)
+        sync_model = SynchronousStreamingTritLM(payload, D_128, D_256, masks)
 
         # EXACT MATHEMATICAL IDENTITY AUDIT
         log("\n  --- EXACT MATHEMATICAL IDENTITY AUDIT ---")
