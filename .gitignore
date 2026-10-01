@@ -22,3 +22,6 @@ results/*.pt
 
 *.pth
 *.pt
+*.dll
+*.so
+*.o
