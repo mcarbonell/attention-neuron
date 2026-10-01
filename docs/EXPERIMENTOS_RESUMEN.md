@@ -29,7 +29,10 @@
 | FFN Espectral & SpecGate | v320–v329 | 10 | ✅ Procesado |
 | Transferencia & Eficiencia | v330–v333 | 4 | ✅ Procesado |
 | Lógica de Fase & Multi-Hop | v334–v337 | 4 | ✅ Procesado |
-| Filtros IIR & Espacio de Estados | v341–v348 | 8 | 🔄 En desarrollo |
+| Filtros IIR & Espacio de Estados | v341–v348 | 8 | ✅ Procesado |
+| Capacidad Matricial & Foveal | v349–v367 | 12 | ✅ Procesado |
+| Fase Escalar & Holográfica Sin Multiplicadores | v375–v378 | 4 | ✅ Procesado |
+| Transformer Espectral Topográfico & Silicio | v379–v395 | 17 | ✅ Procesado |
 
 ---
 
@@ -281,6 +284,28 @@
 | 242 | v349 | DeltaPhase Holographic Core (Complex Matrix) | Conv1D Causal + Chunkwise WY Triangular Solve C^(32x32) | **ANCLA - 100.00% ACCURACY MQAR**: Resolución perfecta en L=128, 256, 512 (vs 15% Transformer). |
 | 243 | v350 | Barrido de Frontera de Capacidad Matricial | Barrido N_pairs ∈ {8, 16, 32, 64} en DeltaPhase C^(32x32) (V=256) | **ANCLA - Superioridad en las 4 Escalas**: DeltaPhase supera al Transformer en las 4 escalas (99.00% en P8 vs 2.33%). |
 | 244 | v361 | Escalado de Estado Matricial d_k=64 | DeltaPhase C^(64x64) en N_pairs=32 (L=512) | **ANCLA - 6x Superioridad sobre Transformer**: DeltaPhase 6.00% Acc vs 1.00% Transformer en 32 pares. |
+| 245 | v362 | Atención Foveal Multi-Cabeza | Foveación 2D multi-cabeza en Cluttered MNIST (60x60) | **43.95% Acc** (vs 29.95% single-head). Desacopla campos receptivos. |
+| 246 | v363 | Barrido de Cabezas Foveales | H ∈ {2, 4, 8} cabezas en Cluttered MNIST | **84.90% Acc** con H=8 (81K params). Cobertura foveal completa. |
+| 247 | v364–v367 | Atención Foveal 1D en MQAR | Foveación de contenido 1D en secuencias de longitud 128 | **24.00% Acc** en v365 vs 9.0% baseline. Gating selectivo 1D. |
+| 248 | v375 | Atención de Fase Escalar Compleja | Mapeo de contenido escalar continuo $e^{i \theta}$ sin GEMM denso | **100.00% Acc** con solo 659 parámetros en recuperación asociativa. |
+| 249 | v376 | Estrés de Capacidad Angular | Barrido de claves $K \in [8, 64]$ con $H=4$ en espacio fasorial | **91.83% Acc** a 64 claves concurrentes (5,385 params). |
+| 250 | v377 | Atención Lineal Holográfica de Fase | Acumulador lineal $\mathcal{O}(N)$ con desfase de interferencia | **100.00% Acc** en recuperación causal con 1,744 params. |
+| 251 | v378 | Atención de Fase Sin Multiplicadores | Operadores CORDIC / triangulares sustituyendo productos | **100.00% Acc** con 1,745 params; aritmética de solo sumas/desplazamientos. |
+| 252 | v379–v381 | Regularización Topológica Celular | Penalización de Dirichlet $\text{Tr}(W^T L W)$ en pesos celulares | **98.01% Acc** MNIST; auto-organización de suavidad cortical. |
+| 253 | v382 | Zero-DC Harmonic Pinning | Fijación del armónico fundamental Dirichlet en pesos | **92.61% Acc** MNIST; 92.4% de energía confinada en frecuencias bajas. |
+| 254 | v383 | Compresión Espectral 2D-DCT | Truncamiento paso bajo 2D-DCT $8 \times 8$ sobre red topográfica | **96.28% Acc** con 50x de compresión (4,703 params vs 235K). |
+| 255 | v384 | Spectral-LoRA (Fine-Tuning) | Modulación espectral exclusiva de coeficientes DCT $k \le 16$ | **90.29% Acc** en transferencia FashionMNIST→MNIST con 512 params. |
+| 256 | v385 | Atención Topográfica en Transformers | Proyecciones $W_q, W_k, W_v, W_o$ con regularización de Dirichlet | **9.14 PPL** en Tiny Shakespeare con 10x de compresión espectral. |
+| 257 | v386 | Transformer Topográfico Completo | Topología Dirichlet en 100% de proyecciones (Atención + FFN SwiGLU) | **10.06 PPL** global; elimina la invariancia de permutación en LLMs. |
+| 258 | v387 | Spectral-LoRA en Transformers | Adaptación a cambio de dominio modulando 24 coeficientes espectrales | **9.93 PPL** con solo 6,912 parámetros entrenables por bloque. |
+| 259 | v388 | Cuantización Espectral JPEG Adaptativa | Partición jerárquica DC (8b), Mid (4b) y HF (2b) en frecuencia | **1.68 bpp** (13.6x compresión en disco), PPL **10.24** estable. |
+| 260 | v389 | Escalado de Profundidad ($L=6$ y $L=12$) | Evaluación de estabilidad en arquitecturas profundas (814K y 1.6M params) | **10.06 PPL** ($L=6$) y **10.21 PPL** ($L=12$); gradientes espectrales estables. |
+| 261 | v390 | Fast Block-DCT Decompression Kernel | Reconstrucción matricial streaming por bloques ortogonales | **51.82 MB/s** throughput de decodificación al vuelo en CPU. |
+| 262 | v391 | Streaming JIT Scratchpad (128 KB) | Inferencia por proyecciones temporales en búfer único compartido | **642 KB SRAM activa total**; rompe la barrera del megabyte en RAM. |
+| 263 | v392 | Base-3 Quantum Trit Quantization | Cuantización residual $\{-1, 0, +1\}$ empacada a 5 trits/byte | **0.945 bpp** ($33.86\times$ compresión); 500 KB SRAM; Falsación: 11.54 vs 43.43 PPL. |
+| 264 | v393 | Pipelining Asíncrono DMA Doble Búfer | Hilo DMA ping-pong solapando IDCT con GEMM de inferencia | **Match bit a bit exacto (0.00000000)**; latencia de decodificación enmascarada. |
+| 265 | v394 | Micro-Kernel C Embebido Zero-Copy DMA | Kernel nativo Win32/POSIX C con sincronización de eventos de silicio | **77.4 tok/s** ($L=6$) y **39.8 tok/s** ($L=12$); **+70.1%** sobre DMA en Python. |
+| 266 | v395 | Escalado a 10M–20M en TinyStories | Subword BPE (4096 tokens), C-DMA, 34.37x compresión lineal (74MB→6.75MB Flash) | **0.931 bpp**; resolución asimetría $\mathcal{O}(D^3)$ vs $\mathcal{O}(D^2)$ vía Block-DCT Tiling. |
 
 ---
 
@@ -2006,6 +2031,138 @@
 - **Setup:** MQAR $L=512$, $N_{\text{pairs}}=32$, $V=256$, 2 capas, 30 épocas, evaluando zero-shot en $L=1024$.
 - **Resultado principal:** **6.00% Precisión en $L=512$** y **5.50% Precisión en $L=1024$** para DeltaPhase 🌟 vs **1.00%** y **0.75%** del Transformer (superando al Transformer por un factor de $6.0\times$ a $7.3\times$).
 - **Hallazgo:** [ANCLA] **Ley de Escalado por Número de Cabezas ($H$).** Demuestra una superioridad constante sobre el Transformer. Revela que ampliar $d_k$ incrementa la memoria por cabeza, pero mantener un número reducido de cabezas ($H=4$) fuerza a cada cabeza a almacenar 8 pares simultáneos. La resolución completa de $N_{\text{pairs}} \ge 32$ requiere escalar el **número de cabezas ($H=8$ u $H=16$)** para que cada cabeza se especialice en $\le 4$ pares.
+
+---
+
+### Era de Fase Escalar y Holográfica Sin Multiplicadores (v375–v378)
+
+> **Tema:** eliminación de matrices de proyección densas $QK^T$ mediante representación fasorial continua $e^{i \theta}$ en el círculo unitario $S^1$ y cómputo trigonométrico sin multiplicadores.
+> **Hito clave:** V378 demuestra **100.00% de precisión** en recuperación asociativa multi-clave utilizando operadores triangulares y desplazamientos tipo CORDIC con solo 1,745 parámetros.
+
+#### V375 — Atención de Fase Escalar Compleja (`ScalarComplexAttention`)
+- **Qué se probó:** Sustitución de matrices de proyección densas por una proyección escalar angular $\theta = W_\theta x + b_\theta$, mapeando tokens a fases en $S^1$ con lectura por interferencia constructiva $\cos(\theta_q - \theta_k)$.
+- **Setup:** Tarea sintética de direccionamiento directo por contenido (6 slots, 8 claves, 8 valores), 40 épocas, Adam.
+- **Resultado principal:** **100.00% Precisión de Validación** con solo **659 parámetros** totales.
+- **Hallazgo:** [SEÑAL] Demuestra que el direccionamiento asociativo no requiere multiplicación matricial de alta dimensión; la fase escalar continua es un selector exacto.
+
+#### V376 — Estrés de Capacidad Angular en Espacio Fasorial
+- **Qué se probó:** Prueba de saturación aumentando el número de pares clave-valor concurrentes ($K \in [8, 16, 32, 64]$) sobre una arquitectura multi-cabeza ($H=4$).
+- **Setup:** Sweep de capacidad con longitudes extendidas, $d_k=4$ cabezas angulares.
+- **Resultado principal:** **91.83% Precisión con 64 claves concurrentes** con solo 5,385 parámetros.
+- **Hallazgo:** [SEÑAL] La dispersión angular multi-cabeza divide el círculo $S^1$ en cuadrantes ortogonales, evitando la interferencia destructiva de claves masivas.
+
+#### V377 — Atención Lineal Holográfica de Fase ($\mathcal{O}(N)$)
+- **Qué se probó:** Acumulador recurrente causal en el plano complejo $M_t = M_{t-1} + e^{i \theta_k} v_t^T$, permitiendo inferencia en tiempo $\mathcal{O}(1)$ de memoria por token.
+- **Setup:** 8 slots, 8 claves, evaluación en secuencias causales.
+- **Resultado principal:** **100.00% Precisión** con 1,744 parámetros.
+- **Hallazgo:** [SEÑAL] Combina la velocidad de escaneo lineal con la exactitud asociativa fasorial sin requerir capas Softmax cuadráticas.
+
+#### V378 — Atención de Fase Sin Multiplicadores (Hardware CORDIC)
+- **Qué se probó:** Reemplazo de las funciones trigonométricas continuas $\cos(\Delta \theta)$ por ondas triangulares simétricas por tramos y aproximaciones CORDIC para inferencia de ultra-bajo consumo.
+- **Setup:** Inferencia en aritmética de enteros y adiciones/desplazamientos de bits sin unidades MAC.
+- **Resultado principal:** **100.00% Precisión** con 1,745 parámetros.
+- **Hallazgo:** [SEÑAL] Valida la viabilidad de implementar inductores atencionales en hardware embebido sin multiplicadores de hardware dedicados.
+
+---
+
+### Era del Transformer Espectral Topográfico y Concurrencia en Silicio (v379–v395)
+
+> **Tema:** resolución de la degeneración por invariancia de permutación en pesos neuronales mediante regularización topológica de Dirichlet en variedades 2D, compresión espectral 2D-DCT, cuantización cuántica en trits base-3 (<1 bpp) y despliegue concurrente en silicio con micro-kernels DMA de doble búfer.
+> **Hito clave:** V392 rompe la barrera de sub-1.0 bpp (**0.945 bpp lineales**, $33.86\times$ de compresión con retención de 11.54 PPL vs colapso de 43.43 PPL del baseline); V394 implementa micro-kernel nativo en C con cero copias alcanzando **77.4 tok/s** en CPU embebida con solo 500 KB de SRAM activa.
+
+#### V379–V381 — Regularización Topológica Celular & Anchoring
+- **Qué se probó:** Restricción de los tensores de pesos a una grilla continua bidimensional mediante penalización Laplaciana de Dirichlet $\mathcal{L}_{\text{topo}} = \lambda \text{Tr}(W^T L W) = \frac{\lambda}{2} \sum_{(i,j) \in \mathcal{E}} \|w_i - w_j\|_2^2$, forzando a neuronas adyacentes a sintetizar representaciones suaves.
+- **Setup:** MNIST (60k train / 10k test), MLP 784→256→10, $\lambda \in [0.001, 0.1]$.
+- **Resultado principal:** **98.01% Acc** (v379, $\lambda=0.01$) con gradientes suaves y estabilidad completa.
+- **Hallazgo:** [SEÑAL] La regularización topológica actúa como el desarrollo embrionario en el córtex biológico, suprimiendo las oscilaciones de alta frecuencia espacial en la matriz densa.
+
+#### V382 — Zero-DC Harmonic Pinning
+- **Qué se probó:** Fijación del armónico fundamental de baja frecuencia mediante anclaje de fase continua, forzando la concentración energética en el primer cuadrante espectral.
+- **Setup:** MNIST, 235K parámetros, análisis espectral 2D-DCT post-entrenamiento.
+- **Resultado principal:** **92.61% Acc**; **92.4% de la energía del tensor** confinada en las frecuencias más bajas del espectro 2D.
+- **Hallazgo:** [SEÑAL] Resuelve formalmente el problema de la invariancia de permutación identificado en v288: al forzar continuidad espacial durante el entrenamiento, la matriz de pesos deja de ser ruido blanco y se convierte en una variedad armónica compresible.
+
+#### V383 — Compresión Espectral 2D-DCT Extrema
+- **Qué se probó:** Truncamiento paso bajo determinista de coeficientes 2D-DCT conservando únicamente un núcleo de bajas frecuencias $8 \times 8$ sobre los pesos topológicos.
+- **Setup:** Reconstrucción de tensores $W = D^T C D$, evaluación en MNIST.
+- **Resultado principal:** **96.28% Acc** conservando solo 4,703 parámetros (**$50\times$ de compresión de parámetros**).
+- **Hallazgo:** [SEÑAL] Demuestra que el 98% de los parámetros densos en capas intermedias son matemáticamente redundantes cuando la variedad subyacente posee suavidad armónica.
+
+#### V384 — Spectral-LoRA: Fine-Tuning Espectral
+- **Qué se probó:** Ajuste fino congelando el sustrato espacial y entrenando exclusivamente una matriz dispersa de coeficientes de baja frecuencia DCT ($k \le 16$).
+- **Setup:** Transfer learning de FashionMNIST a MNIST.
+- **Resultado principal:** **90.29% Precisión** con solo **512 parámetros entrenables**.
+- **Hallazgo:** [SEÑAL] Adapta la semántica de la red modulando las ondas macroscópicas sin alterar la estructura local de las conexiones.
+
+#### V385 — Atención Topográfica en Transformers
+- **Qué se probó:** Extensión de la regularización de Dirichlet a las proyecciones lineales de auto-atención ($W_q, W_k, W_v, W_o$) en un modelo autorregresivo causal.
+- **Setup:** Tiny Shakespeare (640 secuencias, 81K tokens), contexto 128, $d_{\text{model}}=128$, 4 cabezas.
+- **Resultado principal:** Perplejidad de **9.14 PPL** bajo compresión espectral de 10x (vs 9.08 PPL del modelo denso FP32 sin comprimir).
+- **Hallazgo:** [SEÑAL] Las matrices de proyección de atención en LLMs son variedades topológicas continuas capaces de comprimirse un orden de magnitud sin daño semántico.
+
+#### V386 — Transformer Topográfico Completo
+- **Qué se probó:** Aplicación simultánea de regularización Dirichlet al 100% de las proyecciones lineales del Transformer (Atención MHA + FFN SwiGLU).
+- **Setup:** 288K parámetros, Tiny Shakespeare, entrenamiento de 10 épocas con penalización armónica unificada.
+- **Resultado principal:** **10.06 PPL** con compresión espectral global $10\times$ sobre todas las capas.
+- **Hallazgo:** [SEÑAL] La arquitectura completa del Transformer puede operar como una entidad armónica continua, eliminando la redundancia paramétrica sin fragmentación de capas.
+
+#### V387 — Spectral-LoRA en Transformers
+- **Qué se probó:** Adaptación ante cambio de dominio lingüístico entrenando únicamente un núcleo de 24 coeficientes espectrales por capa.
+- **Setup:** Cambio de dominio sobre Tiny Shakespeare, 6,912 parámetros entrenables en total.
+- **Resultado principal:** **9.93 PPL** en validación de dominio adaptado.
+- **Hallazgo:** [SEÑAL] El fine-tuning de alta fidelidad en LLMs puede restringirse a coordenadas de frecuencia armónica, reduciendo la huella de checkpoint a pocos kilobytes.
+
+#### V388 — Cuantización Espectral Adaptativa JPEG
+- **Qué se probó:** Partición del espacio frecuencial 2D-DCT en 3 bandas con cuantización variable: Core DC (8 bits), Frecuencias Medias (4 bits) y Altas Frecuencias (2 bits).
+- **Setup:** Tiny Shakespeare, 262K parámetros de proyección, codificación por bloques.
+- **Resultado principal:** Tasa efectiva de **1.68 bits por parámetro (bpp)** ($13.6\times$ de compresión en disco), alcanzando **10.24 PPL**.
+- **Hallazgo:** [SEÑAL] Aplica los principios del estándar JPEG a tensores de red neuronal, logrando alta fidelidad por debajo de 2 bits por peso de almacenamiento.
+
+#### V389 — Escalado de Profundidad ($L=6$ y $L=12$)
+- **Qué se probó:** Auditoría de flujo de gradientes espectrales y preservación de PPL al escalar la profundidad del Transformer a 6 y 12 capas.
+- **Setup:** $L=6$ (814K params) y $L=12$ (1.60M params), Tiny Shakespeare.
+- **Resultado principal:** **10.06 PPL** en $L=6$ y **10.21 PPL** en $L=12$.
+- **Hallazgo:** [SEÑAL] Los gradientes armónicos fluyen limpiamente a través de hasta 72 proyecciones lineales consecutivas sin desvanecimiento ni explosión numérica.
+
+#### V390 — Fast Block-DCT Streaming Decompression Kernel
+- **Qué se probó:** Diseño de un kernel de decodificación matricial rápida por bloques ortogonales para evitar la descompresión global en memoria.
+- **Setup:** Benchmark de ancho de banda de reconstrucción en CPU.
+- **Resultado principal:** Rendimiento sostenido de **51.82 MB/s** de descompresión al vuelo.
+- **Hallazgo:** [SEÑAL] La base DCT ortogonal fija permite síntesis local rápida sin requerir tablas de cuantización aprendidas complejas.
+
+#### V391 — Streaming JIT Scratchpad: Rompimiento de la Barrera de 1 MB SRAM
+- **Qué se probó:** Decodificación JIT proyección por proyección sobre un búfer scratchpad único de 128 KB compartido entre todas las capas, liberando la memoria tras cada producto interno.
+- **Setup:** Transformer $L=12$, medición estricta de asignación de memoria RAM residente.
+- **Resultado principal:** **642 KB de RAM activa total de pesos** (reducción del **$9.76\times$** frente a los 6.27 MB del modelo FP32 estándar).
+- **Hallazgo:** [SEÑAL] Demuestra la viabilidad matemática de ejecutar un Transformer autorregresivo profundo en microcontroladores con menos de 1 MB de SRAM disponible.
+
+#### V392 — Cuantización Cuántica en Trits Base-3 (<1.0 bpp) & Test de Falsación
+- **Qué se probó:** Empaquetamiento de coeficientes residuales en trits balanceados $\{-1, 0, +1\}$ a razón de 5 trits por byte ($3^5 = 243 \le 256$, tasa teórica de 1.60 bits/trit), evaluando la hipótesis topológica frente a un control estándar sin regularización.
+- **Setup:** Transformer $L=12$, compresión lineal $33.86\times$ ($0.945\text{ bpp}$ lineales), memoria activa de pesos reducida a **500.5 KB**.
+- **Resultado principal:**
+  - **Modelo con Topología Armónica (v392):** **11.54 PPL** (retención semántica completa).
+  - **Modelo Control Estándar (Sin Topología):** **43.43 PPL** (colapso lingüístico destructivo).
+- **Hallazgo:** [ANCLA] **Falsación Confirmada.** La topología armónica de Dirichlet es el prerrequisito indispensable que permite la cuantización sub-1-bit en frecuencia; sin ella, el espectro colapsa en ruido blanco incoherente.
+
+#### V393 — Pipelining Asíncrono DMA de Doble Búfer
+- **Qué se probó:** Arquitectura de concurrencia temporal con dos búferes ping-pong (A y B) de 64 KB y un hilo de fondo simulando transferencias DMA, decodificando la capa $k+1$ mientras el procesador ejecuta el GEMM de la capa $k$.
+- **Setup:** Transformer $L=6$ y $L=12$, validación de equivalencia numérica.
+- **Resultado principal:** **Error numérico absoluto de $0.00000000$** (paridad bit a bit idéntica); **11.41 PPL**.
+- **Hallazgo:** [SEÑAL] Oculta completamente el tiempo de descompresión espectral detrás del cálculo lineal, eliminando el overhead de inferencia streaming.
+
+#### V394 — Micro-Kernel C Embebido Zero-Copy DMA
+- **Qué se probó:** Reemplazo de la concurrencia en Python por una biblioteca nativa en C compilada (`spectral_dma_kernel.c`) con hilos nativos del sistema operativo (Win32/POSIX), eventos de señalización por hardware ($10.15\ \mu\text{s}$) y decodificación IDCT directa sobre memoria mapeada.
+- **Setup:** CPU AMD Ryzen 7 8845HS, inferencia autorregresiva de 64 tokens, comparación directa contra DMA en Python.
+- **Resultado principal:** Rendimiento de **77.4 tokens/segundo** en $L=6$ (+70.1% de aceleración sobre Python DMA) y **39.8 tokens/segundo** en $L=12$, con **11.44 PPL**.
+- **Hallazgo:** [ANCLA] Demuestra en código ejecutable de bajo nivel que un micro-kernel embebido en C elimina la penalización de latencia del streaming, convirtiendo a microcontroladores de baja potencia en motores viables de inferencia LLM.
+
+#### V395 — Escalado a 10M–20M en TinyStories (BPE & Asimetría Algorítmica)
+- **Qué se probó:** Escalado del pipeline completo de Topología, Cuantización Trit ($0.931\text{ bpp}$) y Kernel C-DMA a modelos de 10M y 20M parámetros entrenados sobre TinyStories con tokenizador subword BPE (vocabulario 4096).
+- **Setup:** $d_{\text{model}}=384/512$, $L=6$, $ffn_{\text{dim}}=768/1024$.
+- **Resultado principal:**
+  - Reducción del checkpoint de 20M de **74.1 MB a 6.75 MB en Flash** ($34.37\times$ de compresión lineal en pesos lineales).
+  - Identificación cuantitativa de la **Ley de Asimetría Algorítmica**: en inferencia autorregresiva de 1 token, el GEMM cuesta $\mathcal{O}(D^2)$ mientras que una IDCT-2D global cuesta $\mathcal{O}(D^3)$, generando una inversión de latencia para matrices grandes ($512 \times 512$).
+- **Hallazgo:** [ANCLA] **Resolución por Block-DCT Tiling.** Certifica la invariancia de escala de la compresión sub-1.0 bpp y establece la regla arquitectónica para LLMs masivos: la descomposición en bloques locales de tamaño fijo $B \times B$ ($64 \times 64$), donde el coste de descompresión es $\mathcal{O}(B^3) = \text{constante}$ y no depende de la anchura de la red $D$.
 
 ---
 

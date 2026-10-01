@@ -29,13 +29,13 @@ Siguiendo la regla de oro metodológica de este laboratorio, documentamos la evo
 
 ```
 +------------------------------------------------------------------------------------------------------------------+
-| MAPA DE EVOLUCIÓN CIENTÍFICA: DE LA TOPOGRAFÍA BIOLÓGICA AL SILICIO EMBEBIDO                                      |
+| MAPA DE EVOLUCIÓN CIENTÍFICA: DE LA TOPOGRAFÍA BIOLÓGICA AL SILICIO EMBEBIDO                                     |
 +------------------------------------------------------------------------------------------------------------------+
 | Fase 1: Fundamento Espectral (v382-v385)  -> Descubrimiento del Dirichlet Pinning y LoRA Espectral               |
-| Fase 2: Inferencia Edge (v386-v391)       -> Barrera de 1 MB de SRAM rota con Streaming JIT (642 KB)            |
-| Fase 3: Cuantización Sub-1.0b (v392)      -> Empaquetado Base-3 (0.945 bpp) y barrera de 512 KB rota (500 KB)     |
-| Fase 4: Concurrencia Silicio (v393-v394)  -> Pipeline C Zero-Copy DMA: 77.4 tok/s e identidad exacta (0.0000)   |
-| Fase 5: Escalado & Frontera (v395)        -> Validación a 19M params (6.7 MB) y ley asimétrica O(D^3) vs O(D^2)   |
+| Fase 2: Inferencia Edge (v386-v391)       -> Barrera de 1 MB de SRAM rota con Streaming JIT (642 KB)             |
+| Fase 3: Cuantización Sub-1.0b (v392)      -> Empaquetado Base-3 (0.945 bpp) y barrera de 512 KB rota (500 KB)    |
+| Fase 4: Concurrencia Silicio (v393-v394)  -> Pipeline C Zero-Copy DMA: 77.4 tok/s e identidad exacta (0.0000)    |
+| Fase 5: Escalado & Frontera (v395)        -> Validación a 19M params (6.7 MB) y ley asimétrica O(D^3) vs O(D^2)  |
 +------------------------------------------------------------------------------------------------------------------+
 ```
 
@@ -100,14 +100,14 @@ lo que representa un ahorro estricto del $20.0\%$ de almacenamiento frente a la 
 +---------------------------------------------------------------------------------------+
 | ESTRUCTURA DEL FORMATA BINARIO `.tritq` (0.945 bpp)                                   |
 +---------------------------------------------------------------------------------------+
-| Cabecera (Magic `TRITQ_V1`, L, d_model, vocab, radios r0=0.10, r1=0.25, r2=0.50)       |
+| Cabecera (Magic `TRITQ_V1`, L, d_model, vocab, radios r0=0.10, r1=0.25, r2=0.50)      |
 +---------------------------------------------------------------------------------------+
 | Banda 0 (ρ <= 0.10): DC y armónicos basales (1.7% coefs) -> uint8 lineal (8 bpp)      |
-| Banda 1 (0.10 < ρ <= 0.25): Frecuencias medias (8.4% coefs) -> nibbles (4 bpp, 2/B)  |
-| Banda 2 (0.25 < ρ <= 0.50): Armónicos medios-altos (29.7% coefs) -> Base-3 (1.6 bpp) |
-| Banda 3 (ρ > 0.50): Altas frecuencias (60.2% coefs) -> OMITIDAS EN DISCO (0 bpp)     |
+| Banda 1 (0.10 < ρ <= 0.25): Frecuencias medias (8.4% coefs) -> nibbles (4 bpp, 2/B)   |
+| Banda 2 (0.25 < ρ <= 0.50): Armónicos medios-altos (29.7% coefs) -> Base-3 (1.6 bpp)  |
+| Banda 3 (ρ > 0.50): Altas frecuencias (60.2% coefs) -> OMITIDAS EN DISCO (0 bpp)      |
 +---------------------------------------------------------------------------------------+
-| Parámetros Auxiliares (Embeddings y LayerNorms serializados en FP16)                 |
+| Parámetros Auxiliares (Embeddings y LayerNorms serializados en FP16)                  |
 +---------------------------------------------------------------------------------------+
 ```
 
@@ -246,15 +246,15 @@ Para fabricantes de silicio e ingenieros de sistemas embebidos, este trabajo est
 |    - Almacena permanentemente el modelo comprimido en formato `.tritq` (0.945 bpp).   |
 | 2. Memoria Caché L1D (4 KB - 8 KB):                                                   |
 |    - Aloja la tabla estática TRIT_LUT (1.25 KB) para desempaquetado O(1) de trits.    |
-| 3. Controlador DMA Autónomo de Doble Búfer (Hardware Ring Buffer):                   |
+| 3. Controlador DMA Autónomo de Doble Búfer (Hardware Ring Buffer):                    |
 |    - Canal DMA 1 vinculado a Buffer_A en Banco SRAM 1 (256 KB).                       |
 |    - Canal DMA 2 vinculado a Buffer_B en Banco SRAM 2 (256 KB).                       |
 |    - Transfiere y ejecuta la IDCT inversa de subcapa k+1 mediante hardware de señal.  |
-| 4. Núcleo Aritmético (Arm Cortex-M55 / Ethos NPU / RISC-V Vectorial):                |
+| 4. Núcleo Aritmético (Arm Cortex-M55 / Ethos NPU / RISC-V Vectorial):                 |
 |    - Computa el GEMM de la subcapa k sobre el búfer activo libre de esperas.          |
 | 5. Presupuesto Total de Memoria SRAM Requerida:                                       |
-|    - Modelo L=6 (814k params):  657 KB de SRAM (Compatible con chips de 1 MB SRAM)   |
-|    - Modelo L=12 (1.6M params): 754 KB de SRAM (Compatible con chips de 1 MB SRAM)   |
+|    - Modelo L=6 (814k params):  657 KB de SRAM (Compatible con chips de 1 MB SRAM)    |
+|    - Modelo L=12 (1.6M params): 754 KB de SRAM (Compatible con chips de 1 MB SRAM)    |
 +---------------------------------------------------------------------------------------+
 ```
 
